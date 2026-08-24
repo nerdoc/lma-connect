@@ -1,0 +1,32 @@
+{% load static i18n %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:'en' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="{{ event.theme_color|default:'#206bc4' }}">
+    <title>{{ poll.question_text|truncatechars:40 }} · {% trans "Live poll" %}</title>
+    {% comment %} htmx from static/vendor/ (the same file base.html uses) — polls the result block.
+       GET only, so no CSRF token and no inline script are needed.{% endcomment %}
+    <script src="{% static 'vendor/htmx/htmx.min.js' %}"></script>
+    {% include "program/_projection_styles.html" %}
+</head>
+<body>
+    <div class="stage">
+        <div class="stage__head">
+            <span class="brand">{{ event.name|default:"" }}{% if session %} · {{ session.title|truncatechars:60 }}{% endif %}</span>
+            <span class="live"><span class="live__dot"></span>{% trans "LIVE" %}</span>
+        </div>
+
+        <div class="question">{{ poll.question_text }}</div>
+
+        <div class="results"
+             id="poll-results"
+             hx-get="{% url 'program:poll_project_results' poll.id %}"
+             hx-trigger="every 3s"
+             hx-swap="innerHTML">
+            {% include "program/_poll_project_results.html" %}
+        </div>
+    </div>
+</body>
+</html>

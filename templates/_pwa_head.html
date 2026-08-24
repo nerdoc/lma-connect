@@ -1,0 +1,32 @@
+{% comment %}
+    PWA / home-screen icon — included by base.html AND core/welcome.html
+    (welcome has a <head> of its own). The ONE source for these tags, so the
+    pages cannot drift apart — which is exactly what had made the icon on the
+    welcome screen differ from the one on /home.
+
+    Cache busting uses the version token IN THE PATH of the icon URL
+    (icon-180-<v>.png), NOT as a ?query: iOS/Safari ignore apple-touch-icon
+    URLs carrying a query string and fall back to the grey letter placeholder.
+
+    The token is event.icon_version (logo mtime plus render revision), NOT
+    event.logo_version: Safari remembers per URL that an icon fetch failed and
+    never retries it, so an icon fixed in the renderer but served under an
+    unchanged URL never reaches the device.
+
+    The apple-touch-icon points at the OPAQUE variant (icon-opaque-…): Safari
+    discards home-screen icons with an alpha channel. The favicon stays
+    transparent.
+{% endcomment %}
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+{% comment %} firstof, not chained |default: — a filter argument is resolved eagerly, so
+   `event.name` raised VariableDoesNotExist (a 500) on any page rendered
+   before an event exists, e.g. a fresh installation.{% endcomment %}
+{% firstof event.short_name event.name 'Conference' as app_title %}
+<meta name="apple-mobile-web-app-title" content="{{ app_title|truncatechars:15 }}">
+<link rel="manifest" href="{% url 'core:manifest' %}?v={{ event.icon_version }}">
+{% if event.logo %}
+<link rel="icon" type="image/png" href="{% url 'core:app_icon' 192 event.icon_version %}">
+<link rel="apple-touch-icon" sizes="180x180" href="{% url 'core:app_icon_opaque' 180 event.icon_version %}">
+{% endif %}

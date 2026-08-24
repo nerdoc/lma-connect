@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% comment %}
+    CSRF error page. Django calls django.views.csrf.csrf_failure when the
+    CSRF check fails (a missing or expired token — usually after a long idle
+    period, or when cookies are blocked). csrf_failure renders this template
+    WITH the request, so the context processors run and {{ event }} is
+    available to base.html — unlike in 500.html.
+
+    The CSRF context carries technical fields ({{ reason }}, {{ no_referer }},
+    {{ no_cookie }}). We deliberately do NOT show those to the user, but an
+    explanation they can act on and a way back.
+{% endcomment %}
+
+{% block title %}{% trans "Session expired" %} — {{ event.name|default:"Conference App" }}{% endblock %}
+{% block topbar_title %}{% trans "Session expired" %}{% endblock %}
+{% block topbar_sub %}{% trans "Error 403" %}{% endblock %}
+
+{% block content %}
+<div class="empty">
+    <div class="empty-icon">
+        <i class="ti ti-refresh-alert h1" style="color: var(--lma-primary);"></i>
+    </div>
+    <p class="empty-title">{% trans "Your session expired" %}</p>
+    <p class="empty-subtitle text-secondary">
+        {% trans "For your security the form could not be submitted — usually because the page sat open too long or cookies are blocked. Go back, reload the page and try again." %}
+    </p>
+    <div class="empty-action d-flex gap-2 flex-wrap justify-content-center">
+        <a href="{% url 'core:home' %}" class="btn btn-primary">
+            <i class="ti ti-home"></i> {% trans "Back to home" %}
+        </a>
+        <a href="{% url 'login' %}" class="btn btn-outline-primary">
+            <i class="ti ti-login"></i> {% trans "Sign in again" %}
+        </a>
+    </div>
+</div>
+{% endblock %}

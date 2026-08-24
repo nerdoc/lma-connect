@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Abstract Reviews" %} — {{ event.name }}{% endblock %}
+{% block topbar_title %}{% trans "Abstract Reviews" %}{% endblock %}
+{% block topbar_sub %}{% blocktrans with done=done_reviews|length total=total %}{{ done }} / {{ total }} reviewed{% endblocktrans %}{% endblock %}
+
+{% block content %}
+
+{% if total == 0 %}
+<div class="empty">
+    <div class="empty-icon"><i class="ti ti-clipboard-off h1"></i></div>
+    <p class="empty-title">{% trans "No abstracts assigned" %}</p>
+    <p class="empty-subtitle text-secondary">{% trans "As soon as a committee admin assigns abstracts to you, they will appear here." %}</p>
+</div>
+{% else %}
+
+<div class="alert alert-info d-flex align-items-center gap-2 mb-3">
+    <i class="ti ti-info-circle"></i>
+    <div>
+        <strong>{% trans "Rating scale:" %}</strong>
+        {% trans "1 = excellent · 2 = very good · 3 = good · 4 = borderline · 5 = weak · 6 = not suitable" %}
+    </div>
+</div>
+
+<div class="card mb-3" style="border-left: 4px solid var(--lma-highlight);">
+    <div class="card-body py-2">
+        <details>
+            <summary class="cursor-pointer fw-bold mb-0">
+                <i class="ti ti-list-check"></i> {% trans "Review criteria" %}
+                <span class="small text-secondary ms-1">{% trans "— what authors were asked to address" %}</span>
+                <i class="ti ti-chevron-down float-end"></i>
+            </summary>
+            <p class="text-secondary small mt-2 mb-2">
+                {% trans "Abstracts must describe structured accounts of implemented or failed digital / AI projects in medical diagnostics — real-world experience, not concepts. Each submission should cover:" %}
+            </p>
+            <ol class="small mb-1">
+                <li>{% trans "The clinical or operational problem addressed" %}</li>
+                <li>{% trans "The implemented or failed solution and its integration into existing systems" %}</li>
+                <li>{% trans "Governance, regulatory and data protection considerations" %}</li>
+                <li>{% trans "Measurable outcomes and operational impact" %}</li>
+                <li>{% trans "Lessons learned, including challenges and setbacks" %}</li>
+                <li>{% trans "Practical recommendations for others" %}</li>
+            </ol>
+            <p class="small text-secondary mb-0">
+                {% trans "Both successful and unsuccessful projects are welcome. Transparent reflection and practical relevance are essential." %}
+            </p>
+        </details>
+    </div>
+</div>
+
+{% if open_reviews %}
+<h2 class="h4 mt-3 mb-2 d-flex align-items-center gap-2">
+    <i class="ti ti-clipboard-list text-warning"></i>
+    {% trans "Open" %} <span class="badge bg-warning text-dark">{{ open_reviews|length }}</span>
+</h2>
+<div class="d-flex flex-column gap-2 mb-4">
+    {% for review in open_reviews %}
+    <a href="{% url 'abstracts:review_detail' review.pk %}" class="card text-decoration-none">
+        <div class="card-body py-3">
+            <div class="d-flex justify-content-between align-items-start gap-2 mb-1">
+                <div class="d-flex flex-wrap gap-1 align-items-center">
+                    {% if review.abstract.poster_id %}<span class="badge bg-secondary-lt fw-bold">{{ review.abstract.poster_id }}</span>{% endif %}
+                    {% if review.abstract.category %}<span class="badge" style="background: {{ review.abstract.category.color }}; color: #fff;">{{ review.abstract.category.name }}</span>{% endif %}
+                    {% for tag in review.abstract.tags.all %}<span class="badge" style="background: {{ tag.color }}; color: #fff;">{{ tag.name }}</span>{% endfor %}
+                </div>
+                <i class="ti ti-chevron-right text-secondary"></i>
+            </div>
+            <div class="fw-bold mb-1">{{ review.abstract.title }}</div>
+            {% with authors=review.abstract.authors.all %}
+            {% if authors %}
+            <div class="small text-secondary">
+                {% for a in authors %}{{ a.full_name }}{% if not forloop.last %}, {% endif %}{% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if done_reviews %}
+<h2 class="h4 mt-3 mb-2 d-flex align-items-center gap-2">
+    <i class="ti ti-clipboard-check text-success"></i>
+    {% trans "Done" %} <span class="badge bg-success">{{ done_reviews|length }}</span>
+</h2>
+<div class="d-flex flex-column gap-2">
+    {% for review in done_reviews %}
+    <a href="{% url 'abstracts:review_detail' review.pk %}" class="card text-decoration-none">
+        <div class="card-body py-3">
+            <div class="d-flex justify-content-between align-items-start gap-2 mb-1">
+                <div class="d-flex flex-wrap gap-1 align-items-center">
+                    {% if review.abstract.poster_id %}<span class="badge bg-secondary-lt fw-bold">{{ review.abstract.poster_id }}</span>{% endif %}
+                    {% if review.abstract.category %}<span class="badge" style="background: {{ review.abstract.category.color }}; color: #fff;">{{ review.abstract.category.name }}</span>{% endif %}
+                </div>
+                <span class="badge fs-3 px-3" style="background-color: {% if review.score <= 2 %}var(--lma-primary){% elif review.score == 3 %}var(--lma-primary-light){% elif review.score == 4 %}var(--lma-highlight){% else %}var(--lma-accent){% endif %}; color: {% if review.score == 4 %}var(--lma-ink){% else %}#fff{% endif %};">{{ review.score }}</span>
+            </div>
+            <div class="fw-bold">{{ review.abstract.title }}</div>
+            {% if review.submitted_at %}<div class="small text-secondary mt-1">{% blocktrans with date=review.submitted_at|date:"j M Y, H:i" %}reviewed {{ date }}{% endblocktrans %}</div>{% endif %}
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% endif %}
+
+{% endblock %}

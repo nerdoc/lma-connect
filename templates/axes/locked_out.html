@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Account locked" %} · {{ event.name|default:"Conference" }}{% endblock %}
+{% block topbar_title %}{% trans "Account locked" %}{% endblock %}
+{% block topbar_sub %}{% endblock %}
+
+{% block content %}
+<div class="empty">
+    <div class="empty-icon">
+        <i class="ti ti-lock-x" style="font-size: 3rem; color: var(--tblr-danger);"></i>
+    </div>
+    <p class="empty-title">{% trans "Too many failed sign-in attempts" %}</p>
+    <p class="empty-subtitle text-secondary">
+        {% blocktrans %}For your protection this account / IP has been temporarily locked.
+        Please wait about an hour and try again — or contact the conference team
+        if you believe this is in error.{% endblocktrans %}
+    </p>
+    <div class="empty-action">
+        <a href="{% url 'core:home' %}" class="btn btn-primary">
+            <i class="ti ti-home"></i> {% trans "Back to home" %}
+        </a>
+    </div>
+</div>
+{% endblock %}

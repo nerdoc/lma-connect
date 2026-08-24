@@ -1,0 +1,142 @@
+{% load static i18n %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:'en' }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Token" %} {{ token.token|slice:":8" }}… — Print</title>
+    <style>
+        {% include "_brand_palette.html" %}
+        @page {
+            size: A6 portrait;
+            margin: 8mm;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 12mm;
+            color: var(--lma-ink);
+            background: #fff;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-top: 6px solid var(--lma-primary);
+            border-radius: 8px;
+            padding: 14mm 10mm;
+            text-align: center;
+            page-break-inside: avoid;
+        }
+        .event-name {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--lma-primary);
+            margin-bottom: 4mm;
+        }
+        .label {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0 0 6mm 0;
+            color: var(--lma-ink);
+        }
+        .group {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #fff;
+            background: var(--lma-primary);
+            padding: 1.5mm 5mm;
+            border-radius: 20px;
+            margin: 0 0 5mm 0;
+        }
+        .qr {
+            width: 60mm; height: 60mm; max-width: 100%;
+            margin: 0 auto 6mm auto;
+            display: block;
+        }
+        .instructions {
+            font-size: 0.78rem;
+            color: #555;
+            margin: 3mm 0;
+            line-height: 1.4;
+        }
+        .url {
+            font-size: 0.65rem;
+            color: #888;
+            word-break: break-all;
+            margin-top: 5mm;
+            font-family: monospace;
+        }
+        .footer-mark {
+            display: inline-block;
+            margin-top: 6mm;
+            font-size: 0.65rem;
+            color: var(--lma-primary);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        .accent {
+            display: inline-block;
+            width: 40mm;
+            height: 2px;
+            background: var(--lma-highlight);
+            margin: 4mm auto;
+        }
+        /* Print actions only on screen */
+        .actions {
+            text-align: center;
+            margin: 8mm 0;
+        }
+        @media print {
+            body { padding: 0; }
+            .actions { display: none; }
+            .card { border-width: 1px; box-shadow: none; }
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 0 4px;
+            background: var(--lma-primary);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+        .btn-secondary {
+            background: #fff;
+            color: var(--lma-ink);
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="actions">
+        <button type="button" class="btn" data-print>🖨️ {% trans "Print" %}</button>
+        <a class="btn btn-secondary" href="{% url 'access:ops_token_detail' token.pk %}">{% trans "Back" %}</a>
+    </div>
+
+    <div class="card">
+        <div class="event-name">{{ event.name|default:"LMA Connect" }}</div>
+        <div class="group">{{ token.get_category_display }}</div>
+        {% if token.label %}<div class="label">{{ token.label }}</div>{% endif %}
+
+        <img src="{% url 'access:ops_token_qr' token.pk %}" alt="QR" class="qr">
+
+        <div class="accent"></div>
+
+        <div class="instructions">
+            {% trans "Scan this QR code with your phone camera to sign in." %}
+        </div>
+
+        <div class="url">{{ qr_url }}</div>
+
+        {% if event.localized_subtitle %}<div class="footer-mark">{{ event.localized_subtitle }}</div>{% endif %}
+    </div>
+    {# Standalone-Seite (kein base.html) → eigener nonce-Handler statt onclick, das unter strikter CSP blockiert wird. #}
+    <script nonce="{{ request.csp_nonce }}">
+        document.querySelector('[data-print]')?.addEventListener('click', () => window.print());
+    </script>
+</body>
+</html>

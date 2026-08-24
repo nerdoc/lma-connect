@@ -1,0 +1,93 @@
+{% load i18n %}<!DOCTYPE html>
+{% comment %}
+    Server error page. django.views.defaults.server_error renders this template
+    WITHOUT a request and WITHOUT context processors (template.render() with no
+    arguments) — so there is NO {{ event }}, no {{ request }}, no csp_nonce and
+    no CSRF token here. Hence it is deliberately SELF-CONTAINED: no
+    {% templatetag openblock %} extends "base.html" {% templatetag closeblock %},
+    no CDN assets, no {% templatetag openblock %} url {% templatetag closeblock %}
+    resolution (hard-linked to "/"). That way the page still renders while the
+    app is in a broken state. It stays translatable all the same.
+
+    This is also the one place that may hard-code brand colours: without an
+    event there is nothing to read them from. Keep them in sync with the
+    defaults in templates/_brand_palette.html.
+{% endcomment %}
+<html lang="{{ LANGUAGE_CODE|default:'en' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#457b9d">
+    <title>{% trans "Something went wrong" %}</title>
+    <style>
+        :root {
+            --lma-primary: #457b9d;
+            --lma-primary-dark: #38637f;
+            --lma-accent: #fe5f55;
+            --lma-accent-soft: rgba(254, 95, 85, 0.12);
+            --lma-surface: #f2f4ff;
+            --lma-ink: #3c1518;
+            --bg: var(--lma-surface);
+            --fg: var(--lma-ink);
+            --muted: #6b6266;
+            --card: #ffffff;
+            --border: #e4e2ea;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1a1416; --fg: #f2f4ff; --muted: #a89ea2;
+                --card: #241c1f; --border: #3c3236;
+            }
+        }
+        * { box-sizing: border-box; }
+        html, body { height: 100%; }
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg); color: var(--fg);
+            display: flex; align-items: center; justify-content: center;
+            padding: 1.5rem; line-height: 1.5;
+        }
+        .card {
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 16px; max-width: 26rem; width: 100%;
+            padding: 2.25rem 1.75rem; text-align: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,.06);
+        }
+        .icon {
+            width: 4rem; height: 4rem; margin: 0 auto 1.25rem;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%;
+            background: var(--lma-accent-soft);
+            color: var(--lma-accent);
+        }
+        .icon svg { width: 2rem; height: 2rem; }
+        h1 { font-size: 1.4rem; margin: 0 0 .5rem; }
+        p { color: var(--muted); margin: 0 0 1.5rem; font-size: .95rem; }
+        .btn {
+            display: inline-block; text-decoration: none;
+            background: var(--lma-primary); color: #fff;
+            padding: .7rem 1.4rem; border-radius: 8px; font-weight: 600;
+            min-height: 44px; line-height: 1.7;
+        }
+        .btn:hover, .btn:focus { background: var(--lma-primary-dark); }
+        .code { display: block; margin-top: 1.5rem; font-size: .75rem; color: var(--muted); letter-spacing: .05em; }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 9v4"></path>
+                <path d="M12 17h.01"></path>
+                <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            </svg>
+        </div>
+        <h1>{% trans "Something went wrong" %}</h1>
+        <p>{% trans "An unexpected error occurred on our side. The team has been notified. Please try again in a moment." %}</p>
+        <a class="btn" href="/">{% trans "Back to home" %}</a>
+        <span class="code">{% trans "Error 500" %}</span>
+    </main>
+</body>
+</html>

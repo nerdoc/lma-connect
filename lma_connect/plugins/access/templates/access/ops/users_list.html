@@ -1,0 +1,122 @@
+{% extends "access/ops/_base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Users" %} — Ops{% endblock %}
+
+{% block ops_content %}
+<button class="btn btn-outline-secondary d-md-none mb-3 w-100"
+        type="button" data-bs-toggle="collapse" data-bs-target="#user-filters">
+    <i class="ti ti-filter"></i> {% trans "Search & filter" %}
+    {% if q or category or social %}<span class="badge bg-primary ms-1">{% trans "active" %}</span>{% endif %}
+</button>
+
+<form method="get" class="mb-3 collapse d-md-block{% if q or category or social %} show{% endif %}" id="user-filters">
+    <div class="input-group mb-2">
+        <span class="input-group-text"><i class="ti ti-search"></i></span>
+        <input type="search" name="q" value="{{ q }}" placeholder="{% trans 'Search username, name, email …' %}" class="form-control">
+        {% if category %}<input type="hidden" name="category" value="{{ category }}">{% endif %}
+        {% if social %}<input type="hidden" name="social" value="{{ social }}">{% endif %}
+        <button class="btn btn-primary" type="submit">{% trans "Search" %}</button>
+    </div>
+
+    <div class="d-flex gap-1 flex-wrap align-items-center mb-1">
+        <span class="small text-secondary me-1">{% trans "Category:" %}</span>
+        <a href="?{% if q %}q={{ q }}{% endif %}{% if social %}&social={{ social }}{% endif %}" class="btn btn-sm {% if not category %}btn-primary{% else %}btn-outline-secondary{% endif %}">{% trans "All" %}</a>
+        {% for value, label in categories %}
+        <a href="?category={{ value }}{% if q %}&q={{ q }}{% endif %}{% if social %}&social={{ social }}{% endif %}" class="btn btn-sm {% if category == value %}btn-primary{% else %}btn-outline-secondary{% endif %}">{{ label }}</a>
+        {% endfor %}
+    </div>
+    <div class="d-flex gap-1 flex-wrap align-items-center">
+        <span class="small text-secondary me-1">{% trans "Social event:" %}</span>
+        <a href="?{% if q %}q={{ q }}{% endif %}{% if category %}&category={{ category }}{% endif %}" class="btn btn-sm {% if not social %}btn-primary{% else %}btn-outline-secondary{% endif %}">{% trans "All" %}</a>
+        <a href="?social=yes{% if q %}&q={{ q }}{% endif %}{% if category %}&category={{ category }}{% endif %}" class="btn btn-sm {% if social == 'yes' %}btn-primary{% else %}btn-outline-secondary{% endif %}">{% trans "Registered" %}</a>
+        <a href="?social=no{% if q %}&q={{ q }}{% endif %}{% if category %}&category={{ category }}{% endif %}" class="btn btn-sm {% if social == 'no' %}btn-outline-secondary{% else %}btn-outline-secondary{% endif %}">{% trans "Not registered" %}</a>
+    </div>
+</form>
+
+<p class="small text-secondary mb-2">
+    {% blocktrans count counter=users|length %}{{ counter }} of {{ total_count }} user shown{% plural %}{{ counter }} of {{ total_count }} users shown{% endblocktrans %}
+</p>
+
+{% if not users %}
+<div class="empty">
+    <div class="empty-icon"><i class="ti ti-user-off h1"></i></div>
+    <p class="empty-title">{% trans "No users match these filters" %}</p>
+    <p class="empty-subtitle text-secondary">{% trans "Try clearing search or category filter." %}</p>
+</div>
+{% else %}
+{# ---- Mobile: stacked card list (whole card is a link → big touch target) ---- #}
+<div class="d-md-none">
+    <div class="row g-2">
+        {% for u in users %}
+        <div class="col-12">
+            <a href="{% url 'access:ops_user_detail' u.pk %}" class="card card-sm text-reset text-decoration-none">
+                <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between mb-1">
+                        <div class="me-2">
+                            <div class="fw-medium">{{ u.first_name }} {{ u.last_name }}</div>
+                            <div><code>{{ u.username }}</code></div>
+                        </div>
+                        {% if u.category_key %}
+                            <span class="badge {% if u.category_key == 'speaker' %}bg-primary-lt{% elif u.category_key == 'organizer' or u.category_key == 'committee' %}bg-warning-lt text-dark{% elif u.category_key == 'company' %}bg-danger-lt{% else %}bg-secondary-lt{% endif %}">{{ u.category_label }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="d-flex flex-wrap gap-3 small text-secondary">
+                        {% if u.social_flag %}<span title="{% trans 'Registered for social event' %}"><i class="ti ti-glass-cocktail" style="color: var(--lma-primary);"></i> {% trans "Social" %}</span>{% endif %}
+                        <span><i class="ti ti-qrcode"></i> {{ u.n_tokens }}</span>
+                        <span><i class="ti ti-star"></i> {{ u.n_reviews }}</span>
+                        <span><i class="ti ti-clock"></i> {% if u.last_login %}{{ u.last_login|date:"j M, H:i" }}{% else %}—{% endif %}</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{# ---- Desktop: full comparison table ---- #}
+<div class="card d-none d-md-block">
+    <div class="table-responsive">
+        <table class="table table-vcenter mb-0">
+            <thead>
+                <tr>
+                    <th>{% trans "Username" %}</th>
+                    <th>{% trans "Name" %}</th>
+                    <th>{% trans "Category" %}</th>
+                    <th class="text-center" title="{% trans 'Registered for social event' %}"><i class="ti ti-glass-cocktail"></i></th>
+                    <th class="text-end">{% trans "Tokens" %}</th>
+                    <th class="text-end">{% trans "Reviews" %}</th>
+                    <th>{% trans "Last login" %}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in users %}
+                <tr>
+                    <td><code>{{ u.username }}</code></td>
+                    <td>{{ u.first_name }} {{ u.last_name }}</td>
+                    <td>
+                        {% if u.category_key %}
+                            <span class="badge {% if u.category_key == 'speaker' %}bg-primary-lt{% elif u.category_key == 'organizer' or u.category_key == 'committee' %}bg-warning-lt text-dark{% elif u.category_key == 'company' %}bg-danger-lt{% else %}bg-secondary-lt{% endif %}">{{ u.category_label }}</span>
+                        {% else %}
+                            <span class="text-secondary small">—</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        {% if u.social_flag %}<i class="ti ti-check" style="color: var(--lma-primary);"></i>{% else %}<span class="text-secondary">—</span>{% endif %}
+                    </td>
+                    <td class="text-end small">{{ u.n_tokens }}</td>
+                    <td class="text-end small">{{ u.n_reviews }}</td>
+                    <td><span class="small text-secondary">{% if u.last_login %}{{ u.last_login|date:"j M, H:i" }}{% else %}—{% endif %}</span></td>
+                    <td class="text-end">
+                        <a href="{% url 'access:ops_user_detail' u.pk %}" class="btn btn-sm btn-outline-secondary">
+                            <i class="ti ti-eye"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

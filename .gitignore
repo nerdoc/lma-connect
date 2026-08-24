@@ -1,0 +1,48 @@
+# Python / uv
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+.python-version
+
+# Django
+*.sqlite3
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+local_settings.py
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Editor / OS / agent tooling
+# .claude/ holds local tool permissions and paths — machine-specific, and it
+# must never reach a public mirror. Do not rely on a global ignore file for
+# this: that one only exists on the machine it was configured on.
+.claude/
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+
+# Tests / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Logs
+*.log
+
+# Vendored (rebuildable)
+static-vendored/
+.playwright-mcp/

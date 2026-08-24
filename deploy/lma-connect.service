@@ -1,0 +1,64 @@
+# systemd user unit for LMA Connect (Django + gunicorn), e.g. on Uberspace.
+#
+# Install / update on the server:
+#   scp deploy/lma-connect.service \
+#       <user>@<host>:~/.config/systemd/user/lma-connect.service
+#   ssh <user>@<host> \
+#       'systemctl --user daemon-reload && systemctl --user restart lma-connect.service'
+#
+# Adjust WorkingDirectory / EnvironmentFile / ExecStart if your checkout does
+# not live in ~/lma-connect, and the port if 8130 is taken.
+#
+# Notes on the gunicorn flags and why they are what they are:
+#
+#   --worker-class gthread + --threads 4
+#       Plain *sync* workers handle exactly one request each, so 2 workers cap
+#       the app at two concurrent requests: every third visitor queues, and a
+#       single slow request (icon rendering, a large program query) eats half
+#       the capacity. 3 workers à 4 threads give 12 concurrent requests. The
+#       views here are I/O bound (SQLite reads, template rendering), which is
+#       exactly what threads are good for — the GIL is not the bottleneck.
+#
+#   --workers 3
+#       Matches a 3-core host. More processes would only cost RAM and add
+#       SQLite lock contention.
+#
+#   --max-requests 2000
+#       Recycling workers guards against memory leaks, but a low value (500)
+#       means a worker is restarting constantly on the conference day —
+#       exactly when the capacity is needed.
+#
+#   Restart=always + StartLimitIntervalSec=0
+#       With Restart=on-failure and systemd's default rate limit (5 starts in
+#       10 s) the service stays DEAD after a restart burst. That is the
+#       opposite of "must never be down". This restarts from any state,
+#       without a limit.
+
+[Unit]
+Description=LMA Connect (Django + gunicorn)
+After=default.target
+# No start rate limit: the service must come back up under all circumstances.
+StartLimitIntervalSec=0
+
+[Service]
+WorkingDirectory=%h/lma-connect
+Environment=DJANGO_SETTINGS_MODULE=lma_connect.settings
+EnvironmentFile=%h/lma-connect/.env
+ExecStart=%h/lma-connect/.venv/bin/gunicorn lma_connect.wsgi:application \
+    --bind 0.0.0.0:8130 \
+    --worker-class gthread \
+    --workers 3 \
+    --threads 4 \
+    --max-requests 2000 \
+    --max-requests-jitter 200 \
+    --timeout 60 \
+    --graceful-timeout 30 \
+    --keep-alive 5 \
+    --access-logfile - \
+    --error-logfile -
+ExecReload=/bin/kill -s HUP $MAINPID
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target

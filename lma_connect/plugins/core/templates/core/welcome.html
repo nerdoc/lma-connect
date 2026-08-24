@@ -1,0 +1,174 @@
+{% load static i18n %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:'en' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#ffffff">
+    {# PWA / home-screen icon — the shared partial, also used by base.html. #}
+    {% include "_pwa_head.html" %}
+    <title>{% if event %}{{ event.name }}{% else %}{% trans "Conference App" %}{% endif %}</title>
+    {% comment %} A standalone page (it does not extend base.html) — assets come from
+       static/vendor/ like everywhere else.{% endcomment %}
+    <link rel="stylesheet" href="{% static 'vendor/tabler/tabler.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/tabler-icons/tabler-icons.min.css' %}">
+    <style>
+        {% include "_brand_palette.html" %}
+        html, body { height: 100%; margin: 0; }
+        body {
+            background: #fff;
+            color: #1a1a2e;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        .welcome-top {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 1.25rem;
+        }
+        .welcome-top img { max-height: 44px; width: auto; }
+        .welcome-hero {
+            flex: 1;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            padding: 1rem 1.5rem; text-align: center;
+        }
+        .welcome-hero img.event-logo {
+            max-width: 75%; max-height: 140px;
+            margin-bottom: 1.5rem;
+        }
+        .welcome-hero img.hero-art {
+            max-width: 92%; max-height: 38vh; object-fit: contain;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+            margin-bottom: 1.5rem;
+        }
+        .welcome-name {
+            font-size: 2rem; font-weight: 700; line-height: 1.1;
+            margin: 0 0 0.5rem 0;
+        }
+        .welcome-sub {
+            font-size: 1rem; color: #6c757d; margin-bottom: 1.5rem;
+        }
+        .welcome-meta {
+            display: flex; flex-wrap: wrap; gap: 1.25rem; justify-content: center;
+            font-size: 0.95rem; color: #6c757d;
+        }
+        .welcome-meta div { display: flex; align-items: center; gap: 0.4rem; }
+        .welcome-meta i { font-size: 1.1rem; }
+        .welcome-cta {
+            padding: 1rem 1.5rem 1.5rem;
+            display: flex; flex-direction: column; gap: 0.75rem; align-items: center;
+        }
+        .welcome-cta .btn {
+            width: 100%; max-width: 360px;
+            background: var(--lma-primary); color: #fff;
+            font-weight: 700; font-size: 1.05rem;
+            min-height: 56px; border-radius: 14px; border: none;
+            box-shadow: 0 4px 16px rgba(var(--lma-primary-rgb), 0.25);
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+        }
+        .welcome-cta .btn:active { transform: scale(0.98); }
+        /* Headline sponsor — between the CTA and the footer. Deliberately
+           below the enter button: the button stays the visual target of this
+           screen, the sponsor logo accompanies it rather than competing. */
+        .welcome-sponsors {
+            display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+            padding: 0 1.5rem 0.5rem;
+        }
+        .welcome-sponsors .label {
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em;
+            color: #adb5bd;
+        }
+        .welcome-sponsors .logos {
+            display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;
+        }
+        .welcome-footer {
+            text-align: center;
+            padding: 1rem 1rem calc(1rem + env(safe-area-inset-bottom));
+            font-size: 0.78rem; color: #6c757d;
+        }
+        .welcome-footer img { max-height: 28px; width: auto; vertical-align: middle; margin: 0 0.4rem; }
+        .welcome-footer a { color: var(--lma-primary); text-decoration: none; }
+        .welcome-footer a:hover { text-decoration: underline; }
+        .welcome-footer .welcome-legal { font-size: 0.78rem; margin-top: 0.4rem; }
+        .welcome-footer .app-credit { font-size: 0.72rem; opacity: 0.7; margin-top: 0.5rem; }
+    </style>
+</head>
+<body>
+
+<div class="welcome-top">
+    <div>
+        {% if event.logo %}
+        <img src="{{ event.logo.url }}" alt="{{ event.name }}">
+        {% endif %}
+    </div>
+    <div>
+        {% if event.organizer_logo %}
+        <img src="{{ event.organizer_logo.url }}" alt="{{ event.organizer_name }}">
+        {% endif %}
+    </div>
+</div>
+
+<div class="welcome-hero">
+    {% if event.welcome_image %}
+        <img src="{{ event.welcome_image.url }}" alt="" class="hero-art">
+    {% endif %}
+
+    <h1 class="welcome-name">{% if event %}{{ event.name }}{% else %}{% trans "Conference" %}{% endif %}</h1>
+
+    {% if event.localized_subtitle %}<div class="welcome-sub">{{ event.localized_subtitle }}</div>{% endif %}
+
+    {% if event %}
+    <div class="welcome-meta">
+        <div><i class="ti ti-calendar"></i> {{ event.start_date|date:"j M" }}–{{ event.end_date|date:"j M Y" }}</div>
+        <div><i class="ti ti-map-pin"></i> {{ event.localized_venue_name }}, {{ event.city }}</div>
+    </div>
+    {% endif %}
+</div>
+
+<div class="welcome-cta">
+    <a href="{% url 'core:home' %}" class="btn">
+        <i class="ti ti-arrow-right"></i> {% trans "Enter" %}
+    </a>
+</div>
+
+{% with featured=event.featured_sponsors %}
+{% if featured %}
+<div class="welcome-sponsors">
+    <div class="label">{% trans "With the support of" %}</div>
+    <div class="logos">
+        {% include "sponsors/_featured_logos.html" with sponsors=featured max_height="44px" %}
+    </div>
+</div>
+{% endif %}
+{% endwith %}
+
+<div class="welcome-footer">
+    {% if event.organizer_name or event.organizer_logo %}
+    {% trans "Hosted by" %}
+    {% if event.organizer_url %}<a href="{{ event.organizer_url }}" target="_blank" rel="noopener">{% endif %}
+    {% if event.organizer_logo %}<img src="{{ event.organizer_logo.url }}" alt="{{ event.organizer_name }}">{% else %}<strong>{{ event.organizer_name }}</strong>{% endif %}
+    {% if event.organizer_url %}</a>{% endif %}
+    {% endif %}
+    {% comment %} Legal links — the welcome screen is the first page anyone sees, and an
+       imprint has to be reachable from there, not only from inside the app.{% endcomment %}
+    {% with legal_pages=event.published_legal_pages %}
+    {% if legal_pages %}
+    <div class="welcome-legal">
+        {% for page in legal_pages %}<a href="{% url 'core:legal' page.slug %}">{{ page.localized_title }}</a>{% if not forloop.last %} · {% endif %}{% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    {% comment %} Hard-coded app attribution — this page does not extend base.html, so it
+       carries its own copy of the credit line.{% endcomment %}
+    <div class="app-credit">
+        <a href="{% url 'core:about' %}">{{ app.name }}</a>
+        · {% blocktrans with license=app.license_spdx %}open source, {{ license }}{% endblocktrans %}
+    </div>
+</div>
+
+</body>
+</html>

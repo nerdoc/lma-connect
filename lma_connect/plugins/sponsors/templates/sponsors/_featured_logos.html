@@ -1,0 +1,25 @@
+{% comment %}
+Logo chips for the headline sponsors (Event.featured_sponsors).
+
+The one place that knows what a headline sponsor logo looks like — included
+by the welcome screen and by the home page hero. Both sit on a coloured
+ground, which is why the chip is white: sponsor logos arrive with transparent
+backgrounds and would be unreadable on the brand colour.
+
+Parameters (via {% include ... with %}):
+  sponsors   — queryset or list, usually event.featured_sponsors
+  max_height — CSS height of the logo area, e.g. "34px" (default: 32px)
+  linked     — True: the chip links to the sponsor detail page. Only set this
+               where the user is already inside the app, not on the welcome
+               screen, whose only exit should stay the enter button.
+{% endcomment %}
+{% for sponsor in sponsors %}
+{% if linked %}<a href="{{ sponsor.get_absolute_url }}" class="d-inline-block" title="{{ sponsor.name }}">{% endif %}
+    <span class="d-inline-flex align-items-center justify-content-center rounded bg-white"
+          style="padding: 5px 8px; max-width: 160px;">
+        <img src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}"
+             style="max-height: {{ max_height|default:'32px' }}; max-width: 100%;
+                    width: auto; object-fit: contain; display: block;">
+    </span>
+{% if linked %}</a>{% endif %}
+{% endfor %}

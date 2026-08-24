@@ -1,0 +1,55 @@
+{% load program_extras i18n %}
+{# 4-dim rating card. Tap a star to save instantly. #}
+<div class="card mb-3" id="rating-card"><div class="card-body py-3">
+    <div class="d-flex justify-content-between align-items-baseline mb-2">
+        <h2 class="h5 mb-0"><i class="ti ti-star me-1"></i>{% trans "How was this session?" %}</h2>
+        {% if agg.n %}
+        <div class="small text-secondary">{% blocktrans count n=agg.n %}{{ n }} rating{% plural %}{{ n }} ratings{% endblocktrans %}</div>
+        {% endif %}
+    </div>
+
+    {% if user.is_authenticated %}
+        {% for dim_key, dim_label in dimensions %}
+        <div class="mb-2">
+            <div class="d-flex justify-content-between align-items-baseline mb-1">
+                <label class="small fw-bold mb-0">{{ dim_label }}</label>
+                {% with avg_val=agg|dict_get:dim_key %}
+                {% if avg_val %}<span class="small text-secondary">⌀ {{ avg_val|floatformat:1 }} ★</span>{% endif %}
+                {% endwith %}
+            </div>
+            <div class="d-flex gap-1" role="radiogroup" aria-label="{{ dim_label }}">
+                {% with current=user_rating|dim_value:dim_key %}
+                {% for i in "12345" %}
+                <form hx-post="{% url 'program:session_rate' session.slug %}"
+                      hx-target="#rating-card" hx-swap="outerHTML" class="flex-grow-1 m-0">
+                    <input type="hidden" name="dimension" value="{{ dim_key }}">
+                    <input type="hidden" name="value" value="{{ forloop.counter }}">
+                    <button type="submit" class="btn w-100 btn-sm {% if forloop.counter <= current %}btn-warning{% else %}btn-outline-warning{% endif %}"
+                            aria-label="{% blocktrans with n=forloop.counter %}{{ n }} stars{% endblocktrans %}">
+                        <i class="ti ti-star{% if forloop.counter <= current %}-filled{% endif %}"></i>
+                    </button>
+                </form>
+                {% endfor %}
+                {% endwith %}
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if user_rating %}
+        <form class="mt-2"
+              hx-post="{% url 'program:session_rate' session.slug %}"
+              hx-target="#rating-card" hx-swap="outerHTML">
+            <input type="hidden" name="rating" value="{{ user_rating.rating_overall|default:0 }}">
+            <textarea class="form-control" name="comment" rows="2"
+                      placeholder="{% trans "Optional comment …" %}">{{ user_rating.comment }}</textarea>
+            <div class="d-flex justify-content-end mt-2">
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <i class="ti ti-device-floppy"></i> {% trans "Save comment" %}
+                </button>
+            </div>
+        </form>
+        {% endif %}
+    {% else %}
+    <div class="alert alert-secondary py-2 mb-0"><i class="ti ti-info-circle"></i> <a href="{% url 'login' %}?next={{ request.path }}">{% trans "Sign in" %}</a> {% trans "required." %}</div>
+    {% endif %}
+</div></div>

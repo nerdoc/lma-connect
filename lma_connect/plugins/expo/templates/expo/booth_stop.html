@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ sponsor.name }}{% endblock %}
+{% block topbar_title %}{% trans "Booth check-in" %}{% endblock %}
+{% block topbar_sub %}{{ sponsor.name }}{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+<div class="mb-3">
+    {% for m in messages %}
+    <div class="alert alert-{{ m.tags|default:'info' }} mb-2 py-2">{{ m }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{# ─── Booth header ─── #}
+<div class="card mb-3">
+    <div class="card-body py-3 d-flex align-items-center gap-3">
+        {% if sponsor.logo %}
+        <img src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}" style="max-height: 48px; max-width: 96px; width:auto;">
+        {% endif %}
+        <div class="min-w-0">
+            <h1 class="h4 mb-0 text-truncate">{{ sponsor.name }}</h1>
+            {% if sponsor.localized_booth_location %}<div class="text-secondary small"><i class="ti ti-map-pin me-1"></i>{{ sponsor.localized_booth_location }}</div>{% endif %}
+        </div>
+    </div>
+</div>
+
+{% if quiz %}
+    {% if already_solved %}
+    {# ─── Solved ─── #}
+    <div class="card mb-3 border-success">
+        <div class="card-body py-3 text-center">
+            <i class="ti ti-circle-check h1 d-block text-success mb-1"></i>
+            <div class="fw-bold">{% trans "Quiz solved — bonus points earned!" %}</div>
+            {% if quiz.correct_choice %}
+            <div class="small text-secondary mt-1">{{ quiz.question }}<br><span class="fw-semibold text-success">{{ quiz.correct_choice.text }}</span></div>
+            {% endif %}
+        </div>
+    </div>
+    {% else %}
+    {# ─── Quiz form ─── #}
+    <div class="card mb-3">
+        <div class="card-body py-3">
+            <h2 class="h5 mb-2"><i class="ti ti-help-circle me-1"></i>{{ quiz.question }}</h2>
+            {% if quiz.hint %}<div class="small text-secondary mb-3"><i class="ti ti-bulb me-1"></i>{{ quiz.hint }}</div>{% endif %}
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    {% for choice in quiz.choices.all %}
+                    <label class="form-selectgroup-item d-block mb-2">
+                        <input type="radio" name="choice" value="{{ choice.pk }}" class="form-check-input me-2" required>
+                        {{ choice.text }}
+                    </label>
+                    {% endfor %}
+                </div>
+                <button type="submit" class="btn btn-primary w-100"><i class="ti ti-send me-1"></i>{% trans "Submit answer" %}</button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+{% else %}
+<div class="card mb-3">
+    <div class="card-body py-3 text-center text-secondary">
+        <i class="ti ti-circle-check h2 d-block text-success mb-1"></i>
+        {% trans "You're checked in. Enjoy the booth!" %}
+    </div>
+</div>
+{% endif %}
+
+<a href="{{ sponsor.get_absolute_url }}" class="btn btn-outline-secondary w-100">
+    <i class="ti ti-building-store me-1"></i>{% trans "Booth details" %}
+</a>
+
+{% endblock %}

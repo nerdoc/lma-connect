@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load program_extras i18n %}
+
+{% block title %}{{ session.title }}{% endblock %}
+{% block topbar_title %}{{ session.title|truncatechars:40 }}{% endblock %}
+{% block topbar_sub %}{{ session.starts_at|date:"D, j M H:i" }} · {{ session.room.name|default:"" }}{% endblock %}
+
+{% block content %}
+<a href="{% url 'program:list' %}" class="btn btn-sm btn-ghost-secondary mb-2"><i class="ti ti-arrow-left"></i> {% trans "Program" %}</a>
+
+{% if is_chair %}
+<a href="{% url 'program:chair_panel' session.slug %}" class="btn btn-sm btn-primary mb-2 ms-1"><i class="ti ti-microphone-2"></i> {% trans "Chair view (Q&A)" %}</a>
+{% endif %}
+
+{# ─── Header ─── #}
+<div class="card mb-3 session-card {% if session.type == 'break' %}is-break{% endif %}" style="--track-color: {{ session.track.color|default:'#9ca3af' }}">
+    <div class="card-body">
+        <div class="d-flex flex-wrap gap-1 mb-2">
+            {% if session.type == 'keynote' %}<span class="badge bg-yellow-lt"><i class="ti ti-star"></i> {% trans "Keynote" %}</span>
+            {% elif session.type == 'panel' %}<span class="badge bg-purple-lt">{% trans "Panel" %}</span>
+            {% elif session.type == 'workshop' %}<span class="badge bg-cyan-lt">{% trans "Workshop" %}</span>
+            {% elif session.type == 'break' %}<span class="badge" style="background: var(--lma-highlight); color: var(--lma-ink);">{% if "lunch" in session.title|lower %}<i class="ti ti-tools-kitchen-2"></i> {% trans "Lunch" %}{% else %}<i class="ti ti-coffee"></i> {% trans "Break" %}{% endif %}</span>
+            {% elif session.type == 'poster' %}<span class="badge bg-orange-lt">{% trans "Poster" %}</span>
+            {% endif %}
+            {% if session.track %}<span class="badge" style="background: {{ session.track.color }}; color: #fff;">{{ session.track.name }}</span>{% endif %}
+        </div>
+        <h1 class="h3 mb-2">{{ session.title }}</h1>
+        <div class="d-flex flex-column gap-1 small text-secondary">
+            <div><i class="ti ti-clock"></i> {{ session.starts_at|date:"l, j F · H:i" }}–{{ session.ends_at|date:"H:i" }}</div>
+            {% if session.room %}<div><i class="ti ti-map-pin"></i> {{ session.room.name }}{% if session.room.floor %} · {{ session.room.floor }}{% endif %}</div>{% endif %}
+            {% if session_chairs %}
+            <div><i class="ti ti-microphone-2"></i> {% blocktrans count n=session_chairs|length %}Chair:{% plural %}Chairs:{% endblocktrans %}
+                {% for sc in session_chairs %}{{ sc.user.get_full_name|default:sc.user.first_name|default:sc.user.username }}{% if not forloop.last %}, {% endif %}{% endfor %}</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{# ─── Speakers ─── #}
+{% with speakers=session.speakers.all %}
+{% if speakers %}
+<h2 class="h5 mb-2"><i class="ti ti-users me-1"></i>{% trans "Speakers" %}</h2>
+<div class="d-flex flex-column gap-2 mb-3">
+    {% for sp in speakers %}
+    <a href="{% url 'people:detail' sp.speaker.profile.user.username %}" class="card text-decoration-none">
+        <div class="card-body py-3">
+            <div class="d-flex gap-3 align-items-start">
+                {% if sp.speaker.profile.photo %}
+                <img src="{{ sp.speaker.profile.photo.url }}" alt=""
+                     class="avatar avatar-md" style="object-fit: cover;">
+                {% else %}
+                <span class="avatar avatar-md bg-{% cycle 'blue' 'orange' 'green' 'purple' %}-lt">
+                    {{ sp.speaker.profile.user.first_name|first }}{{ sp.speaker.profile.user.last_name|first }}
+                </span>
+                {% endif %}
+                <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between align-items-start gap-2">
+                        <div>
+                            <div class="fw-bold">{{ sp.speaker.profile.user.get_full_name|default:sp.speaker.profile.user.username }}</div>
+                            {% with aff=sp.speaker.affiliation|default:sp.speaker.profile.affiliation|default:sp.speaker.profile.user.affiliation_line %}
+                            <div class="small text-secondary">{{ aff }}</div>
+                            {% endwith %}
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-secondary-lt d-block mb-1">{{ sp.get_role_display }}</span>
+                            <i class="ti ti-chevron-right text-secondary"></i>
+                        </div>
+                    </div>
+                    {% if sp.speaker.intro and sp.speaker.profile.profile_public %}<div class="small mt-1">{{ sp.speaker.intro|linebreaksbr }}</div>{% endif %}
+                </div>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+{# ─── Summary ─── #}
+{% if session.summary %}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5 mb-2">{% trans "Summary" %}</h2>
+    <p class="mb-0">{{ session.summary|linebreaks }}</p>
+</div></div>
+{% endif %}
+
+{# ─── Live polls ─── #}
+{% if polls %}
+<h2 class="h5 mb-2"><i class="ti ti-chart-bar me-1"></i>{% trans "Live poll" %}</h2>
+{% for poll in polls %}
+    {% include "program/_poll_card.html" with poll=poll results=poll_results|dict_get:poll.id user_choice_ids=user_poll_choice_ids|dict_get:poll.id user_text=user_poll_text|dict_get:poll.id %}
+{% endfor %}
+{% endif %}
+
+{# ─── Q&A ─── #}
+{% if session.qa_enabled %}
+<h2 class="h5 mb-2"><i class="ti ti-message-question me-1"></i>{% trans "Questions for the panel" %}</h2>
+{% include "program/_qa_panel.html" %}
+{% endif %}
+
+{# ─── Rating ─── #}
+{% if session.rating_enabled %}
+<div class="mt-3">
+    {% include "program/_rating_card.html" %}
+</div>
+{% endif %}
+
+{% endblock %}

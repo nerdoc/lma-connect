@@ -1,0 +1,53 @@
+[project]
+name = "lma-connect"
+version = "0.1.0"
+description = "LMA Connect — mobile-first conference companion (Django + HTMX, no build step)"
+readme = "README.md"
+requires-python = ">=3.13"
+license = "AGPL-3.0-or-later"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Janne Cadamuro" },
+    { name = "LabMed Alliance Inc." },
+]
+keywords = ["conference", "django", "htmx", "events", "abstracts", "poster"]
+dependencies = [
+    # Core stack — all directly used
+    "django>=5.2",
+    "django-htmx>=1.19",
+    "django-markdownify>=0.9",
+    "django-q2>=1.7",
+    "python-dotenv>=1.0",
+    "qrcode>=7.4",
+    "Pillow>=10.0",
+    # Prod (uncomment for MariaDB / MySQL)
+    # "mysqlclient>=2.2",
+    "django-axes>=8.3.1",
+    "django-csp>=4.0",
+    "gunicorn>=26.0.0",
+    "whitenoise>=6.12.0",
+]
+
+[dependency-groups]
+dev = [
+    "django-debug-toolbar",
+    "pytest",
+    "pytest-django",
+    "pytest-mock",
+    "ruff>=0.6",
+    "mypy>=1.11",
+    "django-stubs",
+]
+
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "DJ"]
+ignore = ["E501"]  # handled by `line-length` above; W505 is not enabled
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "lma_connect.settings"
+python_files = ["test_*.py", "*_test.py"]

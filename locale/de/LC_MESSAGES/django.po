@@ -1,0 +1,5669 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-18 11:49+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: lma_connect/plugins/abstracts/models.py:19
+#: lma_connect/plugins/abstracts/models.py:44
+#: lma_connect/plugins/abstracts/models.py:82
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:83
+#: lma_connect/plugins/core/models.py:88 lma_connect/plugins/core/models.py:390
+#: lma_connect/plugins/core/models.py:419
+#: lma_connect/plugins/core/models.py:486
+#: lma_connect/plugins/gamification/models.py:87
+#: lma_connect/plugins/program/models.py:18
+#: lma_connect/plugins/sponsors/models.py:39
+#: lma_connect/plugins/sponsors/models.py:69
+#: lma_connect/plugins/sponsors/models.py:194
+msgid "Name"
+msgstr "Name"
+
+#: lma_connect/plugins/abstracts/models.py:20
+#: lma_connect/plugins/abstracts/models.py:45
+#: lma_connect/plugins/abstracts/models.py:84
+#: lma_connect/plugins/abstracts/models.py:128
+#: lma_connect/plugins/core/models.py:93 lma_connect/plugins/core/models.py:391
+#: lma_connect/plugins/core/models.py:422
+#: lma_connect/plugins/feedback/models.py:29
+#: lma_connect/plugins/program/models.py:19
+#: lma_connect/plugins/program/models.py:62
+#: lma_connect/plugins/sponsors/models.py:40
+#: lma_connect/plugins/sponsors/models.py:70
+msgid "Slug"
+msgstr "Slug"
+
+#: lma_connect/plugins/abstracts/models.py:21
+#: lma_connect/plugins/abstracts/models.py:46
+#: lma_connect/plugins/program/models.py:20
+#: lma_connect/plugins/sponsors/models.py:41
+msgid "Colour"
+msgstr "Farbe"
+
+#: lma_connect/plugins/abstracts/models.py:22
+#: lma_connect/plugins/core/models.py:424
+#: lma_connect/plugins/gamification/models.py:88
+#: lma_connect/plugins/program/models.py:22
+msgid "Description"
+msgstr "Beschreibung"
+
+#: lma_connect/plugins/abstracts/models.py:23
+#: lma_connect/plugins/abstracts/models.py:85
+#: lma_connect/plugins/abstracts/models.py:219
+#: lma_connect/plugins/core/models.py:395
+#: lma_connect/plugins/core/models.py:425
+#: lma_connect/plugins/core/models.py:457
+#: lma_connect/plugins/core/models.py:494
+#: lma_connect/plugins/core/models.py:520
+#: lma_connect/plugins/core/models.py:576
+#: lma_connect/plugins/core/models.py:632 lma_connect/plugins/expo/models.py:62
+#: lma_connect/plugins/feedback/models.py:65
+#: lma_connect/plugins/feedback/models.py:90
+#: lma_connect/plugins/gamification/models.py:91
+#: lma_connect/plugins/program/models.py:23
+#: lma_connect/plugins/program/models.py:117
+#: lma_connect/plugins/program/models.py:140
+#: lma_connect/plugins/program/models.py:279
+#: lma_connect/plugins/sponsors/models.py:49
+#: lma_connect/plugins/sponsors/models.py:175
+#: lma_connect/plugins/sponsors/models.py:205
+#: lma_connect/plugins/sponsors/models.py:242
+#: lma_connect/plugins/sponsors/models.py:281
+msgid "Order"
+msgstr "Reihenfolge"
+
+#: lma_connect/plugins/abstracts/models.py:26
+#, fuzzy
+#| msgid "Abstract-Kategorie"
+msgid "Abstract category"
+msgstr "Abstract-Kategorie"
+
+#: lma_connect/plugins/abstracts/models.py:27
+#, fuzzy
+#| msgid "Abstract-Kategorie"
+msgid "Abstract categories"
+msgstr "Abstract-Kategorie"
+
+#: lma_connect/plugins/abstracts/models.py:49
+#, fuzzy
+#| msgid "Abstract-Tag"
+msgid "Abstract tag"
+msgstr "Abstract-Tag"
+
+#: lma_connect/plugins/abstracts/models.py:50
+#, fuzzy
+#| msgid "Abstract-Tags"
+msgid "Abstract tags"
+msgstr "Abstract-Tags"
+
+#: lma_connect/plugins/abstracts/models.py:59
+#: lma_connect/plugins/access/templates/access/ops/abstract_stars.html:63
+#: lma_connect/plugins/access/templates/access/ops/abstracts_results.html:59
+#: lma_connect/plugins/program/templates/program/detail.html:23
+#: lma_connect/plugins/program/templates/program/list.html:78
+#: lma_connect/plugins/qr/views.py:133
+msgid "Poster"
+msgstr "Poster"
+
+#: lma_connect/plugins/abstracts/models.py:60
+#: lma_connect/plugins/program/models.py:37
+msgid "Oral communication"
+msgstr "Vortrag"
+
+#: lma_connect/plugins/abstracts/models.py:61
+#: lma_connect/plugins/people/templates/people/speaker_list.html:34
+#: lma_connect/plugins/program/models.py:36
+#: lma_connect/plugins/program/templates/program/detail.html:19
+#: lma_connect/plugins/program/templates/program/list.html:74
+msgid "Keynote"
+msgstr "Keynote"
+
+#: lma_connect/plugins/abstracts/models.py:65
+#: lma_connect/plugins/access/templates/access/ops/abstract_results_detail.html:57
+msgid "Submitted"
+msgstr "Eingereicht"
+
+#: lma_connect/plugins/abstracts/models.py:66
+msgid "Under review"
+msgstr "In Prüfung"
+
+#: lma_connect/plugins/abstracts/models.py:67
+msgid "Accepted"
+msgstr "Angenommen"
+
+#: lma_connect/plugins/abstracts/models.py:68
+msgid "Rejected"
+msgstr "Abgelehnt"
+
+#: lma_connect/plugins/abstracts/models.py:69
+msgid "Withdrawn"
+msgstr "Zurückgezogen"
+
+#: lma_connect/plugins/abstracts/models.py:83
+#, fuzzy
+#| msgid "Young Investigator Award"
+msgid "e.g. 'Best Poster', 'Young Investigator Award'"
+msgstr "Young Investigator Award"
+
+#: lma_connect/plugins/abstracts/models.py:87
+#, fuzzy
+#| msgid "Audience Choice"
+msgid "Audience choice"
+msgstr "Publikumspreis"
+
+#: lma_connect/plugins/abstracts/models.py:88
+msgid ""
+"Tick the one award decided by the attendees' star votes. The operations "
+"dashboard hands it out with one click, and only one abstract per event can "
+"hold it."
+msgstr ""
+"Die eine Auszeichnung ankreuzen, über die das Publikum per Sternen abstimmt. "
+"Das Ops-Dashboard vergibt sie mit einem Klick, und pro Event kann sie nur "
+"ein Abstract tragen."
+
+#: lma_connect/plugins/abstracts/models.py:93
+#, fuzzy
+#| msgid "Abstract"
+msgid "Abstract award"
+msgstr "Abstract"
+
+#: lma_connect/plugins/abstracts/models.py:94
+#, fuzzy
+#| msgid "Abstracts"
+msgid "Abstract awards"
+msgstr "Abstracts"
+
+#: lma_connect/plugins/abstracts/models.py:117
+#: lma_connect/plugins/core/models.py:680
+#: lma_connect/plugins/feedback/models.py:63
+#: lma_connect/plugins/program/models.py:64
+#: lma_connect/plugins/program/models.py:255
+#: lma_connect/plugins/sponsors/models.py:241
+#: lma_connect/plugins/sponsors/models.py:278
+msgid "Type"
+msgstr "Typ"
+
+#: lma_connect/plugins/abstracts/models.py:121
+#, fuzzy
+#| msgid "Poster-/Talk-ID"
+msgid "Poster / talk ID"
+msgstr "Poster-/Talk-ID"
+
+#: lma_connect/plugins/abstracts/models.py:122
+#, fuzzy
+#| msgid "z. B. P-042 für Poster Nr. 42, O-15 für Oral 15"
+msgid "e.g. P-042 for poster no. 42, O-15 for oral no. 15"
+msgstr "z. B. P-042 für Poster Nr. 42, O-15 für Oral 15"
+
+#: lma_connect/plugins/abstracts/models.py:124
+#, fuzzy
+#| msgid "Lokation"
+msgid "Location"
+msgstr "Lokation"
+
+#: lma_connect/plugins/abstracts/models.py:125
+#, fuzzy
+#| msgid "Wo das Poster hängt — z. B. Foyer A, Wand 5"
+msgid "Where the poster hangs — e.g. Foyer A, wall 5"
+msgstr "Wo das Poster hängt — z. B. Foyer A, Wand 5"
+
+#: lma_connect/plugins/abstracts/models.py:127
+#: lma_connect/plugins/access/templates/access/ops/abstract_stars.html:64
+#: lma_connect/plugins/access/templates/access/ops/abstracts_results.html:60
+#: lma_connect/plugins/core/models.py:569
+#: lma_connect/plugins/core/models.py:630
+#: lma_connect/plugins/feedback/models.py:27
+#: lma_connect/plugins/program/models.py:61
+#: lma_connect/plugins/sponsors/models.py:236
+msgid "Title"
+msgstr "Titel"
+
+#: lma_connect/plugins/abstracts/models.py:130
+#, fuzzy
+#| msgid "Abstract-Text (Markdown)"
+msgid "Abstract text (Markdown)"
+msgstr "Abstract-Text (Markdown)"
+
+#: lma_connect/plugins/abstracts/models.py:131
+#, fuzzy
+#| msgid "Hauptinhalt — typisch 250–300 Wörter"
+msgid "Main body — typically 250–300 words"
+msgstr "Hauptinhalt — typisch 250–300 Wörter"
+
+#: lma_connect/plugins/abstracts/models.py:132
+msgid "Keywords"
+msgstr "Keywords"
+
+#: lma_connect/plugins/abstracts/models.py:133
+#, fuzzy
+#| msgid "Komma-separiert"
+msgid "Comma separated"
+msgstr "Komma-separiert"
+
+#: lma_connect/plugins/abstracts/models.py:135
+msgid "PEER pre-review (Markdown)"
+msgstr "PEER-Vorauswertung (Markdown)"
+
+#: lma_connect/plugins/abstracts/models.py:136
+msgid ""
+"AI-generated pre-review for committee members — shown on the review page as "
+"a helper / second opinion. Markdown supported."
+msgstr ""
+"KI-generierte Vorab-Bewertung für Komiteemitglieder — auf der Review-Seite "
+"als Hilfe / Zweitmeinung angezeigt. Markdown unterstützt."
+
+#: lma_connect/plugins/abstracts/models.py:141
+msgid "Tags"
+msgstr "Tags"
+
+#: lma_connect/plugins/abstracts/models.py:143
+#: lma_connect/plugins/abstracts/models.py:254
+#: lma_connect/plugins/feedback/models.py:106
+#, fuzzy
+#| msgid "Submitted"
+msgid "Submitted at"
+msgstr "Eingereicht"
+
+#: lma_connect/plugins/abstracts/models.py:147
+#: lma_connect/plugins/access/templates/access/ops/token_detail.html:48
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:46
+msgid "Status"
+msgstr "Status"
+
+#: lma_connect/plugins/abstracts/models.py:149
+msgid "Decision notes (internal)"
+msgstr "Entscheidungsnotizen (intern)"
+
+#: lma_connect/plugins/abstracts/models.py:155
+#: lma_connect/plugins/access/templates/access/ops/abstract_stars.html:68
+msgid "Award"
+msgstr "Preis"
+
+#: lma_connect/plugins/abstracts/models.py:156
+msgid "When set, the abstract is marked as a winner"
+msgstr "Wenn gesetzt, wird der Abstract als Preisträger markiert"
+
+#: lma_connect/plugins/abstracts/models.py:157
+#, fuzzy
+#| msgid "Award-Begründung (optional)"
+msgid "Award rationale (optional)"
+msgstr "Award-Begründung (optional)"
+
+#: lma_connect/plugins/abstracts/models.py:158
+#, fuzzy
+#| msgid "Kurzer Text, z. B. 'Highest impact factor in study design'"
+msgid "Short text, e.g. 'Highest impact factor in study design'"
+msgstr "Kurzer Text, z. B. 'Highest impact factor in study design'"
+
+#: lma_connect/plugins/abstracts/models.py:159
+#, fuzzy
+#| msgid "Awarded at"
+msgid "Award date"
+msgstr "Verliehen am"
+
+#: lma_connect/plugins/abstracts/models.py:161
+msgid "Publicly visible"
+msgstr "Öffentlich sichtbar"
+
+#: lma_connect/plugins/abstracts/models.py:168
+#, fuzzy
+#| msgid "Poster details"
+msgid "Poster on display"
+msgstr "Poster-Details"
+
+#: lma_connect/plugins/abstracts/models.py:169
+msgid ""
+"A poster with a QR code hangs for this abstract — also possible for talks "
+"that additionally show a poster"
+msgstr ""
+"Für dieses Abstract hängt ein Poster mit QR-Code — auch bei Vorträgen "
+"möglich, die zusätzlich ein Poster zeigen"
+
+#: lma_connect/plugins/abstracts/models.py:173
+#: lma_connect/plugins/abstracts/templates/abstracts/detail.html:5
+#: lma_connect/plugins/abstracts/templates/abstracts/detail.html:89
+msgid "Abstract"
+msgstr "Abstract"
+
+#: lma_connect/plugins/abstracts/models.py:174
+#: lma_connect/plugins/abstracts/templates/abstracts/detail.html:9
+#: lma_connect/plugins/abstracts/templates/abstracts/list.html:4
+#: lma_connect/plugins/abstracts/templates/abstracts/list.html:5
+#: lma_connect/plugins/access/templates/access/ops/_base.html:29
+#: lma_connect/plugins/core/templates/core/home.html:83 templates/base.html:369
+#: templates/base.html:370
+msgid "Abstracts"
+msgstr "Abstracts"
+
+#: lma_connect/plugins/abstracts/models.py:199
+#, fuzzy
+#| msgid "Optional — wenn der Autor einen Account hat"
+msgid "Optional — when the author has an account"
+msgstr "Optional — wenn der:die Autor:in einen Account hat"
+
+#: lma_connect/plugins/abstracts/models.py:201
+#, fuzzy
+#| msgid "Full programme"
+msgid "Full name"
+msgstr "Volles Programm"
+
+#: lma_connect/plugins/abstracts/models.py:202
+msgid "Plain text — an account is not required"
+msgstr "Klartext — ein Benutzerkonto ist nicht nötig"
+
+#: lma_connect/plugins/abstracts/models.py:203
+#: lma_connect/plugins/core/models.py:489
+#: lma_connect/plugins/sponsors/models.py:201
+#: lma_connect/plugins/sponsors/templates/sponsors/detail.html:159
+msgid "Email"
+msgstr "E-Mail"
+
+#: lma_connect/plugins/abstracts/models.py:204
+#: lma_connect/plugins/core/models.py:455
+#: lma_connect/plugins/people/models.py:51
+msgid "Affiliation"
+msgstr "Affiliation"
+
+#: lma_connect/plugins/abstracts/models.py:205
+#: lma_connect/plugins/people/models.py:68
+msgid "ORCID"
+msgstr "ORCID"
+
+#: lma_connect/plugins/abstracts/models.py:211
+#: lma_connect/plugins/core/models.py:37 lma_connect/plugins/core/models.py:108
+#: lma_connect/plugins/people/models.py:54
+msgid "Country"
+msgstr "Land"
+
+#: lma_connect/plugins/abstracts/models.py:212
+#: lma_connect/plugins/people/models.py:55
+msgid "Country of the affiliation, e.g. 'Austria'"
+msgstr "Land der Affiliation, z. B. „Österreich“"
+
+#: lma_connect/plugins/abstracts/models.py:213
+#: lma_connect/plugins/core/models.py:38 lma_connect/plugins/core/models.py:109
+#: lma_connect/plugins/people/models.py:56
+msgid "ISO-3166"
+msgstr "ISO-3166"
+
+#: lma_connect/plugins/abstracts/models.py:214
+#: lma_connect/plugins/people/models.py:57
+msgid "Two-letter code, e.g. 'AT' — drives the world map and the flag display"
+msgstr ""
+"Zweibuchstaben-Code, z. B. „AT“ — steuert Weltkarte und Flaggen-Anzeige"
+
+#: lma_connect/plugins/abstracts/models.py:217
+#, fuzzy
+#| msgid "* presenting author"
+msgid "Presenting author"
+msgstr "* präsentierende:r Autor:in"
+
+#: lma_connect/plugins/abstracts/models.py:218
+#, fuzzy
+#| msgid "* presenting author"
+msgid "Corresponding author"
+msgstr "* präsentierende:r Autor:in"
+
+#: lma_connect/plugins/abstracts/models.py:222
+#, fuzzy
+#| msgid "Abstract-Autor"
+msgid "Abstract author"
+msgstr "Abstract-Autor:in"
+
+#: lma_connect/plugins/abstracts/models.py:223
+#, fuzzy
+#| msgid "Abstract-Autor"
+msgid "Abstract authors"
+msgstr "Abstract-Autor:in"
+
+#: lma_connect/plugins/abstracts/models.py:240
+#, fuzzy
+#| msgid "1 — exzellent"
+msgid "1 — excellent"
+msgstr "1 — exzellent"
+
+#: lma_connect/plugins/abstracts/models.py:241
+#, fuzzy
+#| msgid "2 — sehr gut"
+msgid "2 — very good"
+msgstr "2 — sehr gut"
+
+#: lma_connect/plugins/abstracts/models.py:242
+#, fuzzy
+#| msgid "3 — gut"
+msgid "3 — good"
+msgstr "3 — gut"
+
+#: lma_connect/plugins/abstracts/models.py:243
+#, fuzzy
+#| msgid "4 — grenzwertig"
+msgid "4 — borderline"
+msgstr "4 — grenzwertig"
+
+#: lma_connect/plugins/abstracts/models.py:244
+#, fuzzy
+#| msgid "5 — schwach"
+msgid "5 — weak"
+msgstr "5 — schwach"
+
+#: lma_connect/plugins/abstracts/models.py:245
+#, fuzzy
+#| msgid "6 — nicht passend"
+msgid "6 — unsuitable"
+msgstr "6 — nicht passend"
+
+#: lma_connect/plugins/abstracts/models.py:251
+#, fuzzy
+#| msgid "Score"
+msgid "Score 1–6"
+msgstr "Score"
+
+#: lma_connect/plugins/abstracts/models.py:253
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:148
+#: lma_connect/plugins/expo/models.py:89
+msgid "Comment (optional)"
+msgstr "Kommentar (optional)"
+
+#: lma_connect/plugins/abstracts/models.py:255
+msgid "Set when a score is submitted for the first time"
+msgstr "Wird beim ersten Score-Submit gesetzt"
+
+#: lma_connect/plugins/abstracts/models.py:259
+#, fuzzy
+#| msgid "Abstract reviews"
+msgid "Abstract review"
+msgstr "Abstract-Reviews"
+
+#: lma_connect/plugins/abstracts/models.py:260
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:157
+#: templates/base.html:273
+msgid "Abstract reviews"
+msgstr "Abstract-Reviews"
+
+#: lma_connect/plugins/abstracts/models.py:299
+#, fuzzy
+#| msgid "Audience vote"
+msgid "Audience star"
+msgstr "Publikums-Voting"
+
+#: lma_connect/plugins/abstracts/models.py:300
+#, fuzzy
+#| msgid "Audience vote"
+msgid "Audience stars"
+msgstr "Publikums-Voting"
+
+#: lma_connect/plugins/abstracts/models.py:320
+#, fuzzy
+#| msgid "Member"
+msgid "Number"
+msgstr "Mitglied"
+
+#: lma_connect/plugins/abstracts/models.py:321
+#, fuzzy
+#| msgid "Zitation"
+msgid "Citation"
+msgstr "Zitation"
+
+#: lma_connect/plugins/abstracts/models.py:322
+#, fuzzy
+#| msgid "Volltext-Zitation, z. B. Smith J et al. Nature 2024;612:45-53"
+msgid "Full citation, e.g. Smith J et al. Nature 2024;612:45-53"
+msgstr "Volltext-Zitation, z. B. Smith J et al. Nature 2024;612:45-53"
+
+#: lma_connect/plugins/abstracts/models.py:324
+msgid "DOI"
+msgstr "DOI"
+
+#: lma_connect/plugins/abstracts/models.py:325
+#: lma_connect/plugins/sponsors/models.py:277
+msgid "URL"
+msgstr "URL"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/_review_status.html:5
+#, python-format
+msgid "Rated with <strong>%(score)s</strong>"
+msgstr "Bewertet mit <strong>%(score)s</strong>"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/_review_status.html:10
+msgid "Not yet rated"
+msgstr "Noch nicht bewertet"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/detail.html:33
+msgid "Where to find:"
+msgstr "Wo zu finden:"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/detail.html:45
+msgid "Audience Choice Award"
+msgstr "Audience Choice Award"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/detail.html:48
+msgid "You have given this poster your star."
+msgstr "Du hast diesem Poster deinen Stern gegeben."
+
+#: lma_connect/plugins/abstracts/templates/abstracts/detail.html:52
+#, python-format
+msgid ""
+"To rate this poster, scan the QR code on the poster itself — voting only "
+"works on site. Every attendee has %(stars_total)s stars and can give at most "
+"one per poster. A star is final and cannot be taken back."
+msgstr ""
+"Um das Poster bewerten zu können, scanne den QR-Code am Poster selbst — "
+"abgestimmt wird nur vor Ort. Jede:r Teilnehmende hat %(stars_total)s Sterne "
+"und kann höchstens einen pro Poster vergeben. Ein Stern ist endgültig und "
+"lässt sich nicht zurücknehmen."
+
+#: lma_connect/plugins/abstracts/templates/abstracts/detail.html:56
+#: lma_connect/plugins/expo/templates/expo/poster_stop.html:62
+#, python-format
+msgid "You have %(n)s star left."
+msgid_plural "You have %(n)s stars left."
+msgstr[0] "Du hast noch %(n)s Stern übrig."
+msgstr[1] "Du hast noch %(n)s Sterne übrig."
+
+#: lma_connect/plugins/abstracts/templates/abstracts/detail.html:69
+msgid "Authors"
+msgstr "Autor:innen"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/detail.html:75
+msgid "presenting"
+msgstr "präsentierend"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/detail.html:75
+msgid "corr."
+msgstr "korr."
+
+#: lma_connect/plugins/abstracts/templates/abstracts/detail.html:95
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:94
+msgid "Keywords:"
+msgstr "Keywords:"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/detail.html:105
+msgid "References"
+msgstr "Literatur"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/detail.html:113
+msgid "Link"
+msgstr "Link"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/list.html:6
+#, python-format
+msgid "%(n)s accepted · %(c)s category"
+msgid_plural "%(n)s accepted · %(c)s categories"
+msgstr[0] "%(n)s angenommen · %(c)s Kategorie"
+msgstr[1] "%(n)s angenommen · %(c)s Kategorien"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/list.html:10
+msgid "Where our abstracts come from"
+msgstr "Woher unsere Abstracts kommen"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/list.html:15
+msgid "Title, content, keywords …"
+msgstr "Titel, Inhalt, Keywords …"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/list.html:20
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:15
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:22
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:23
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:30
+msgid "All"
+msgstr "Alle"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/list.html:21
+msgid "Award winners"
+msgstr "Preisträger:innen"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/list.html:22
+#: lma_connect/plugins/access/templates/access/me.html:50
+#: lma_connect/plugins/access/templates/access/ops/dashboard.html:92
+msgid "Posters"
+msgstr "Poster"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/list.html:23
+msgid "Oral communications"
+msgstr "Vorträge"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/list.html:34
+msgid "No abstracts found"
+msgstr "Keine Abstracts gefunden"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/list.html:35
+msgid "Reset filters or change your search term."
+msgstr "Setze die Filter zurück oder ändere deinen Suchbegriff."
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:4
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:5
+msgid "Review"
+msgstr "Review"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:35
+msgid "Overview"
+msgstr "Übersicht"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:38
+#: lma_connect/plugins/sponsors/templates/sponsors/detail.html:59
+msgid "Previous"
+msgstr "Zurück"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:40
+#: lma_connect/plugins/sponsors/templates/sponsors/detail.html:62
+msgid "Next"
+msgstr "Weiter"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:49
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:30
+msgid "Review criteria"
+msgstr "Bewertungskriterien"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:50
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:31
+msgid "— what authors were asked to address"
+msgstr "— worum die Autor:innen gebeten wurden"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:54
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:35
+msgid ""
+"Abstracts must describe structured accounts of implemented or failed "
+"digital / AI projects in medical diagnostics — real-world experience, not "
+"concepts. Each submission should cover:"
+msgstr ""
+"Abstracts müssen strukturierte Berichte über umgesetzte oder gescheiterte "
+"digitale / KI-Projekte in der medizinischen Diagnostik beschreiben — "
+"Praxiserfahrung, keine Konzepte. Jede Einreichung sollte Folgendes abdecken:"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:57
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:38
+msgid "The clinical or operational problem addressed"
+msgstr "Das klinische oder operationelle Problem, das adressiert wird"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:58
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:39
+msgid ""
+"The implemented or failed solution and its integration into existing systems"
+msgstr ""
+"Die umgesetzte oder gescheiterte Lösung und deren Integration in bestehende "
+"Systeme"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:59
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:40
+msgid "Governance, regulatory and data protection considerations"
+msgstr "Governance, regulatorische und datenschutzrechtliche Überlegungen"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:60
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:41
+msgid "Measurable outcomes and operational impact"
+msgstr "Messbare Ergebnisse und operativer Impact"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:61
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:42
+msgid "Lessons learned, including challenges and setbacks"
+msgstr "Lessons learned, inkl. Herausforderungen und Rückschläge"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:62
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:43
+msgid "Practical recommendations for others"
+msgstr "Praktische Empfehlungen für andere"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:65
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:46
+msgid ""
+"Both successful and unsuccessful projects are welcome. Transparent "
+"reflection and practical relevance are essential."
+msgstr ""
+"Sowohl erfolgreiche als auch gescheiterte Projekte sind willkommen. "
+"Transparente Reflexion und praktische Relevanz sind entscheidend."
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:86
+msgid "* presenting author"
+msgstr "* präsentierende:r Autor:in"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:103
+#: lma_connect/plugins/access/templates/access/ops/abstract_results_detail.html:85
+msgid "PEER pre-review"
+msgstr "PEER-Vorauswertung"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:108
+msgid "Independent AI pre-assessment as a helper — your rating remains yours."
+msgstr "Unabhängige KI-Vorbewertung als Hilfe — deine Bewertung bleibt deine."
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:115
+msgid "PEER has not analysed this abstract yet."
+msgstr "PEER hat dieses Abstract noch nicht analysiert."
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:124
+msgid "Your rating"
+msgstr "Deine Bewertung"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:126
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:22
+msgid ""
+"1 = excellent · 2 = very good · 3 = good · 4 = borderline · 5 = weak · 6 = "
+"not suitable"
+msgstr ""
+"1 = exzellent · 2 = sehr gut · 3 = gut · 4 = grenzwertig · 5 = schwach · 6 = "
+"nicht passend1 = exzellent · 2 = sehr gut · 3 = gut · 4 = grenzwertig · 5 = "
+"schwach · 6 = nicht passend"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:150
+msgid "Notes, strengths, weaknesses …"
+msgstr "Notizen, Stärken, Schwächen …"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:155
+#: lma_connect/plugins/access/templates/access/me.html:126
+msgid "Save"
+msgstr "Speichern"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:162
+msgid "Really clear this rating?"
+msgstr "Bewertung wirklich zurücksetzen?"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_detail.html:163
+msgid "Reset"
+msgstr "Zurücksetzen"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:4
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:5
+msgid "Abstract Reviews"
+msgstr "Abstract-Reviews"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:6
+#, python-format
+msgid "%(done)s / %(total)s reviewed"
+msgstr "%(done)s / %(total)s bewertet"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:13
+msgid "No abstracts assigned"
+msgstr "Keine Abstracts zugewiesen"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:14
+msgid ""
+"As soon as a committee admin assigns abstracts to you, they will appear here."
+msgstr "Sobald dir ein Komitee-Admin Abstracts zuteilt, erscheinen sie hier."
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:21
+msgid "Rating scale:"
+msgstr "Bewertungs-Skala:"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:55
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:16
+msgid "Open"
+msgstr "Offen"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:86
+msgid "Done"
+msgstr "Erledigt"
+
+#: lma_connect/plugins/abstracts/templates/abstracts/review_list.html:100
+#, python-format
+msgid "reviewed %(date)s"
+msgstr "bewertet am %(date)s"
+
+#: lma_connect/plugins/abstracts/views.py:145
+#: lma_connect/plugins/abstracts/views.py:147
+msgid "Score must be between 1 and 6"
+msgstr "Bewertung muss zwischen 1 und 6 liegen"
+
+#: lma_connect/plugins/access/models.py:45
+#: lma_connect/plugins/access/templates/access/ops/token_detail.html:3
+#: lma_connect/plugins/access/templates/access/ops/token_detail.html:27
+#: lma_connect/plugins/access/templates/access/ops/token_print.html:5
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:41
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:131
+msgid "Token"
+msgstr "Token"
+
+#: lma_connect/plugins/access/models.py:46
+msgid "This is what the QR code encodes"
+msgstr "Wird im QR-Code kodiert"
+
+#: lma_connect/plugins/access/models.py:50
+msgid "Created on first redemption"
+msgstr "Erstellt beim ersten Einlösen"
+
+#: lma_connect/plugins/access/models.py:51
+#, fuzzy
+#| msgid "Label (intern)"
+msgid "Label (internal)"
+msgstr "Label (intern)"
+
+#: lma_connect/plugins/access/models.py:52
+#, fuzzy
+#| msgid "Für Orga, z. B. 'Speaker-Slot 12' oder 'Reserve'"
+msgid "For the organizers, e.g. 'speaker slot 12' or 'spare'"
+msgstr "Für Orga, z. B. 'Speaker-Slot 12' oder 'Reserve'"
+
+#: lma_connect/plugins/access/models.py:54
+msgid "Group / Category"
+msgstr "Gruppe / Kategorie"
+
+#: lma_connect/plugins/access/models.py:57
+msgid ""
+"Participant group this QR batch belongs to (Delegate, Speaker, Industry …) — "
+"assigned to the attendee's profile on first redemption"
+msgstr ""
+"Teilnehmendengruppe, zu der dieser QR-Batch gehört (Delegate, Speaker, "
+"Industry …) — wird beim ersten Einlösen dem Profil zugewiesen"
+
+#: lma_connect/plugins/access/models.py:60
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:28
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:133
+#: lma_connect/plugins/expo/models.py:42
+#: lma_connect/plugins/feedback/models.py:33
+#: lma_connect/plugins/program/models.py:260
+msgid "Active"
+msgstr "Aktiv"
+
+#: lma_connect/plugins/access/models.py:61
+msgid ""
+"Deactivate to stop the token from being redeemed — use this for a lost badge"
+msgstr ""
+"Deaktivieren = Token kann nicht mehr eingelöst werden — für verlorene Badges"
+
+#: lma_connect/plugins/access/models.py:63
+#, fuzzy
+#| msgid "Redeemed"
+msgid "Redeemed at"
+msgstr "Eingelöst"
+
+#: lma_connect/plugins/access/models.py:64
+#: lma_connect/plugins/access/templates/access/ops/token_detail.html:46
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:134
+msgid "Last seen"
+msgstr "Zuletzt gesehen"
+
+#: lma_connect/plugins/access/models.py:65
+#, fuzzy
+#| msgid "Notizen (intern)"
+msgid "Notes (internal)"
+msgstr "Notizen (intern)"
+
+#: lma_connect/plugins/access/models.py:68 lma_connect/plugins/qr/views.py:82
+#, fuzzy
+#| msgid "Access tokens"
+msgid "Access token"
+msgstr "Access-Tokens"
+
+#: lma_connect/plugins/access/models.py:69
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:124
+msgid "Access tokens"
+msgstr "Access-Tokens"
+
+#: lma_connect/plugins/access/models.py:91
+msgid "Failed login attempt"
+msgstr "Fehlgeschlagener Anmeldeversuch"
+
+#: lma_connect/plugins/access/models.py:92
+msgid "Failed login attempts"
+msgstr "Fehlgeschlagene Anmeldeversuche"
+
+#: lma_connect/plugins/access/models.py:98
+#: lma_connect/plugins/access/models.py:99
+msgid "Login failure log"
+msgstr "Protokoll fehlgeschlagener Anmeldungen"
+
+#: lma_connect/plugins/access/models.py:105
+#: lma_connect/plugins/access/models.py:106
+msgid "Login log"
+msgstr "Anmeldeprotokoll"
+
+#: lma_connect/plugins/access/ops_views.py:225
+msgid ""
+"No audience-choice award is configured for this event. Create one in the "
+"admin and tick “Audience choice”."
+msgstr ""
+"Für dieses Event ist kein Publikumspreis eingerichtet. Im Admin einen "
+"anlegen und „Publikumspreis“ ankreuzen."
+
+#: lma_connect/plugins/access/ops_views.py:233
+#, python-format
+msgid "Removed the audience award from “%(title)s”."
+msgstr "Publikumspreis von „%(title)s“ entfernt."
+
+#: lma_connect/plugins/access/ops_views.py:242
+#, python-format
+msgid "“%(title)s” now holds the %(award)s."
+msgstr "„%(title)s“ trägt jetzt den %(award)s."
+
+#: lma_connect/plugins/access/ops_views.py:317
+#: lma_connect/plugins/access/ops_views.py:463
+#: lma_connect/plugins/access/ops_views.py:531
+#: lma_connect/plugins/core/templates/core/info.html:12
+msgid "No active event"
+msgstr "Kein aktives Event"
+
+#: lma_connect/plugins/access/ops_views.py:331
+#, python-format
+msgid "%(count)d token(s) created"
+msgstr "%(count)d Token erstellt"
+
+#: lma_connect/plugins/access/ops_views.py:374
+msgid "Token activated"
+msgstr "Token aktiviert"
+
+#: lma_connect/plugins/access/ops_views.py:374
+msgid "Token deactivated"
+msgstr "Token deaktiviert"
+
+#: lma_connect/plugins/access/ops_views.py:471
+msgid "Profile updated"
+msgstr "Profil aktualisiert"
+
+#: lma_connect/plugins/access/ops_views.py:483
+#: lma_connect/plugins/access/ops_views.py:503
+#: lma_connect/plugins/access/ops_views.py:526
+msgid ""
+"This account has elevated privileges (staff/admin) and cannot be managed "
+"from the Ops frontend."
+msgstr ""
+"Dieses Konto hat erweiterte Rechte (Staff/Admin) und kann nicht über das Ops-"
+"Frontend verwaltet werden."
+
+#: lma_connect/plugins/access/ops_views.py:490
+#, python-format
+msgid ""
+"Temporary password for %(user)s: %(pw)s — give this to the user; they should "
+"change it after login."
+msgstr ""
+"Temporäres Passwort für %(user)s: %(pw)s — gib es an die Person weiter; sie "
+"sollte es nach dem Login ändern."
+
+#: lma_connect/plugins/access/ops_views.py:511
+#, python-format
+msgid "Cleared %(n)d axes lockout entries for %(user)s"
+msgstr "%(n)d Axes-Sperreinträge für %(user)s gelöscht"
+
+#: lma_connect/plugins/access/ops_views.py:514
+msgid "django-axes not installed"
+msgstr "django-axes nicht installiert"
+
+#: lma_connect/plugins/access/ops_views.py:542
+#, python-format
+msgid "New token %(token)s created and linked to %(user)s"
+msgstr "Neues Token %(token)s erstellt und mit %(user)s verknüpft"
+
+#: lma_connect/plugins/access/templates/access/me.html:4
+#: lma_connect/plugins/access/templates/access/me.html:5
+#: lma_connect/plugins/core/templates/core/help.html:190
+#: lma_connect/plugins/core/templates/core/help.html:191
+msgid "My profile"
+msgstr "Mein Profil"
+
+#: lma_connect/plugins/access/templates/access/me.html:24
+#, python-format
+msgid "points · %(earned)s/%(total)s badges"
+msgstr "Punkte · %(earned)s/%(total)s Badges"
+
+#: lma_connect/plugins/access/templates/access/me.html:25
+#: lma_connect/plugins/gamification/templates/gamification/leaderboard.html:5
+msgid "Leaderboard"
+msgstr "Rangliste"
+
+#: lma_connect/plugins/access/templates/access/me.html:36
+#: lma_connect/plugins/access/templates/access/ops/dashboard.html:89
+msgid "Booths"
+msgstr "Stände"
+
+#: lma_connect/plugins/access/templates/access/me.html:43
+msgid "Quizzes"
+msgstr "Quizze"
+
+#: lma_connect/plugins/access/templates/access/me.html:61
+#: lma_connect/plugins/expo/templates/expo/poster_stop.html:6
+msgid "Audience Choice"
+msgstr "Publikumspreis"
+
+#: lma_connect/plugins/access/templates/access/me.html:63
+#, python-format
+msgid "%(n)s star left"
+msgid_plural "%(n)s stars left"
+msgstr[0] "%(n)s Stern übrig"
+msgstr[1] "%(n)s Sterne übrig"
+
+#: lma_connect/plugins/access/templates/access/me.html:64
+msgid "give them at the posters"
+msgstr "vergib sie an den Postern"
+
+#: lma_connect/plugins/access/templates/access/me.html:77
+msgid "Badges"
+msgstr "Badges"
+
+#: lma_connect/plugins/access/templates/access/me.html:105
+msgid "Recent activity"
+msgstr "Letzte Aktivität"
+
+#: lma_connect/plugins/access/templates/access/me.html:121
+#: lma_connect/plugins/access/templates/access/setup_nickname.html:20
+#: lma_connect/plugins/program/models.py:161
+msgid "Display name"
+msgstr "Anzeigename"
+
+#: lma_connect/plugins/access/templates/access/me.html:128
+msgid "Shown next to your Q&A posts, ratings and on the leaderboard."
+msgstr ""
+"Wird neben deinen Q&A-Beiträgen, Bewertungen und in der Rangliste angezeigt."
+
+#: lma_connect/plugins/access/templates/access/me.html:132
+msgid "Sign-in"
+msgstr "Anmeldung"
+
+#: lma_connect/plugins/access/templates/access/me.html:134
+msgid ""
+"Your QR-code is your sign-in. As long as you're signed in on this\n"
+"        browser, you stay signed in. On a different device: scan the QR-"
+"code\n"
+"        again."
+msgstr ""
+"Dein QR-Code ist deine Anmeldung. Solange du in diesem\n"
+"        Browser angemeldet bist, bleibst du angemeldet. Auf einem anderen "
+"Gerät: Scanne den QR-Code\n"
+"        einfach erneut."
+
+#: lma_connect/plugins/access/templates/access/me.html:138
+#: templates/base.html:282
+msgid "Sign out"
+msgstr "Abmelden"
+
+#: lma_connect/plugins/access/templates/access/ops/_base.html:4
+#: templates/base.html:269
+msgid "Operations"
+msgstr "Organisation"
+
+#: lma_connect/plugins/access/templates/access/ops/_base.html:20
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: lma_connect/plugins/access/templates/access/ops/_base.html:23
+#: lma_connect/plugins/access/templates/access/ops/dashboard.html:86
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:3
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:86
+#: lma_connect/plugins/qr/templates/qr/print.html:43
+msgid "Tokens"
+msgstr "Tokens"
+
+#: lma_connect/plugins/access/templates/access/ops/_base.html:26
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:3
+msgid "Users"
+msgstr "Benutzername"
+
+#: lma_connect/plugins/access/templates/access/ops/_base.html:32
+#: lma_connect/plugins/access/templates/access/ops/abstract_stars.html:3
+msgid "Audience vote"
+msgstr "Publikums-Voting"
+
+#: lma_connect/plugins/access/templates/access/ops/_publish_counter.html:9
+#: lma_connect/plugins/access/templates/access/ops/abstract_results_detail.html:44
+msgid "Visible to attendees"
+msgstr "Für Teilnehmende sichtbar"
+
+#: lma_connect/plugins/access/templates/access/ops/_publish_toggle.html:12
+msgid "Visible to attendees — click to hide"
+msgstr "Für Teilnehmende sichtbar — zum Ausblenden klicken"
+
+#: lma_connect/plugins/access/templates/access/ops/_publish_toggle.html:12
+msgid "Hidden — click to publish"
+msgstr "Ausgeblendet — zum Veröffentlichen klicken"
+
+#: lma_connect/plugins/access/templates/access/ops/_publish_toggle.html:14
+#: lma_connect/plugins/access/templates/access/ops/abstracts_results.html:66
+#: lma_connect/plugins/core/models.py:230
+msgid "Public"
+msgstr "Öffentlich"
+
+#: lma_connect/plugins/access/templates/access/ops/_publish_toggle.html:14
+msgid "Hidden"
+msgstr "Ausgeblendet"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_results_detail.html:16
+msgid "Back to results"
+msgstr "Zurück zu den Benutzern"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_results_detail.html:36
+#: lma_connect/plugins/access/templates/access/ops/abstracts_results.html:22
+msgid "Reviews submitted"
+msgstr "Reviews abgeschickt"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_results_detail.html:40
+msgid "Average"
+msgstr "Durchschnitt"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_results_detail.html:48
+msgid "Individual reviews"
+msgstr "Einzelne Reviews"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_results_detail.html:54
+msgid "Reviewer"
+msgstr "Review"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_results_detail.html:55
+msgid "Score"
+msgstr "Score"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_results_detail.html:56
+msgid "Comment"
+msgstr "Kommentar"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_results_detail.html:73
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:70
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:166
+msgid "open"
+msgstr "offen"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_results_detail.html:87
+msgid "Not generated yet"
+msgstr "Noch nicht bewertet"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_results_detail.html:91
+msgid "Original abstract"
+msgstr "Original-Abstract"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_stars.html:20
+msgid "Stars given"
+msgstr "Vergebene Sterne"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_stars.html:26
+msgid "Attendees who voted"
+msgstr "Teilnehmende mit Stimme"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_stars.html:32
+msgid "Stars per attendee"
+msgstr "Sterne pro Teilnehmer:in"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_stars.html:39
+#, python-format
+msgid ""
+"Attendees give their stars by scanning the QR code on a poster — one star "
+"per poster, %(stars_per_user)s per person, final once given."
+msgstr ""
+"Teilnehmende vergeben ihre Sterne, indem sie den QR-Code am Poster scannen — "
+"ein Stern pro Poster, %(stars_per_user)s pro Person, nach der Abgabe "
+"endgültig."
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_stars.html:40
+#, fuzzy, python-format
+#| msgid ""
+#| "Use the trophy button to award the Audience Choice Award; only one "
+#| "abstract per event can hold it."
+msgid ""
+"Use the trophy button to hand out the %(award)s; only one abstract per event "
+"can hold it."
+msgstr ""
+"Mit dem Pokal-Button den %(award)s vergeben; pro Event kann ihn nur ein "
+"Abstract tragen.Über den Pokal-Button wird der Publikumspreis vergeben; pro "
+"Event kann ihn nur ein Abstract tragen."
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_stars.html:46
+msgid ""
+"This event has no audience award yet. Create one under Abstract awards in "
+"the admin and tick “Audience choice” — until then the trophy button does "
+"nothing."
+msgstr ""
+"Für dieses Event gibt es noch keinen Publikumspreis. Im Admin unter "
+"„Auszeichnungen“ einen anlegen und „Publikumspreis“ ankreuzen — bis dahin "
+"tut der Pokal-Button nichts."
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_stars.html:53
+#, python-format
+msgid "%(n)s abstract is in the lead."
+msgid_plural ""
+"%(n)s abstracts are tied for the lead — decide who gets the award."
+msgstr[0] "%(n)s Abstract führt."
+msgstr[1] ""
+"%(n)s Abstracts liegen gleichauf an der Spitze — entscheidet, wer den Preis "
+"bekommt."
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_stars.html:65
+#: lma_connect/plugins/access/templates/access/ops/abstracts_results.html:61
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:41
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:84
+#: lma_connect/plugins/people/models.py:39
+msgid "Category"
+msgstr "Kategorie"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_stars.html:66
+#: lma_connect/plugins/expo/models.py:88
+msgid "Stars"
+msgstr "Sterne"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_stars.html:81
+msgid "No poster on site — cannot be voted for"
+msgstr "Kein Poster vor Ort — nicht abstimmbar"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_stars.html:81
+msgid "no poster"
+msgstr "kein Poster"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_stars.html:104
+#, python-format
+msgid "Remove the %(award)s"
+msgstr "%(award)s entfernen"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_stars.html:110
+#, python-format
+msgid "Hand out the %(award)s instead"
+msgstr "Stattdessen den %(award)s vergeben"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_stars.html:115
+#, python-format
+msgid "Hand out the %(award)s"
+msgstr "%(award)s vergeben"
+
+#: lma_connect/plugins/access/templates/access/ops/abstract_stars.html:124
+msgid "No published abstracts yet."
+msgstr "Noch keine veröffentlichten Abstracts."
+
+#: lma_connect/plugins/access/templates/access/ops/abstracts_results.html:3
+msgid "Abstract results"
+msgstr "Abstract-Reviews"
+
+#: lma_connect/plugins/access/templates/access/ops/abstracts_results.html:28
+#, python-format
+msgid "Abstracts with &lt; %(min_required)s reviews"
+msgstr "Abstracts mit &lt; %(min_required)s Reviews"
+
+#: lma_connect/plugins/access/templates/access/ops/abstracts_results.html:39
+msgid "Sort by"
+msgstr "Sortieren nach"
+
+#: lma_connect/plugins/access/templates/access/ops/abstracts_results.html:41
+msgid "Score (best first)"
+msgstr "Score (beste zuerst)"
+
+#: lma_connect/plugins/access/templates/access/ops/abstracts_results.html:42
+msgid "Reviews done"
+msgstr "Review"
+
+#: lma_connect/plugins/access/templates/access/ops/abstracts_results.html:43
+msgid "Poster-ID"
+msgstr "Poster-ID"
+
+#: lma_connect/plugins/access/templates/access/ops/abstracts_results.html:49
+#, python-format
+msgid ""
+"Scale: 1 = excellent · 6 = not suitable. Lower average = better.\n"
+"    Rows marked in red have fewer than %(min_required)s submitted reviews — "
+"please follow up with reviewers."
+msgstr ""
+"Skala: 1 = ausgezeichnet · 6 = nicht geeignet. Niedrigerer Durchschnitt = "
+"besser.\n"
+"    Rot markierte Zeilen haben weniger als %(min_required)s eingereichte "
+"Reviews — bitte hake bei den Reviewer:innen nach."
+
+#: lma_connect/plugins/access/templates/access/ops/abstracts_results.html:51
+msgid ""
+"Use the eye button to publish an abstract — only published abstracts appear "
+"in the attendee app."
+msgstr ""
+"Mit dem Augen-Button wird ein Abstract veröffentlicht — nur veröffentlichte "
+"Abstracts erscheinen in der Teilnehmenden-App."
+
+#: lma_connect/plugins/access/templates/access/ops/abstracts_results.html:64
+msgid "Spread"
+msgstr "Streuung"
+
+#: lma_connect/plugins/access/templates/access/ops/abstracts_results.html:65
+msgid "Individual scores"
+msgstr "Einzelbewertungen"
+
+#: lma_connect/plugins/access/templates/access/ops/abstracts_results.html:108
+msgid "Details"
+msgstr "Details"
+
+#: lma_connect/plugins/access/templates/access/ops/dashboard.html:3
+msgid "Operations Dashboard"
+msgstr "Organisations-Dashboard"
+
+#: lma_connect/plugins/access/templates/access/ops/dashboard.html:11
+msgid "Tokens total"
+msgstr "Tokens gesamt"
+
+#: lma_connect/plugins/access/templates/access/ops/dashboard.html:19
+msgid "Open / unused"
+msgstr "Offen / unbenutzt"
+
+#: lma_connect/plugins/access/templates/access/ops/dashboard.html:27
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:17
+msgid "Redeemed"
+msgstr "Eingelöst"
+
+#: lma_connect/plugins/access/templates/access/ops/dashboard.html:35
+msgid "Users total"
+msgstr "Benutzer gesamt"
+
+#: lma_connect/plugins/access/templates/access/ops/dashboard.html:41
+msgid "Quick actions"
+msgstr "Schnellaktionen"
+
+#: lma_connect/plugins/access/templates/access/ops/dashboard.html:46
+msgid "Generate access tokens"
+msgstr "Access-Tokens erzeugen"
+
+#: lma_connect/plugins/access/templates/access/ops/dashboard.html:48
+msgid "Bulk-create QR-code tokens for attendees who need a badge."
+msgstr "QR-Code-Tokens für Teilnehmer mit Badge-Bedarf in Bulk erzeugen."
+
+#: lma_connect/plugins/access/templates/access/ops/dashboard.html:53
+msgid "Count"
+msgstr "Anzahl"
+
+#: lma_connect/plugins/access/templates/access/ops/dashboard.html:57
+#: lma_connect/plugins/access/templates/access/ops/token_detail.html:29
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:21
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:42
+msgid "Group"
+msgstr "Gruppe"
+
+#: lma_connect/plugins/access/templates/access/ops/dashboard.html:65
+msgid "Label (optional)"
+msgstr "Kommentar (optional)"
+
+#: lma_connect/plugins/access/templates/access/ops/dashboard.html:66
+msgid "e.g. Booth A, Reserve"
+msgstr "z. B. Stand A, Reserve"
+
+#: lma_connect/plugins/access/templates/access/ops/dashboard.html:70
+msgid "Create QR tokens"
+msgstr "QR-Tokens erstellen"
+
+#: lma_connect/plugins/access/templates/access/ops/dashboard.html:80
+msgid "Print QR sheets"
+msgstr "QR-Bögen drucken"
+
+#: lma_connect/plugins/access/templates/access/ops/dashboard.html:82
+msgid "Print A4-format QR cards for badge stations, booths and posters."
+msgstr "Drucke QR-Karten im A4-Format für Badge-Stationen, Stände und Poster."
+
+#: lma_connect/plugins/access/templates/access/ops/token_detail.html:7
+msgid "Back to tokens"
+msgstr "Zurück zu den Tokens"
+
+#: lma_connect/plugins/access/templates/access/ops/token_detail.html:17
+msgid "Print badge"
+msgstr "Badge drucken"
+
+#: lma_connect/plugins/access/templates/access/ops/token_detail.html:25
+msgid "Token details"
+msgstr "Token-Details"
+
+#: lma_connect/plugins/access/templates/access/ops/token_detail.html:31
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:43
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:132
+#: lma_connect/plugins/sponsors/models.py:275
+msgid "Label"
+msgstr "Label"
+
+#: lma_connect/plugins/access/templates/access/ops/token_detail.html:33
+#: lma_connect/plugins/core/models.py:253
+msgid "Event"
+msgstr "Event"
+
+#: lma_connect/plugins/access/templates/access/ops/token_detail.html:35
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:45
+msgid "Created"
+msgstr "Erstellt"
+
+#: lma_connect/plugins/access/templates/access/ops/token_detail.html:37
+msgid "Redeemed by"
+msgstr "Eingelöst von"
+
+#: lma_connect/plugins/access/templates/access/ops/token_detail.html:43
+msgid "not yet redeemed"
+msgstr "Noch nicht bewertet"
+
+#: lma_connect/plugins/access/templates/access/ops/token_detail.html:51
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:9
+msgid "active"
+msgstr "aktiv"
+
+#: lma_connect/plugins/access/templates/access/ops/token_detail.html:53
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:66
+msgid "inactive"
+msgstr "inaktiv"
+
+#: lma_connect/plugins/access/templates/access/ops/token_detail.html:63
+msgid "Deactivate token"
+msgstr "Token deaktivieren"
+
+#: lma_connect/plugins/access/templates/access/ops/token_detail.html:63
+msgid "Activate token"
+msgstr "Token aktivieren"
+
+#: lma_connect/plugins/access/templates/access/ops/token_print.html:116
+#: lma_connect/plugins/qr/templates/qr/print.html:46
+msgid "Print"
+msgstr "Impressum"
+
+#: lma_connect/plugins/access/templates/access/ops/token_print.html:117
+#: lma_connect/plugins/core/templates/core/about.html:15
+#: lma_connect/plugins/core/templates/core/legal.html:36
+#: lma_connect/plugins/people/templates/people/speaker_detail.html:9
+msgid "Back"
+msgstr "Zurück"
+
+#: lma_connect/plugins/access/templates/access/ops/token_print.html:130
+msgid "Scan this QR code with your phone camera to sign in."
+msgstr "QR-Code mit der Handy-Kamera scannen, um dich anzumelden."
+
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:9
+msgid "Search token, label, username …"
+msgstr "Token, Label, Benutzername suchen …"
+
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:12
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:18
+msgid "Search"
+msgstr "Suchen"
+
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:18
+msgid "Inactive"
+msgstr "Inaktiv"
+
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:32
+msgid "No tokens found"
+msgstr "Keine Tokens gefunden"
+
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:33
+msgid "Adjust your filter or generate new tokens from the dashboard."
+msgstr "Filter anpassen oder neue Tokens vom Dashboard aus erzeugen."
+
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:44
+msgid "User"
+msgstr "Benutzername"
+
+#: lma_connect/plugins/access/templates/access/ops/tokens_list.html:68
+msgid "redeemed"
+msgstr "eingelöst"
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:7
+msgid "Back to users"
+msgstr "Zurück zu den Benutzern"
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:17
+msgid "Social event"
+msgstr "Social Event"
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:24
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:88
+msgid "Last login"
+msgstr "Letzter Login"
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:26
+msgid "Joined"
+msgstr "Beigetreten"
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:29
+msgid "yes"
+msgstr "ja"
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:29
+msgid "no"
+msgstr "Info"
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:37
+msgid "Event profile"
+msgstr "Mein Profil"
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:52
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:64
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:85
+#: lma_connect/plugins/people/models.py:45
+msgid "Registered for social event"
+msgstr "Für Social Event angemeldet"
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:55
+msgid "Save profile"
+msgstr "Mein Profil"
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:61
+msgid "Support actions"
+msgstr "Support-Aktionen"
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:65
+msgid ""
+"This account has elevated privileges (staff/admin). Password reset and token "
+"issuing are disabled here — manage it in the Django admin instead."
+msgstr ""
+"Dieser Account hat erweiterte Rechte (Staff/Admin). Passwort-Reset und Token-"
+"Ausgabe sind hier deaktiviert — verwalte ihn stattdessen im Django-Admin."
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:73
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:81
+msgid "Reset password"
+msgstr "Passwort"
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:75
+msgid "Set a fresh temporary password. The user should change it after login."
+msgstr ""
+"Setzt ein neues temporäres Passwort. Der Benutzer sollte es nach dem Login "
+"ändern."
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:80
+msgid "Generate a new temporary password for this user?"
+msgstr "Neues temporäres Passwort für diesen Benutzer erzeugen?"
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:90
+msgid "Unlock login"
+msgstr "Login entsperren"
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:92
+msgid ""
+"Clear all django-axes lockout entries — useful if the user got locked out "
+"after wrong-password attempts."
+msgstr ""
+"Alle django-axes-Sperren löschen — nützlich, wenn ein:e Nutzer:in nach "
+"falschen Passwortversuchen ausgesperrt wurde."
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:97
+msgid "Clear lockouts"
+msgstr "Lockouts löschen"
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:108
+msgid "Issue new token"
+msgstr "Neuen Token ausstellen"
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:110
+msgid "Generate a new QR-code token bound to this user (e.g. lost badge)."
+msgstr ""
+"Neuen QR-Code-Token für diesen Benutzer erzeugen (z. B. bei verlorenem "
+"Badge)."
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:115
+msgid "New token"
+msgstr "Neuer Token"
+
+#: lma_connect/plugins/access/templates/access/ops/user_detail.html:153
+msgid "No tokens linked to this user."
+msgstr "Keine Tokens diesem Benutzer zugeordnet."
+
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:8
+msgid "Search & filter"
+msgstr "Suchen & filtern"
+
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:15
+msgid "Search username, name, email …"
+msgstr "Benutzername, Name, E-Mail suchen …"
+
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:22
+msgid "Category:"
+msgstr "Kategorie:"
+
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:29
+msgid "Social event:"
+msgstr "Social Event:"
+
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:31
+msgid "Registered"
+msgstr "Angemeldet"
+
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:32
+msgid "Not registered"
+msgstr "Nicht angemeldet"
+
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:37
+#, python-format
+msgid "%(counter)s of %(total_count)s user shown"
+msgid_plural "%(counter)s of %(total_count)s users shown"
+msgstr[0] "%(counter)s von %(total_count)s Benutzer angezeigt"
+msgstr[1] "%(counter)s von %(total_count)s Benutzern angezeigt"
+
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:43
+msgid "No users match these filters"
+msgstr "Keine Benutzer passen zu diesen Filtern"
+
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:44
+msgid "Try clearing search or category filter."
+msgstr "Versuche, Suche oder Kategorie-Filter zu löschen."
+
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:64
+msgid "Social"
+msgstr "Social"
+
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:82
+#: templates/registration/login.html:44
+msgid "Username"
+msgstr "Benutzername"
+
+#: lma_connect/plugins/access/templates/access/ops/users_list.html:87
+msgid "Reviews"
+msgstr "Review"
+
+#: lma_connect/plugins/access/templates/access/setup_nickname.html:4
+msgid "Welcome — Choose your nickname"
+msgstr "Willkommen — Wähle deinen Nickname"
+
+#: lma_connect/plugins/access/templates/access/setup_nickname.html:5
+msgid "Welcome"
+msgstr "Willkommen"
+
+#: lma_connect/plugins/access/templates/access/setup_nickname.html:11
+msgid "What should we call you?"
+msgstr "Wie sollen wir dich nennen?"
+
+#: lma_connect/plugins/access/templates/access/setup_nickname.html:13
+msgid ""
+"Your display name will appear next to your Q&A posts and ratings.\n"
+"        You can change it any time. No email, no password —\n"
+"        your QR-code is your sign-in."
+msgstr ""
+"Dein Anzeigename erscheint neben deinen Q&A-Beiträgen und Bewertungen.\n"
+"        Du kannst ihn jederzeit ändern. Keine E-Mail, kein Passwort —\n"
+"        dein QR-Code ist deine Anmeldung."
+
+#: lma_connect/plugins/access/templates/access/setup_nickname.html:24
+msgid "e.g. Maria H. or LabFan42"
+msgstr "z. B. Maria H. oder LabFan42"
+
+#: lma_connect/plugins/access/templates/access/setup_nickname.html:40
+#, python-format
+msgid ""
+"By continuing you accept the <a href=\"%(terms_url)s\" target=\"_blank\" "
+"rel=\"noopener\">terms of use</a> and confirm that you have read the <a "
+"href=\"%(privacy_url)s\" target=\"_blank\" rel=\"noopener\">privacy policy</"
+"a>."
+msgstr ""
+"Mit dem Fortfahren erkennst du die <a href=\"%(terms_url)s\" "
+"target=\"_blank\" rel=\"noopener\">Nutzungsbedingungen</a> an und "
+"bestätigst, die <a href=\"%(privacy_url)s\" target=\"_blank\" "
+"rel=\"noopener\">Datenschutzerklärung</a> gelesen zu haben."
+
+#: lma_connect/plugins/access/templates/access/setup_nickname.html:44
+msgid "Get started"
+msgstr "Loslegen"
+
+#: lma_connect/plugins/access/templates/access/setup_nickname.html:49
+msgid "No forms to fill — just a name."
+msgstr "Keine Formulare — nur ein Name."
+
+#: lma_connect/plugins/core/models.py:32
+msgid "Department"
+msgstr "Abteilung"
+
+#: lma_connect/plugins/core/models.py:33
+msgid "e.g. 'Department of Laboratory Medicine'"
+msgstr "z. B. „Institut für Laboratoriumsmedizin“"
+
+#: lma_connect/plugins/core/models.py:34
+msgid "Institution"
+msgstr "Institution"
+
+#: lma_connect/plugins/core/models.py:35
+#, fuzzy
+#| msgid "e.g. 'University Hospital Salzburg'"
+msgid "e.g. 'St Mary's University Hospital'"
+msgstr "z. B. „Uniklinik Salzburg“"
+
+#: lma_connect/plugins/core/models.py:36 lma_connect/plugins/core/models.py:106
+msgid "City"
+msgstr "Stadt"
+
+#: lma_connect/plugins/core/models.py:39
+msgid "e.g. 'AT' — for flag display"
+msgstr "z. B. 'AT' — für Flaggen-Anzeige"
+
+#: lma_connect/plugins/core/models.py:90
+msgid "Short name"
+msgstr "Kurzname"
+
+#: lma_connect/plugins/core/models.py:91
+msgid ""
+"Compact name for the topbar and the home-screen icon (e.g. 'ACME 2026'). "
+"Falls back to the full name."
+msgstr ""
+"Kompakter Name für Topbar & Homescreen-Icon (z. B. „ACME 2026“). Fallback: "
+"Name."
+
+#: lma_connect/plugins/core/models.py:94
+#, fuzzy
+#| msgid "Title"
+msgid "Subtitle"
+msgstr "Titel"
+
+#: lma_connect/plugins/core/models.py:97
+#, fuzzy
+#| msgid "Starred at"
+msgid "Start date"
+msgstr "Markiert am"
+
+#: lma_connect/plugins/core/models.py:98
+msgid "End date"
+msgstr "Ende"
+
+#: lma_connect/plugins/core/models.py:99
+msgid "Time zone"
+msgstr "Zeitzone"
+
+#: lma_connect/plugins/core/models.py:100
+msgid "IANA name, e.g. 'Europe/Vienna', 'America/New_York'"
+msgstr "IANA-Name, z. B. 'Europe/Vienna', 'America/New_York'"
+
+#: lma_connect/plugins/core/models.py:104
+#: lma_connect/plugins/core/templates/core/home.html:192
+#: lma_connect/plugins/core/templates/core/info.html:30
+msgid "Venue"
+msgstr "Veranstaltungsort"
+
+#: lma_connect/plugins/core/models.py:105
+#: lma_connect/plugins/core/models.py:492
+msgid "Address"
+msgstr "Adresse"
+
+#: lma_connect/plugins/core/models.py:107
+msgid "Postal code"
+msgstr "PLZ"
+
+#: lma_connect/plugins/core/models.py:112
+msgid "Latitude"
+msgstr "Breitengrad"
+
+#: lma_connect/plugins/core/models.py:113
+msgid "Longitude"
+msgstr "Längengrad"
+
+#: lma_connect/plugins/core/models.py:116
+#, fuzzy
+#| msgid "Beschreibung (Markdown)"
+msgid "Description (Markdown)"
+msgstr "Beschreibung (Markdown)"
+
+#: lma_connect/plugins/core/models.py:117
+msgid "Homepage"
+msgstr "Homepage"
+
+#: lma_connect/plugins/core/models.py:126
+msgid "Six-digit hex colour including the leading '#' — e.g. #457b9d."
+msgstr "Sechsstelliger Hex-Farbwert inklusive führendem „#“ — z. B. #457b9d."
+
+#: lma_connect/plugins/core/models.py:129
+msgid "Primary colour"
+msgstr "Primärfarbe"
+
+#: lma_connect/plugins/core/models.py:131
+msgid "Buttons, links, active nav item, browser theme colour"
+msgstr "Schaltflächen, Links, aktiver Navigationspunkt, Browser-Themefarbe"
+
+#: lma_connect/plugins/core/models.py:133
+msgid "Accent colour"
+msgstr "Akzentfarbe"
+
+#: lma_connect/plugins/core/models.py:135
+msgid "Attention-drawing elements — danger badges, live markers"
+msgstr "Aufmerksamkeitsstarke Elemente — Warn-Badges, Live-Markierungen"
+
+#: lma_connect/plugins/core/models.py:137
+#, fuzzy
+#| msgid "Highlights"
+msgid "Highlight colour"
+msgstr "Highlights"
+
+#: lma_connect/plugins/core/models.py:139
+msgid "Warnings, awards, the marker under the active bottom-nav tab"
+msgstr "Warnungen, Auszeichnungen, Markierung unter dem aktiven Navigationstab"
+
+#: lma_connect/plugins/core/models.py:141
+#, fuzzy
+#| msgid "Page not found"
+msgid "Page background"
+msgstr "Seite nicht gefunden"
+
+#: lma_connect/plugins/core/models.py:143
+msgid ""
+"Background behind the cards. Keep it light — the text colour sits on it."
+msgstr ""
+"Hintergrund hinter den Karten. Hell halten — die Textfarbe steht darauf."
+
+#: lma_connect/plugins/core/models.py:145
+msgid "Text colour"
+msgstr "Textfarbe"
+
+#: lma_connect/plugins/core/models.py:147
+msgid "Body text. Check the contrast against the page background."
+msgstr "Fließtext. Kontrast zum Seitenhintergrund prüfen."
+
+#: lma_connect/plugins/core/models.py:149
+#, fuzzy
+#| msgid "Event-Logo (Header)"
+msgid "Event logo (header)"
+msgstr "Event-Logo (Header)"
+
+#: lma_connect/plugins/core/models.py:151
+#, fuzzy
+#| msgid "Shown in the footer and on the welcome screen"
+msgid "Shown in the topbar; also the source for the home-screen icon"
+msgstr "Wird im Footer und auf dem Willkommensbildschirm angezeigt"
+
+#: lma_connect/plugins/core/models.py:153
+#: lma_connect/plugins/sponsors/models.py:75
+msgid "Banner"
+msgstr "Banner"
+
+#: lma_connect/plugins/core/models.py:154
+#, fuzzy
+#| msgid "Welcome-Hero-Bild"
+msgid "Welcome hero image"
+msgstr "Welcome-Hero-Bild"
+
+#: lma_connect/plugins/core/models.py:156
+#, fuzzy
+#| msgid "Shown in the footer and on the welcome screen"
+msgid "Main image on the welcome screen"
+msgstr "Wird im Footer und auf dem Willkommensbildschirm angezeigt"
+
+#: lma_connect/plugins/core/models.py:158
+msgid "Organizer name"
+msgstr "Name des Veranstalters"
+
+#: lma_connect/plugins/core/models.py:159
+msgid ""
+"The association, society or company running the event — shown in the footer"
+msgstr ""
+"Verein, Gesellschaft oder Firma, die die Veranstaltung ausrichtet — steht in "
+"der Fußzeile"
+
+#: lma_connect/plugins/core/models.py:161
+msgid "Organizer logo (footer)"
+msgstr "Veranstalter-Logo (Footer)"
+
+#: lma_connect/plugins/core/models.py:164
+msgid "Shown in the footer and on the welcome screen"
+msgstr "Wird im Footer und auf dem Willkommensbildschirm angezeigt"
+
+#: lma_connect/plugins/core/models.py:165
+msgid "Organizer URL"
+msgstr "Veranstalter-URL"
+
+#: lma_connect/plugins/core/models.py:171
+msgid "Footer 'hosted by' label"
+msgstr "Footer-Label 'hosted by'"
+
+#: lma_connect/plugins/core/models.py:173
+msgid "Customisable label preceding the organizer logo"
+msgstr "Anpassbare Beschriftung vor dem Veranstalter-Logo"
+
+#: lma_connect/plugins/core/models.py:174
+msgid "Copyright holder"
+msgstr "Rechteinhaber:in"
+
+#: lma_connect/plugins/core/models.py:175
+msgid "Defaults to organizer name if empty"
+msgstr "Nutzt den Namen des Veranstalters, wenn leer"
+
+#: lma_connect/plugins/core/models.py:177
+msgid "Copyright start year"
+msgstr "Copyright-Startjahr"
+
+#: lma_connect/plugins/core/models.py:178
+msgid "Year the copyright begins; defaults to event year if empty"
+msgstr "Startjahr des Copyrights; leer = Jahr des Events"
+
+#: lma_connect/plugins/core/models.py:183
+msgid "Extra footer text (Markdown)"
+msgstr "Zusätzlicher Footer-Text (Markdown)"
+
+#: lma_connect/plugins/core/models.py:184
+msgid "Free-form line displayed below the legal links"
+msgstr "Freitextzeile, wird unter den rechtlichen Links angezeigt"
+
+#: lma_connect/plugins/core/models.py:196
+#: lma_connect/plugins/core/models.py:470
+msgid "Organizing Secretary"
+msgstr "Organisationssekretariat"
+
+#: lma_connect/plugins/core/models.py:207
+msgid "Emergency number"
+msgstr "Notrufnummer"
+
+#: lma_connect/plugins/core/models.py:208
+msgid ""
+"Shown as a quick-dial tile on the Info tab. 112 covers the EU; use 911 (US), "
+"000 (AU) … Leave empty to hide the tile."
+msgstr ""
+"Erscheint als Schnellwahl-Kachel auf dem Info-Tab. 112 gilt in der EU; 911 "
+"(USA), 000 (AU) … Leer lassen blendet die Kachel aus.Erscheint als "
+"Wählkachel im Info-Tab. 112 gilt EU-weit; sonst 911 (US), 000 (AU) … Leer "
+"lassen blendet die Kachel aus."
+
+#: lma_connect/plugins/core/models.py:212
+msgid "Social-Event title"
+msgstr "Social Event"
+
+#: lma_connect/plugins/core/models.py:213
+msgid "e.g. 'Conference Dinner', 'Networking Reception'"
+msgstr "z. B. „Konferenzdinner“, „Networking-Empfang“"
+
+#: lma_connect/plugins/core/models.py:215
+msgid "Social-Event start"
+msgstr "Social Event"
+
+#: lma_connect/plugins/core/models.py:216
+msgid "Social-Event end"
+msgstr "Social Event"
+
+#: lma_connect/plugins/core/models.py:217
+msgid "Social-Event venue"
+msgstr "Social Event"
+
+#: lma_connect/plugins/core/models.py:218
+msgid "Social-Event address"
+msgstr "Social Event"
+
+#: lma_connect/plugins/core/models.py:219
+msgid "Social-Event city"
+msgstr "Social Event"
+
+#: lma_connect/plugins/core/models.py:220
+msgid "Social-Event venue website"
+msgstr "Social Event"
+
+#: lma_connect/plugins/core/models.py:221
+msgid "Optional — Restaurant/Bar/Location URL"
+msgstr "Optional — Restaurant/Bar/Location URL"
+
+#: lma_connect/plugins/core/models.py:222
+#: lma_connect/plugins/core/templates/core/info.html:95
+msgid "Meeting point"
+msgstr "Treffpunkt"
+
+#: lma_connect/plugins/core/models.py:223
+msgid "e.g. 'Foyer of the main building'"
+msgstr "z. B. „Foyer Hauptgebäude“"
+
+#: lma_connect/plugins/core/models.py:224
+msgid "Meeting time"
+msgstr "Treffpunkt-Zeit"
+
+#: lma_connect/plugins/core/models.py:225
+msgid "When to be at the meeting point (for a shared transfer)"
+msgstr "Zeitpunkt am Treffpunkt (für gemeinsamen Transfer)"
+
+#: lma_connect/plugins/core/models.py:227
+msgid "Social-Event details (Markdown)"
+msgstr "Social-Event-Details (Markdown)"
+
+#: lma_connect/plugins/core/models.py:228
+#, fuzzy
+#| msgid "Dresscode, Catering, Programm, Kosten etc."
+msgid "Dress code, catering, programme, cost …"
+msgstr "Dresscode, Catering, Programm, Kosten etc."
+
+#: lma_connect/plugins/core/models.py:237
+#, fuzzy
+#| msgid "Title (EN)"
+msgid "Subtitle (DE)"
+msgstr "Titel (EN)"
+
+#: lma_connect/plugins/core/models.py:238
+#, fuzzy
+#| msgid "Venue"
+msgid "Venue (DE)"
+msgstr "Veranstaltungsort"
+
+#: lma_connect/plugins/core/models.py:239
+#, fuzzy
+#| msgid "Adresse (DE)"
+msgid "Address (DE)"
+msgstr "Adresse (DE)"
+
+#: lma_connect/plugins/core/models.py:240
+#, fuzzy
+#| msgid "Beschreibung — DE (Markdown)"
+msgid "Description — DE (Markdown)"
+msgstr "Beschreibung — DE (Markdown)"
+
+#: lma_connect/plugins/core/models.py:241
+msgid "Extra footer text — DE (Markdown)"
+msgstr "Zusätzlicher Footer-Text — DE (Markdown)"
+
+#: lma_connect/plugins/core/models.py:242
+msgid "Social-Event details — DE (Markdown)"
+msgstr "Datenschutz"
+
+#: lma_connect/plugins/core/models.py:246
+msgid "Show Program tab"
+msgstr "Programm-Tab anzeigen"
+
+#: lma_connect/plugins/core/models.py:247
+msgid "Show Sponsors tab"
+msgstr "Sponsoren-Tab anzeigen"
+
+#: lma_connect/plugins/core/models.py:248
+msgid "Show Abstracts tab"
+msgstr "Abstract-Tab anzeigen"
+
+#: lma_connect/plugins/core/models.py:249
+msgid "Show Info tab"
+msgstr "Info-Tab anzeigen"
+
+#: lma_connect/plugins/core/models.py:250
+msgid "Show Feedback tab"
+msgstr "Feedback-Tab anzeigen"
+
+#: lma_connect/plugins/core/models.py:254
+msgid "Events"
+msgstr "Events"
+
+#: lma_connect/plugins/core/models.py:392
+msgid "Capacity"
+msgstr "Kapazität"
+
+#: lma_connect/plugins/core/models.py:393
+#, fuzzy
+#| msgid "Floorplan"
+msgid "Floor"
+msgstr "Lageplan"
+
+#: lma_connect/plugins/core/models.py:394
+#: lma_connect/plugins/core/models.py:683
+msgid "Notes"
+msgstr "Notizen"
+
+#: lma_connect/plugins/core/models.py:398
+msgid "Room"
+msgstr "Raum"
+
+#: lma_connect/plugins/core/models.py:399
+#, fuzzy
+#| msgid "Room screen"
+msgid "Rooms"
+msgstr "Raum-Bildschirm"
+
+#: lma_connect/plugins/core/models.py:420
+msgid ""
+"e.g. 'Scientific Committee', 'Local Organizing Committee', 'Poster Jury'"
+msgstr ""
+"z. B. „Wissenschaftliches Komitee“, „Lokales Organisationskomitee“, „Poster-"
+"Jury“"
+
+#: lma_connect/plugins/core/models.py:423
+msgid "Used in URLs and anchors — e.g. 'scientific'"
+msgstr "Wird in URLs und Ankern verwendet — z. B. „scientific“"
+
+#: lma_connect/plugins/core/models.py:428
+#, fuzzy
+#| msgid "Committees"
+msgid "Committee"
+msgstr "Komitee / Reviewer"
+
+#: lma_connect/plugins/core/models.py:429
+#: lma_connect/plugins/core/templates/core/home.html:156
+#: lma_connect/plugins/core/templates/core/info.html:178
+msgid "Committees"
+msgstr "Komitee / Reviewer"
+
+#: lma_connect/plugins/core/models.py:441
+#: lma_connect/plugins/program/models.py:104
+#: lma_connect/plugins/program/templates/program/_chair_question_list.html:21
+#: lma_connect/plugins/program/templates/program/_qa_panel.html:31
+#: lma_connect/plugins/program/templates/program/chair_panel.html:4
+msgid "Chair"
+msgstr "Chair"
+
+#: lma_connect/plugins/core/models.py:442
+msgid "Co-Chair"
+msgstr "Co-Chair"
+
+#: lma_connect/plugins/core/models.py:443
+msgid "Secretary"
+msgstr "Sekretär:in"
+
+#: lma_connect/plugins/core/models.py:444
+msgid "Member"
+msgstr "Mitglied"
+
+#: lma_connect/plugins/core/models.py:453
+#: lma_connect/plugins/core/models.py:484
+#: lma_connect/plugins/program/models.py:115
+#: lma_connect/plugins/sponsors/models.py:195
+msgid "Role"
+msgstr "Rolle"
+
+#: lma_connect/plugins/core/models.py:456
+msgid "Overrides the profile affiliation when set"
+msgstr "Überschreibt die Profil-Affiliation, falls gesetzt"
+
+#: lma_connect/plugins/core/models.py:460
+#, fuzzy
+#| msgid "Committees"
+msgid "Committee membership"
+msgstr "Komitee / Reviewer"
+
+#: lma_connect/plugins/core/models.py:461
+#, fuzzy
+#| msgid "Committees"
+msgid "Committee memberships"
+msgstr "Komitee / Reviewer"
+
+#: lma_connect/plugins/core/models.py:471
+msgid "Registration"
+msgstr "Registrierung"
+
+#: lma_connect/plugins/core/models.py:472
+msgid "Sponsoring"
+msgstr "Sponsoring"
+
+#: lma_connect/plugins/core/models.py:473
+msgid "Abstracts / Scientific"
+msgstr "Abstracts / Wissenschaft"
+
+#: lma_connect/plugins/core/models.py:474
+#: lma_connect/plugins/people/models.py:26
+msgid "Press"
+msgstr "Presse"
+
+#: lma_connect/plugins/core/models.py:475
+msgid "Technical / IT"
+msgstr "Technik / IT"
+
+#: lma_connect/plugins/core/models.py:476
+#: lma_connect/plugins/people/models.py:28
+#: lma_connect/plugins/sponsors/models.py:232
+#: lma_connect/plugins/sponsors/models.py:271
+msgid "Other"
+msgstr "Sonstige"
+
+#: lma_connect/plugins/core/models.py:487
+msgid "Person or organization name displayed first"
+msgstr "Name der Person oder Organisation, der zuerst angezeigt wird"
+
+#: lma_connect/plugins/core/models.py:488
+msgid "Company / Organization"
+msgstr "Firma / Organisation"
+
+#: lma_connect/plugins/core/models.py:490
+#: lma_connect/plugins/sponsors/models.py:202
+msgid "Phone"
+msgstr "Telefon"
+
+#: lma_connect/plugins/core/models.py:491
+#: lma_connect/plugins/core/templates/core/event_detail.html:44
+#: lma_connect/plugins/core/templates/core/home.html:196
+#: lma_connect/plugins/core/templates/core/info.html:88
+#: lma_connect/plugins/core/templates/core/info.html:166
+#: lma_connect/plugins/people/models.py:70
+#: lma_connect/plugins/people/templates/people/speaker_detail.html:76
+#: lma_connect/plugins/sponsors/models.py:85
+msgid "Website"
+msgstr "Webseite"
+
+#: lma_connect/plugins/core/models.py:493
+msgid "Notes (Markdown)"
+msgstr "Notizen (Markdown)"
+
+#: lma_connect/plugins/core/models.py:497
+msgid "Event contact"
+msgstr "Event-Kontakt"
+
+#: lma_connect/plugins/core/models.py:498
+msgid "Event contacts"
+msgstr "Event-Kontakte"
+
+#: lma_connect/plugins/core/models.py:515
+msgid "Floor / label"
+msgstr "Ebene / Beschriftung"
+
+#: lma_connect/plugins/core/models.py:516
+msgid "e.g. 'Ground floor', 'Hall 3', 'Foyer'"
+msgstr "z. B. „Erdgeschoss“, „Halle 3“, „Foyer“"
+
+#: lma_connect/plugins/core/models.py:517
+#: lma_connect/plugins/sponsors/models.py:240
+msgid "File"
+msgstr "Datei"
+
+#: lma_connect/plugins/core/models.py:518
+msgid "PDF, PNG or SVG. PDFs get an open button, images are shown inline."
+msgstr ""
+"PDF, PNG oder SVG. PDFs bekommen einen Öffnen-Button, Bilder werden inline "
+"gezeigt.PDF, PNG oder SVG. PDFs bekommen einen Öffnen-Button, Bilder werden "
+"direkt angezeigt."
+
+#: lma_connect/plugins/core/models.py:522
+msgid "Exhibition floor"
+msgstr "Ausstellungsebene"
+
+#: lma_connect/plugins/core/models.py:523
+msgid ""
+"Tick the level where the expo takes place. It is shown on the Expo page, and "
+"the first ticked plan is the reference image for the sponsor booth pins."
+msgstr ""
+"Die Ebene ankreuzen, auf der die Ausstellung stattfindet. Sie wird auf der "
+"Expo-Seite gezeigt; der erste angekreuzte Plan ist die Bezugsfläche für die "
+"Standmarkierungen.Die Ebene ankreuzen, auf der die Ausstellung stattfindet. "
+"Sie erscheint auf der Expo-Seite; der erste angekreuzte Plan ist die "
+"Bezugsfläche für die Standort-Pins der Aussteller."
+
+#: lma_connect/plugins/core/models.py:526
+#, fuzzy
+#| msgid "Label (EN)"
+msgid "Label (DE)"
+msgstr "Label (EN)"
+
+#: lma_connect/plugins/core/models.py:529
+msgid "Floorplan"
+msgstr "Lageplan"
+
+#: lma_connect/plugins/core/models.py:530
+msgid "Floorplans"
+msgstr "Lagepläne"
+
+#: lma_connect/plugins/core/models.py:565
+msgid ""
+"Only lowercase letters, digits and hyphens — e.g. 'wifi', 'tools-kitchen-2'."
+msgstr ""
+"Nur Kleinbuchstaben, Ziffern und Bindestriche — z. B. „wifi“, „tools-"
+"kitchen-2“.Nur Kleinbuchstaben, Ziffern und Bindestriche — z. B. 'wifi', "
+"'tools-kitchen-2'."
+
+#: lma_connect/plugins/core/models.py:571
+msgid "Icon"
+msgstr "Icon"
+
+#: lma_connect/plugins/core/models.py:573
+msgid ""
+"Tabler icon name without the 'ti-' prefix — e.g. 'wifi', 'tools-kitchen-2', "
+"'urgent'. See tabler.io/icons"
+msgstr ""
+"Tabler-Icon-Name ohne „ti-“-Präfix — z. B. „wifi“, „tools-kitchen-2“, "
+"„urgent“. Siehe tabler.io/iconsTabler-Icon-Name ohne das Präfix 'ti-' — z. "
+"B. 'wifi', 'tools-kitchen-2', 'urgent'. Siehe tabler.io/icons"
+
+#: lma_connect/plugins/core/models.py:575
+#: lma_connect/plugins/core/models.py:631
+msgid "Text (Markdown)"
+msgstr "Text (Markdown)"
+
+#: lma_connect/plugins/core/models.py:578
+#: lma_connect/plugins/core/models.py:634
+#: lma_connect/plugins/program/models.py:79
+msgid "Published"
+msgstr "Veröffentlicht"
+
+#: lma_connect/plugins/core/models.py:579
+msgid "Uncheck to hide the block without deleting it."
+msgstr "Abwählen, um den Block auszublenden, ohne ihn zu löschen."
+
+#: lma_connect/plugins/core/models.py:582
+#: lma_connect/plugins/core/models.py:638
+msgid "Title (DE)"
+msgstr "Titel (DE)"
+
+#: lma_connect/plugins/core/models.py:583
+#: lma_connect/plugins/core/models.py:639
+msgid "Text — DE (Markdown)"
+msgstr "Text — DE (Markdown)"
+
+#: lma_connect/plugins/core/models.py:586
+msgid "Info block"
+msgstr "Info-Block"
+
+#: lma_connect/plugins/core/models.py:587
+msgid "Info blocks"
+msgstr "Info-Blöcke"
+
+#: lma_connect/plugins/core/models.py:619
+msgid "Imprint"
+msgstr "Impressum"
+
+#: lma_connect/plugins/core/models.py:620
+msgid "Privacy policy"
+msgstr "Datenschutz"
+
+#: lma_connect/plugins/core/models.py:621
+msgid "Terms of use"
+msgstr "Nutzungsbedingungen"
+
+#: lma_connect/plugins/core/models.py:622
+msgid "Accessibility statement"
+msgstr "Barrierefreiheitserklärung"
+
+#: lma_connect/plugins/core/models.py:627
+msgid "URL slug"
+msgstr "URL-Kürzel"
+
+#: lma_connect/plugins/core/models.py:628
+msgid ""
+"Address of the page: /legal/<slug>/. Use 'imprint' and 'privacy' for those "
+"two — the app links to them directly."
+msgstr ""
+"Adresse der Seite: /legal/<slug>/. Für diese beiden „imprint“ und „privacy“ "
+"verwenden — die App verlinkt sie direkt.Adresse der Seite: /legal/<slug>/. "
+"Für diese beiden bitte „imprint“ und „privacy“ verwenden — die App verlinkt "
+"sie direkt."
+
+#: lma_connect/plugins/core/models.py:635
+msgid "Uncheck to hide the page and its footer link without deleting it."
+msgstr ""
+"Häkchen entfernen, um die Seite samt Footer-Link auszublenden, ohne sie zu "
+"löschen.Abwählen, um die Seite und ihren Footer-Link auszublenden, ohne sie "
+"zu löschen."
+
+#: lma_connect/plugins/core/models.py:642
+msgid "Legal page"
+msgstr "Rechtstext"
+
+#: lma_connect/plugins/core/models.py:643
+msgid "Legal pages"
+msgstr "Rechtstexte"
+
+#: lma_connect/plugins/core/models.py:666
+msgid "Newsletter"
+msgstr "Newsletter"
+
+#: lma_connect/plugins/core/models.py:667
+msgid "Show profile publicly"
+msgstr "Profil öffentlich anzeigen"
+
+#: lma_connect/plugins/core/models.py:668
+msgid "Photo / video usage"
+msgstr "Foto-/Video-Nutzung"
+
+#: lma_connect/plugins/core/models.py:669
+msgid "Post Q&A under real name instead of a pseudonym"
+msgstr "Q&A-Beiträge unter Klarnamen statt Pseudonym"
+
+#: lma_connect/plugins/core/models.py:681
+#, fuzzy
+#| msgid "Awarded at"
+msgid "Granted at"
+msgstr "Verliehen am"
+
+#: lma_connect/plugins/core/models.py:682
+#, fuzzy
+#| msgid "Withdrawn"
+msgid "Withdrawn at"
+msgstr "Zurückgezogen"
+
+#: lma_connect/plugins/core/models.py:686
+msgid "Consent"
+msgstr "Einwilligung"
+
+#: lma_connect/plugins/core/models.py:687
+msgid "Consents"
+msgstr "Einwilligungen"
+
+#: lma_connect/plugins/core/templates/core/_floorplans.html:23
+msgid "Full size"
+msgstr "Vollbild"
+
+#: lma_connect/plugins/core/templates/core/_floorplans.html:27
+msgid "Open PDF"
+msgstr "PDF öffnen"
+
+#: lma_connect/plugins/core/templates/core/_world_map.html:47
+#, python-format
+msgid "%(n)s country"
+msgid_plural "%(n)s countries"
+msgstr[0] "%(n)s Land"
+msgstr[1] "%(n)s Länder"
+
+#: lma_connect/plugins/core/templates/core/_world_map.html:48
+#, python-format
+msgid "%(n)s speaker"
+msgid_plural "%(n)s speakers"
+msgstr[0] "%(n)s Sprecher"
+msgstr[1] "%(n)s Sprecher"
+
+#: lma_connect/plugins/core/templates/core/_world_map.html:48
+#, python-format
+msgid "%(n)s abstract"
+msgid_plural "%(n)s abstracts"
+msgstr[0] "%(n)s Abstract"
+msgstr[1] "%(n)s Abstracts"
+
+#: lma_connect/plugins/core/templates/core/_world_map.html:54
+msgid "Show country list"
+msgstr "Länderliste anzeigen"
+
+#: lma_connect/plugins/core/templates/core/about.html:11
+#: lma_connect/plugins/core/templates/core/about.html:12
+#: templates/base.html:266
+#, python-format
+msgid "About %(name)s"
+msgstr "Über %(name)s"
+
+#: lma_connect/plugins/core/templates/core/about.html:19
+msgid "Version"
+msgstr "Version"
+
+#: lma_connect/plugins/core/templates/core/about.html:21
+msgid ""
+"Mobile-first conference companion for scientific and professional events — "
+"program, speakers, live Q&amp;A, polls, ratings, abstracts and expo. Built "
+"with Django and HTMX; no JavaScript framework, no build step."
+msgstr ""
+"Mobile-first-Begleit-App für wissenschaftliche und berufliche Kongresse — "
+"Programm, Vortragende, Live-Q&amp;A, Umfragen, Bewertungen, Abstracts und "
+"Ausstellung. Gebaut mit Django und HTMX; kein JavaScript-Framework, kein "
+"Build-Schritt."
+
+#: lma_connect/plugins/core/templates/core/about.html:26
+msgid "Who built it"
+msgstr "Wer sie gebaut hat"
+
+#: lma_connect/plugins/core/templates/core/about.html:31
+msgid "designed and developed by"
+msgstr "konzipiert und entwickelt von"
+
+#: lma_connect/plugins/core/templates/core/about.html:41
+msgid "Licence — use it, adapt it, share alike"
+msgstr "Lizenz — nutzen, anpassen, unter gleichen Bedingungen weitergeben"
+
+#: lma_connect/plugins/core/templates/core/about.html:43
+#, python-format
+msgid ""
+"%(name)s is free and open-source software, released under the %(license)s."
+msgstr ""
+"%(name)s ist freie Open-Source-Software, veröffentlicht unter der "
+"%(license)s."
+
+#: lma_connect/plugins/core/templates/core/about.html:46
+msgid "In short, you are free to:"
+msgstr "Kurz gesagt, du darfst:"
+
+#: lma_connect/plugins/core/templates/core/about.html:48
+msgid "run the app for your own conference, commercially or not;"
+msgstr "die App für deinen eigenen Kongress betreiben, kommerziell oder nicht;"
+
+#: lma_connect/plugins/core/templates/core/about.html:49
+msgid "study the source code, adapt it and build on it;"
+msgstr "den Quellcode studieren, anpassen und darauf aufbauen;"
+
+#: lma_connect/plugins/core/templates/core/about.html:50
+msgid "pass it on, modified or unmodified."
+msgstr "sie weitergeben, verändert oder unverändert."
+
+#: lma_connect/plugins/core/templates/core/about.html:52
+msgid "On these conditions:"
+msgstr "Unter diesen Bedingungen:"
+
+#: lma_connect/plugins/core/templates/core/about.html:54
+msgid ""
+"Share alike — anything you build on it must be released under the same "
+"licence."
+msgstr ""
+"Weitergabe unter gleichen Bedingungen — was du darauf aufbaust, muss unter "
+"derselben Lizenz veröffentlicht werden."
+
+#: lma_connect/plugins/core/templates/core/about.html:55
+msgid ""
+"Also when you only host it — if you run a modified version as a service, you "
+"have to offer your users its source code (AGPL §13). That is what makes this "
+"licence different from the plain GPL."
+msgstr ""
+"Auch beim bloßen Betreiben — wer eine veränderte Fassung als Dienst "
+"betreibt, muss seinen Nutzerinnen und Nutzern deren Quellcode anbieten (AGPL "
+"§13). Genau darin unterscheidet sich diese Lizenz von der einfachen GPL."
+
+#: lma_connect/plugins/core/templates/core/about.html:56
+msgid ""
+"Keep the attribution — leave the copyright notices and this page in place, "
+"and state what you changed. You may of course add yourself to the credits."
+msgstr ""
+"Namensnennung erhalten — die Copyright-Hinweise und diese Seite bleiben "
+"stehen, und du gibst an, was du geändert hast. Dich selbst zu den Credits "
+"hinzuzufügen, ist selbstverständlich erlaubt."
+
+#: lma_connect/plugins/core/templates/core/about.html:57
+msgid "No warranty — the software comes as is."
+msgstr "Keine Gewährleistung — die Software wird ohne Garantie bereitgestellt."
+
+#: lma_connect/plugins/core/templates/core/about.html:60
+msgid "Read the full licence text"
+msgstr "Vollständigen Lizenztext lesen"
+
+#: lma_connect/plugins/core/templates/core/about.html:61
+msgid "it also ships with the source, in the LICENSE file."
+msgstr "er liegt auch dem Quellcode bei, in der Datei LICENSE."
+
+#: lma_connect/plugins/core/templates/core/about.html:66
+msgid "Source code"
+msgstr "Quellcode"
+
+#: lma_connect/plugins/core/templates/core/about.html:68
+msgid "The complete source of this app is public:"
+msgstr "Der vollständige Quellcode dieser App ist öffentlich:"
+
+#: lma_connect/plugins/core/templates/core/about.html:72
+#, python-format
+msgid "This installation runs version %(version)s."
+msgstr "Diese Installation läuft mit Version %(version)s."
+
+#: lma_connect/plugins/core/templates/core/about.html:77
+msgid "The event content is the organizer's"
+msgstr "Die Veranstaltungsinhalte gehören dem Veranstalter"
+
+#: lma_connect/plugins/core/templates/core/about.html:79
+msgid ""
+"The licence covers the software. Everything an organizer maintains in it — "
+"programme, texts, logos, images, abstracts, trademarks and the event brand — "
+"belongs to that organizer and is not covered by it."
+msgstr ""
+"Die Lizenz gilt für die Software. Alles, was ein Veranstalter darin pflegt — "
+"Programm, Texte, Logos, Bilder, Abstracts, Marken und die "
+"Veranstaltungsmarke —, gehört diesem Veranstalter und fällt nicht darunter."
+
+#: lma_connect/plugins/core/templates/core/about.html:84
+msgid "Built on"
+msgstr "Aufgebaut auf"
+
+#: lma_connect/plugins/core/templates/core/about.html:86
+msgid ""
+"Open-source components this app is built with — all front-end assets are "
+"served from this host, never from a third-party CDN."
+msgstr ""
+"Open-Source-Komponenten, aus denen diese App gebaut ist — alle Frontend-"
+"Assets kommen von diesem Host, nie von einem fremden CDN."
+
+#: lma_connect/plugins/core/templates/core/about.html:91
+msgid "Component"
+msgstr "Komponente"
+
+#: lma_connect/plugins/core/templates/core/about.html:91
+msgid "Licence"
+msgstr "Lizenz"
+
+#: lma_connect/plugins/core/templates/core/event_detail.html:9
+#: lma_connect/plugins/core/templates/core/help.html:90 templates/base.html:355
+#: templates/base.html:356
+msgid "Home"
+msgstr "Start"
+
+#: lma_connect/plugins/core/templates/core/event_detail.html:50
+msgid "About"
+msgstr "Über"
+
+#: lma_connect/plugins/core/templates/core/help.html:5
+#: lma_connect/plugins/core/templates/core/help.html:6 templates/403.html:34
+#: templates/404.html:29 templates/base.html:265
+msgid "Help"
+msgstr "Hilfe"
+
+#: lma_connect/plugins/core/templates/core/help.html:7
+msgid "How to use the app"
+msgstr "So benutzt du die App"
+
+#: lma_connect/plugins/core/templates/core/help.html:33
+msgid ""
+"This app is your companion for the whole event — programme, live Q&A, polls, "
+"ratings, sponsors and more."
+msgstr ""
+"Diese App ist dein Begleiter für die gesamte Konferenz — Programm, Live-Q&A, "
+"Polls, Bewertungen, Sponsoren und mehr."
+
+#: lma_connect/plugins/core/templates/core/help.html:38
+#: lma_connect/plugins/core/templates/core/help.html:45
+msgid "For everyone"
+msgstr "Für alle"
+
+#: lma_connect/plugins/core/templates/core/help.html:39
+#: lma_connect/plugins/program/models.py:144
+msgid "Session chairs"
+msgstr "Session-Chairs"
+
+#: lma_connect/plugins/core/templates/core/help.html:40
+msgid "Industry"
+msgstr "Industrie"
+
+#: lma_connect/plugins/core/templates/core/help.html:41
+msgid "Organisers"
+msgstr "Orga"
+
+#: lma_connect/plugins/core/templates/core/help.html:46
+msgid ""
+"These features work the same for every attendee — delegates, speakers, "
+"industry and guests."
+msgstr ""
+"Diese Funktionen sind für alle Teilnehmenden gleich — Delegierte, "
+"Vortragende, Industrie und Gäste."
+
+#: lma_connect/plugins/core/templates/core/help.html:52
+msgid "Sign in — two ways"
+msgstr "Anmelden — auf zwei Wegen"
+
+#: lma_connect/plugins/core/templates/core/help.html:54
+msgid "QR code on your badge (easiest)."
+msgstr "QR-Code auf deinem Badge (einfachster Weg)."
+
+#: lma_connect/plugins/core/templates/core/help.html:55
+msgid ""
+"Open the camera on your phone, point it at the QR code on your badge and tap "
+"the link. The first time you'll be asked for a nickname — pick one and "
+"you're in. Next time you scan the same QR, you'll be logged in immediately."
+msgstr ""
+"Öffne die Kamera deines Handys, halte sie auf den QR-Code deines Badges und "
+"tippe auf den Link. Beim ersten Mal wirst du nach einem Spitznamen gefragt — "
+"wähle einen und du bist drin. Beim nächsten Scan des gleichen QR-Codes wirst "
+"du direkt eingeloggt."
+
+#: lma_connect/plugins/core/templates/core/help.html:58
+msgid "Username & password."
+msgstr "Passwort"
+
+#: lma_connect/plugins/core/templates/core/help.html:60
+#, python-format
+msgid ""
+"Organisers and staff go to <a href=\"%(login_url)s\">Sign in</a> and enter "
+"the credentials they were given. After 10 wrong attempts the form locks for "
+"about an hour — please don't guess."
+msgstr ""
+"Orga und Personal gehen zu <a href=\"%(login_url)s\">Anmelden</a> und geben "
+"die erhaltenen Zugangsdaten ein. Nach 10 Fehlversuchen sperrt das Formular "
+"für etwa eine Stunde — bitte nicht raten."
+
+#: lma_connect/plugins/core/templates/core/help.html:65
+#: lma_connect/plugins/core/templates/core/help.html:66
+msgid "The sign-in screen"
+msgstr "Die Anmeldeseite"
+
+#: lma_connect/plugins/core/templates/core/help.html:76
+msgid "Home & programme"
+msgstr "Start & Programm"
+
+#: lma_connect/plugins/core/templates/core/help.html:78
+msgid ""
+"The <strong>Home</strong> screen gives you the event at a glance — what's "
+"coming up next, quick tiles to the programme, abstracts, expo and feedback, "
+"plus the committees."
+msgstr ""
+"Der <strong>Start</strong>-Bildschirm zeigt dir das Event auf einen Blick — "
+"was als Nächstes ansteht, Kacheln zu Programm, Abstracts, Expo und Feedback "
+"sowie die Komitees."
+
+#: lma_connect/plugins/core/templates/core/help.html:81
+msgid ""
+"Tap <strong>Programme</strong> in the bottom bar to see all sessions grouped "
+"by day. Each session shows its type, track and time."
+msgstr ""
+"Tippe in der unteren Leiste auf <strong>Programm</strong>, um alle Sessions "
+"nach Tagen gruppiert zu sehen. Jede Session zeigt Typ, Track und Uhrzeit."
+
+#: lma_connect/plugins/core/templates/core/help.html:84
+msgid ""
+"Tap a session to see the speakers, abstract and live tools (Q&A, poll, "
+"rating). Speaker names link to their profile with bio and contact links."
+msgstr ""
+"Tippe auf eine Session, um Speaker, Abstract und Live-Tools (Q&A, Poll, "
+"Bewertung) zu sehen. Speaker-Namen verlinken auf das Profil mit Bio und "
+"Kontakten."
+
+#: lma_connect/plugins/core/templates/core/help.html:89
+msgid "Home screen"
+msgstr "Start-Bildschirm"
+
+#: lma_connect/plugins/core/templates/core/help.html:95
+msgid "Programme list"
+msgstr "Programm-Liste"
+
+#: lma_connect/plugins/core/templates/core/help.html:96
+msgid "Programme"
+msgstr "Programm"
+
+#: lma_connect/plugins/core/templates/core/help.html:106
+msgid "On a session page"
+msgstr "Auf einer Session-Seite"
+
+#: lma_connect/plugins/core/templates/core/help.html:107
+msgid "Everything that happens live during a talk is on its session page."
+msgstr ""
+"Alles, was während eines Vortrags live passiert, findest du auf der Session-"
+"Seite."
+
+#: lma_connect/plugins/core/templates/core/help.html:109
+msgid "Ask & up-vote questions"
+msgstr "Fragen stellen & up-voten"
+
+#: lma_connect/plugins/core/templates/core/help.html:111
+msgid "Type your question and hit <strong>Send</strong>."
+msgstr "Tippe deine Frage ein und drücke <strong>Senden</strong>."
+
+#: lma_connect/plugins/core/templates/core/help.html:112
+msgid ""
+"Tap the up-arrow on someone else's question to up-vote it. Most-voted "
+"questions float to the top so the chair sees what the room wants to know."
+msgstr ""
+"Tippe auf den Pfeil nach oben bei einer fremden Frage, um sie up-zuvoten. "
+"Die meistgewählten Fragen rutschen nach oben, damit der Chair sieht, was das "
+"Publikum wissen will."
+
+#: lma_connect/plugins/core/templates/core/help.html:113
+msgid ""
+"Questions starred by the session chair appear at the very top with a gold "
+"border — those are the ones the chair plans to ask."
+msgstr ""
+"Vom Session-Chair markierte Fragen erscheinen ganz oben mit goldenem Rand — "
+"das sind die, die der Chair stellen möchte."
+
+#: lma_connect/plugins/core/templates/core/help.html:116
+#, python-format
+msgid ""
+"Be civil: posts that breach the <a href=\"%(terms_url)s\">terms of use</a> "
+"can be hidden by the chair or organiser."
+msgstr ""
+"Bleib höflich: Beiträge, die gegen die <a "
+"href=\"%(terms_url)s\">Nutzungsbedingungen</a> verstoßen, können vom Chair "
+"oder Organisator ausgeblendet werden."
+
+#: lma_connect/plugins/core/templates/core/help.html:120
+#: lma_connect/plugins/program/models.py:269
+#: lma_connect/plugins/program/templates/program/_chair_screen.html:37
+msgid "Live polls"
+msgstr "Live-Polls"
+
+#: lma_connect/plugins/core/templates/core/help.html:122
+msgid ""
+"When the chair opens a poll, the question shows up on the session page. Tap "
+"your choice — for multi-choice polls you can pick several options. Results "
+"appear on the room screen."
+msgstr ""
+"Wenn der Chair eine Umfrage öffnet, erscheint die Frage auf der Session-"
+"Seite. Tippe auf deine Wahl — bei Mehrfachauswahl kannst du mehrere Optionen "
+"wählen. Die Ergebnisse erscheinen auf dem Raum-Bildschirm."
+
+#: lma_connect/plugins/core/templates/core/help.html:125
+msgid "Rate a session"
+msgstr "Eine Session bewerten"
+
+#: lma_connect/plugins/core/templates/core/help.html:126
+msgid "Each session can be rated on four independent dimensions:"
+msgstr "Jede Session kann auf vier unabhängigen Dimensionen bewertet werden:"
+
+#: lma_connect/plugins/core/templates/core/help.html:128
+#: lma_connect/plugins/program/models.py:214
+msgid "Slides"
+msgstr "Folien"
+
+#: lma_connect/plugins/core/templates/core/help.html:128
+msgid "visual quality of the presentation"
+msgstr "visuelle Qualität der Präsentation"
+
+#: lma_connect/plugins/core/templates/core/help.html:129
+#: lma_connect/plugins/program/models.py:217
+msgid "Clarity (English)"
+msgstr "Verständlichkeit (Englisch)"
+
+#: lma_connect/plugins/core/templates/core/help.html:129
+msgid "how easy it was to follow the English"
+msgstr "wie gut dem Englisch zu folgen war"
+
+#: lma_connect/plugins/core/templates/core/help.html:130
+#: lma_connect/plugins/program/models.py:220
+msgid "Practical relevance"
+msgstr "Praktische Relevanz"
+
+#: lma_connect/plugins/core/templates/core/help.html:130
+msgid "usefulness for your daily work"
+msgstr "Nützlichkeit für deine tägliche Arbeit"
+
+#: lma_connect/plugins/core/templates/core/help.html:131
+#: lma_connect/plugins/program/models.py:223
+msgid "Overall"
+msgstr "Gesamteindruck"
+
+#: lma_connect/plugins/core/templates/core/help.html:131
+msgid "your gut feeling"
+msgstr "dein Bauchgefühl"
+
+#: lma_connect/plugins/core/templates/core/help.html:134
+msgid ""
+"Tap a star for each dimension — your rating saves immediately. You can also "
+"leave a free-text comment; remember to hit <strong>Save comment</strong> "
+"when you're done typing."
+msgstr ""
+"Tippe auf einen Stern pro Dimension — deine Bewertung wird sofort "
+"gespeichert. Du kannst auch einen freien Kommentar hinterlassen; vergiss "
+"nicht, <strong>Kommentar speichern</strong> zu drücken, wenn du fertig bist."
+
+#: lma_connect/plugins/core/templates/core/help.html:139
+msgid "A session page with poll and Q&A"
+msgstr "Eine Session-Seite mit Umfrage und Q&A"
+
+#: lma_connect/plugins/core/templates/core/help.html:140
+msgid "A session page — poll & Q&A"
+msgstr "Eine Session-Seite — Umfrage & Q&A"
+
+#: lma_connect/plugins/core/templates/core/help.html:148
+msgid "Sponsors & exhibitors"
+msgstr "Sponsoren & Aussteller"
+
+#: lma_connect/plugins/core/templates/core/help.html:150
+msgid ""
+"The <strong>Expo</strong> tab lists all exhibitors in alphabetical order. "
+"Each sponsor page shows their description, contact people, materials to "
+"download (PDFs, white-papers) and a pin on the floor plan so you can find "
+"their booth."
+msgstr ""
+"Der Tab <strong>Expo</strong> listet alle Aussteller in alphabetischer "
+"Reihenfolge. Jede Sponsorseite zeigt Beschreibung, Ansprechpersonen, "
+"Materialien zum Download (PDFs, White-Paper) und eine Markierung im "
+"Lageplan, damit du den Stand findest."
+
+#: lma_connect/plugins/core/templates/core/help.html:156
+msgid "Abstracts & posters"
+msgstr "Abstract-Reviews"
+
+#: lma_connect/plugins/core/templates/core/help.html:158
+msgid ""
+"Browse all submitted abstracts in the <strong>Abstracts</strong> tab. Use "
+"the search box to filter by title or author, and the pills to narrow down by "
+"category. Each abstract page tells you where to find the poster (poster ID + "
+"location) and lists all authors with their affiliations and ORCID."
+msgstr ""
+"Im Tab <strong>Abstracts</strong> findest du alle eingereichten Abstracts. "
+"Nutze die Suchleiste für Titel/Autor, die Pills für Kategorien. Jede "
+"Abstract-Seite zeigt, wo das Poster hängt (Poster-ID + Ort) und listet alle "
+"Autoren mit Affiliation und ORCID."
+
+#: lma_connect/plugins/core/templates/core/help.html:162
+msgid ""
+"<strong>Audience Choice Award:</strong> every attendee has three stars for "
+"their favourite posters. You give a star by scanning the QR code on the "
+"poster itself — voting works on site only, one star per poster. You are "
+"asked to confirm, because a star cannot be changed or taken back afterwards. "
+"Giving a star also earns you points. Your remaining stars are shown on your "
+"profile page."
+msgstr ""
+"<strong>Audience Choice Award:</strong> Jede:r Teilnehmende hat drei Sterne "
+"für die Lieblings-Poster. Einen Stern vergibst du, indem du den QR-Code am "
+"Poster selbst scannst — abgestimmt wird nur vor Ort, ein Stern pro Poster. "
+"Du wirst um eine Bestätigung gebeten, denn ein Stern lässt sich danach weder "
+"ändern noch zurücknehmen. Für die Abstimmung gibt es außerdem Punkte. Wie "
+"viele Sterne dir noch bleiben, siehst du auf deiner Profilseite."
+
+#: lma_connect/plugins/core/templates/core/help.html:168
+msgid "Surveys"
+msgstr "Umfragen"
+
+#: lma_connect/plugins/core/templates/core/help.html:170
+msgid ""
+"Organisers may publish surveys during or after the event. Open the "
+"<strong>Feedback</strong> tab, pick a survey, and answer the questions — yes/"
+"no, scale 1–5, single or multiple choice, or free text. You can come back "
+"and edit your answers as long as the survey is open."
+msgstr ""
+"Die Organisation kann während oder nach der Konferenz Umfragen "
+"veröffentlichen. Öffne den Tab <strong>Feedback</strong>, wähle eine Umfrage "
+"und beantworte die Fragen — ja/nein, Skala 1–5, Single- oder Multi-Choice, "
+"Freitext. Du kannst deine Antworten ändern, solange die Umfrage offen ist."
+
+#: lma_connect/plugins/core/templates/core/help.html:178
+msgid "Your profile, points & badges"
+msgstr "Dein Profil, Punkte & Badges"
+
+#: lma_connect/plugins/core/templates/core/help.html:180
+msgid ""
+"Every action you take in the app earns you points: asking a question, up-"
+"voting, voting in a poll, rating a session, completing a survey."
+msgstr ""
+"Jede Aktion in der App bringt dir Punkte: eine Frage stellen, up-voten, an "
+"einem Poll teilnehmen, eine Session bewerten, eine Umfrage ausfüllen."
+
+#: lma_connect/plugins/core/templates/core/help.html:185
+#, python-format
+msgid ""
+"Open <a href=\"%(profile_url)s\">My profile</a> (the person icon, top right) "
+"to change your nickname and see your score and unlocked badges, or check the "
+"<a href=\"%(leaderboard_url)s\">leaderboard</a> to see who's most active."
+msgstr ""
+"Öffne <a href=\"%(profile_url)s\">Mein Profil</a> (das Personen-Symbol oben "
+"rechts), um deinen Nickname zu ändern und deinen Punktestand samt "
+"freigeschalteter Badges zu sehen, oder wirf einen Blick auf die <a "
+"href=\"%(leaderboard_url)s\">Bestenliste</a>, um zu sehen, wer am aktivsten "
+"ist."
+
+#: lma_connect/plugins/core/templates/core/help.html:199
+msgid "Add to home screen"
+msgstr "Zum Home-Bildschirm hinzufügen"
+
+#: lma_connect/plugins/core/templates/core/help.html:201
+msgid "Use the app like a native app — without a browser address bar:"
+msgstr "Nutze die App wie eine native App — ohne Browser-Adressleiste:"
+
+#: lma_connect/plugins/core/templates/core/help.html:204
+msgid ""
+"<strong>iPhone / iPad:</strong> in Safari, tap the share button → <em>Add to "
+"Home Screen</em>."
+msgstr ""
+"<strong>iPhone / iPad:</strong> Tippe in Safari auf den Teilen-Button → "
+"<em>Zum Home-Bildschirm</em>."
+
+#: lma_connect/plugins/core/templates/core/help.html:205
+msgid ""
+"<strong>Android:</strong> in Chrome, tap the menu → <em>Add to Home Screen</"
+"em> (or accept the install prompt when it appears)."
+msgstr ""
+"<strong>Android:</strong> Tippe in Chrome auf das Menü → <em>Zum "
+"Startbildschirm hinzufügen</em> (oder den Install-Prompt akzeptieren)."
+
+#: lma_connect/plugins/core/templates/core/help.html:211
+msgid "Your data & privacy"
+msgstr "Deine Daten & Datenschutz"
+
+#: lma_connect/plugins/core/templates/core/help.html:215
+#, python-format
+msgid ""
+"We store only what we need to run the event: your nickname, optional "
+"affiliation, and the actions you take in the app (questions, votes, "
+"ratings). No tracking, no ads, no third-party analytics. For the details see "
+"the <a href=\"%(privacy_url)s\">privacy policy</a> and the <a "
+"href=\"%(imprint_url)s\">imprint</a>."
+msgstr ""
+"Wir speichern nur, was wir für die Konferenz brauchen: deinen Spitznamen, "
+"optionale Affiliation und deine Aktionen in der App (Fragen, Voten, "
+"Bewertungen). Kein Tracking, keine Ads, keine Drittanbieter-Analytics. "
+"Details in der <a href=\"%(privacy_url)s\">Datenschutzerklärung</a> und im "
+"<a href=\"%(imprint_url)s\">Impressum</a>."
+
+#: lma_connect/plugins/core/templates/core/help.html:221
+msgid "For session chairs"
+msgstr "Für Session-Chairs"
+
+#: lma_connect/plugins/core/templates/core/help.html:222
+msgid "Chair / Co-Chair"
+msgstr "Chair / Co-Chair"
+
+#: lma_connect/plugins/core/templates/core/help.html:223
+msgid ""
+"If you chair or co-chair a session, that session gets an extra Chair view "
+"for moderating Q&A, running polls and driving the room screen. You reach it "
+"from the session page via the “Chair view” button."
+msgstr ""
+"Wenn du eine Session (mit-)leitest, bekommt sie eine zusätzliche Chair-"
+"Ansicht zum Moderieren des Q&A, Starten von Umfragen und Steuern des Raum-"
+"Bildschirms. Du erreichst sie auf der Session-Seite über die Schaltfläche "
+"„Chair-Ansicht“."
+
+#: lma_connect/plugins/core/templates/core/help.html:229
+msgid "Moderate the Q&A"
+msgstr "Das Q&A moderieren"
+
+#: lma_connect/plugins/core/templates/core/help.html:231
+msgid ""
+"<strong>Star</strong> a question to promote it — starred questions get a "
+"badge and jump to the top of the public list, so the audience sees what "
+"you'll actually ask."
+msgstr ""
+"<strong>Sterne</strong> eine Frage, um sie hervorzuheben — markierte Fragen "
+"bekommen ein Badge und springen an die Spitze der öffentlichen Liste, sodass "
+"das Publikum sieht, was du tatsächlich fragen wirst."
+
+#: lma_connect/plugins/core/templates/core/help.html:232
+msgid ""
+"<strong>Hide</strong> a question that is off-topic or breaches the rules; "
+"<strong>Mark as answered</strong> once the panel has dealt with it."
+msgstr ""
+"<strong>Blende</strong> Fragen aus, die am Thema vorbeigehen oder gegen die "
+"Regeln verstoßen; markiere sie mit <strong>Als beantwortet markieren</"
+"strong>, sobald das Panel sie behandelt hat."
+
+#: lma_connect/plugins/core/templates/core/help.html:233
+msgid ""
+"Prepare your own questions in advance with <strong>Add question</strong> — "
+"they're added pre-starred so you can walk in ready."
+msgstr ""
+"Bereite eigene Fragen vorab mit <strong>Hinzufügen</strong> vor — sie werden "
+"gleich markiert hinzugefügt, sodass du vorbereitet in die Session gehst."
+
+#: lma_connect/plugins/core/templates/core/help.html:234
+msgid "The counters show how many questions are starred, visible and total."
+msgstr ""
+"Die Zähler zeigen, wie viele Fragen markiert, sichtbar und insgesamt "
+"vorhanden sind."
+
+#: lma_connect/plugins/core/templates/core/help.html:239
+#: lma_connect/plugins/core/templates/core/help.html:240
+msgid "The chair view"
+msgstr "Die Chair-Ansicht"
+
+#: lma_connect/plugins/core/templates/core/help.html:248
+msgid "The room screen (beamer) & live polls"
+msgstr "Der Raum-Bildschirm (Beamer) & Live-Umfragen"
+
+#: lma_connect/plugins/core/templates/core/help.html:250
+msgid ""
+"Open the <strong>room screen</strong> once on the projector. From the chair "
+"view you switch what it shows — a <em>Standby</em> title card, the live "
+"<em>Q&A</em>, or a poll's results — and it refreshes within a few seconds. "
+"You never need to touch the projector laptop again."
+msgstr ""
+"Öffne den <strong>Raum-Bildschirm</strong> einmal am Projektor. Aus der "
+"Chair-Ansicht schaltest du um, was er zeigt — eine <em>Standby</em>-"
+"Titelkarte, das live <em>Q&A</em> oder die Ergebnisse einer Umfrage — und er "
+"aktualisiert sich innerhalb weniger Sekunden. Den Projektor-Laptop musst du "
+"danach nie wieder anfassen."
+
+#: lma_connect/plugins/core/templates/core/help.html:253
+msgid ""
+"<strong>Live polls:</strong> attendees only see the results once you project "
+"them. Start/stop opens or closes the vote. Below you can see the two screen "
+"states — a live poll result and the standby card."
+msgstr ""
+"<strong>Live-Umfragen:</strong> Teilnehmende sehen die Ergebnisse erst, wenn "
+"du sie projizierst. Start/Stopp öffnet oder schließt die Abstimmung. Unten "
+"siehst du die zwei Bildschirm-Zustände — ein Live-Umfrageergebnis und die "
+"Standby-Karte."
+
+#: lma_connect/plugins/core/templates/core/help.html:257
+msgid "Live poll projected on the room screen"
+msgstr "Live-Umfrage auf dem Raum-Bildschirm projiziert"
+
+#: lma_connect/plugins/core/templates/core/help.html:258
+msgid "Live poll results on the room screen"
+msgstr "Live-Umfrageergebnisse auf dem Raum-Bildschirm"
+
+#: lma_connect/plugins/core/templates/core/help.html:261
+msgid "Room screen in standby"
+msgstr "Raum-Bildschirm im Standby"
+
+#: lma_connect/plugins/core/templates/core/help.html:262
+msgid "Standby card between talks"
+msgstr "Standby-Karte zwischen den Vorträgen"
+
+#: lma_connect/plugins/core/templates/core/help.html:269
+msgid "For industry & exhibitors"
+msgstr "Für Industrie & Aussteller"
+
+#: lma_connect/plugins/core/templates/core/help.html:270
+#: lma_connect/plugins/people/models.py:24
+msgid "Company / Industry"
+msgstr "Firma / Industrie"
+
+#: lma_connect/plugins/core/templates/core/help.html:271
+msgid ""
+"If you represent a company at the expo: you use the app like every other "
+"attendee — sign in by scanning the QR code on your badge. On top of that, "
+"your company has a profile and a booth in the app."
+msgstr ""
+"Wenn Sie eine Firma auf der Expo vertreten: Sie nutzen die App wie alle "
+"anderen Teilnehmenden — Anmeldung per Scan des QR-Codes auf Ihrem Badge. "
+"Zusätzlich hat Ihre Firma ein Profil und einen Stand in der App."
+
+#: lma_connect/plugins/core/templates/core/help.html:277
+#: lma_connect/plugins/core/templates/core/help.html:294
+msgid "Your company profile"
+msgstr "Ihr Firmenprofil"
+
+#: lma_connect/plugins/core/templates/core/help.html:279
+msgid ""
+"Attendees find you in the <strong>Expo</strong> tab — all exhibitors are "
+"listed as equals, in alphabetical order. Your profile page shows:"
+msgstr ""
+"Teilnehmende finden Sie im Tab <strong>Expo</strong> — alle Aussteller "
+"stehen gleichrangig in alphabetischer Reihenfolge. Ihre Profilseite zeigt:"
+
+#: lma_connect/plugins/core/templates/core/help.html:282
+msgid ""
+"your logo, a short one-line description and the full company description,"
+msgstr ""
+"Ihr Logo, eine kurze Einzeiler-Beschreibung und die ausführliche "
+"Firmenbeschreibung,"
+
+#: lma_connect/plugins/core/templates/core/help.html:283
+msgid ""
+"your contact people at the booth — with photo, role and field of expertise, "
+"so visitors know whom to approach,"
+msgstr ""
+"Ihre Ansprechpersonen am Stand — mit Foto, Rolle und Fachgebiet, damit "
+"Besucher wissen, wen sie ansprechen können,"
+
+#: lma_connect/plugins/core/templates/core/help.html:284
+msgid ""
+"downloads (white-papers, datasheets, brochures) and links attendees can open "
+"right away,"
+msgstr ""
+"Downloads (White-Paper, Datenblätter, Broschüren) und Links, die "
+"Teilnehmende direkt öffnen können,"
+
+#: lma_connect/plugins/core/templates/core/help.html:285
+msgid "your booth location, plus a pin on the floor plan."
+msgstr "Ihren Standort samt Markierung im Lageplan."
+
+#: lma_connect/plugins/core/templates/core/help.html:288
+msgid ""
+"The profile is maintained by the organisers — you don't have to edit "
+"anything yourself."
+msgstr ""
+"Das Profil wird von der Orga gepflegt — Sie müssen selbst nichts bearbeiten."
+
+#: lma_connect/plugins/core/templates/core/help.html:293
+msgid "A company profile in the expo"
+msgstr "Ein Firmenprofil in der Expo"
+
+#: lma_connect/plugins/core/templates/core/help.html:304
+msgid "Your booth QR code & the booth quiz"
+msgstr "Ihr Stand-QR-Code & das Stand-Quiz"
+
+#: lma_connect/plugins/core/templates/core/help.html:306
+msgid ""
+"You get a printed <strong>QR code for your booth</strong> from the "
+"organisers. Visitors scan it and check in — that earns them points in the "
+"app's leaderboard, which is exactly what draws them to your stand."
+msgstr ""
+"Sie erhalten von der Orga einen gedruckten <strong>QR-Code für Ihren Stand</"
+"strong>. Besucher scannen ihn und checken ein — dafür bekommen sie Punkte in "
+"der Bestenliste der App, und genau das bringt sie an Ihren Stand."
+
+#: lma_connect/plugins/core/templates/core/help.html:309
+msgid ""
+"On top of the check-in you can have a <strong>booth quiz</strong>: one "
+"question with several answers. The answer should be findable at your booth — "
+"on a roll-up, on a device, or simply by asking your staff. That is the "
+"point: it starts a conversation. A correct answer earns extra points."
+msgstr ""
+"Zusätzlich zum Check-in können Sie ein <strong>Stand-Quiz</strong> anbieten: "
+"eine Frage mit mehreren Antworten. Die Antwort sollte an Ihrem Stand zu "
+"finden sein — auf einem Roll-up, an einem Gerät oder einfach durch "
+"Nachfragen beim Standpersonal. Genau das ist der Zweck: Es bringt Besucher "
+"ins Gespräch. Für die richtige Antwort gibt es Extra-Punkte."
+
+#: lma_connect/plugins/core/templates/core/help.html:312
+msgid ""
+"Send your quiz question and answers to the organisers — we set it up for you."
+msgstr ""
+"Schicken Sie Ihre Quiz-Frage samt Antworten an die Orga — wir richten es für "
+"Sie ein."
+
+#: lma_connect/plugins/core/templates/core/help.html:317
+msgid "Booth check-in with quiz"
+msgstr "Stand-Check-in mit Quiz"
+
+#: lma_connect/plugins/core/templates/core/help.html:318
+msgid "Booth check-in & quiz"
+msgstr "Stand-Check-in & Quiz"
+
+#: lma_connect/plugins/core/templates/core/help.html:326
+msgid "Want to change something on your profile?"
+msgstr "Sie möchten etwas an Ihrem Profil ändern?"
+
+#: lma_connect/plugins/core/templates/core/help.html:328
+msgid ""
+"Send your text, logo, contact people, downloads or quiz question to the "
+"organisers — we keep your profile up to date for you, before and during the "
+"event."
+msgstr ""
+"Schicken Sie Texte, Logo, Ansprechpersonen, Downloads oder Quiz-Frage an die "
+"Orga — wir halten Ihr Profil für Sie aktuell, vor und während der "
+"Veranstaltung."
+
+#: lma_connect/plugins/core/templates/core/help.html:341
+msgid ""
+"Please talk to the registration desk — they will put you in touch with the "
+"right person."
+msgstr ""
+"Wenden Sie sich bitte an den Registrierungsschalter — dort stellt man den "
+"Kontakt zur richtigen Person her."
+
+#: lma_connect/plugins/core/templates/core/help.html:347
+msgid "For organisers"
+msgstr "Für die Orga"
+
+#: lma_connect/plugins/core/templates/core/help.html:348
+msgid "Operations team"
+msgstr "Operations-Team"
+
+#: lma_connect/plugins/core/templates/core/help.html:349
+msgid ""
+"Organisers and staff have an Operations area for access tokens, badges and "
+"attendees. Reach it from the wrench icon in the top bar after signing in "
+"with your organiser account."
+msgstr ""
+"Orga und Personal haben einen Operations-Bereich für Zugangs-Tokens, Badges "
+"und Teilnehmende. Du erreichst ihn über das Werkzeug-Symbol in der oberen "
+"Leiste, sobald du mit deinem Orga-Konto angemeldet bist."
+
+#: lma_connect/plugins/core/templates/core/help.html:355
+#: lma_connect/plugins/core/templates/core/help.html:366
+#: lma_connect/plugins/core/templates/core/help.html:367
+msgid "Operations dashboard"
+msgstr "Operations-Dashboard"
+
+#: lma_connect/plugins/core/templates/core/help.html:357
+msgid ""
+"The dashboard shows live counts — tokens total, open/unused, redeemed and "
+"registered users — and quick actions for the two most common jobs:"
+msgstr ""
+"Das Dashboard zeigt Live-Zahlen — Tokens gesamt, offen/unbenutzt, eingelöst "
+"und registrierte Benutzer — und Schnellaktionen für die zwei häufigsten "
+"Aufgaben:"
+
+#: lma_connect/plugins/core/templates/core/help.html:360
+msgid ""
+"<strong>Generate access tokens</strong> in bulk — pick a count and a group "
+"(Delegate, Speaker, Industry …)."
+msgstr ""
+"<strong>Zugangs-Tokens erzeugen</strong> im Bulk — Anzahl und Gruppe wählen "
+"(Delegierte:r, Sprecher:in, Industrie …)."
+
+#: lma_connect/plugins/core/templates/core/help.html:361
+msgid ""
+"<strong>Print QR sheets</strong> — A4 sheets of QR cards for badge stations, "
+"booths and posters."
+msgstr ""
+"<strong>QR-Bögen drucken</strong> — A4-Bögen mit QR-Karten für Badge-"
+"Stationen, Stände und Poster."
+
+#: lma_connect/plugins/core/templates/core/help.html:375
+msgid "Access tokens & badges"
+msgstr "Zugangs-Tokens & Badges"
+
+#: lma_connect/plugins/core/templates/core/help.html:377
+msgid ""
+"The <strong>Tokens</strong> list shows every access token with its group, "
+"label and status (open, redeemed, inactive). Search by token, label or "
+"username, and filter by status or group."
+msgstr ""
+"Die <strong>Tokens</strong>-Liste zeigt jeden Zugangs-Token mit Gruppe, "
+"Label und Status (offen, eingelöst, inaktiv). Suche nach Token, Label oder "
+"Benutzername und filtere nach Status oder Gruppe."
+
+#: lma_connect/plugins/core/templates/core/help.html:380
+msgid ""
+"Open a token to see its QR code and details. <strong>Print badge</strong> "
+"produces the printable badge; <strong>Deactivate</strong> revokes a token if "
+"a badge is lost. A token stays “open” until someone scans it and picks a "
+"nickname — then it counts as redeemed."
+msgstr ""
+"Öffne einen Token, um QR-Code und Details zu sehen. <strong>Badge drucken</"
+"strong> erzeugt den druckbaren Badge; <strong>Deaktivieren</strong> sperrt "
+"einen Token, falls ein Badge verloren geht. Ein Token bleibt „offen“, bis "
+"ihn jemand scannt und einen Nickname wählt — dann gilt er als eingelöst."
+
+#: lma_connect/plugins/core/templates/core/help.html:384
+msgid "Token list with filters"
+msgstr "Token-Liste mit Filtern"
+
+#: lma_connect/plugins/core/templates/core/help.html:385
+msgid "Token list — filter by group & status"
+msgstr "Token-Liste — nach Gruppe & Status filtern"
+
+#: lma_connect/plugins/core/templates/core/help.html:388
+msgid "Single token with QR code"
+msgstr "Einzelner Token mit QR-Code"
+
+#: lma_connect/plugins/core/templates/core/help.html:389
+msgid "Single token — QR & badge"
+msgstr "Einzelner Token — QR & Badge"
+
+#: lma_connect/plugins/core/templates/core/help.html:398
+msgid "Manage attendees"
+msgstr "Teilnehmende verwalten"
+
+#: lma_connect/plugins/core/templates/core/help.html:400
+msgid ""
+"Under <strong>Users</strong> you find every registered attendee. Open a "
+"profile to edit their display name or affiliation, reset a password, unlock "
+"an account that got locked after too many sign-in attempts, or issue a fresh "
+"token."
+msgstr ""
+"Unter <strong>Benutzer</strong> findest du alle registrierten Teilnehmenden. "
+"Öffne ein Profil, um Anzeigename oder Zugehörigkeit zu bearbeiten, ein "
+"Passwort zurückzusetzen, ein nach zu vielen Anmeldeversuchen gesperrtes "
+"Konto zu entsperren oder einen neuen Token auszustellen."
+
+#: lma_connect/plugins/core/templates/core/help.html:405
+#: lma_connect/plugins/core/templates/core/help.html:406
+msgid "User management"
+msgstr "Benutzerverwaltung"
+
+#: lma_connect/plugins/core/templates/core/help.html:416
+#: lma_connect/plugins/core/templates/core/help.html:426
+msgid "Abstract review results"
+msgstr "Abstract-Review-Ergebnisse"
+
+#: lma_connect/plugins/core/templates/core/help.html:418
+msgid ""
+"The <strong>Abstracts</strong> area in Operations aggregates the reviewers' "
+"scores per abstract, so the scientific committee can rank submissions and "
+"decide on oral vs. poster slots."
+msgstr ""
+"Der <strong>Abstracts</strong>-Bereich in Operations bündelt die Bewertungen "
+"der Reviewer pro Abstract, damit das wissenschaftliche Komitee Einreichungen "
+"reihen und über Vortrags- vs. Poster-Slots entscheiden kann."
+
+#: lma_connect/plugins/core/templates/core/help.html:421
+msgid ""
+"<strong>Audience vote</strong> is the separate public ranking: how many "
+"stars each poster collected from attendees. From there you award the "
+"Audience Choice Award with one click — a tie at the top is flagged, and only "
+"one abstract per event can hold the award. An abstract is only votable once "
+"it is marked as <em>poster on display</em>, which also decides whether it "
+"gets a QR sheet."
+msgstr ""
+"<strong>Publikums-Voting</strong> ist die davon getrennte Publikumswertung: "
+"wie viele Sterne jedes Poster von den Teilnehmenden bekommen hat. Von dort "
+"vergebt ihr den Audience Choice Award mit einem Klick — ein Gleichstand an "
+"der Spitze wird angezeigt, und pro Event kann nur ein Abstract den Preis "
+"tragen. Abstimmbar ist ein Abstract erst, wenn es als <em>Poster hängt aus</"
+"em> markiert ist; davon hängt auch ab, ob es einen QR-Bogen bekommt."
+
+#: lma_connect/plugins/core/templates/core/help.html:427
+msgid "Aggregated review scores"
+msgstr "Aggregierte Bewertungen"
+
+#: lma_connect/plugins/core/templates/core/help.html:436
+msgid "Need help during the event?"
+msgstr "Brauchst du während der Konferenz Hilfe?"
+
+#: lma_connect/plugins/core/templates/core/help.html:438
+msgid ""
+"Walk up to the registration desk or any committee member with an orange "
+"lanyard. They'll help you with login problems, missing sessions on your "
+"schedule, or anything else."
+msgstr ""
+"Geh zum Registrierungsschalter oder zu einem Komitee-Mitglied mit orangem "
+"Lanyard. Sie helfen dir bei Login-Problemen, fehlenden Sessions oder allem "
+"anderen."
+
+#: lma_connect/plugins/core/templates/core/home.html:76
+#: lma_connect/plugins/program/templates/program/detail.html:9
+#: lma_connect/plugins/program/templates/program/list.html:4
+#: lma_connect/plugins/program/templates/program/list.html:5
+#: templates/base.html:359 templates/base.html:360
+msgid "Program"
+msgstr "Programm"
+
+#: lma_connect/plugins/core/templates/core/home.html:77
+#, python-format
+msgid "%(n)s session"
+msgid_plural "%(n)s sessions"
+msgstr[0] "%(n)s Session"
+msgstr[1] "%(n)s Sessions"
+
+#: lma_connect/plugins/core/templates/core/home.html:84
+#, python-format
+msgid "%(n)s submitted"
+msgstr "%(n)s abgeschickt"
+
+#: lma_connect/plugins/core/templates/core/home.html:90
+#: lma_connect/plugins/sponsors/templates/sponsors/list.html:4
+#: lma_connect/plugins/sponsors/templates/sponsors/list.html:5
+#: templates/base.html:364 templates/base.html:365
+msgid "Expo"
+msgstr "Expo"
+
+#: lma_connect/plugins/core/templates/core/home.html:91
+msgid "exhibitors & sponsors"
+msgstr "Aussteller & Sponsoren"
+
+#: lma_connect/plugins/core/templates/core/home.html:97
+#: lma_connect/plugins/core/templates/core/info.html:145
+#: lma_connect/plugins/feedback/templates/feedback/detail.html:9
+#: lma_connect/plugins/feedback/templates/feedback/list.html:5
+#: templates/base.html:379 templates/base.html:380
+msgid "Feedback"
+msgstr "Feedback"
+
+#: lma_connect/plugins/core/templates/core/home.html:98
+msgid "post-event"
+msgstr "nach dem Event"
+
+#: lma_connect/plugins/core/templates/core/home.html:108
+msgid "Current session"
+msgstr "Aktuelle Session"
+
+#: lma_connect/plugins/core/templates/core/home.html:110
+msgid "Coming up next"
+msgstr "Demnächst"
+
+#: lma_connect/plugins/core/templates/core/home.html:113
+msgid "Full programme"
+msgstr "Volles Programm"
+
+#: lma_connect/plugins/core/templates/core/home.html:147
+#: lma_connect/plugins/core/templates/core/info.html:42
+msgctxt "section heading"
+msgid "Floorplan"
+msgid_plural "Floorplans"
+msgstr[0] "Lageplan"
+msgstr[1] "Lagepläne"
+
+#: lma_connect/plugins/core/templates/core/home.html:164
+#, python-format
+msgid "%(n)s member"
+msgid_plural "%(n)s members"
+msgstr[0] "%(n)s Mitglied"
+msgstr[1] "%(n)s Mitglieder"
+
+#: lma_connect/plugins/core/templates/core/home.html:202
+msgid ""
+"<strong>No active event.</strong> Create one in the admin and set "
+"<code>is_published=True</code>."
+msgstr ""
+"<strong>Kein aktives Event.</strong> Lege im Admin eines an und setze "
+"<code>is_published=True</code>."
+
+#: lma_connect/plugins/core/templates/core/info.html:4
+#: lma_connect/plugins/core/templates/core/info.html:5 templates/base.html:374
+#: templates/base.html:375
+msgid "Info"
+msgstr "Info"
+
+#: lma_connect/plugins/core/templates/core/info.html:6
+msgid "Venue · Floorplans · Contacts"
+msgstr "Ort · Lagepläne · Kontakte"
+
+#: lma_connect/plugins/core/templates/core/info.html:20
+msgid "How to use this app"
+msgstr "So benutzt du die App"
+
+#: lma_connect/plugins/core/templates/core/info.html:21
+msgid "Q&A, polls, ratings, sign-in, install to home screen…"
+msgstr "Q&A, Polls, Bewertungen, Anmeldung, Installation am Home-Bildschirm…"
+
+#: lma_connect/plugins/core/templates/core/info.html:35
+#: lma_connect/plugins/core/templates/core/info.html:84
+msgid "Open in maps"
+msgstr "In Maps öffnen"
+
+#: lma_connect/plugins/core/templates/core/info.html:61
+msgid "Social Event"
+msgstr "Social Event"
+
+#: lma_connect/plugins/core/templates/core/info.html:69
+msgid "When"
+msgstr "Wann"
+
+#: lma_connect/plugins/core/templates/core/info.html:77
+msgid "Where"
+msgstr "Wo"
+
+#: lma_connect/plugins/core/templates/core/info.html:111
+msgid "Want to register?"
+msgstr "Nicht angemeldet"
+
+#: lma_connect/plugins/core/templates/core/info.html:112
+msgid "Contact the Organizing Secretary to be added to the social-event list."
+msgstr ""
+"Kontaktieren Sie das Organizing Secretary, um sich für das Social Event "
+"nachzumelden."
+
+#: lma_connect/plugins/core/templates/core/info.html:113
+#, python-format
+msgid "Late registration for social event – %(title)s"
+msgstr "Nachmeldung Social Event – %(title)s"
+
+#: lma_connect/plugins/core/templates/core/info.html:115
+#, python-format
+msgid "Contact %(name)s"
+msgstr "%(name)s kontaktieren"
+
+#: lma_connect/plugins/core/templates/core/info.html:128
+msgid "Event website"
+msgstr "Social Event"
+
+#: lma_connect/plugins/core/templates/core/info.html:134
+#, python-format
+msgid "Emergency %(number)s"
+msgstr "Notruf %(number)s"
+
+#: lma_connect/plugins/core/templates/core/info.html:140
+msgid "Directions"
+msgstr "Schnellaktionen"
+
+#: lma_connect/plugins/core/templates/core/info.html:152
+#: lma_connect/plugins/sponsors/templates/sponsors/detail.html:144
+msgid "Contacts"
+msgstr "Kontakte"
+
+#: lma_connect/plugins/core/templates/core/info.html:186
+#, python-format
+msgid "%(counter)s member"
+msgid_plural "%(counter)s members"
+msgstr[0] "%(counter)s Mitglied"
+msgstr[1] "%(counter)s Mitglieder"
+
+#: lma_connect/plugins/core/templates/core/info.html:207
+msgid "No members yet."
+msgstr "Noch nicht bewertet"
+
+#: lma_connect/plugins/core/templates/core/legal.html:46
+#, python-format
+msgid "%(page_title)s not configured"
+msgstr "%(page_title)s nicht konfiguriert"
+
+#: lma_connect/plugins/core/templates/core/legal.html:48
+msgid "The organizer hasn't filled in this page yet."
+msgstr "Der Veranstalter hat diese Seite noch nicht ausgefüllt."
+
+#: lma_connect/plugins/core/templates/core/legal.html:56
+msgid "Admins can add the content via <code>/admin/lma_core/legalpage/</code>."
+msgstr ""
+"Admins können den Inhalt über <code>/admin/lma_core/legalpage/</code> "
+"ergänzen."
+
+#: lma_connect/plugins/core/templates/core/welcome.html:9
+msgid "Conference App"
+msgstr "Konferenz-App"
+
+#: lma_connect/plugins/core/templates/core/welcome.html:120
+msgid "Conference"
+msgstr "Konferenz"
+
+#: lma_connect/plugins/core/templates/core/welcome.html:134
+msgid "Enter"
+msgstr "Eingeben"
+
+#: lma_connect/plugins/core/templates/core/welcome.html:141
+#: lma_connect/plugins/sponsors/templates/sponsors/list.html:73
+msgid "With the support of"
+msgstr "Mit Unterstützung von"
+
+#: lma_connect/plugins/core/templates/core/welcome.html:151
+#: templates/base.html:306
+msgid "Hosted by"
+msgstr "Betrieben von"
+
+#: lma_connect/plugins/core/templates/core/welcome.html:161
+#: templates/base.html:350
+#, python-format
+msgid "open source, %(license)s"
+msgstr "Open Source, %(license)s"
+
+#: lma_connect/plugins/expo/models.py:37
+#: lma_connect/plugins/feedback/models.py:60
+#: lma_connect/plugins/program/models.py:164
+#: lma_connect/plugins/program/models.py:254
+#, fuzzy
+#| msgid "Questions"
+msgid "Question"
+msgstr "Fragen"
+
+#: lma_connect/plugins/expo/models.py:38
+msgid ""
+"The answer should be findable at the booth, or something staff can be asked "
+"about"
+msgstr ""
+"Die Antwort sollte am Stand zu finden oder beim Standpersonal erfragbar sein"
+
+#: lma_connect/plugins/expo/models.py:40
+#, fuzzy
+#| msgid "Hinweis (optional)"
+msgid "Hint (optional)"
+msgstr "Hinweis (optional)"
+
+#: lma_connect/plugins/expo/models.py:41
+msgid "e.g. 'Ask the booth staff' or 'see the roll-up'"
+msgstr "z. B. „Frag das Standpersonal“ oder „siehe Roll-up“"
+
+#: lma_connect/plugins/expo/models.py:45
+#, fuzzy
+#| msgid "Booth check-in & quiz"
+msgid "Booth quiz"
+msgstr "Stand-Check-in & Quiz"
+
+#: lma_connect/plugins/expo/models.py:46
+#, fuzzy
+#| msgid "Booths"
+msgid "Booth quizzes"
+msgstr "Stände"
+
+#: lma_connect/plugins/expo/models.py:60
+#, fuzzy
+#| msgid "Answered"
+msgid "Answer text"
+msgstr "Beantwortet"
+
+#: lma_connect/plugins/expo/models.py:61
+msgid "Correct"
+msgstr "Richtig"
+
+#: lma_connect/plugins/expo/models.py:65
+#, fuzzy
+#| msgid "Antwortoption"
+msgid "Answer option"
+msgstr "Antwortoption"
+
+#: lma_connect/plugins/expo/models.py:66
+#, fuzzy
+#| msgid "Antwortoption"
+msgid "Answer options"
+msgstr "Antwortoption"
+
+#: lma_connect/plugins/expo/models.py:92
+#, fuzzy
+#| msgid "Your rating"
+msgid "Poster rating"
+msgstr "Deine Bewertung"
+
+#: lma_connect/plugins/expo/models.py:93
+#, fuzzy
+#| msgid "Your rating"
+msgid "Poster ratings"
+msgstr "Deine Bewertung"
+
+#: lma_connect/plugins/expo/templates/expo/booth_stop.html:5
+msgid "Booth check-in"
+msgstr "Stand-Check-in"
+
+#: lma_connect/plugins/expo/templates/expo/booth_stop.html:37
+msgid "Quiz solved — bonus points earned!"
+msgstr "Quiz gelöst — Bonuspunkte kassiert!"
+
+#: lma_connect/plugins/expo/templates/expo/booth_stop.html:59
+msgid "Submit answer"
+msgstr "Antwort absenden"
+
+#: lma_connect/plugins/expo/templates/expo/booth_stop.html:68
+msgid "You're checked in. Enjoy the booth!"
+msgstr "Du bist eingecheckt. Viel Spaß am Stand!"
+
+#: lma_connect/plugins/expo/templates/expo/booth_stop.html:74
+msgid "Booth details"
+msgstr "Stand-Details"
+
+#: lma_connect/plugins/expo/templates/expo/poster_stop.html:5
+msgid "Poster check-in"
+msgstr "Poster-Check-in"
+
+#: lma_connect/plugins/expo/templates/expo/poster_stop.html:34
+msgid "You gave this poster your star"
+msgstr "Du hast diesem Poster deinen Stern gegeben"
+
+#: lma_connect/plugins/expo/templates/expo/poster_stop.html:36
+msgid "Your vote is final and counts towards the Audience Choice Award."
+msgstr "Deine Stimme ist endgültig und zählt für den Publikumspreis."
+
+#: lma_connect/plugins/expo/templates/expo/poster_stop.html:42
+msgid "Give your star to this poster?"
+msgstr "Diesem Poster deinen Stern geben?"
+
+#: lma_connect/plugins/expo/templates/expo/poster_stop.html:44
+msgid "This cannot be undone."
+msgstr "Das lässt sich nicht rückgängig machen."
+
+#: lma_connect/plugins/expo/templates/expo/poster_stop.html:45
+msgid ""
+"The star is transferred immediately and cannot be changed or taken back "
+"afterwards."
+msgstr ""
+"Der Stern wird sofort übertragen und kann danach nicht mehr geändert oder "
+"zurückgenommen werden."
+
+#: lma_connect/plugins/expo/templates/expo/poster_stop.html:50
+msgid "Yes, give my star"
+msgstr "Ja, Stern vergeben"
+
+#: lma_connect/plugins/expo/templates/expo/poster_stop.html:54
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: lma_connect/plugins/expo/templates/expo/poster_stop.html:60
+msgid "Is this your favourite poster?"
+msgstr "Ist das dein Lieblings-Poster?"
+
+#: lma_connect/plugins/expo/templates/expo/poster_stop.html:63
+msgid "A star can only be given once per poster and cannot be taken back."
+msgstr ""
+"Pro Poster kann nur ein Stern vergeben werden, und er lässt sich nicht "
+"zurücknehmen."
+
+#: lma_connect/plugins/expo/templates/expo/poster_stop.html:66
+msgid "Give a star"
+msgstr "Stern vergeben"
+
+#: lma_connect/plugins/expo/templates/expo/poster_stop.html:72
+msgid "All stars given"
+msgstr "Alle Sterne vergeben"
+
+#: lma_connect/plugins/expo/templates/expo/poster_stop.html:74
+#, python-format
+msgid "You have already given away your %(n)s star."
+msgid_plural "You have already given away all %(n)s stars."
+msgstr[0] "Du hast deinen %(n)s Stern bereits vergeben."
+msgstr[1] "Du hast bereits alle %(n)s Sterne vergeben."
+
+#: lma_connect/plugins/expo/templates/expo/poster_stop.html:80
+msgid "Your stars"
+msgstr "Deine Sterne"
+
+#: lma_connect/plugins/expo/templates/expo/poster_stop.html:91
+msgid "Poster details"
+msgstr "Poster-Details"
+
+#: lma_connect/plugins/expo/views.py:45
+#, fuzzy, python-format
+#| msgid "Checked in at a poster"
+msgid "Checked in at %(name)s — points added!"
+msgstr "An einem Poster eingecheckt"
+
+#: lma_connect/plugins/expo/views.py:59
+msgid "Too many wrong answers — please wait a moment and try again."
+msgstr "Zu viele Fehlversuche — bitte kurz warten und erneut probieren."
+
+#: lma_connect/plugins/expo/views.py:71
+msgid "Correct! Bonus points unlocked."
+msgstr "Richtig! Bonuspunkte freigeschaltet."
+
+#: lma_connect/plugins/expo/views.py:75
+msgid "Not quite — give it another go."
+msgstr "Leider nicht richtig — versuch es nochmal."
+
+#: lma_connect/plugins/expo/views.py:103
+#, fuzzy
+#| msgid "Checked in at a poster"
+msgid "Checked in at the poster — points added!"
+msgstr "An einem Poster eingecheckt"
+
+#: lma_connect/plugins/expo/views.py:110
+msgid "Star given — thanks for your vote!"
+msgstr "Stern vergeben — danke für deine Stimme!"
+
+#: lma_connect/plugins/expo/views.py:112
+#, fuzzy, python-format
+#| msgid "You have already given away your %(n)s star."
+#| msgid_plural "You have already given away all %(n)s stars."
+msgid "You have already given all %(n)d of your stars."
+msgstr "Du hast deinen %(n)s Stern bereits vergeben."
+
+#: lma_connect/plugins/feedback/models.py:28
+msgid "e.g. 'Your feedback on the conference'"
+msgstr "z. B. „Feedback zur Konferenz“"
+
+#: lma_connect/plugins/feedback/models.py:30
+#, fuzzy
+#| msgid "Imprint (Markdown)"
+msgid "Introduction (Markdown)"
+msgstr "Impressum (Markdown)"
+
+#: lma_connect/plugins/feedback/models.py:31
+#: lma_connect/plugins/program/models.py:257
+#, fuzzy
+#| msgid "Open text"
+msgid "Opens at"
+msgstr "Freitext"
+
+#: lma_connect/plugins/feedback/models.py:32
+#: lma_connect/plugins/program/models.py:259
+msgid "Closes at"
+msgstr "Schließt"
+
+#: lma_connect/plugins/feedback/models.py:34
+msgid "Allow anonymous responses"
+msgstr "Anonyme Teilnahme erlauben"
+
+#: lma_connect/plugins/feedback/models.py:35
+msgid "When off: login required and answers are attributed to the user"
+msgstr "Wenn aus: Login erforderlich, Antworten dem User zugeordnet"
+
+#: lma_connect/plugins/feedback/models.py:39
+#, fuzzy
+#| msgid "Events"
+msgid "Event survey"
+msgstr "Events"
+
+#: lma_connect/plugins/feedback/models.py:40
+#, fuzzy
+#| msgid "Events"
+msgid "Event surveys"
+msgstr "Events"
+
+#: lma_connect/plugins/feedback/models.py:49
+msgid "Yes / No"
+msgstr "Ja / Nein"
+
+#: lma_connect/plugins/feedback/models.py:50
+msgid "Likert scale 1–5"
+msgstr "Likert-Skala 1–5"
+
+#: lma_connect/plugins/feedback/models.py:51
+#: lma_connect/plugins/program/models.py:246
+msgid "Open text"
+msgstr "Freitext"
+
+#: lma_connect/plugins/feedback/models.py:52
+msgid "Multiple choice"
+msgstr "Multiple Choice"
+
+#: lma_connect/plugins/feedback/models.py:53
+#: lma_connect/plugins/program/models.py:244
+msgid "Single choice"
+msgstr "Einfachauswahl"
+
+#: lma_connect/plugins/feedback/models.py:61
+#, fuzzy
+#| msgid "Open text"
+msgid "Help text"
+msgstr "Freitext"
+
+#: lma_connect/plugins/feedback/models.py:62
+msgid "Optional — e.g. what the scale means"
+msgstr "Optional — z. B. was die Skala bedeutet"
+
+#: lma_connect/plugins/feedback/models.py:64
+#, fuzzy
+#| msgid "required."
+msgid "Required"
+msgstr "erforderlich."
+
+#: lma_connect/plugins/feedback/models.py:68
+#, fuzzy
+#| msgid "Likert min Label"
+msgid "Likert label (min)"
+msgstr "Likert-Min-Label"
+
+#: lma_connect/plugins/feedback/models.py:69
+msgid "e.g. 'too short'"
+msgstr "z. B. „zu kurz“"
+
+#: lma_connect/plugins/feedback/models.py:70
+#, fuzzy
+#| msgid "Likert min Label"
+msgid "Likert label (max)"
+msgstr "Likert-Min-Label"
+
+#: lma_connect/plugins/feedback/models.py:71
+msgid "e.g. 'too long'"
+msgstr "z. B. „zu lang“"
+
+#: lma_connect/plugins/feedback/models.py:74
+#, fuzzy
+#| msgid "Up-voted a question"
+msgid "Survey question"
+msgstr "Frage hochgevotet"
+
+#: lma_connect/plugins/feedback/models.py:75
+#, fuzzy
+#| msgid "Ask & up-vote questions"
+msgid "Survey questions"
+msgstr "Fragen stellen & up-voten"
+
+#: lma_connect/plugins/feedback/models.py:87
+msgid "Text"
+msgstr "Text"
+
+#: lma_connect/plugins/feedback/models.py:88
+msgid "Value"
+msgstr "Wert"
+
+#: lma_connect/plugins/feedback/models.py:89
+#, fuzzy
+#| msgid "Optional — interner Wert (sonst = text)"
+msgid "Optional internal value; defaults to the text"
+msgstr "Optional — interner Wert (sonst = text)"
+
+#: lma_connect/plugins/feedback/models.py:105
+#, fuzzy
+#| msgid "NULL = anonym (sofern allow_anonymous)"
+msgid "NULL = anonymous (when allow_anonymous is on)"
+msgstr "NULL = anonym (sofern allow_anonymous)"
+
+#: lma_connect/plugins/feedback/models.py:109
+#, fuzzy
+#| msgid "Surveys"
+msgid "Survey response"
+msgstr "Umfragen"
+
+#: lma_connect/plugins/feedback/models.py:110
+#, fuzzy
+#| msgid "Surveys"
+msgid "Survey responses"
+msgstr "Umfragen"
+
+#: lma_connect/plugins/feedback/models.py:134
+#, fuzzy
+#| msgid "Yes/No"
+msgid "Yes/No value"
+msgstr "Ja/Nein"
+
+#: lma_connect/plugins/feedback/models.py:136
+#, fuzzy
+#| msgid "Likert scale"
+msgid "Likert value"
+msgstr "Likert-Skala"
+
+#: lma_connect/plugins/feedback/models.py:139
+msgid "Free-text value"
+msgstr "Freitext-Wert"
+
+#: lma_connect/plugins/feedback/templates/feedback/detail.html:6
+#: lma_connect/plugins/feedback/templates/feedback/list.html:26
+#, python-format
+msgid "%(count)s questions"
+msgstr "%(count)s Fragen"
+
+#: lma_connect/plugins/feedback/templates/feedback/detail.html:16
+msgid ""
+"You have already submitted this survey — thanks! You can update your answers "
+"any time."
+msgstr ""
+"Du hast diese Umfrage schon abgesendet — danke! Du kannst deine Antworten "
+"jederzeit ändern."
+
+#: lma_connect/plugins/feedback/templates/feedback/detail.html:35
+msgid "Yes/No"
+msgstr "Ja/Nein"
+
+#: lma_connect/plugins/feedback/templates/feedback/detail.html:37
+msgid "Yes"
+msgstr "Ja"
+
+#: lma_connect/plugins/feedback/templates/feedback/detail.html:39
+msgid "No"
+msgstr "Nein"
+
+#: lma_connect/plugins/feedback/templates/feedback/detail.html:47
+msgid "Likert scale"
+msgstr "Likert-Skala"
+
+#: lma_connect/plugins/feedback/templates/feedback/detail.html:55
+#: lma_connect/plugins/program/templates/program/_poll_card.html:12
+msgid "Your answer …"
+msgstr "Deine Antwort …"
+
+#: lma_connect/plugins/feedback/templates/feedback/detail.html:80
+msgid "Submit feedback"
+msgstr "Feedback absenden"
+
+#: lma_connect/plugins/feedback/templates/feedback/detail.html:85
+#: lma_connect/plugins/program/templates/program/_poll_card.html:45
+#: lma_connect/plugins/program/templates/program/_qa_panel.html:19
+#: lma_connect/plugins/program/templates/program/_rating_card.html:53
+#: templates/base.html:286 templates/registration/login.html:4
+#: templates/registration/login.html:5 templates/registration/login.html:55
+msgid "Sign in"
+msgstr "Anmelden"
+
+#: lma_connect/plugins/feedback/templates/feedback/detail.html:85
+msgid "required (anonymous submission disabled)."
+msgstr "erforderlich (anonymes Absenden deaktiviert)."
+
+#: lma_connect/plugins/feedback/templates/feedback/list.html:4
+#, python-format
+msgid "Feedback — %(name)s"
+msgstr "Feedback — %(name)s"
+
+#: lma_connect/plugins/feedback/templates/feedback/list.html:6
+#, python-format
+msgid "Help us make %(name)s better"
+msgstr "Hilf uns, %(name)s besser zu machen"
+
+#: lma_connect/plugins/feedback/templates/feedback/list.html:13
+msgid "No feedback survey active"
+msgstr "Keine Feedback-Umfrage aktiv"
+
+#: lma_connect/plugins/feedback/templates/feedback/list.html:14
+msgid "The post-event survey will be opened at the end of the conference."
+msgstr ""
+"Die Umfrage nach der Veranstaltung wird zum Ende der Konferenz "
+"freigeschaltet."
+
+#: lma_connect/plugins/feedback/templates/feedback/list.html:27
+msgid "anonymous allowed"
+msgstr "anonym erlaubt"
+
+#: lma_connect/plugins/feedback/views.py:71
+msgid "Sign-in required."
+msgstr "Anmeldung erforderlich."
+
+#: lma_connect/plugins/feedback/views.py:77
+msgid "You have already submitted this survey."
+msgstr "Du hast diese Umfrage bereits abgesendet."
+
+#: lma_connect/plugins/feedback/views.py:85
+msgid "Too many submissions from your network for this survey."
+msgstr "Zu viele Einsendungen aus deinem Netzwerk für diese Umfrage."
+
+#: lma_connect/plugins/feedback/views.py:152
+msgid "Thanks for your feedback!"
+msgstr "Danke für dein Feedback!"
+
+#: lma_connect/plugins/gamification/models.py:21
+msgid "Asked a question"
+msgstr "Frage gestellt"
+
+#: lma_connect/plugins/gamification/models.py:22
+msgid "Up-voted a question"
+msgstr "Frage hochgevotet"
+
+#: lma_connect/plugins/gamification/models.py:23
+msgid "Voted in a live poll"
+msgstr "In einer Live-Umfrage abgestimmt"
+
+#: lma_connect/plugins/gamification/models.py:24
+msgid "Rated a session"
+msgstr "Session bewertet"
+
+#: lma_connect/plugins/gamification/models.py:25
+msgid "Submitted the feedback survey"
+msgstr "Feedback-Umfrage abgesendet"
+
+#: lma_connect/plugins/gamification/models.py:26
+msgid "Checked in at an exhibitor booth"
+msgstr "An einem Ausstellerstand eingecheckt"
+
+#: lma_connect/plugins/gamification/models.py:27
+msgid "Answered a booth quiz correctly"
+msgstr "Ein Stand-Quiz richtig beantwortet"
+
+#: lma_connect/plugins/gamification/models.py:28
+msgid "Checked in at a poster"
+msgstr "An einem Poster eingecheckt"
+
+#: lma_connect/plugins/gamification/models.py:32
+msgid "Rated a poster"
+msgstr "Poster bewertet"
+
+#: lma_connect/plugins/gamification/models.py:33
+msgid "Gave a star to an abstract"
+msgstr "Stern an ein Abstract vergeben"
+
+#: lma_connect/plugins/gamification/models.py:59
+msgid "Action"
+msgstr "Aktion"
+
+#: lma_connect/plugins/gamification/models.py:60
+msgid "Points"
+msgstr "Punkte"
+
+#: lma_connect/plugins/gamification/models.py:63
+msgid "Dedup key"
+msgstr "Dedup-Key"
+
+#: lma_connect/plugins/gamification/models.py:66
+msgid "Score entry"
+msgstr "Score-Eintrag"
+
+#: lma_connect/plugins/gamification/models.py:67
+msgid "Score entries"
+msgstr "Punkte-Einträge"
+
+#: lma_connect/plugins/gamification/models.py:85
+msgid "Key"
+msgstr "Schlüssel"
+
+#: lma_connect/plugins/gamification/models.py:86
+msgid "Must match a rule in services.ACHIEVEMENT_RULES"
+msgstr "Muss zu einer Regel in services.ACHIEVEMENT_RULES passen"
+
+#: lma_connect/plugins/gamification/models.py:89
+msgid "Tabler icon class"
+msgstr "Tabler-Icon-Klasse"
+
+#: lma_connect/plugins/gamification/models.py:90
+msgid "e.g. 'ti-trophy', 'ti-message-circle'"
+msgstr "z. B. 'ti-trophy', 'ti-message-circle'"
+
+#: lma_connect/plugins/gamification/models.py:107
+msgid "Awarded at"
+msgstr "Verliehen am"
+
+#: lma_connect/plugins/gamification/models.py:110
+msgid "User achievement"
+msgstr "Nutzer-Achievement"
+
+#: lma_connect/plugins/gamification/models.py:111
+msgid "User achievements"
+msgstr "Nutzer:innen-Erfolge"
+
+#: lma_connect/plugins/gamification/templates/gamification/leaderboard.html:4
+#, python-format
+msgid "Leaderboard — %(name)s"
+msgstr "Rangliste — %(name)s"
+
+#: lma_connect/plugins/gamification/templates/gamification/leaderboard.html:6
+msgid "Most active participants"
+msgstr "Aktivste Teilnehmer:innen"
+
+#: lma_connect/plugins/gamification/templates/gamification/leaderboard.html:13
+msgid "No scores yet"
+msgstr "Noch keine Bewertungen"
+
+#: lma_connect/plugins/gamification/templates/gamification/leaderboard.html:14
+msgid "Ask questions, vote in polls, rate sessions — points appear here."
+msgstr ""
+"Stelle Fragen, stimme in Umfragen ab, bewerte Sessions — Punkte erscheinen "
+"hier."
+
+#: lma_connect/plugins/gamification/templates/gamification/leaderboard.html:19
+msgid ""
+"Points: question +10 · up-vote +1 · poll vote +5 · session rating +5 · "
+"feedback survey +25"
+msgstr ""
+"Punkte: Frage +10 · Up-Vote +1 · Umfrage-Stimme +5 · Session-Bewertung +5 · "
+"Feedback-Umfrage +25"
+
+#: lma_connect/plugins/gamification/templates/gamification/leaderboard.html:37
+msgid "you"
+msgstr "du"
+
+#: lma_connect/plugins/gamification/templates/gamification/leaderboard.html:42
+msgid "pts"
+msgstr "Pkt."
+
+#: lma_connect/plugins/gamification/templates/gamification/leaderboard.html:51
+msgid "My profile & badges"
+msgstr "Mein Profil & Badges"
+
+#: lma_connect/plugins/people/models.py:20
+msgid "Delegate"
+msgstr "Delegierte:r"
+
+#: lma_connect/plugins/people/models.py:21
+#: lma_connect/plugins/people/models.py:105
+#: lma_connect/plugins/program/models.py:105
+msgid "Speaker"
+msgstr "Sprecher:in"
+
+#: lma_connect/plugins/people/models.py:22
+msgid "Organizer"
+msgstr "Organisator:in"
+
+#: lma_connect/plugins/people/models.py:23
+msgid "Committee / Reviewer"
+msgstr "Komitee / Reviewer"
+
+#: lma_connect/plugins/people/models.py:25
+msgid "Staff"
+msgstr "Personal"
+
+#: lma_connect/plugins/people/models.py:27
+msgid "Student"
+msgstr "Student:in"
+
+#: lma_connect/plugins/people/models.py:42
+msgid ""
+"Type of participant — drives badge layout, list filters and access rules"
+msgstr ""
+"Art der Teilnahme — steuert Badge-Layout, Listenfilter und "
+"ZugriffsregelnTeilnehmenden-Typ — steuert Badge-Layout, Listenfilter und "
+"Zugriffsregeln"
+
+#: lma_connect/plugins/people/models.py:46
+msgid "Tick when the participant has booked/paid the social evening"
+msgstr ""
+"Ankreuzen, wenn die Person den Social-Abend gebucht/bezahlt hatAnkreuzen, "
+"wenn der:die Teilnehmer:in den Social-Abend gebucht/bezahlt hat"
+
+#: lma_connect/plugins/people/models.py:49
+msgid "Bio (Markdown)"
+msgstr "Bio (Markdown)"
+
+#: lma_connect/plugins/people/models.py:50
+#: lma_connect/plugins/sponsors/models.py:204
+msgid "Photo"
+msgstr "Foto"
+
+#: lma_connect/plugins/people/models.py:52
+msgid "Position"
+msgstr "Position"
+
+#: lma_connect/plugins/people/models.py:53
+#, fuzzy
+#| msgid "e.g. 'Department of Laboratory Medicine'"
+msgid "e.g. 'Head of Laboratory Medicine'"
+msgstr "z. B. „Institut für Laboratoriumsmedizin“"
+
+#: lma_connect/plugins/people/models.py:59
+msgid "CV"
+msgstr "Lebenslauf"
+
+#: lma_connect/plugins/people/models.py:60
+msgid "Curriculum vitae as a PDF"
+msgstr "Lebenslauf als PDF"
+
+#: lma_connect/plugins/people/models.py:62
+#, fuzzy
+#| msgid "Pronomen"
+msgid "Pronouns"
+msgstr "Pronomen"
+
+#: lma_connect/plugins/people/models.py:63
+msgid "e.g. they/them or she/her — empty means nothing is shown"
+msgstr "z. B. er/ihm oder she/her — leer = nicht angezeigt"
+
+#: lma_connect/plugins/people/models.py:67
+#: lma_connect/plugins/sponsors/models.py:203
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: lma_connect/plugins/people/models.py:69
+msgid "Format: 0000-0000-0000-0000"
+msgstr "Format: 0000-0000-0000-0000"
+
+#: lma_connect/plugins/people/models.py:75
+#, fuzzy
+#| msgid "Profil öffentlich"
+msgid "Profile public"
+msgstr "Profil öffentlich"
+
+#: lma_connect/plugins/people/models.py:76
+msgid "Only set to true once the matching consent has been recorded"
+msgstr "Erst nach dokumentierter Einwilligung auf wahr setzen"
+
+#: lma_connect/plugins/people/models.py:80
+#, fuzzy
+#| msgid "Personenprofile"
+msgid "Person profile"
+msgstr "Personenprofile"
+
+#: lma_connect/plugins/people/models.py:81
+#, fuzzy
+#| msgid "Personenprofile"
+msgid "Person profiles"
+msgstr "Personenprofile"
+
+#: lma_connect/plugins/people/models.py:97
+msgid "Topic tags"
+msgstr "Themen-Tags"
+
+#: lma_connect/plugins/people/models.py:98
+#, fuzzy
+#| msgid "Komma-separiert, z. B. Präanalytik, KI, Hämatologie"
+msgid "Comma separated, e.g. 'pre-analytics, AI, haematology'"
+msgstr "Komma-separiert, z. B. Präanalytik, KI, Hämatologie"
+
+#: lma_connect/plugins/people/models.py:100
+#, fuzzy
+#| msgid "Short description"
+msgid "Speaker intro"
+msgstr "Speaker-Vorstellung"
+
+#: lma_connect/plugins/people/models.py:101
+msgid "One-line affiliation/position shown on the session cards, e.g. 'Head of Laboratory Medicine, University Hospital Salzburg'"
+msgstr "Einzeilige Affiliation/Position für die Session-Cards, z. B. 'Head of Laboratory Medicine, University Hospital Salzburg'"
+
+#: lma_connect/plugins/people/models.py:102
+#: lma_connect/plugins/people/templates/people/speaker_detail.html:25
+msgid "Keynote speaker"
+msgstr "Keynote-Speaker"
+
+#: lma_connect/plugins/people/models.py:106
+#: lma_connect/plugins/people/templates/people/speaker_list.html:5
+#: lma_connect/plugins/program/templates/program/detail.html:42
+msgid "Speakers"
+msgstr "Speaker"
+
+#: lma_connect/plugins/people/templates/people/speaker_detail.html:64
+msgid "CV (PDF)"
+msgstr "CV (PDF)"
+
+#: lma_connect/plugins/people/templates/people/speaker_detail.html:83
+msgid "Biography"
+msgstr "Biografie"
+
+#: lma_connect/plugins/people/templates/people/speaker_detail.html:89
+msgid "Talks at this event"
+msgstr "Vorträge bei dieser Veranstaltung"
+
+#: lma_connect/plugins/people/templates/people/speaker_list.html:4
+#, python-format
+msgid "Speakers — %(name)s"
+msgstr "Speaker — %(name)s"
+
+#: lma_connect/plugins/people/templates/people/speaker_list.html:6
+#, python-format
+msgid "Speakers at %(name)s"
+msgstr "Speaker bei %(name)s"
+
+#: lma_connect/plugins/people/templates/people/speaker_list.html:13
+msgid "No speakers published yet"
+msgstr "Noch keine Speaker veröffentlicht"
+
+#: lma_connect/plugins/program/models.py:21
+#, fuzzy
+#| msgid "Hex inkl. # — Akzent auf Session-Cards"
+msgid "Hex including the '#' — accent on the session cards"
+msgstr "Hex inkl. # — Akzent auf Session-Cards"
+
+#: lma_connect/plugins/program/models.py:26
+msgid "Track"
+msgstr "Track"
+
+#: lma_connect/plugins/program/models.py:27
+#: lma_connect/plugins/program/templates/program/list.html:51
+msgid "Tracks"
+msgstr "Tracks"
+
+#: lma_connect/plugins/program/models.py:38
+msgid "Panel discussion"
+msgstr "Podiumsdiskussion"
+
+#: lma_connect/plugins/program/models.py:39
+#: lma_connect/plugins/program/templates/program/detail.html:21
+#: lma_connect/plugins/program/templates/program/list.html:76
+msgid "Workshop"
+msgstr "Workshop"
+
+#: lma_connect/plugins/program/models.py:40
+msgid "Symposium"
+msgstr "Symposium"
+
+#: lma_connect/plugins/program/models.py:41
+msgid "Break / Catering"
+msgstr "Pause / Catering"
+
+#: lma_connect/plugins/program/models.py:42
+msgid "Poster session"
+msgstr "Poster-Session"
+
+#: lma_connect/plugins/program/models.py:47
+#: lma_connect/plugins/program/templates/program/_chair_screen.html:25
+msgid "Standby"
+msgstr "Standby"
+
+#: lma_connect/plugins/program/models.py:48
+#: lma_connect/plugins/program/templates/program/_chair_screen.html:32
+msgid "Q&A"
+msgstr "Q&A"
+
+#: lma_connect/plugins/program/models.py:49
+msgid "Umfrage-Ergebnisse"
+msgstr "Umfrage-Ergebnisse"
+
+#: lma_connect/plugins/program/models.py:63
+#, fuzzy
+#| msgid "Imprint (Markdown)"
+msgid "Summary (Markdown)"
+msgstr "Impressum (Markdown)"
+
+#: lma_connect/plugins/program/models.py:67
+#, fuzzy
+#| msgid "Starred at"
+msgid "Starts at"
+msgstr "Markiert am"
+
+#: lma_connect/plugins/program/models.py:68
+msgid "Ends at"
+msgstr "Ende"
+
+#: lma_connect/plugins/program/models.py:70
+#, fuzzy
+#| msgid "Live-Q&A aktiv"
+msgid "Live Q&A enabled"
+msgstr "Live-Q&A aktiv"
+
+#: lma_connect/plugins/program/models.py:71
+msgid "Attendees may submit questions during the session"
+msgstr "Teilnehmer dürfen während der Session Fragen einreichen"
+
+#: lma_connect/plugins/program/models.py:72
+msgid "Q&A pre-moderated"
+msgstr "Q&A vormoderiert"
+
+#: lma_connect/plugins/program/models.py:73
+msgid ""
+"Off (default): questions appear immediately, everyone can up-vote, and the "
+"chair stars the ones to be asked. On: questions stay hidden until the chair "
+"approves them — use for sensitive sessions."
+msgstr ""
+"Aus (Standard): Fragen erscheinen sofort, alle können hochstimmen, und der "
+"Chair markiert die, die gestellt werden. An: Fragen bleiben verborgen, bis "
+"der Chair sie freigibt — für heikle Sessions.Aus (Standard): Fragen "
+"erscheinen sofort, alle können hochvoten, und der Chair markiert die zu "
+"stellenden mit einem Stern. An: Fragen bleiben verborgen, bis der Chair sie "
+"freigibt — für sensible Sessions."
+
+#: lma_connect/plugins/program/models.py:77
+#, fuzzy
+#| msgid "Rating scale:"
+msgid "Rating enabled"
+msgstr "Bewertungs-Skala:"
+
+#: lma_connect/plugins/program/models.py:83
+#: lma_connect/plugins/program/templates/program/_chair_screen.html:19
+msgid "Screen source"
+msgstr "Screen-Quelle"
+
+#: lma_connect/plugins/program/models.py:87
+msgid "Projected poll"
+msgstr "Projizierte Umfrage"
+
+#: lma_connect/plugins/program/models.py:90
+#: lma_connect/plugins/program/templates/program/chair_panel.html:9
+msgid "Session"
+msgstr "Session"
+
+#: lma_connect/plugins/program/models.py:91
+#: lma_connect/plugins/qr/templates/qr/print.html:44
+msgid "Sessions"
+msgstr "Sessions"
+
+#: lma_connect/plugins/program/models.py:106
+msgid "Co-author"
+msgstr "Co-Autor:in"
+
+#: lma_connect/plugins/program/models.py:107
+msgid "Discussant"
+msgstr "Diskutant:in"
+
+#: lma_connect/plugins/program/models.py:120
+msgid "Session-Speaker"
+msgstr "Session-Speaker"
+
+#: lma_connect/plugins/program/models.py:121
+msgid "Session-Speakers"
+msgstr "Session-Speaker"
+
+#: lma_connect/plugins/program/models.py:143
+msgid "Session chair"
+msgstr "Session-Chair"
+
+#: lma_connect/plugins/program/models.py:162
+msgid "Pseudonym — empty when posting under the real name"
+msgstr "Pseudonym — leer bei Klarnamen-Posting"
+
+#: lma_connect/plugins/program/models.py:166
+msgid "Approved"
+msgstr "Freigegeben"
+
+#: lma_connect/plugins/program/models.py:167
+msgid "Required in moderated sessions; set automatically otherwise"
+msgstr "Bei moderierten Sessions Pflicht; sonst automatisch gesetzt"
+
+#: lma_connect/plugins/program/models.py:169
+#: lma_connect/plugins/program/templates/program/_chair_question_list.html:45
+msgid "Answered"
+msgstr "Beantwortet"
+
+#: lma_connect/plugins/program/models.py:170
+#, fuzzy
+#| msgid "Answered"
+msgid "Answered at"
+msgstr "Beantwortet"
+
+#: lma_connect/plugins/program/models.py:171
+msgid "Times flagged"
+msgstr "Gemeldet"
+
+#: lma_connect/plugins/program/models.py:174
+msgid "Starred by chair"
+msgstr "Von Chair markiert"
+
+#: lma_connect/plugins/program/models.py:175
+msgid "Chair marked this to actually be asked"
+msgstr "Vom Chair zum tatsächlichen Stellen markiert"
+
+#: lma_connect/plugins/program/models.py:176
+msgid "Starred at"
+msgstr "Markiert am"
+
+#: lma_connect/plugins/program/models.py:179
+msgid "Set when the chair prepared this question themselves"
+msgstr "Gesetzt, wenn der:die Chair diese Frage selbst vorbereitet hat"
+
+#: lma_connect/plugins/program/models.py:182
+#, fuzzy
+#| msgid "Asked a question"
+msgid "Live Q&A question"
+msgstr "Frage gestellt"
+
+#: lma_connect/plugins/program/models.py:183
+#, fuzzy
+#| msgid "Questions"
+msgid "Live Q&A questions"
+msgstr "Fragen"
+
+#: lma_connect/plugins/program/models.py:225
+#, fuzzy
+#| msgid "Kommentar (Markdown, optional)"
+msgid "Comment (Markdown, optional)"
+msgstr "Kommentar (Markdown, optional)"
+
+#: lma_connect/plugins/program/models.py:226
+#, fuzzy
+#| msgid "anonymous allowed"
+msgid "Show anonymously"
+msgstr "anonym erlaubt"
+
+#: lma_connect/plugins/program/models.py:227
+msgid "Protects the raw responses; the aggregate stays visible"
+msgstr "Schützt die Rohdaten; die Aggregation bleibt sichtbar"
+
+#: lma_connect/plugins/program/models.py:231
+#, fuzzy
+#| msgid "Session chair"
+msgid "Session rating"
+msgstr "Session-Chair"
+
+#: lma_connect/plugins/program/models.py:232
+#, fuzzy
+#| msgid "Session chairs"
+msgid "Session ratings"
+msgstr "Session-Chairs"
+
+#: lma_connect/plugins/program/models.py:245
+msgid "Multi choice"
+msgstr "Mehrfachauswahl"
+
+#: lma_connect/plugins/program/models.py:258
+msgid "Empty = activated by hand"
+msgstr "Leer = manuelle Aktivierung"
+
+#: lma_connect/plugins/program/models.py:262
+#, fuzzy
+#| msgid "How to use the app"
+msgid "Show results in the app"
+msgstr "So benutzt du die App"
+
+#: lma_connect/plugins/program/models.py:263
+msgid ""
+"Off = attendees only vote and see no results on their own device; the chair "
+"projects the outcome from the projection view. Switch on to release the "
+"results into the app as well."
+msgstr ""
+"Aus = Teilnehmer stimmen nur ab und sehen auf dem eigenen Gerät keine "
+"Ergebnisse; der Chair projiziert die Auswertung. Einschalten, um die "
+"Ergebnisse auch in der App freizugeben."
+
+#: lma_connect/plugins/program/models.py:268
+#: lma_connect/plugins/program/templates/program/detail.html:89
+#: lma_connect/plugins/program/templates/program/poll_project.html:8
+#: lma_connect/plugins/qr/views.py:106
+msgid "Live poll"
+msgstr "Live-Umfrage"
+
+#: lma_connect/plugins/program/models.py:278
+#, fuzzy
+#| msgid "Answered"
+msgid "Answer"
+msgstr "Beantwortet"
+
+#: lma_connect/plugins/program/models.py:296
+#, fuzzy
+#| msgid "Freitext-Antwort"
+msgid "Free-text answer"
+msgstr "Freitext-Antwort"
+
+#: lma_connect/plugins/program/models.py:299
+#, fuzzy
+#| msgid "Live polls"
+msgid "Live poll response"
+msgstr "Live-Polls"
+
+#: lma_connect/plugins/program/models.py:300
+#, fuzzy
+#| msgid "Live polls"
+msgid "Live poll responses"
+msgstr "Live-Polls"
+
+#: lma_connect/plugins/program/templates/program/_chair_question_list.html:5
+#, python-format
+msgid "⭐ %(starred_count)s starred"
+msgstr "⭐ %(starred_count)s markiert"
+
+#: lma_connect/plugins/program/templates/program/_chair_question_list.html:6
+#, python-format
+msgid "%(approved_count)s visible"
+msgstr "%(approved_count)s sichtbar"
+
+#: lma_connect/plugins/program/templates/program/_chair_question_list.html:7
+#, python-format
+msgid "%(total_count)s total"
+msgstr "%(total_count)s gesamt"
+
+#: lma_connect/plugins/program/templates/program/_chair_question_list.html:11
+msgid "No questions yet."
+msgstr "Noch keine Fragen."
+
+#: lma_connect/plugins/program/templates/program/_chair_question_list.html:24
+msgid "hidden"
+msgstr "ausgeblendet"
+
+#: lma_connect/plugins/program/templates/program/_chair_question_list.html:25
+#: lma_connect/plugins/program/templates/program/_qa_panel.html:33
+msgid "answered"
+msgstr "beantwortet"
+
+#: lma_connect/plugins/program/templates/program/_chair_question_list.html:35
+msgid "Starred"
+msgstr "Markiert"
+
+#: lma_connect/plugins/program/templates/program/_chair_question_list.html:35
+msgid "Star"
+msgstr "Stern"
+
+#: lma_connect/plugins/program/templates/program/_chair_question_list.html:40
+msgid "Hide"
+msgstr "Ausblenden"
+
+#: lma_connect/plugins/program/templates/program/_chair_question_list.html:40
+msgid "Show"
+msgstr "Anzeigen"
+
+#: lma_connect/plugins/program/templates/program/_chair_question_list.html:45
+msgid "Mark answered"
+msgstr "Als beantwortet markieren"
+
+#: lma_connect/plugins/program/templates/program/_chair_question_list.html:51
+msgid "Delete this prepared question?"
+msgstr "Diese vorbereitete Frage löschen?"
+
+#: lma_connect/plugins/program/templates/program/_chair_screen.html:7
+#: lma_connect/plugins/program/templates/program/screen.html:8
+msgid "Room screen"
+msgstr "Raum-Bildschirm"
+
+#: lma_connect/plugins/program/templates/program/_chair_screen.html:10
+msgid "Open beamer"
+msgstr "Beamer öffnen"
+
+#: lma_connect/plugins/program/templates/program/_chair_screen.html:14
+#, python-format
+msgid ""
+"Open the beamer view once on the projector. Switch what it shows here —\n"
+"        it updates within ~3&nbsp;s. Currently projected: "
+"<strong>%(current_screen_label)s</strong>."
+msgstr ""
+"Öffne die Beamer-Ansicht einmal am Projektor. Was sie zeigt, schaltest du "
+"hier um —\n"
+"        es aktualisiert sich innerhalb von ~3&nbsp;s. Aktuell projiziert: "
+"<strong>%(current_screen_label)s</strong>."
+
+#: lma_connect/plugins/program/templates/program/_chair_screen.html:40
+msgid ""
+"Attendees only see results once you project them. Start/stop opens or closes "
+"voting."
+msgstr ""
+"Teilnehmer:innen sehen die Ergebnisse erst, wenn du sie projizierst. Start/"
+"Stopp öffnet oder schließt die Abstimmung."
+
+#: lma_connect/plugins/program/templates/program/_chair_screen.html:49
+msgid "voting open"
+msgstr "Abstimmung offen"
+
+#: lma_connect/plugins/program/templates/program/_chair_screen.html:49
+msgid "closed"
+msgstr "geschlossen"
+
+#: lma_connect/plugins/program/templates/program/_chair_screen.html:51
+msgid "on screen"
+msgstr "auf dem Screen"
+
+#: lma_connect/plugins/program/templates/program/_chair_screen.html:59
+msgid "Stop"
+msgstr "Stopp"
+
+#: lma_connect/plugins/program/templates/program/_chair_screen.html:59
+msgid "Start"
+msgstr "Start"
+
+#: lma_connect/plugins/program/templates/program/_chair_screen.html:65
+msgid "Take off the screen"
+msgstr "Vom Screen nehmen"
+
+#: lma_connect/plugins/program/templates/program/_chair_screen.html:69
+msgid "On screen"
+msgstr "Auf dem Screen"
+
+#: lma_connect/plugins/program/templates/program/_chair_screen.html:77
+msgid "Put on the Screen"
+msgstr "Auf den Screen bringen"
+
+#: lma_connect/plugins/program/templates/program/_chair_screen.html:87
+msgid "No polls for this session yet — create them in the"
+msgstr "Noch keine Umfragen für diese Session — erstelle sie im"
+
+#: lma_connect/plugins/program/templates/program/_chair_screen.html:88
+msgid "admin"
+msgstr "Admin"
+
+#: lma_connect/plugins/program/templates/program/_poll_card.html:13
+msgid "Update"
+msgstr "Aktualisieren"
+
+#: lma_connect/plugins/program/templates/program/_poll_card.html:13
+msgid "Submit"
+msgstr "Absenden"
+
+#: lma_connect/plugins/program/templates/program/_poll_card.html:27
+msgid "Change vote"
+msgstr "Stimme ändern"
+
+#: lma_connect/plugins/program/templates/program/_poll_card.html:27
+#: lma_connect/plugins/program/templates/program/_poll_card.html:41
+msgid "Vote"
+msgstr "Abstimmen"
+
+#: lma_connect/plugins/program/templates/program/_poll_card.html:41
+msgid "Update selection"
+msgstr "Auswahl aktualisieren"
+
+#: lma_connect/plugins/program/templates/program/_poll_card.html:45
+msgid "to take part."
+msgstr "um teilzunehmen."
+
+#: lma_connect/plugins/program/templates/program/_poll_card.html:51
+#, python-format
+msgid "%(total)s vote"
+msgid_plural "%(total)s votes"
+msgstr[0] "%(total)s Stimme"
+msgstr[1] "%(total)s Stimmen"
+
+#: lma_connect/plugins/program/templates/program/_poll_card.html:66
+#, python-format
+msgid "Text answers (%(n)s)"
+msgstr "Textantworten (%(n)s)"
+
+#: lma_connect/plugins/program/templates/program/_poll_card.html:72
+msgid "Results are shown on the room screen by the chair."
+msgstr "Die Ergebnisse werden vom Chair auf dem Raum-Screen gezeigt."
+
+#: lma_connect/plugins/program/templates/program/_poll_project_results.html:12
+msgid "Waiting for the first answer …"
+msgstr "Warte auf die erste Antwort …"
+
+#: lma_connect/plugins/program/templates/program/_poll_project_results.html:28
+msgid "No votes yet — waiting for the audience …"
+msgstr "Noch keine Stimmen — warten auf das Publikum …"
+
+#: lma_connect/plugins/program/templates/program/_poll_project_results.html:32
+msgid "vote"
+msgid_plural "votes"
+msgstr[0] "Stimme"
+msgstr[1] "Stimmen"
+
+#: lma_connect/plugins/program/templates/program/_qa_panel.html:11
+msgid "Your question for the panel discussion …"
+msgstr "Deine Frage für die Panel-Diskussion …"
+
+#: lma_connect/plugins/program/templates/program/_qa_panel.html:13
+msgid "Moderated — needs approval before showing"
+msgstr "Moderiert — muss vor der Anzeige freigegeben werden"
+
+#: lma_connect/plugins/program/templates/program/_qa_panel.html:13
+msgid "Visible immediately"
+msgstr "Sofort sichtbar"
+
+#: lma_connect/plugins/program/templates/program/_qa_panel.html:14
+msgid "Send"
+msgstr "Senden"
+
+#: lma_connect/plugins/program/templates/program/_qa_panel.html:19
+msgid "required to ask a question."
+msgstr "erforderlich, um eine Frage zu stellen."
+
+#: lma_connect/plugins/program/templates/program/_qa_panel.html:30
+msgid "will be asked"
+msgstr "wird gefragt"
+
+#: lma_connect/plugins/program/templates/program/_qa_panel.html:42
+msgid "Upvote"
+msgstr "Hochvoten"
+
+#: lma_connect/plugins/program/templates/program/_qa_panel.html:46
+msgid "Upvote (sign in)"
+msgstr "Hochstimmen (anmelden)"
+
+#: lma_connect/plugins/program/templates/program/_qa_panel.html:55
+msgid "No questions yet — be the first to ask."
+msgstr "Noch keine Fragen — stell die erste."
+
+#: lma_connect/plugins/program/templates/program/_rating_card.html:5
+msgid "How was this session?"
+msgstr "Wie war diese Session?"
+
+#: lma_connect/plugins/program/templates/program/_rating_card.html:7
+#, python-format
+msgid "%(n)s rating"
+msgid_plural "%(n)s ratings"
+msgstr[0] "%(n)s Bewertung"
+msgstr[1] "%(n)s Bewertungen"
+
+#: lma_connect/plugins/program/templates/program/_rating_card.html:28
+#, python-format
+msgid "%(n)s stars"
+msgstr "%(n)s Sterne"
+
+#: lma_connect/plugins/program/templates/program/_rating_card.html:44
+msgid "Optional comment …"
+msgstr "Optionaler Kommentar …"
+
+#: lma_connect/plugins/program/templates/program/_rating_card.html:47
+msgid "Save comment"
+msgstr "Kommentar speichern"
+
+#: lma_connect/plugins/program/templates/program/_rating_card.html:53
+msgid "required."
+msgstr "erforderlich."
+
+#: lma_connect/plugins/program/templates/program/_screen_content.html:13
+msgid "Questions"
+msgstr "Fragen"
+
+#: lma_connect/plugins/program/templates/program/_screen_content.html:21
+msgid "No questions yet — ask away!"
+msgstr "Noch keine Fragen — leg los!"
+
+#: lma_connect/plugins/program/templates/program/_screen_content.html:30
+msgid "The session will continue shortly."
+msgstr "Die Session geht gleich weiter."
+
+#: lma_connect/plugins/program/templates/program/chair_panel.html:5
+msgid "Chair view"
+msgstr "Chair-Ansicht"
+
+#: lma_connect/plugins/program/templates/program/chair_panel.html:12
+msgid "Q&A moderation"
+msgstr "Q&A-Moderation"
+
+#: lma_connect/plugins/program/templates/program/chair_panel.html:15
+msgid ""
+"Attendees post questions and up-vote each other's — the list below is sorted "
+"by up-votes"
+msgstr ""
+"Teilnehmende stellen Fragen und voten die der anderen hoch — die Liste unten "
+"ist nach Up-Votes sortiert"
+
+#: lma_connect/plugins/program/templates/program/chair_panel.html:16
+msgid "new questions appear immediately"
+msgstr "neue Fragen erscheinen sofort"
+
+#: lma_connect/plugins/program/templates/program/chair_panel.html:16
+msgid "questions stay hidden until you \"Show\" them"
+msgstr "Fragen bleiben verborgen, bis du sie „einblendest\""
+
+#: lma_connect/plugins/program/templates/program/chair_panel.html:17
+msgid ""
+"⭐ Star the ones to be asked — starred questions get a badge and rise to the "
+"top of the public list."
+msgstr ""
+"⭐ Markiere die zu stellenden mit einem Stern — markierte Fragen bekommen "
+"ein Badge und steigen an die Spitze der öffentlichen Liste."
+
+#: lma_connect/plugins/program/templates/program/chair_panel.html:18
+msgid "You can also add your own prepared questions below."
+msgstr "Du kannst unten auch eigene vorbereitete Fragen hinzufügen."
+
+#: lma_connect/plugins/program/templates/program/chair_panel.html:27
+msgid "Prepare your own question"
+msgstr "Bereite deine eigene Frage vor"
+
+#: lma_connect/plugins/program/templates/program/chair_panel.html:32
+msgid "A question you want to put to the panel …"
+msgstr "Eine Frage, die du dem Panel stellen möchtest …"
+
+#: lma_connect/plugins/program/templates/program/chair_panel.html:33
+msgid "Add (starred)"
+msgstr "Hinzufügen (markiert)"
+
+#: lma_connect/plugins/program/templates/program/detail.html:12
+msgid "Chair view (Q&A)"
+msgstr "Chair-Ansicht (Q&A)"
+
+#: lma_connect/plugins/program/templates/program/detail.html:20
+#: lma_connect/plugins/program/templates/program/list.html:75
+msgid "Panel"
+msgstr "Panel"
+
+#: lma_connect/plugins/program/templates/program/detail.html:22
+#: lma_connect/plugins/program/templates/program/list.html:77
+msgid "Lunch"
+msgstr "Mittagessen"
+
+#: lma_connect/plugins/program/templates/program/detail.html:22
+#: lma_connect/plugins/program/templates/program/list.html:77
+msgid "Break"
+msgstr "Pause"
+
+#: lma_connect/plugins/program/templates/program/detail.html:32
+msgid "Chair:"
+msgid_plural "Chairs:"
+msgstr[0] "Chair:"
+msgstr[1] "Chairs:"
+
+#: lma_connect/plugins/program/templates/program/detail.html:82
+msgid "Summary"
+msgstr "Zusammenfassung"
+
+#: lma_connect/plugins/program/templates/program/detail.html:97
+msgid "Questions for the panel"
+msgstr "Fragen ans Panel"
+
+#: lma_connect/plugins/program/templates/program/list.html:6
+msgid "sessions"
+msgstr "Sessions"
+
+#: lma_connect/plugins/program/templates/program/list.html:6
+msgid "tracks"
+msgstr "Tracks"
+
+#: lma_connect/plugins/program/templates/program/list.html:40
+msgid "Where our speakers come from"
+msgstr "Woher unsere Sprecher kommen"
+
+#: lma_connect/plugins/program/templates/program/list.html:45
+msgid "No program yet"
+msgstr "Noch kein Programm"
+
+#: lma_connect/plugins/program/templates/program/list.html:46
+msgid "Sessions are added in the admin and published from there."
+msgstr "Sessions werden im Admin angelegt und von dort veröffentlicht."
+
+#: lma_connect/plugins/program/templates/program/poll_project.html:19
+#: lma_connect/plugins/program/templates/program/screen.html:19
+msgid "LIVE"
+msgstr "LIVE"
+
+#: lma_connect/plugins/program/views.py:191
+msgid "Question must not be empty"
+msgstr "Frage darf nicht leer sein"
+
+#: lma_connect/plugins/program/views.py:197
+msgid "Too many questions in a short time — please wait a moment."
+msgstr "Zu viele Fragen in kurzer Zeit — bitte kurz warten."
+
+#: lma_connect/plugins/program/views.py:436
+msgid "Invalid dimension"
+msgstr "Ungültige Dimension"
+
+#: lma_connect/plugins/program/views.py:440
+#: lma_connect/plugins/program/views.py:442
+msgid "Value must be between 1 and 5"
+msgstr "Wert muss zwischen 1 und 5 liegen"
+
+#: lma_connect/plugins/program/views.py:546
+msgid "Question text required"
+msgstr "Fragetext erforderlich"
+
+#: lma_connect/plugins/program/views.py:593
+msgid "Invalid source"
+msgstr "Ungültige Quelle"
+
+#: lma_connect/plugins/qr/templates/qr/print.html:5
+msgid "QR print"
+msgstr "QR-Druck"
+
+#: lma_connect/plugins/qr/templates/qr/print.html:42
+msgid "QR print:"
+msgstr "QR-Druck:"
+
+#: lma_connect/plugins/qr/templates/qr/print.html:45
+msgid "Polls"
+msgstr "Umfragen"
+
+#: lma_connect/plugins/qr/templates/qr/print.html:46
+msgid "cards"
+msgstr "Karten"
+
+#: lma_connect/plugins/qr/templates/qr/print.html:65
+msgid "No items for"
+msgstr "Keine Einträge für"
+
+#: lma_connect/plugins/qr/views.py:47
+msgid "Missing ?u=<url> parameter"
+msgstr "Fehlender Parameter ?u=<url>"
+
+#: lma_connect/plugins/qr/views.py:83
+#, fuzzy
+#| msgid "not yet redeemed"
+msgid "(not redeemed yet)"
+msgstr "Noch nicht bewertet"
+
+#: lma_connect/plugins/qr/views.py:120
+#, fuzzy
+#| msgid "booth"
+msgid "Expo booth"
+msgstr "Stand"
+
+#: lma_connect/plugins/sponsors/models.py:42
+#, fuzzy
+#| msgid "Hex inkl. # — z. B. Gold = #f59e0b"
+msgid "Hex including the '#' — e.g. gold = #f59e0b"
+msgstr "Hex inkl. # — z. B. Gold = #f59e0b"
+
+#: lma_connect/plugins/sponsors/models.py:43
+#, fuzzy
+#| msgid "Notes (Markdown)"
+msgid "Package contents (Markdown)"
+msgstr "Notizen (Markdown)"
+
+#: lma_connect/plugins/sponsors/models.py:44
+msgid "What the package includes"
+msgstr "Aufzählung, was im Paket enthalten ist"
+
+#: lma_connect/plugins/sponsors/models.py:45
+msgid "Price"
+msgstr "Preis"
+
+#: lma_connect/plugins/sponsors/models.py:47
+msgid "Number of slots"
+msgstr "Anzahl Slots"
+
+#: lma_connect/plugins/sponsors/models.py:48
+msgid "0 = unlimited"
+msgstr "0 = unbegrenzt"
+
+#: lma_connect/plugins/sponsors/models.py:50
+#, fuzzy
+#| msgid "0 = top"
+msgid "0 = topmost"
+msgstr "0 = oben"
+
+#: lma_connect/plugins/sponsors/models.py:53
+#, fuzzy
+#| msgid "Sponsor-Bilder"
+msgid "Sponsor tier"
+msgstr "Sponsor-Bilder"
+
+#: lma_connect/plugins/sponsors/models.py:54
+#, fuzzy
+#| msgid "Sponsors"
+msgid "Sponsor tiers"
+msgstr "Sponsoren"
+
+#: lma_connect/plugins/sponsors/models.py:71
+msgid "Logo"
+msgstr "Logo"
+
+#: lma_connect/plugins/sponsors/models.py:72
+msgid ""
+"Uploaded by the organizers only — see the module docstring on why there is "
+"no self-service form"
+msgstr ""
+"Upload nur durch die Orga — warum es kein Self-Service-Formular gibt, steht "
+"im Modul-Docstring"
+
+#: lma_connect/plugins/sponsors/models.py:77
+#, fuzzy
+#| msgid "Sort by"
+msgid "Short bio"
+msgstr "Sortieren nach"
+
+#: lma_connect/plugins/sponsors/models.py:78
+msgid "One-sentence pitch for the sponsor list"
+msgstr "Ein-Satz-Pitch für die Sponsor-Übersicht"
+
+#: lma_connect/plugins/sponsors/models.py:79
+#, fuzzy
+#| msgid "Short description (EN)"
+msgid "Short bio (EN)"
+msgstr "Kurzbeschreibung (EN)"
+
+#: lma_connect/plugins/sponsors/models.py:80
+msgid "Leave empty and the source text is shown in English too"
+msgstr "Leer lassen = der deutsche Text wird auch englisch gezeigt"
+
+#: lma_connect/plugins/sponsors/models.py:82
+#, fuzzy
+#| msgid "Bio (Markdown)"
+msgid "Full bio (Markdown)"
+msgstr "Bio (Markdown)"
+
+#: lma_connect/plugins/sponsors/models.py:83
+#, fuzzy
+#| msgid "Text — DE (Markdown)"
+msgid "Full bio — EN (Markdown)"
+msgstr "Text — DE (Markdown)"
+
+#: lma_connect/plugins/sponsors/models.py:86
+#, fuzzy
+#| msgid "Contact"
+msgid "Contact email"
+msgstr "Kontakt"
+
+#: lma_connect/plugins/sponsors/models.py:87
+#, fuzzy
+#| msgid "Contacts"
+msgid "Contact person"
+msgstr "Kontakte"
+
+#: lma_connect/plugins/sponsors/models.py:89
+#, fuzzy
+#| msgid "Booth check-in"
+msgid "Booth location"
+msgstr "Stand-Check-in"
+
+#: lma_connect/plugins/sponsors/models.py:90
+#: lma_connect/plugins/sponsors/models.py:92
+#, fuzzy
+#| msgid "z. B. 'Foyer A — Stand B12'"
+msgid "e.g. 'Foyer A — booth B12'"
+msgstr "z. B. „Foyer A — Stand B12“"
+
+#: lma_connect/plugins/sponsors/models.py:91
+#, fuzzy
+#| msgid "Short description (EN)"
+msgid "Booth location (EN)"
+msgstr "Kurzbeschreibung (EN)"
+
+#: lma_connect/plugins/sponsors/models.py:95
+msgid "Floorplan X"
+msgstr "Lageplan X"
+
+#: lma_connect/plugins/sponsors/models.py:97
+#, fuzzy
+#| msgid "0.0 = links, 1.0 = rechts"
+msgid "0.0 = left edge, 1.0 = right edge"
+msgstr "0.0 = links, 1.0 = rechts"
+
+#: lma_connect/plugins/sponsors/models.py:98
+msgid "Floorplan Y"
+msgstr "Floorplan Y"
+
+#: lma_connect/plugins/sponsors/models.py:100
+#, fuzzy
+#| msgid "0.0 = oben, 1.0 = unten"
+msgid "0.0 = top edge, 1.0 = bottom edge"
+msgstr "0.0 = oben, 1.0 = unten"
+
+#: lma_connect/plugins/sponsors/models.py:102
+msgid "Highlights (Markdown)"
+msgstr "Highlights (Markdown)"
+
+#: lma_connect/plugins/sponsors/models.py:103
+msgid ""
+"Bullet points on products and news — given prominence on the detail page"
+msgstr ""
+"Stichpunkte zu Produkten und Neuheiten — wird auf der Detailseite "
+"hervorgehoben"
+
+#: lma_connect/plugins/sponsors/models.py:105
+msgid "Highlights — EN (Markdown)"
+msgstr "Highlights — EN (Markdown)"
+
+#: lma_connect/plugins/sponsors/models.py:107
+#, fuzzy
+#| msgid "No abstracts assigned"
+msgid "Contract signed"
+msgstr "Keine Abstracts zugewiesen"
+
+#: lma_connect/plugins/sponsors/models.py:108
+msgid "Paid"
+msgstr "Bezahlt"
+
+#: lma_connect/plugins/sponsors/models.py:109
+#, fuzzy
+#| msgid "Interne Notizen"
+msgid "Internal notes"
+msgstr "Interne Notizen"
+
+#: lma_connect/plugins/sponsors/models.py:110
+msgid "Never shown publicly"
+msgstr "Nicht öffentlich sichtbar"
+
+#: lma_connect/plugins/sponsors/models.py:112
+msgid "Show publicly"
+msgstr "Öffentlich anzeigen"
+
+#: lma_connect/plugins/sponsors/models.py:118
+msgid "Headline sponsor (home page)"
+msgstr "Hauptsponsor (Startseite)"
+
+#: lma_connect/plugins/sponsors/models.py:119
+msgid ""
+"The logo appears on the welcome screen and in the home page header. Only "
+"takes effect when 'Show publicly' is set and a logo is uploaded."
+msgstr ""
+"Das Logo erscheint auf dem Welcome-Screen und im Kopfbereich der Startseite. "
+"Nur wirksam, wenn „Öffentlich anzeigen“ gesetzt und ein Logo hinterlegt ist."
+
+#: lma_connect/plugins/sponsors/models.py:122
+msgid "Order within the tier"
+msgstr "Reihenfolge innerhalb der Stufe"
+
+#: lma_connect/plugins/sponsors/models.py:125
+#: lma_connect/plugins/sponsors/templates/sponsors/detail.html:9
+msgid "Sponsor"
+msgstr "Sponsor"
+
+#: lma_connect/plugins/sponsors/models.py:126
+#: lma_connect/plugins/sponsors/templates/sponsors/detail.html:16
+msgid "Sponsors"
+msgstr "Sponsoren"
+
+#: lma_connect/plugins/sponsors/models.py:172
+msgid "Image"
+msgstr "Bild"
+
+#: lma_connect/plugins/sponsors/models.py:173
+#, fuzzy
+#| msgid "Lokation"
+msgid "Caption"
+msgstr "Lokation"
+
+#: lma_connect/plugins/sponsors/models.py:174
+msgid "Caption (EN)"
+msgstr "Bildunterschrift (EN)"
+
+#: lma_connect/plugins/sponsors/models.py:178
+#, fuzzy
+#| msgid "Sponsoring"
+msgid "Sponsor image"
+msgstr "Sponsoring"
+
+#: lma_connect/plugins/sponsors/models.py:179
+#, fuzzy
+#| msgid "Sponsoring"
+msgid "Sponsor images"
+msgstr "Sponsoring"
+
+#: lma_connect/plugins/sponsors/models.py:196
+#, fuzzy
+#| msgid "z. B. 'Sales Manager DACH'"
+msgid "e.g. 'Regional Sales Manager'"
+msgstr "z. B. 'Sales Manager DACH'"
+
+#: lma_connect/plugins/sponsors/models.py:197
+#, fuzzy
+#| msgid "Title (EN)"
+msgid "Role (EN)"
+msgstr "Titel (EN)"
+
+#: lma_connect/plugins/sponsors/models.py:198
+msgid "Field of expertise"
+msgstr "Fachgebiet"
+
+#: lma_connect/plugins/sponsors/models.py:199
+msgid "e.g. 'Haematology, point-of-care testing'"
+msgstr "z. B. „Hämatologie, POC-Diagnostik“"
+
+#: lma_connect/plugins/sponsors/models.py:200
+msgid "Field of expertise (EN)"
+msgstr "Fachgebiet (EN)"
+
+#: lma_connect/plugins/sponsors/models.py:208
+#, fuzzy
+#| msgid "Sponsor download"
+msgid "Sponsor contact"
+msgstr "Sponsor-Download"
+
+#: lma_connect/plugins/sponsors/models.py:209
+#, fuzzy
+#| msgid "Sponsor downloads"
+msgid "Sponsor contacts"
+msgstr "Sponsor-Downloads"
+
+#: lma_connect/plugins/sponsors/models.py:227
+#: lma_connect/plugins/sponsors/models.py:269
+msgid "Whitepaper / Study"
+msgstr "Whitepaper / Studie"
+
+#: lma_connect/plugins/sponsors/models.py:228
+msgid "Datasheet"
+msgstr "Datenblatt"
+
+#: lma_connect/plugins/sponsors/models.py:229
+msgid "Brochure"
+msgstr "Broschüre"
+
+#: lma_connect/plugins/sponsors/models.py:230
+msgid "Presentation / Slides"
+msgstr "Präsentation / Folien"
+
+#: lma_connect/plugins/sponsors/models.py:231
+msgid "Manual / User guide"
+msgstr "Handbuch / Anleitung"
+
+#: lma_connect/plugins/sponsors/models.py:237
+msgid "Title (EN)"
+msgstr "Titel (EN)"
+
+#: lma_connect/plugins/sponsors/models.py:238
+#: lma_connect/plugins/sponsors/models.py:279
+msgid "Short description"
+msgstr "Kurzbeschreibung"
+
+#: lma_connect/plugins/sponsors/models.py:239
+#: lma_connect/plugins/sponsors/models.py:280
+msgid "Short description (EN)"
+msgstr "Kurzbeschreibung (EN)"
+
+#: lma_connect/plugins/sponsors/models.py:245
+msgid "Sponsor download"
+msgstr "Sponsor-Download"
+
+#: lma_connect/plugins/sponsors/models.py:246
+msgid "Sponsor downloads"
+msgstr "Sponsor-Downloads"
+
+#: lma_connect/plugins/sponsors/models.py:267
+msgid "Product"
+msgstr "Produkt"
+
+#: lma_connect/plugins/sponsors/models.py:268
+msgid "News"
+msgstr "News"
+
+#: lma_connect/plugins/sponsors/models.py:270
+msgid "Video"
+msgstr "Video"
+
+#: lma_connect/plugins/sponsors/models.py:276
+msgid "Label (EN)"
+msgstr "Label (EN)"
+
+#: lma_connect/plugins/sponsors/templates/sponsors/detail.html:9
+msgid "Exhibitor"
+msgstr "Aussteller"
+
+#: lma_connect/plugins/sponsors/templates/sponsors/detail.html:68
+#, python-format
+msgid "Slide %(n)s"
+msgstr "Folie %(n)s"
+
+#: lma_connect/plugins/sponsors/templates/sponsors/detail.html:81
+msgid "Where to find us"
+msgstr "Wo du uns findest"
+
+#: lma_connect/plugins/sponsors/templates/sponsors/detail.html:86
+#, python-format
+msgid "Floorplan PDF (Booth: %(loc)s)"
+msgstr "Lageplan-PDF (Stand: %(loc)s)"
+
+#: lma_connect/plugins/sponsors/templates/sponsors/detail.html:100
+msgid "Booth marker"
+msgstr "Stand-Markierung"
+
+#: lma_connect/plugins/sponsors/templates/sponsors/detail.html:128
+msgid "Highlights"
+msgstr "Highlights"
+
+#: lma_connect/plugins/sponsors/templates/sponsors/detail.html:136
+msgid "About us"
+msgstr "Über uns"
+
+#: lma_connect/plugins/sponsors/templates/sponsors/detail.html:170
+msgid "Contact"
+msgstr "Kontakt"
+
+#: lma_connect/plugins/sponsors/templates/sponsors/detail.html:180
+msgid "More links"
+msgstr "Weitere Links"
+
+#: lma_connect/plugins/sponsors/templates/sponsors/detail.html:204
+msgid "Downloads"
+msgstr "Downloads"
+
+#: lma_connect/plugins/sponsors/templates/sponsors/detail.html:236
+#, python-format
+msgid "Visit %(name)s"
+msgstr "%(name)s besuchen"
+
+#: lma_connect/plugins/sponsors/templates/sponsors/list.html:6
+#, python-format
+msgid "Exhibitors & partners at %(name)s"
+msgstr "Aussteller & Partner bei %(name)s"
+
+#: lma_connect/plugins/sponsors/templates/sponsors/list.html:13
+msgid "Nothing published yet"
+msgstr "Noch nichts veröffentlicht"
+
+#: lma_connect/plugins/sponsors/templates/sponsors/list.html:21
+msgid "Where the booths are"
+msgstr "Wo die Stände stehen"
+
+#: lma_connect/plugins/sponsors/templates/sponsors/list.html:31
+msgid "Exhibitors"
+msgstr "Aussteller"
+
+#: lma_connect/plugins/sponsors/templates/sponsors/list.html:32
+msgid "booth"
+msgstr "Stand"
+
+#: lma_connect/plugins/sponsors/templates/sponsors/list.html:34
+#: lma_connect/plugins/sponsors/templates/sponsors/list.html:74
+msgid "Listed in alphabetical order."
+msgstr "In alphabetischer Reihenfolge."
+
+#: templates/403.html:16 templates/403.html:17
+msgid "No permission"
+msgstr "Keine Berechtigung"
+
+#: templates/403.html:18 templates/403_csrf.html:18
+msgid "Error 403"
+msgstr "Fehler 403"
+
+#: templates/403.html:25
+msgid "You don’t have permission to view this page"
+msgstr "Du hast keine Berechtigung, diese Seite zu sehen"
+
+#: templates/403.html:27
+msgid ""
+"This area is reserved for a specific role (e.g. session chairs or the "
+"organizing team). If you think you should have access, ask the organizers."
+msgstr ""
+"Dieser Bereich ist einer bestimmten Rolle vorbehalten (z. B. Session-Chairs "
+"oder dem Organisationsteam). Wenn du glaubst, dass du Zugriff haben "
+"solltest, wende dich an die Organisator:innen."
+
+#: templates/403.html:31 templates/403_csrf.html:31 templates/404.html:26
+#: templates/500.html:89 templates/axes/locked_out.html:21
+msgid "Back to home"
+msgstr "Zur Startseite"
+
+#: templates/403_csrf.html:16 templates/403_csrf.html:17
+msgid "Session expired"
+msgstr "Sitzung abgelaufen"
+
+#: templates/403_csrf.html:25
+msgid "Your session expired"
+msgstr "Deine Sitzung ist abgelaufen"
+
+#: templates/403_csrf.html:27
+msgid ""
+"For your security the form could not be submitted — usually because the page "
+"sat open too long or cookies are blocked. Go back, reload the page and try "
+"again."
+msgstr ""
+"Aus Sicherheitsgründen konnte das Formular nicht abgeschickt werden — meist, "
+"weil die Seite zu lange offen war oder Cookies blockiert sind. Geh zurück, "
+"lade die Seite neu und versuche es erneut."
+
+#: templates/403_csrf.html:34
+msgid "Sign in again"
+msgstr "Erneut anmelden"
+
+#: templates/404.html:11 templates/404.html:12
+msgid "Page not found"
+msgstr "Seite nicht gefunden"
+
+#: templates/404.html:13
+msgid "Error 404"
+msgstr "Fehler 404"
+
+#: templates/404.html:20
+msgid "This page doesn’t exist"
+msgstr "Diese Seite existiert nicht"
+
+#: templates/404.html:22
+msgid ""
+"The link may be outdated, or the page has moved. Let’s get you back on track."
+msgstr ""
+"Der Link ist vielleicht veraltet oder die Seite wurde verschoben. Wir "
+"bringen dich zurück auf Kurs."
+
+#: templates/500.html:22 templates/500.html:87
+msgid "Something went wrong"
+msgstr "Etwas ist schiefgelaufen"
+
+#: templates/500.html:88
+msgid ""
+"An unexpected error occurred on our side. The team has been notified. Please "
+"try again in a moment."
+msgstr ""
+"Auf unserer Seite ist ein unerwarteter Fehler aufgetreten. Das Team wurde "
+"benachrichtigt. Bitte versuche es gleich noch einmal."
+
+#: templates/500.html:90
+msgid "Error 500"
+msgstr "Fehler 500"
+
+#: templates/axes/locked_out.html:4 templates/axes/locked_out.html:5
+msgid "Account locked"
+msgstr "Konto gesperrt"
+
+#: templates/axes/locked_out.html:13
+msgid "Too many failed sign-in attempts"
+msgstr "Zu viele fehlgeschlagene Anmeldeversuche"
+
+#: templates/axes/locked_out.html:15
+msgid ""
+"For your protection this account / IP has been temporarily locked.\n"
+"        Please wait about an hour and try again — or contact the conference "
+"team\n"
+"        if you believe this is in error."
+msgstr ""
+"Zu deinem Schutz wurde dieses Konto / diese IP vorübergehend gesperrt.\n"
+"        Bitte warte etwa eine Stunde und versuche es erneut — oder wende "
+"dich an das Konferenzteam,\n"
+"        falls du glaubst, dass dies ein Fehler ist."
+
+#: templates/base.html:254
+msgid "Menu"
+msgstr "Menü"
+
+#: templates/base.html:349
+#, python-format
+msgid "built by %(holder)s"
+msgstr "gebaut von %(holder)s"
+
+#: templates/base.html:354
+msgid "Main navigation"
+msgstr "Hauptnavigation"
+
+#: templates/registration/login.html:15
+msgid "Sign in with your QR-code"
+msgstr "Melde dich mit deinem QR-Code an"
+
+#: templates/registration/login.html:17
+msgid ""
+"If you are a speaker, delegate, company representative or any other\n"
+"            attendee, please sign in by scanning your personal QR-code badge "
+"— no username\n"
+"            or password needed."
+msgstr ""
+"Wenn du Speaker, Delegierte:r, Firmenvertreter:in oder sonstige:r\n"
+"            Teilnehmer:in bist, melde dich bitte an, indem du dein "
+"persönliches QR-Code-Badge scannst — kein Benutzername\n"
+"            und kein Passwort nötig."
+
+#: templates/registration/login.html:23
+msgid ""
+"Lost your code or never received one? Please contact the registration desk."
+msgstr ""
+"Code verloren oder nie erhalten? Wende dich bitte an den "
+"Registrierungsschalter."
+
+#: templates/registration/login.html:30
+msgid "Organizer sign-in"
+msgstr "Veranstalter-Anmeldung"
+
+#: templates/registration/login.html:32
+msgid "For organizers and staff only."
+msgstr "Nur für Veranstalter:innen und Personal."
+
+#: templates/registration/login.html:49
+msgid "Password"
+msgstr "Passwort"
+
+msgid "A few sentences about the speaker — shown publicly on the session and speaker pages"
+msgstr "Ein paar Sätze zur Person – öffentlich auf Session- und Speaker-Seiten sichtbar"
+
+msgid "Chair notes"
+msgstr "Chair-Notizen"
+
+msgid "Private notes for the session chair to introduce the speaker — never shown publicly, only in the chair view"
+msgstr "Private Notizen für den Session-Chair zur Vorstellung – nie öffentlich, nur in der Chair-Ansicht"
+
+msgid "Chair only"
+msgstr "Nur für Chairs"
+
+msgid "Visible only to the session chairs — never on public pages."
+msgstr "Nur für die Session-Chairs sichtbar – nie auf öffentlichen Seiten."
+
+msgid "Speakers — introduction notes"
+msgstr "Speaker – Notizen zur Vorstellung"
+
+msgid "Only chairs see this section — your notes are private and never shown publicly."
+msgstr "Diesen Abschnitt sehen nur Chairs – deine Notizen sind privat und nie öffentlich sichtbar."
+
+msgid "Your notes"
+msgstr "Deine Notizen"
+
+msgid "How you want to introduce this speaker …"
+msgstr "Wie du diese Person vorstellen möchtest …"
+
+msgid "Save notes"
+msgstr "Notizen speichern"
+
+msgid "Saved"
+msgstr "Gespeichert"
+
+msgid "Keep it factual — no judgemental or sensitive personal details."
+msgstr "Sachlich bleiben – keine wertenden oder sensiblen persönlichen Angaben."
+
+#: lma_connect/plugins/feedback/models.py
+msgid "Introduction — DE (Markdown)"
+msgstr "Einleitung — DE (Markdown)"
+
+#: lma_connect/plugins/feedback/models.py
+msgid "Leave empty and the English text is shown to German-speaking visitors too"
+msgstr "Leer lassen, dann sehen auch deutschsprachige Besucher den englischen Text"
+
+#: lma_connect/plugins/feedback/models.py
+msgid "Question (DE)"
+msgstr "Frage (DE)"
+
+#: lma_connect/plugins/feedback/models.py
+msgid "Help text (DE)"
+msgstr "Hilfetext (DE)"
+
+#: lma_connect/plugins/feedback/models.py
+msgid "Likert label (min, DE)"
+msgstr "Likert-Label (min, DE)"
+
+#: lma_connect/plugins/feedback/models.py
+msgid "Likert label (max, DE)"
+msgstr "Likert-Label (max, DE)"
+
+#: lma_connect/plugins/feedback/models.py
+msgid "Text (DE)"
+msgstr "Text (DE)"
+
+#: templates/base.html
+msgid "Open this page in Safari (other browsers cannot install apps on iOS)."
+msgstr "Diese Seite in Safari öffnen (andere Browser können auf iOS keine Apps installieren)."
+
+#: templates/base.html
+msgid ""
+"Tap the <strong>share button</strong> <i class=\"ti ti-share-2\"></i> at the "
+"bottom of the screen."
+msgstr ""
+"Unten auf den <strong>Teilen-Button</strong> <i class=\"ti ti-share-2\"></i> "
+"tippen."
+
+#: templates/base.html
+msgid "Choose <strong>Add to Home Screen</strong>, then <strong>Add</strong>."
+msgstr "<strong>Zum Home-Bildschirm</strong> wählen, dann <strong>Hinzufügen</strong>."
+
+#: templates/base.html
+msgid "Open the browser menu <i class=\"ti ti-dots-vertical\"></i> (top right)."
+msgstr "Das Browser-Menü <i class=\"ti ti-dots-vertical\"></i> (oben rechts) öffnen."
+
+#: templates/base.html
+msgid ""
+"Choose <strong>Add to Home screen</strong> or <strong>Install app</strong>, "
+"then confirm."
+msgstr ""
+"<strong>Zum Startbildschirm hinzufügen</strong> oder <strong>App "
+"installieren</strong> wählen und bestätigen."
+
+#: templates/base.html
+msgid ""
+"In Chrome or Edge, click the <strong>install icon</strong> in the address "
+"bar, or open the browser menu and choose <strong>Install app</strong>."
+msgstr ""
+"In Chrome oder Edge auf das <strong>Installieren-Symbol</strong> in der "
+"Adressleiste klicken oder im Browser-Menü <strong>App installieren</strong> "
+"wählen."
+
+#: templates/base.html
+msgid ""
+"Safari on Mac: File → Add to Dock. Firefox has no install option — use a "
+"bookmark."
+msgstr ""
+"Safari am Mac: Ablage → Zum Dock hinzufügen. Firefox bietet keine "
+"Installation — ein Lesezeichen verwenden."
+
+#: templates/base.html
+msgid "Close"
+msgstr "Schließen"

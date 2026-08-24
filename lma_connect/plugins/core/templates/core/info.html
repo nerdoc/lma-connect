@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+{% load i18n markdownify %}
+
+{% block title %}{% trans "Info" %} — {{ event.name }}{% endblock %}
+{% block topbar_title %}{% trans "Info" %}{% endblock %}
+{% block topbar_sub %}{% trans "Venue · Floorplans · Contacts" %}{% endblock %}
+
+{% block content %}
+
+{% if not event %}
+<div class="empty"><div class="empty-icon"><i class="ti ti-info-circle h1"></i></div>
+<p class="empty-title">{% trans "No active event" %}</p></div>
+{% else %}
+
+{# Help — prominent at the top #}
+<a href="{% url 'core:help' %}" class="card mb-3 text-decoration-none text-reset" style="border-left: 4px solid var(--lma-primary);">
+    <div class="card-body py-3 d-flex align-items-center gap-3">
+        <div style="font-size: 2rem; color: var(--lma-primary);"><i class="ti ti-help-circle"></i></div>
+        <div class="flex-grow-1">
+            <div class="fw-bold">{% trans "How to use this app" %}</div>
+            <div class="small text-secondary">{% trans "Q&A, polls, ratings, sign-in, install to home screen…" %}</div>
+        </div>
+        <i class="ti ti-chevron-right text-secondary"></i>
+    </div>
+</a>
+
+
+{# Venue #}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5 mb-2"><i class="ti ti-map-pin me-1" style="color: var(--lma-primary);"></i>{% trans "Venue" %}</h2>
+    <div class="fw-bold">{{ event.localized_venue_name }}</div>
+    <div class="text-secondary small">{{ event.localized_address }}<br>{{ event.postal_code }} {{ event.city }}, {{ event.country }}</div>
+    {% if event.localized_venue_name or event.localized_address %}
+    <a href="https://www.google.com/maps/search/?api=1&query={{ event.localized_venue_name }} {{ event.localized_address }} {{ event.postal_code }} {{ event.city }}, {{ event.country }}" target="_blank" rel="noopener"
+       class="btn btn-outline-primary btn-sm mt-2"><i class="ti ti-map-2"></i> {% trans "Open in maps" %}</a>
+    {% endif %}
+</div></div>
+
+{# Floorplan #}
+{% if floorplans %}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5 mb-2"><i class="ti ti-map-2 me-1"></i>{% blocktrans count counter=floorplans|length context "section heading" %}Floorplan{% plural %}Floorplans{% endblocktrans %}</h2>
+    {% include "core/_floorplans.html" with plans=floorplans %}
+</div></div>
+{% endif %}
+
+{% comment %} Every text section comes from the admin (event → info blocks): travel,
+   sightseeing, WiFi, catering … the organizers decide title, icon and order;
+   this template knows no topics any more.{% endcomment %}
+{% for block in info_blocks %}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5 mb-2"><i class="ti ti-{{ block.icon|default:'info-circle' }} me-1" style="color: var(--lma-primary);"></i>{{ block.localized_title }}</h2>
+    {% if block.localized_body %}<div>{{ block.localized_body|markdownify }}</div>{% endif %}
+</div></div>
+{% endfor %}
+
+{# Social Event #}
+{% if event.social_event_title or event.social_event_start or event.social_event_venue_name %}
+<div class="card mb-3" style="border-left: 4px solid var(--lma-highlight);"><div class="card-body py-3">
+    <h2 class="h5 mb-2"><i class="ti ti-glass-cocktail me-1" style="color: var(--lma-accent);"></i>{% trans "Social Event" %}</h2>
+
+    {% if event.social_event_title %}
+    <div class="fw-bold h6 mb-2">{{ event.social_event_title }}</div>
+    {% endif %}
+
+    <dl class="row mb-2 small">
+        {% if event.social_event_start %}
+        <dt class="col-sm-3 text-secondary">{% trans "When" %}</dt>
+        <dd class="col-sm-9">
+            {{ event.social_event_start|date:"l, j F Y · H:i" }}
+            {% if event.social_event_end %} – {{ event.social_event_end|date:"H:i" }}{% endif %}
+        </dd>
+        {% endif %}
+
+        {% if event.social_event_venue_name or event.social_event_address %}
+        <dt class="col-sm-3 text-secondary">{% trans "Where" %}</dt>
+        <dd class="col-sm-9">
+            {% if event.social_event_venue_name %}<div class="fw-bold">{{ event.social_event_venue_name }}</div>{% endif %}
+            {% if event.social_event_address %}<div class="text-secondary">{{ event.social_event_address }}{% if event.social_event_city %}, {{ event.social_event_city }}{% endif %}</div>{% endif %}
+            <div class="d-flex gap-1 mt-1 flex-wrap">
+                {% if event.social_event_venue_name or event.social_event_address %}
+                <a href="https://www.google.com/maps/search/?api=1&query={{ event.social_event_venue_name }} {{ event.social_event_address }} {{ event.social_event_city }}" target="_blank" rel="noopener"
+                   class="btn btn-outline-primary btn-sm"><i class="ti ti-map-2"></i> {% trans "Open in maps" %}</a>
+                {% endif %}
+                {% if event.social_event_url %}
+                <a href="{{ event.social_event_url }}" target="_blank" rel="noopener"
+                   class="btn btn-outline-primary btn-sm"><i class="ti ti-external-link"></i> {% trans "Website" %}</a>
+                {% endif %}
+            </div>
+        </dd>
+        {% endif %}
+
+        {% if event.social_event_meeting_point or event.social_event_meeting_time %}
+        <dt class="col-sm-3 text-secondary mt-2">{% trans "Meeting point" %}</dt>
+        <dd class="col-sm-9 mt-2">
+            {% if event.social_event_meeting_point %}<div class="fw-bold">{{ event.social_event_meeting_point }}</div>{% endif %}
+            {% if event.social_event_meeting_time %}<div class="text-secondary small"><i class="ti ti-clock"></i> {{ event.social_event_meeting_time|date:"l, j F · H:i" }}</div>{% endif %}
+        </dd>
+        {% endif %}
+    </dl>
+
+    {% if event.localized_social_event_info %}
+    <div class="small">{{ event.localized_social_event_info|markdownify }}</div>
+    {% endif %}
+
+    {# Late-registration CTA — mailto Organizing Secretary #}
+    {% with sec=event.secretary_contact %}
+    {% if sec.email %}
+    <div class="alert alert-warning mt-3 mb-0 py-2">
+        <div class="fw-bold small mb-1">{% trans "Want to register?" %}</div>
+        <div class="small mb-2">{% trans "Contact the Organizing Secretary to be added to the social-event list." %}</div>
+        <a href="mailto:{{ sec.email }}?subject={% blocktrans with title=event.social_event_title|default:event.name %}Late registration for social event – {{ title }}{% endblocktrans %}"
+           class="btn btn-sm btn-warning">
+            <i class="ti ti-mail"></i> {% blocktrans with name=sec.name %}Contact {{ name }}{% endblocktrans %}
+        </a>
+    </div>
+    {% endif %}
+    {% endwith %}
+</div></div>
+{% endif %}
+
+{# Quick links #}
+<div class="row g-2 mb-3">
+    {% if event.homepage_url %}
+    <div class="col-6"><a href="{{ event.homepage_url }}" target="_blank" rel="noopener" class="card text-decoration-none h-100"><div class="card-body py-3 text-center">
+        <i class="ti ti-world h2 m-0" style="color: var(--lma-primary);"></i>
+        <div class="small fw-bold mt-1">{% trans "Event website" %}</div>
+    </div></a></div>
+    {% endif %}
+    {% if event.emergency_number %}
+    <div class="col-6"><a href="tel:{{ event.emergency_number }}" class="card text-decoration-none h-100"><div class="card-body py-3 text-center">
+        <i class="ti ti-phone-call h2 m-0" style="color: #dc3545;"></i>
+        <div class="small fw-bold mt-1">{% blocktrans with number=event.emergency_number %}Emergency {{ number }}{% endblocktrans %}</div>
+    </div></a></div>
+    {% endif %}
+    {% if event.lat and event.lon %}
+    <div class="col-6"><a href="https://www.google.com/maps/dir/?api=1&destination={{ event.lat }},{{ event.lon }}" target="_blank" rel="noopener" class="card text-decoration-none h-100"><div class="card-body py-3 text-center">
+        <i class="ti ti-route h2 m-0" style="color: var(--lma-accent);"></i>
+        <div class="small fw-bold mt-1">{% trans "Directions" %}</div>
+    </div></a></div>
+    {% endif %}
+    <div class="col-6"><a href="{% url 'feedback:list' %}" class="card text-decoration-none h-100"><div class="card-body py-3 text-center">
+        <i class="ti ti-message-2 h2 m-0" style="color: var(--lma-primary);"></i>
+        <div class="small fw-bold mt-1">{% trans "Feedback" %}</div>
+    </div></a></div>
+</div>
+
+{# Event contacts (Organizing Secretary etc.) #}
+{% with contacts=event.contacts.all %}
+{% if contacts %}
+<h2 class="h5 mb-2"><i class="ti ti-address-book me-1"></i>{% trans "Contacts" %}</h2>
+<div class="d-flex flex-column gap-2 mb-3">
+    {% for c in contacts %}
+    <div class="card"><div class="card-body py-3">
+        <div class="d-flex justify-content-between align-items-start gap-2 mb-1">
+            <div>
+                <div class="fw-bold">{{ c.name }}</div>
+                {% if c.company %}<div class="small text-secondary">{{ c.company }}</div>{% endif %}
+            </div>
+            <span class="badge bg-blue-lt">{{ c.get_role_display }}</span>
+        </div>
+        <div class="d-flex flex-wrap gap-2 mt-2">
+            {% if c.email %}<a href="mailto:{{ c.email }}" class="btn btn-sm btn-outline-primary"><i class="ti ti-mail"></i> {{ c.email }}</a>{% endif %}
+            {% if c.phone %}<a href="tel:{{ c.phone }}" class="btn btn-sm btn-outline-secondary"><i class="ti ti-phone"></i> {{ c.phone }}</a>{% endif %}
+            {% if c.website %}<a href="{{ c.website }}" target="_blank" rel="noopener" class="btn btn-sm btn-outline-info"><i class="ti ti-world"></i> {% trans "Website" %}</a>{% endif %}
+        </div>
+        {% if c.address %}<div class="small text-secondary mt-2"><i class="ti ti-map-pin"></i> {{ c.address }}</div>{% endif %}
+        {% if c.notes %}<div class="small mt-2">{{ c.notes|linebreaks }}</div>{% endif %}
+    </div></div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+{# Committees — collapsible with member list (prefetched in the view) #}
+{% if committees %}
+<h2 class="h5 mb-2"><i class="ti ti-users-group me-1"></i>{% trans "Committees" %}</h2>
+<div class="d-flex flex-column gap-2 mb-3">
+    {% for c in committees %}
+    <details class="card" {% if forloop.first %}open{% endif %}>
+        <summary class="card-body py-3" style="cursor: pointer; list-style: none;">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="fw-bold">{{ c.name }}</div>
+                    <div class="small text-secondary">{% blocktrans count counter=c.memberships.all|length %}{{ counter }} member{% plural %}{{ counter }} members{% endblocktrans %}</div>
+                </div>
+                <i class="ti ti-chevron-down text-secondary"></i>
+            </div>
+        </summary>
+        {% with members=c.memberships.all %}
+        {% if members %}
+        <ul class="list-unstyled mb-0 small">
+            {% for m in members %}
+            <li class="d-flex justify-content-between gap-2 px-3 py-2 border-top">
+                <div class="flex-grow-1 min-w-0">
+                    <strong>{{ m.user.get_full_name|default:m.user.username }}</strong>
+                    {% with aff=m.affiliation|default:m.user.affiliation_line %}
+                    {% if aff %}<div class="text-secondary small">{{ aff }}</div>{% endif %}
+                    {% endwith %}
+                </div>
+                {% if m.role != 'member' %}<span class="badge bg-blue-lt flex-shrink-0">{{ m.get_role_display }}</span>{% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <div class="text-secondary small px-3 py-2 border-top">{% trans "No members yet." %}</div>
+        {% endif %}
+        {% endwith %}
+    </details>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% endif %}
+{% endblock %}

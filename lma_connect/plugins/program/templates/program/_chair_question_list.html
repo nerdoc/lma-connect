@@ -1,0 +1,61 @@
+{% load i18n %}
+{# Chair Q&A list — re-rendered via HTMX after star/approve/answered/add/delete. #}
+<div id="chair-list">
+<div class="d-flex gap-2 mb-2 small text-secondary">
+    <span class="badge bg-yellow-lt">{% blocktrans %}⭐ {{ starred_count }} starred{% endblocktrans %}</span>
+    <span class="badge bg-green-lt">{% blocktrans %}{{ approved_count }} visible{% endblocktrans %}</span>
+    <span class="badge bg-secondary-lt">{% blocktrans %}{{ total_count }} total{% endblocktrans %}</span>
+</div>
+
+{% if not chair_questions %}
+<div class="text-center text-secondary small py-4">{% trans "No questions yet." %}</div>
+{% else %}
+<div class="d-flex flex-column gap-2">
+    {% for q in chair_questions %}
+    <div class="card {% if q.is_starred %}border-warning{% endif %}{% if not q.is_approved %} opacity-75{% endif %}"
+         {% if q.is_starred %}style="box-shadow: 0 0 0 1px var(--tblr-warning);"{% endif %}>
+        <div class="card-body py-2">
+            <div class="d-flex justify-content-between gap-2 align-items-start">
+                <div class="flex-grow-1 min-w-0">
+                    <div class="small text-secondary mb-1">
+                        {% if q.added_by_chair %}<span class="badge bg-blue-lt"><i class="ti ti-microphone-2"></i> {% trans "Chair" %}</span>{% elif q.asker %}<strong class="text-body">{{ q.asker.first_name|default:q.asker.username }}</strong>{% if q.asker.affiliation_line %} · {{ q.asker.affiliation_line }}{% endif %}{% else %}{{ q.asker_display_name|default:"anonymous" }}{% endif %}
+                        · {{ q.created_at|date:"H:i" }}
+                        · <i class="ti ti-arrow-big-up"></i> {{ q.votes }}
+                        {% if not q.is_approved %}<span class="badge bg-secondary-lt ms-1">{% trans "hidden" %}</span>{% endif %}
+                        {% if q.is_answered %}<span class="badge bg-green-lt ms-1"><i class="ti ti-check"></i> {% trans "answered" %}</span>{% endif %}
+                        {% if q.flagged_count %}<span class="badge bg-red-lt ms-1"><i class="ti ti-flag"></i> {{ q.flagged_count }}</span>{% endif %}
+                    </div>
+                    <div>{{ q.text }}</div>
+                </div>
+            </div>
+            <div class="d-flex gap-1 flex-wrap mt-2">
+                <button class="btn btn-sm {% if q.is_starred %}btn-warning{% else %}btn-outline-warning{% endif %}"
+                        hx-post="{% url 'program:chair_question_star' q.id %}"
+                        hx-target="#chair-list" hx-swap="outerHTML">
+                    <i class="ti ti-star{% if q.is_starred %}-filled{% endif %}"></i> {% if q.is_starred %}{% trans "Starred" %}{% else %}{% trans "Star" %}{% endif %}
+                </button>
+                <button class="btn btn-sm {% if q.is_approved %}btn-outline-secondary{% else %}btn-success{% endif %}"
+                        hx-post="{% url 'program:chair_question_approve' q.id %}"
+                        hx-target="#chair-list" hx-swap="outerHTML">
+                    <i class="ti ti-{% if q.is_approved %}eye-off{% else %}eye{% endif %}"></i> {% if q.is_approved %}{% trans "Hide" %}{% else %}{% trans "Show" %}{% endif %}
+                </button>
+                <button class="btn btn-sm {% if q.is_answered %}btn-success{% else %}btn-outline-secondary{% endif %}"
+                        hx-post="{% url 'program:chair_question_answered' q.id %}"
+                        hx-target="#chair-list" hx-swap="outerHTML">
+                    <i class="ti ti-check"></i> {% if q.is_answered %}{% trans "Answered" %}{% else %}{% trans "Mark answered" %}{% endif %}
+                </button>
+                {% if q.added_by_chair %}
+                <button class="btn btn-sm btn-outline-danger"
+                        hx-post="{% url 'program:chair_question_delete' q.id %}"
+                        hx-target="#chair-list" hx-swap="outerHTML"
+                        hx-confirm="{% trans "Delete this prepared question?" %}">
+                    <i class="ti ti-trash"></i>
+                </button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+</div>

@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "My profile" %}{% endblock %}
+{% block topbar_title %}{% trans "My profile" %}{% endblock %}
+{% block topbar_sub %}{{ u.first_name|default:u.username }} · @{{ u.username }}{% endblock %}
+
+{% block content %}
+
+{# ─── Identity / name ─── #}
+<div class="text-center mb-3">
+    <span class="avatar avatar-lg rounded-circle mb-2" style="background: var(--lma-primary); color:#fff; font-size:1.5rem; font-weight:600;">
+        {{ u.first_name|default:u.username|first|upper }}
+    </span>
+    <h1 class="h3 mb-0">{{ u.first_name|default:u.username }}</h1>
+    <div class="text-secondary small">@{{ u.username }}</div>
+</div>
+
+{% if stats %}
+{# ─── Score + badges summary ─── #}
+<div class="card mb-3 border-0" style="background: var(--lma-primary); color: #fff; border-top: 4px solid var(--lma-highlight) !important;">
+    <div class="card-body py-3 text-center">
+        <div class="display-5 fw-bold">{{ stats.score }}</div>
+        <div class="opacity-75">{% blocktrans with earned=stats.earned|length total=stats.total_badges %}points · {{ earned }}/{{ total }} badges{% endblocktrans %}</div>
+        <a href="{% url 'gamification:leaderboard' %}" class="btn btn-sm btn-white mt-2"><i class="ti ti-trophy"></i> {% trans "Leaderboard" %}</a>
+    </div>
+</div>
+
+{# ─── Expo progress ─── #}
+{% if stats.expo %}
+<div class="row g-2 mb-3">
+    <div class="col-4">
+        <div class="card h-100 text-center"><div class="card-body py-2 px-1">
+            <i class="ti ti-building-store h3 mb-0 d-block" style="color: var(--lma-primary);"></i>
+            <div class="h4 mb-0 fw-bold">{{ stats.expo.booths }}</div>
+            <div class="text-secondary" style="font-size:.7rem;">{% trans "Booths" %}</div>
+        </div></div>
+    </div>
+    <div class="col-4">
+        <div class="card h-100 text-center"><div class="card-body py-2 px-1">
+            <i class="ti ti-bulb h3 mb-0 d-block text-warning"></i>
+            <div class="h4 mb-0 fw-bold">{{ stats.expo.quiz_correct }}</div>
+            <div class="text-secondary" style="font-size:.7rem;">{% trans "Quizzes" %}</div>
+        </div></div>
+    </div>
+    <div class="col-4">
+        <div class="card h-100 text-center"><div class="card-body py-2 px-1">
+            <i class="ti ti-map-pin h3 mb-0 d-block" style="color: var(--lma-accent);"></i>
+            <div class="h4 mb-0 fw-bold">{{ stats.expo.posters }}</div>
+            <div class="text-secondary" style="font-size:.7rem;">{% trans "Posters" %}</div>
+        </div></div>
+    </div>
+</div>
+{% endif %}
+
+{# ─── Audience Choice: Sterne-Kontingent ─── #}
+{% if stats.stars %}
+<div class="card mb-3">
+    <div class="card-body py-2 d-flex align-items-center justify-content-between gap-2">
+        <div>
+            <div class="fw-bold small">{% trans "Audience Choice" %}</div>
+            <div class="text-secondary" style="font-size:.75rem;">
+                {% blocktrans count n=stats.stars.left %}{{ n }} star left{% plural %}{{ n }} stars left{% endblocktrans %}
+                · {% trans "give them at the posters" %}
+            </div>
+        </div>
+        <div style="font-size: 1.25rem; white-space: nowrap;">
+            {% for i in stats.stars.slots %}
+                {% if i %}<i class="ti ti-star-filled text-warning"></i>{% else %}<i class="ti ti-star text-secondary"></i>{% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{# ─── Badges ─── #}
+<h2 class="h5 mb-2"><i class="ti ti-award me-1"></i>{% trans "Badges" %}</h2>
+<div class="row g-2 mb-3">
+    {% for ua in stats.earned %}
+    <div class="col-6 col-sm-4">
+        <div class="card h-100 border-warning" style="box-shadow: 0 0 0 1px var(--tblr-warning);">
+            <div class="card-body py-3 text-center">
+                <i class="ti {{ ua.achievement.icon_class }} h2 mb-1 d-block text-warning"></i>
+                <div class="fw-bold small">{{ ua.achievement.name }}</div>
+                <div class="text-secondary" style="font-size:.7rem;">{{ ua.achievement.description }}</div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% for a in stats.locked %}
+    <div class="col-6 col-sm-4">
+        <div class="card h-100 opacity-50">
+            <div class="card-body py-3 text-center">
+                <i class="ti ti-lock h2 mb-1 d-block text-secondary"></i>
+                <div class="fw-bold small text-secondary">{{ a.name }}</div>
+                <div class="text-secondary" style="font-size:.7rem;">{{ a.description }}</div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{# ─── Recent activity ─── #}
+{% if stats.recent %}
+<h2 class="h5 mb-2"><i class="ti ti-history me-1"></i>{% trans "Recent activity" %}</h2>
+<div class="card mb-3"><div class="card-body p-0">
+    <ul class="list-unstyled mb-0 small">
+        {% for e in stats.recent %}
+        <li class="d-flex justify-content-between px-3 py-2 {% if not forloop.last %}border-bottom{% endif %}">
+            <span>{{ e.get_action_display }}</span>
+            <span class="text-secondary">+{{ e.points }} · {{ e.created_at|date:"D H:i" }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div></div>
+{% endif %}
+{% endif %}
+
+{# ─── Nickname ─── #}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5 mb-2">{% trans "Display name" %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="nickname" class="form-control mb-2"
+               value="{{ u.first_name }}" required minlength="2" maxlength="60">
+        <button type="submit" class="btn btn-primary"><i class="ti ti-check"></i> {% trans "Save" %}</button>
+    </form>
+    <div class="small text-secondary mt-2">{% trans "Shown next to your Q&A posts, ratings and on the leaderboard." %}</div>
+</div></div>
+
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5 mb-2"><i class="ti ti-shield-check me-1"></i>{% trans "Sign-in" %}</h2>
+    <p class="small text-secondary mb-2">
+        {% blocktrans %}Your QR-code is your sign-in. As long as you're signed in on this
+        browser, you stay signed in. On a different device: scan the QR-code
+        again.{% endblocktrans %}
+    </p>
+    <a href="{% url 'logout' %}" class="btn btn-outline-secondary btn-sm"><i class="ti ti-logout"></i> {% trans "Sign out" %}</a>
+</div></div>
+{% endblock %}

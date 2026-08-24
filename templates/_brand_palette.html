@@ -1,0 +1,64 @@
+{% load brand_tags %}{% comment %}
+The event's brand palette as CSS custom properties.
+
+Include this INSIDE a <style> element — it deliberately ships no <style> tag of
+its own, so pages that already have one (base.html, the projection screens) can
+drop it in without nesting.
+
+Five colours come from the Event record; everything else here is derived from
+them. An organizer picks five values in the admin and the whole UI follows.
+Which event field backs which role, and what applies when no event exists yet,
+is decided in core.templatetags.brand_tags — not here.
+
+Derived shades are computed server-side (`|shade`) or as rgba() over the RGB
+triple, NOT with the CSS color-mix() function: Safari only learned color-mix in
+16.2, and an invalid custom property takes the whole declaration down with it —
+an attendee on an older phone would get an unstyled control rather than a
+slightly-off colour.
+
+Nothing below may hard-code a brand colour: a literal here is a colour some
+other conference cannot change.
+{% endcomment %}{% brand_color event "primary" as primary %}{% brand_color event "accent" as accent %}{% brand_color event "highlight" as highlight %}{% brand_color event "surface" as surface %}{% brand_color event "ink" as ink %}:root {
+    /* ── Set in the admin, per event ─────────────────────────────── */
+    --lma-primary:   {{ primary }};
+    --lma-accent:    {{ accent }};
+    --lma-highlight: {{ highlight }};
+    --lma-surface:   {{ surface }};
+    --lma-ink:       {{ ink }};
+
+    /* RGB triples — for the rgba() shades below and the ones Tabler builds. */
+    --lma-primary-rgb:   {{ primary|hex_to_rgb }};
+    --lma-accent-rgb:    {{ accent|hex_to_rgb }};
+    --lma-highlight-rgb: {{ highlight|hex_to_rgb }};
+    --lma-ink-rgb:       {{ ink|hex_to_rgb }};
+
+    /* ── Derived: hover states and tinted backgrounds ────────────── */
+    --lma-primary-dark: {{ primary|shade:"-18" }};
+    --lma-accent-dark:  {{ accent|shade:"-18" }};
+    /* Readable on white: the highlight colour is a light yellow by default,
+       which as text on a white card is barely visible. */
+    --lma-highlight-ink: {{ highlight|shade:"-45" }};
+    --lma-primary-light: {{ primary|shade:"30" }};
+
+    --lma-primary-soft:   rgba(var(--lma-primary-rgb), 0.12);
+    --lma-primary-border: rgba(var(--lma-primary-rgb), 0.30);
+    --lma-accent-soft:    rgba(var(--lma-accent-rgb), 0.12);
+    --lma-accent-border:  rgba(var(--lma-accent-rgb), 0.30);
+    --lma-highlight-soft: rgba(var(--lma-highlight-rgb), 0.22);
+    --lma-shadow:         rgba(var(--lma-ink-rgb), 0.25);
+
+    /* ── Mapped onto Tabler ──────────────────────────────────────── */
+    --tblr-primary:        var(--lma-primary);
+    --tblr-primary-rgb:    var(--lma-primary-rgb);
+    --tblr-primary-fg:     #ffffff;
+    --tblr-warning:        var(--lma-highlight);
+    --tblr-warning-rgb:    var(--lma-highlight-rgb);
+    --tblr-warning-fg:     var(--lma-ink);
+    --tblr-danger:         var(--lma-accent);
+    --tblr-danger-rgb:     var(--lma-accent-rgb);
+    --tblr-info:           var(--lma-primary);
+    --tblr-info-rgb:       var(--lma-primary-rgb);
+    --tblr-body-color:     var(--lma-ink);
+    --tblr-link-color:     var(--lma-primary);
+    --tblr-link-color-rgb: var(--lma-primary-rgb);
+}

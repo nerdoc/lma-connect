@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Welcome — Choose your nickname" %}{% endblock %}
+{% block topbar_title %}{% trans "Welcome" %}{% endblock %}
+{% block topbar_sub %}{{ event.name }}{% endblock %}
+
+{% block content %}
+<div class="card mt-3"><div class="card-body py-4 text-center">
+    <i class="ti ti-user-plus h1 d-block mb-2" style="color: var(--lma-primary);"></i>
+    <h1 class="h3 mb-2">{% trans "What should we call you?" %}</h1>
+    <p class="text-secondary small mb-3">
+        {% blocktrans %}Your display name will appear next to your Q&A posts and ratings.
+        You can change it any time. No email, no password —
+        your QR-code is your sign-in.{% endblocktrans %}
+    </p>
+
+    <form method="post" class="text-start">
+        {% csrf_token %}
+        <label class="form-label fw-bold" for="id_nickname">{% trans "Display name" %}</label>
+        <input type="text" name="nickname" id="id_nickname"
+               class="form-control form-control-lg mb-3" autofocus required
+               minlength="2" maxlength="60"
+               placeholder="{% trans 'e.g. Maria H. or LabFan42' %}"
+               autocomplete="off">
+
+        {% comment %} Incorporating the terms of use: above the button, not below it —
+           the notice has to be read before tapping, and on a phone (the
+           primary device after a badge scan) anything below is likely off
+           screen. The wording separates two things on purpose: for the terms
+           it is a declaration of intent, for the privacy policy only taking
+           notice — GDPR Art. 13 is an information duty, not a consent
+           requirement, and the processing rests on Art. 6(1)(b) and (f) per
+           the privacy policy. The links open in new tabs so that reading them
+           does not abort the token flow.{% endcomment %}
+        <p class="small text-secondary mb-2">
+            {% url 'core:legal' 'terms' as terms_url %}
+            {% url 'core:legal' 'privacy' as privacy_url %}
+            {% blocktrans %}By continuing you accept the <a href="{{ terms_url }}" target="_blank" rel="noopener">terms of use</a> and confirm that you have read the <a href="{{ privacy_url }}" target="_blank" rel="noopener">privacy policy</a>.{% endblocktrans %}
+        </p>
+
+        <button type="submit" class="btn btn-primary w-100">
+            <i class="ti ti-arrow-right"></i> {% trans "Get started" %}
+        </button>
+    </form>
+
+    <div class="small text-secondary mt-3">
+        <i class="ti ti-info-circle"></i> {% trans "No forms to fill — just a name." %}
+    </div>
+</div></div>
+{% endblock %}

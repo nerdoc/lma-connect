@@ -1,0 +1,15 @@
+{% load i18n %}
+{% comment %}
+The publish toggle for one abstract. Swaps itself (outerHTML).
+with_counter=True → the response additionally carries an out-of-band update
+for #publish-counter (only on the result list, where that card exists).
+{% endcomment %}
+<button type="button"
+        class="btn btn-sm {% if abstract.is_published %}btn-success{% else %}btn-outline-secondary{% endif %}"
+        hx-post="{% url 'access:ops_abstract_toggle_publish' abstract.pk %}"
+        hx-swap="outerHTML"
+        {% if with_counter %}hx-vals='{"with_counter": "1"}'{% endif %}
+        title="{% if abstract.is_published %}{% trans "Visible to attendees — click to hide" %}{% else %}{% trans "Hidden — click to publish" %}{% endif %}">
+    <i class="ti ti-{% if abstract.is_published %}eye{% else %}eye-off{% endif %}"></i>
+    <span class="d-none d-lg-inline">{% if abstract.is_published %}{% trans "Public" %}{% else %}{% trans "Hidden" %}{% endif %}</span>
+</button>

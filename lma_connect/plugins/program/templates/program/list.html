@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load i18n world_map_tags %}
+
+{% block title %}{% trans "Program" %} — {{ event.name }}{% endblock %}
+{% block topbar_title %}{% trans "Program" %}{% endblock %}
+{% block topbar_sub %}{{ event.sessions.count }} {% trans "sessions" %} · {{ tracks|length }} {% trans "tracks" %}{% endblock %}
+
+{% block extra_head %}
+<style>
+    .live-dot {
+        display: inline-block; width: 8px; height: 8px;
+        background: var(--lma-accent); border-radius: 50%;
+        margin-right: 4px; vertical-align: middle;
+        box-shadow: 0 0 0 0 rgba(var(--lma-accent-rgb), 0.6);
+        animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+        0%   { box-shadow: 0 0 0 0 rgba(var(--lma-accent-rgb), 0.6); }
+        70%  { box-shadow: 0 0 0 10px rgba(var(--lma-accent-rgb), 0); }
+        100% { box-shadow: 0 0 0 0 rgba(var(--lma-accent-rgb), 0); }
+    }
+    .session-card { position: relative; }
+    .session-card.is-live {
+        border-color: var(--lma-accent);
+        background: rgba(var(--lma-accent-rgb), 0.04);
+        box-shadow: 0 4px 16px rgba(var(--lma-accent-rgb), 0.15);
+    }
+    .session-card.is-live::after {
+        content: "LIVE";
+        position: absolute; top: 8px; right: 12px;
+        background: var(--lma-accent); color: #fff;
+        font-size: 0.6rem; font-weight: 700; letter-spacing: 0.05em;
+        padding: 2px 6px; border-radius: 3px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+{% world_map "speakers" title=_("Where our speakers come from") %}
+
+{% if not sessions_by_day %}
+<div class="empty">
+    <div class="empty-icon"><i class="ti ti-calendar-off h1"></i></div>
+    <p class="empty-title">{% trans "No program yet" %}</p>
+    <p class="empty-subtitle text-secondary">{% trans "Sessions are added in the admin and published from there." %}</p>
+</div>
+{% else %}
+
+{% if tracks %}
+<div class="d-flex flex-wrap gap-1 mb-3" aria-label="{% trans "Tracks" %}">
+    {% for track in tracks %}
+    <span class="badge" style="background: {{ track.color }}; color: #fff;">{{ track.name }}</span>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% for day, sessions in sessions_by_day.items %}
+<div class="mb-4">
+    <h2 class="h5 sticky-top bg-body py-2 mb-2 border-bottom">
+        <i class="ti ti-calendar-event me-1"></i>{{ day|date:"l, j F Y" }}
+    </h2>
+    <div class="d-flex flex-column gap-2">
+        {% for session in sessions %}
+        <a href="{% url 'program:detail' session.slug %}" class="card session-card text-decoration-none {% if session.id == current_session_id %}is-live{% endif %} {% if session.type == 'break' %}is-break{% endif %}" style="--track-color: {{ session.track.color|default:'#9ca3af' }}">
+            <div class="card-body py-3">
+                <div class="d-flex justify-content-between gap-2">
+                    <div class="flex-shrink-0 text-end" style="width: 56px;">
+                        <div class="fw-bold" style="font-variant-numeric: tabular-nums;">{{ session.starts_at|date:"H:i" }}</div>
+                        <div class="small text-secondary">{{ session.ends_at|date:"H:i" }}</div>
+                    </div>
+                    <div class="flex-grow-1 min-w-0">
+                        <div class="d-flex flex-wrap gap-1 mb-1 align-items-center">
+                            {% if session.type == 'keynote' %}<span class="badge bg-yellow-lt"><i class="ti ti-star"></i> {% trans "Keynote" %}</span>
+                            {% elif session.type == 'panel' %}<span class="badge bg-purple-lt">{% trans "Panel" %}</span>
+                            {% elif session.type == 'workshop' %}<span class="badge bg-cyan-lt">{% trans "Workshop" %}</span>
+                            {% elif session.type == 'break' %}<span class="badge" style="background: var(--lma-highlight); color: var(--lma-ink);">{% if "lunch" in session.title|lower %}<i class="ti ti-tools-kitchen-2"></i> {% trans "Lunch" %}{% else %}<i class="ti ti-coffee"></i> {% trans "Break" %}{% endif %}</span>
+                            {% elif session.type == 'poster' %}<span class="badge bg-orange-lt">{% trans "Poster" %}</span>
+                            {% endif %}
+                            {% if session.track %}<span class="badge" style="background: {{ session.track.color }}; color: #fff;">{{ session.track.name }}</span>{% endif %}
+                        </div>
+                        <div class="fw-bold">{{ session.title }}</div>
+                        <div class="small text-secondary">
+                            {% if session.room %}<i class="ti ti-map-pin"></i> {{ session.room.name }}{% endif %}
+                            {% with speaker_list=session.speakers.all %}
+                            {% if speaker_list %}
+                                · {% for sp in speaker_list|slice:":2" %}{{ sp.speaker.profile.user.get_full_name|default:sp.speaker.profile.user.username }}{% if not forloop.last %}, {% endif %}{% endfor %}{% if speaker_list|length > 2 %} +{{ speaker_list|length|add:"-2" }}{% endif %}
+                            {% endif %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
+
+{% endif %}
+{% endblock %}

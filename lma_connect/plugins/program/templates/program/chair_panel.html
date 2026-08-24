@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Chair" %} · {{ session.title }}{% endblock %}
+{% block topbar_title %}{% trans "Chair view" %}{% endblock %}
+{% block topbar_sub %}{{ session.title|truncatechars:40 }}{% endblock %}
+
+{% block content %}
+<a href="{% url 'program:detail' session.slug %}" class="btn btn-sm btn-ghost-secondary mb-2"><i class="ti ti-arrow-left"></i> {% trans "Session" %}</a>
+
+<div class="card mb-3"><div class="card-body py-3">
+    <h1 class="h4 mb-1"><i class="ti ti-microphone-2 me-1"></i>{% trans "Q&A moderation" %}</h1>
+    <div class="small text-secondary">{{ session.title }} · {{ session.starts_at|date:"D, j M H:i" }}</div>
+    <div class="small text-secondary mt-1">
+        {% trans "Attendees post questions and up-vote each other's — the list below is sorted by up-votes" %}
+        ({% if not session.qa_moderated %}{% trans "new questions appear immediately" %}{% else %}{% trans 'questions stay hidden until you "Show" them' %}{% endif %}).
+        {% trans "⭐ Star the ones to be asked — starred questions get a badge and rise to the top of the public list." %}
+        {% trans "You can also add your own prepared questions below." %}
+    </div>
+</div></div>
+
+{# Speaker intros — the chair's private crib sheet #}
+{% if chair_speakers %}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5 mb-2"><i class="ti ti-users me-1"></i>{% trans "Speakers — introduction notes" %}</h2>
+    <div class="small text-secondary mb-2">{% trans "Only chairs see this section — your notes are private and never shown publicly." %}</div>
+    <div class="d-flex flex-column gap-2">
+        {% for sp in chair_speakers %}
+        {% include "program/_chair_speaker_card.html" %}
+        {% endfor %}
+    </div>
+</div></div>
+{% endif %}
+
+{# Room-screen remote: switch source + start/stop polls #}
+{% include "program/_chair_screen.html" %}
+
+{# Add own question #}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5 mb-2"><i class="ti ti-pencil-plus me-1"></i>{% trans "Prepare your own question" %}</h2>
+    <form hx-post="{% url 'program:chair_question_add' session.slug %}"
+          hx-target="#chair-list" hx-swap="outerHTML"
+          data-hx-reset-on-success>
+        <textarea class="form-control mb-2" name="text" rows="2" required maxlength="2000"
+                  placeholder="{% trans "A question you want to put to the panel …" %}"></textarea>
+        <button type="submit" class="btn btn-primary btn-sm"><i class="ti ti-plus"></i> {% trans "Add (starred)" %}</button>
+    </form>
+</div></div>
+
+{% include "program/_chair_question_list.html" %}
+{% endblock %}

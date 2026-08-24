@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ abstract.title }}{% endblock %}
+{% block topbar_title %}{% trans "Poster check-in" %}{% endblock %}
+{% block topbar_sub %}{% if abstract.poster_id %}#{{ abstract.poster_id }} · {% endif %}{% trans "Audience Choice" %}{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+<div class="mb-3">
+    {% for m in messages %}
+    <div class="alert alert-{{ m.tags|default:'info' }} mb-2 py-2">{{ m }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{# ─── Poster header ─── #}
+<div class="card mb-3">
+    <div class="card-body py-3">
+        {% if abstract.category %}<span class="badge mb-2" style="background: {{ abstract.category.color }};">{{ abstract.category.name }}</span>{% endif %}
+        <h1 class="h4 mb-1">{{ abstract.title }}</h1>
+        {% if abstract.location %}<div class="text-secondary small"><i class="ti ti-map-pin me-1"></i>{{ abstract.location }}</div>{% endif %}
+    </div>
+</div>
+
+{# ─── The audience star — final, hence two-step (CSP-safe, no JS) ─── #}
+<div class="card mb-3">
+    <div class="card-body py-3 text-center">
+
+        {% if voted %}
+        {# Already voted — there is no way back, and this says so plainly. #}
+        <i class="ti ti-star-filled text-warning d-block mb-1" style="font-size: 2.5rem;"></i>
+        <h2 class="h5 mb-1">{% trans "You gave this poster your star" %}</h2>
+        <div class="text-secondary small">
+            {% blocktrans %}Your vote is final and counts towards the Audience Choice Award.{% endblocktrans %}
+        </div>
+
+        {% elif confirming %}
+        {# The confirmation before saving for good. #}
+        <i class="ti ti-alert-circle text-warning d-block mb-1" style="font-size: 2.5rem;"></i>
+        <h2 class="h5 mb-2">{% trans "Give your star to this poster?" %}</h2>
+        <div class="alert alert-warning py-2 small text-start mb-3">
+            <strong>{% trans "This cannot be undone." %}</strong>
+            {% blocktrans %}The star is transferred immediately and cannot be changed or taken back afterwards.{% endblocktrans %}
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-warning w-100 mb-2">
+                <i class="ti ti-star-filled me-1"></i>{% trans "Yes, give my star" %}
+            </button>
+        </form>
+        <a href="{% url 'expo:poster_stop' abstract.slug %}" class="btn btn-outline-secondary w-100">
+            {% trans "Cancel" %}
+        </a>
+
+        {% elif stars_left > 0 %}
+        {# A star is still available — the first step. #}
+        <i class="ti ti-star text-secondary d-block mb-1" style="font-size: 2.5rem;"></i>
+        <h2 class="h5 mb-1">{% trans "Is this your favourite poster?" %}</h2>
+        <div class="text-secondary small mb-3">
+            {% blocktrans count n=stars_left %}You have {{ n }} star left.{% plural %}You have {{ n }} stars left.{% endblocktrans %}
+            {% blocktrans %}A star can only be given once per poster and cannot be taken back.{% endblocktrans %}
+        </div>
+        <a href="?confirm=1" class="btn btn-warning w-100">
+            <i class="ti ti-star me-1"></i>{% trans "Give a star" %}
+        </a>
+
+        {% else %}
+        {# Kontingent aufgebraucht. #}
+        <i class="ti ti-star-off text-secondary d-block mb-1" style="font-size: 2.5rem;"></i>
+        <h2 class="h5 mb-1">{% trans "All stars given" %}</h2>
+        <div class="text-secondary small">
+            {% blocktrans count n=stars_total %}You have already given away your {{ n }} star.{% plural %}You have already given away all {{ n }} stars.{% endblocktrans %}
+        </div>
+        {% endif %}
+
+        {# Budget display — filled stars are the ones already given. #}
+        <div class="mt-3 pt-2 border-top">
+            <div class="text-secondary" style="font-size:.75rem;">{% trans "Your stars" %}</div>
+            <div style="font-size: 1.25rem;">
+                {% for given in star_slots %}
+                    {% if given %}<i class="ti ti-star-filled text-warning"></i>{% else %}<i class="ti ti-star text-secondary"></i>{% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="{{ abstract.get_absolute_url }}" class="btn btn-outline-secondary w-100">
+    <i class="ti ti-file-text me-1"></i>{% trans "Poster details" %}
+</a>
+
+{% endblock %}

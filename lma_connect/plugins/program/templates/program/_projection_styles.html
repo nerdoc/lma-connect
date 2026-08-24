@@ -1,0 +1,85 @@
+{% comment %}Shared projection styles (16:9) for the room screen. Included by
+   screen.html and poll_project.html. CSP: style-src allows 'unsafe-inline'.
+
+   The projection has its own dark palette — a room screen is viewed from ten
+   metres away in a darkened hall, where the light page background of the app
+   would glare. Only the two brand colours carry over from the event.
+{% endcomment %}
+<style>
+    {% include "_brand_palette.html" %}
+    :root {
+        --p-primary: var(--lma-primary);
+        --p-accent:  var(--lma-accent);
+        --p-bg:      #0d1117;
+        --p-surface: #161b22;
+        --p-text:    #f2f4ff;
+        --p-muted:   #8b949e;
+        --p-track:   #21262d;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+        height: 100%;
+        background: var(--p-bg);
+        color: var(--p-text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+    .stage { height: 100vh; display: flex; flex-direction: column; padding: 4vh 6vw; }
+    .stage__head {
+        display: flex; justify-content: space-between; align-items: center;
+        gap: 2vw; flex: 0 0 auto;
+    }
+    .brand {
+        font-size: 2.2vh; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+        color: var(--p-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .live {
+        display: inline-flex; align-items: center; gap: .6vw;
+        font-size: 2vh; font-weight: 700; letter-spacing: .12em; color: var(--p-accent); white-space: nowrap;
+    }
+    .live__dot {
+        width: 1.4vh; height: 1.4vh; border-radius: 50%;
+        background: var(--p-accent); animation: pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
+
+    /* Refresh container — fills the space between header and edge */
+    .screen-body { flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0; margin-top: 2vh; }
+
+    .question { flex: 0 0 auto; font-size: 5.2vh; line-height: 1.15; font-weight: 800; margin: 1vh 0 4vh; }
+    .results { flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0; }
+    .results__body { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; min-height: 0; }
+    .footer { flex: 0 0 auto; font-size: 2.4vh; color: var(--p-muted); text-align: center; padding-top: 3vh; }
+
+    /* ── Ergebnis-Balken ── */
+    .opt { margin-bottom: 3.2vh; }
+    .opt:last-child { margin-bottom: 0; }
+    .opt__row { display: flex; justify-content: space-between; align-items: baseline; font-size: 3.4vh; font-weight: 600; margin-bottom: 1vh; }
+    .opt__label { padding-right: 2vw; }
+    .opt__pct { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .opt__count { color: var(--p-muted); font-size: 2.4vh; font-weight: 500; margin-left: 1.2vw; }
+    .bar { height: 5vh; background: var(--p-track); border-radius: 1vh; overflow: hidden; }
+    .bar__fill { height: 100%; background: var(--p-primary); border-radius: 1vh; transition: width .6s cubic-bezier(.4,0,.2,1); min-width: 0; }
+    .opt--leader .bar__fill { background: var(--p-accent); }
+    .opt--leader .opt__label::after { content: " ★"; color: var(--p-accent); }
+
+    /* ── Freitext (open) ── */
+    .texts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2vh 2vw; overflow: hidden; align-content: start; }
+    .texts__item { background: var(--p-surface); border-radius: 1.2vh; padding: 2vh 2vw; font-size: 2.8vh; line-height: 1.3; border-left: .6vh solid var(--p-accent); }
+
+    .empty { flex: 1 1 auto; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--p-muted); font-size: 3.4vh; }
+
+    /* ── Standby ── */
+    .standby { flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 3vh; }
+    .standby__logo { max-height: 24vh; max-width: 55vw; object-fit: contain; }
+    .standby__title { font-size: 6.2vh; font-weight: 800; line-height: 1.1; }
+    .standby__sub { font-size: 3.4vh; color: var(--p-muted); }
+    .standby__hint { font-size: 2.6vh; color: var(--p-muted); }
+
+    /* ── Q&A ── */
+    .qa { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; gap: 2vh; min-height: 0; }
+    .qa__title { font-size: 2.4vh; color: var(--p-muted); text-transform: uppercase; letter-spacing: .06em; }
+    .qa-item { background: var(--p-surface); border-radius: 1.2vh; padding: 2vh 2.4vw; font-size: 3.2vh; line-height: 1.25; border-left: .6vh solid var(--p-primary); }
+    .qa-item--starred { border-left-color: var(--p-accent); }
+    .qa-item__star { color: var(--p-accent); }
+</style>

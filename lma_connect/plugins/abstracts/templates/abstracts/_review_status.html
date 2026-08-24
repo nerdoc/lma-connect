@@ -1,0 +1,12 @@
+{% load i18n %}
+{% if review.score %}
+<div class="alert alert-success d-flex align-items-center gap-2 mb-0">
+    <i class="ti ti-check"></i>
+    <div>{% blocktrans with score=review.score %}Rated with <strong>{{ score }}</strong>{% endblocktrans %}{% if review.submitted_at %} · {{ review.submitted_at|date:"j M Y, H:i" }}{% endif %}</div>
+</div>
+{% else %}
+<div class="alert alert-warning d-flex align-items-center gap-2 mb-0">
+    <i class="ti ti-clipboard-list"></i>
+    <div>{% trans "Not yet rated" %}</div>
+</div>
+{% endif %}

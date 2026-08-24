@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ survey.localized_title }}{% endblock %}
+{% block topbar_title %}{{ survey.localized_title|truncatechars:30 }}{% endblock %}
+{% block topbar_sub %}{% blocktrans with count=questions|length %}{{ count }} questions{% endblocktrans %}{% endblock %}
+
+{% block content %}
+<a href="{% url 'feedback:list' %}" class="btn btn-sm btn-ghost-secondary mb-2"><i class="ti ti-arrow-left"></i> {% trans "Feedback" %}</a>
+
+{% if messages %}
+{% for m in messages %}<div class="alert alert-{{ m.tags }}">{{ m }}</div>{% endfor %}
+{% endif %}
+
+{% if already_submitted %}
+<div class="alert alert-success"><i class="ti ti-circle-check"></i> {% trans "You have already submitted this survey — thanks! You can update your answers any time." %}</div>
+{% endif %}
+
+{% if survey.localized_intro_text %}
+<div class="card mb-3"><div class="card-body py-3">{{ survey.localized_intro_text|linebreaks }}</div></div>
+{% endif %}
+
+<form method="post" action="{% url 'feedback:submit' survey.slug %}">
+    {% csrf_token %}
+
+    {% for q in questions %}
+    <div class="card mb-2"><div class="card-body py-3">
+        <label class="form-label fw-bold mb-1">
+            {{ forloop.counter }}. {{ q.localized_text }}
+            {% if q.is_required %}<span class="text-danger">*</span>{% endif %}
+        </label>
+        {% if q.localized_help_text %}<div class="small text-secondary mb-2">{{ q.localized_help_text }}</div>{% endif %}
+
+        {% if q.type == 'yes_no' %}
+            <div class="btn-group w-100" role="group" aria-label="{% trans 'Yes/No' %}">
+                <input type="radio" class="btn-check" name="q_{{ q.id }}" id="q{{ q.id }}_yes" value="yes" autocomplete="off">
+                <label class="btn btn-outline-success" for="q{{ q.id }}_yes"><i class="ti ti-check"></i> {% trans "Yes" %}</label>
+                <input type="radio" class="btn-check" name="q_{{ q.id }}" id="q{{ q.id }}_no" value="no" autocomplete="off">
+                <label class="btn btn-outline-secondary" for="q{{ q.id }}_no"><i class="ti ti-x"></i> {% trans "No" %}</label>
+            </div>
+
+        {% elif q.type == 'likert_5' %}
+            <div class="d-flex justify-content-between small text-secondary mb-1">
+                <span>{{ q.localized_likert_min_label|default:"1" }}</span>
+                <span>{{ q.localized_likert_max_label|default:"5" }}</span>
+            </div>
+            <div class="btn-group w-100" role="group" aria-label="{% trans 'Likert scale' %}">
+                {% for i in "12345" %}
+                <input type="radio" class="btn-check" name="q_{{ q.id }}" id="q{{ q.id }}_{{ i }}" value="{{ i }}" autocomplete="off">
+                <label class="btn btn-outline-primary fs-4" for="q{{ q.id }}_{{ i }}">{{ i }}</label>
+                {% endfor %}
+            </div>
+
+        {% elif q.type == 'open_text' %}
+            <textarea class="form-control" name="q_{{ q.id }}" rows="3" placeholder="{% trans 'Your answer …' %}" {% if q.is_required %}required{% endif %}></textarea>
+
+        {% elif q.type == 'single_choice' %}
+            <div class="d-flex flex-column gap-1">
+                {% for c in q.choices.all %}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q_{{ q.id }}" id="q{{ q.id }}_c{{ c.id }}" value="{{ c.id }}">
+                    <label class="form-check-label" for="q{{ q.id }}_c{{ c.id }}">{{ c.localized_text }}</label>
+                </div>
+                {% endfor %}
+            </div>
+
+        {% elif q.type == 'multi_choice' %}
+            <div class="d-flex flex-column gap-1">
+                {% for c in q.choices.all %}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="q_{{ q.id }}" id="q{{ q.id }}_c{{ c.id }}" value="{{ c.id }}">
+                    <label class="form-check-label" for="q{{ q.id }}_c{{ c.id }}">{{ c.localized_text }}</label>
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div></div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary w-100"><i class="ti ti-send"></i> {% trans "Submit feedback" %}</button>
+</form>
+
+{% if not user.is_authenticated and not survey.allow_anonymous %}
+<div class="alert alert-secondary mt-3 small mb-0">
+    <i class="ti ti-info-circle"></i> <a href="{% url 'login' %}?next={{ request.path }}">{% trans "Sign in" %}</a> {% trans "required (anonymous submission disabled)." %}
+</div>
+{% endif %}
+
+{% endblock %}

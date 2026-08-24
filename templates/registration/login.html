@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Sign in" %} — {{ event.name|default:"LMA Connect" }}{% endblock %}
+{% block topbar_title %}{% trans "Sign in" %}{% endblock %}
+{% block topbar_sub %}{{ event.name|default:"LMA Connect" }}{% endblock %}
+
+{% block content %}
+{% comment %} The primary route for attendees is the QR code. The password login below
+   is for organizers and staff only.{% endcomment %}
+<div class="card mt-3 border-primary">
+    <div class="card-body text-center py-4">
+        <i class="ti ti-qrcode h1 d-block mb-2" style="color: var(--lma-primary);"></i>
+        <h1 class="h4 mb-2">{% trans "Sign in with your QR-code" %}</h1>
+        <p class="text-secondary small mb-2">
+            {% blocktrans %}If you are a speaker, delegate, company representative or any other
+            attendee, please sign in by scanning your personal QR-code badge — no username
+            or password needed.{% endblocktrans %}
+        </p>
+        <p class="text-secondary small mb-0">
+            <i class="ti ti-help-circle"></i>
+            {% blocktrans %}Lost your code or never received one? Please contact the registration desk.{% endblocktrans %}
+        </p>
+    </div>
+</div>
+
+<div class="card mt-3">
+    <div class="card-body">
+        <h2 class="h5 mb-1 text-center"><i class="ti ti-lock me-1"></i> {% trans "Organizer sign-in" %}</h2>
+        <p class="text-secondary small text-center mb-3">
+            {% trans "For organizers and staff only." %}
+        </p>
+
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger py-2">
+            {% for err in form.non_field_errors %}{{ err }}{% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label" for="id_username">{% trans "Username" %}</label>
+                <input type="text" name="username" id="id_username" class="form-control"
+                       autocomplete="username" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="id_password">{% trans "Password" %}</label>
+                <input type="password" name="password" id="id_password" class="form-control"
+                       autocomplete="current-password" required>
+            </div>
+            <input type="hidden" name="next" value="{{ next }}">
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="ti ti-login"></i> {% trans "Sign in" %}
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

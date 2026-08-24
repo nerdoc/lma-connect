@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load i18n markdownify %}
+
+{% block title %}{{ event.name }}{% endblock %}
+{% block topbar_title %}{{ event.name }}{% endblock %}
+{% block topbar_sub %}{{ event.start_date|date:"j M" }}–{{ event.end_date|date:"j M Y" }} · {{ event.city }}{% endblock %}
+
+{% block content %}
+<a href="{% url 'core:home' %}" class="btn btn-sm btn-ghost-secondary mb-2"><i class="ti ti-arrow-left"></i> {% trans "Home" %}</a>
+
+{% if event.banner %}
+<img src="{{ event.banner.url }}" alt="{{ event.name }}" class="img-fluid rounded mb-3" style="width: 100%; object-fit: cover;">
+{% endif %}
+
+<div class="card mb-3"><div class="card-body">
+    <div class="d-flex gap-3 align-items-start mb-2">
+        {% if event.logo %}
+        <img src="{{ event.logo.url }}" alt="{{ event.name }}" style="width: 64px; height: 64px; object-fit: contain;">
+        {% endif %}
+        <div class="flex-grow-1">
+            <h1 class="h3 mb-1">{{ event.name }}</h1>
+            {% if event.localized_subtitle %}<div class="text-secondary">{{ event.localized_subtitle }}</div>{% endif %}
+        </div>
+    </div>
+
+    <div class="d-flex flex-column gap-2 mt-3">
+        <div class="d-flex gap-2 align-items-center small">
+            <i class="ti ti-calendar text-secondary"></i>
+            <span>{{ event.start_date|date:"j M" }}–{{ event.end_date|date:"j M Y" }}</span>
+        </div>
+        {% if event.localized_venue_name or event.city %}
+        <div class="d-flex gap-2 align-items-start small">
+            <i class="ti ti-map-pin text-secondary mt-1"></i>
+            <span>
+                {% if event.localized_venue_name %}<strong>{{ event.localized_venue_name }}</strong><br>{% endif %}
+                {{ event.localized_address }}{% if event.localized_address %}<br>{% endif %}
+                {{ event.postal_code }} {{ event.city }}{% if event.country %}, {{ event.country }}{% endif %}
+            </span>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if event.homepage_url %}
+    <a href="{{ event.homepage_url }}" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary mt-3"><i class="ti ti-external-link"></i> {% trans "Website" %}</a>
+    {% endif %}
+</div></div>
+
+{% if event.localized_description %}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5 mb-2"><i class="ti ti-info-circle me-1"></i>{% trans "About" %}</h2>
+    <div>{{ event.localized_description|markdownify }}</div>
+</div></div>
+{% endif %}
+
+{% endblock %}

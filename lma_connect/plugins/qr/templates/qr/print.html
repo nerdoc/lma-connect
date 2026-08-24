@@ -1,0 +1,69 @@
+{% load static i18n %}<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "QR print" %} · {{ kind }}{% if event %} · {{ event.name }}{% endif %}</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: -apple-system, "system-ui", sans-serif; margin: 0; padding: 1rem; background: #f8f9fa; color: #111; }
+        h1 { font-size: 1.1rem; margin: 0 0 1rem 0; }
+        .toolbar { margin-bottom: 1rem; padding: 0.75rem; background: #fff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .toolbar a { margin-right: 0.5rem; padding: 0.4rem 0.75rem; border: 1px solid #ddd; border-radius: 6px; text-decoration: none; color: #333; font-size: 0.85rem; }
+        .toolbar a.active { background: #206bc4; color: #fff; border-color: #206bc4; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        .card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 1rem;
+            page-break-inside: avoid;
+            text-align: center;
+        }
+        .card img { width: 100%; max-width: 240px; height: auto; }
+        .card .group { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; background: #206bc4; padding: 0.15rem 0.6rem; border-radius: 20px; margin-top: 0.5rem; }
+        .card .title { font-weight: 700; font-size: 0.95rem; margin: 0.35rem 0 0.25rem; line-height: 1.2; }
+        .card .subtitle { font-size: 0.75rem; color: #666; margin-bottom: 0.5rem; }
+        .card .code { font-family: ui-monospace, monospace; font-size: 0.7rem; color: #999; word-break: break-all; }
+        @media print {
+            body { background: #fff; padding: 0; }
+            .toolbar { display: none; }
+            .grid { gap: 0.5cm; }
+            .card { border: 1px dashed #999; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="toolbar">
+    <strong>{% trans "QR print:" %}</strong>
+    <a href="?kind=tokens{% if event %}&event={{ event.slug }}{% endif %}" class="{% if kind == 'tokens' %}active{% endif %}">{% trans "Tokens" %}</a>
+    <a href="?kind=sessions{% if event %}&event={{ event.slug }}{% endif %}" class="{% if kind == 'sessions' %}active{% endif %}">{% trans "Sessions" %}</a>
+    <a href="?kind=polls{% if event %}&event={{ event.slug }}{% endif %}" class="{% if kind == 'polls' %}active{% endif %}">{% trans "Polls" %}</a>
+    <span style="float: right;">{{ items|length }} {% trans "cards" %} · <button id="print-btn" style="padding: 0.3rem 0.7rem; border: 1px solid #206bc4; background: #206bc4; color: #fff; border-radius: 6px; cursor: pointer;">🖨 {% trans "Print" %}</button></span>
+</div>
+<script nonce="{{ request.csp_nonce }}">
+    document.getElementById('print-btn')?.addEventListener('click', () => window.print());
+</script>
+
+{% if items %}
+<div class="grid">
+    {% for it in items %}
+    <div class="card">
+        <img src="{% url 'qr:free' %}?u={{ it.url|urlencode }}" alt="QR">
+        {% if it.group %}<div class="group">{{ it.group }}</div>{% endif %}
+        <div class="title">{{ it.title|truncatechars:80 }}</div>
+        <div class="subtitle">{{ it.subtitle }}</div>
+        <div class="code">{{ it.code }}</div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="card"><p style="color:#999">{% trans "No items for" %} kind={{ kind }}{% if event %} · event={{ event.slug }}{% endif %}.</p></div>
+{% endif %}
+
+</body>
+</html>

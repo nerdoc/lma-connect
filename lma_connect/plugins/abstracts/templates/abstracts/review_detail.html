@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+{% load i18n markdownify %}
+
+{% block title %}{% trans "Review" %} · {{ abstract.title|truncatechars:60 }}{% endblock %}
+{% block topbar_title %}{% trans "Review" %}{% endblock %}
+{% block topbar_sub %}{{ abstract.poster_id|default:abstract.title|truncatechars:40 }}{% endblock %}
+
+{% block extra_head %}
+<style>
+    .score-slider { width: 100%; height: 44px; }
+    .score-marks { display: flex; justify-content: space-between; font-size: 0.85rem;
+                   color: var(--tblr-secondary); margin-top: 0.25rem; padding: 0 0.5rem; }
+    .score-display { font-size: 4rem; font-weight: 700; line-height: 1; text-align: center;
+                     margin: 1rem 0; transition: color 0.2s; }
+    /* LMA Score-Skala: 1-2 cerulean, 3 cerulean lighter, 4 sunglow, 5-6 bittersweet */
+    .score-display.s-1, .score-display.s-2 { color: var(--lma-primary); }
+    .score-display.s-3 { color: var(--lma-primary-light); }
+    .score-display.s-4 { color: var(--lma-highlight-ink); }
+    .score-display.s-5, .score-display.s-6 { color: var(--lma-accent); }
+    .score-display.s- { color: var(--tblr-secondary); }
+    .abstract-text { white-space: pre-wrap; font-size: 0.95rem; line-height: 1.5; }
+    details > summary { list-style: none; cursor: pointer; }
+    details > summary::-webkit-details-marker { display: none; }
+    details[open] > summary .ti-chevron-down { transform: rotate(180deg); }
+    .peer-content ul, .peer-content ol { padding-left: 1.2rem; }
+    .peer-content p { margin-bottom: 0.5rem; }
+    .peer-content strong { color: var(--tblr-body-color); }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="mb-3 d-flex justify-content-between align-items-center gap-2">
+    <a href="{% url 'abstracts:review_list' %}" class="btn btn-sm btn-outline-secondary">
+        <i class="ti ti-arrow-left"></i> {% trans "Overview" %}
+    </a>
+    <div class="btn-group btn-group-sm" role="group">
+        {% if prev_id %}<a href="{% url 'abstracts:review_detail' prev_id %}" class="btn btn-outline-secondary" aria-label="{% trans 'Previous' %}"><i class="ti ti-chevron-left"></i></a>
+        {% else %}<button class="btn btn-outline-secondary" disabled><i class="ti ti-chevron-left"></i></button>{% endif %}
+        {% if next_id %}<a href="{% url 'abstracts:review_detail' next_id %}" class="btn btn-outline-secondary" aria-label="{% trans 'Next' %}"><i class="ti ti-chevron-right"></i></a>
+        {% else %}<button class="btn btn-outline-secondary" disabled><i class="ti ti-chevron-right"></i></button>{% endif %}
+    </div>
+</div>
+
+<div class="card mb-3" style="border-left: 4px solid var(--lma-highlight);">
+    <div class="card-body py-2">
+        <details>
+            <summary class="cursor-pointer fw-bold mb-0">
+                <i class="ti ti-list-check"></i> {% trans "Review criteria" %}
+                <span class="small text-secondary ms-1">{% trans "— what authors were asked to address" %}</span>
+                <i class="ti ti-chevron-down float-end"></i>
+            </summary>
+            <p class="text-secondary small mt-2 mb-2">
+                {% trans "Abstracts must describe structured accounts of implemented or failed digital / AI projects in medical diagnostics — real-world experience, not concepts. Each submission should cover:" %}
+            </p>
+            <ol class="small mb-1">
+                <li>{% trans "The clinical or operational problem addressed" %}</li>
+                <li>{% trans "The implemented or failed solution and its integration into existing systems" %}</li>
+                <li>{% trans "Governance, regulatory and data protection considerations" %}</li>
+                <li>{% trans "Measurable outcomes and operational impact" %}</li>
+                <li>{% trans "Lessons learned, including challenges and setbacks" %}</li>
+                <li>{% trans "Practical recommendations for others" %}</li>
+            </ol>
+            <p class="small text-secondary mb-0">
+                {% trans "Both successful and unsuccessful projects are welcome. Transparent reflection and practical relevance are essential." %}
+            </p>
+        </details>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="d-flex flex-wrap gap-1 mb-2">
+            {% if abstract.poster_id %}<span class="badge bg-secondary-lt fw-bold">{{ abstract.poster_id }}</span>{% endif %}
+            {% if abstract.category %}<span class="badge" style="background: {{ abstract.category.color }}; color: #fff;">{{ abstract.category.name }}</span>{% endif %}
+            {% for tag in abstract.tags.all %}<span class="badge" style="background: {{ tag.color }}; color: #fff;">{{ tag.name }}</span>{% endfor %}
+        </div>
+        <h1 class="h3">{{ abstract.title }}</h1>
+
+        {% with authors=abstract.authors.all %}
+        {% if authors %}
+        <div class="text-secondary mb-3">
+            {% for a in authors %}
+                <span>{{ a.full_name }}{% if a.is_presenting %}*{% endif %}{% if a.affiliation %} <em class="text-muted">({{ a.affiliation }})</em>{% endif %}</span>{% if not forloop.last %}<span class="mx-1">·</span>{% endif %}
+            {% endfor %}
+            {% if authors.0.is_presenting %}<div class="small text-muted mt-1">{% trans "* presenting author" %}</div>{% endif %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <div class="abstract-text">{{ abstract.abstract_text }}</div>
+
+        {% if abstract.keywords %}
+        <div class="mt-3 small text-secondary"><strong>{% trans "Keywords:" %}</strong> {{ abstract.keywords }}</div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="card mb-3 border-info">
+    <div class="card-body">
+        <details {% if abstract.peer_review %}open{% endif %}>
+            <summary class="cursor-pointer fw-bold h5 mb-0">
+                <i class="ti ti-robot text-info"></i> {% trans "PEER pre-review" %}
+                <span class="badge bg-info-lt ms-1">AI</span>
+                <i class="ti ti-chevron-down float-end"></i>
+            </summary>
+            <p class="text-secondary small mt-2 mb-2">
+                {% trans "Independent AI pre-assessment as a helper — your rating remains yours." %}
+            </p>
+            {% if abstract.peer_review %}
+            <div class="peer-content small">{{ abstract.peer_review|markdownify }}</div>
+            {% else %}
+            <div class="alert alert-light mb-0 small">
+                <i class="ti ti-hourglass-empty"></i>
+                {% trans "PEER has not analysed this abstract yet." %}
+            </div>
+            {% endif %}
+        </details>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h2 class="h4 mb-2"><i class="ti ti-stars"></i> {% trans "Your rating" %}</h2>
+        <p class="text-secondary small mb-3">
+            {% trans "1 = excellent · 2 = very good · 3 = good · 4 = borderline · 5 = weak · 6 = not suitable" %}
+        </p>
+
+        <form hx-post="{% url 'abstracts:review_save' review.pk %}"
+              hx-target="#review-status"
+              hx-swap="innerHTML">
+            {% csrf_token %}
+
+            <div class="score-display s-{{ review.score|default_if_none:'' }}" id="score-display">
+                {{ review.score|default:"—" }}
+            </div>
+
+            <input type="range" min="1" max="6" step="1"
+                   name="score" id="score-input"
+                   value="{{ review.score|default:'3' }}"
+                   class="form-range score-slider"
+                   {% if review.score is None %}data-untouched="1"{% endif %}>
+            <div class="score-marks">
+                <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label for="comment" class="form-label">{% trans "Comment (optional)" %}</label>
+                <textarea name="comment" id="comment" class="form-control" rows="3"
+                          placeholder="{% trans 'Notes, strengths, weaknesses …' %}">{{ review.comment }}</textarea>
+            </div>
+
+            <div class="d-flex gap-2 flex-wrap">
+                <button type="submit" class="btn btn-primary">
+                    <i class="ti ti-device-floppy"></i> {% trans "Save" %}
+                </button>
+                {% if review.score is not None %}
+                <button type="button" class="btn btn-outline-secondary"
+                        hx-post="{% url 'abstracts:review_clear' review.pk %}"
+                        hx-target="#review-status"
+                        hx-swap="innerHTML"
+                        hx-confirm="{% trans 'Really clear this rating?' %}">
+                    <i class="ti ti-rotate"></i> {% trans "Reset" %}
+                </button>
+                {% endif %}
+            </div>
+        </form>
+
+        <div id="review-status" class="mt-3">
+            {% include "abstracts/_review_status.html" with review=review %}
+        </div>
+    </div>
+</div>
+
+<script nonce="{{ request.csp_nonce }}">
+    (function() {
+        const input = document.getElementById('score-input');
+        const display = document.getElementById('score-display');
+        function update(val) {
+            display.textContent = val;
+            display.className = 'score-display s-' + val;
+        }
+        input.addEventListener('input', () => {
+            input.removeAttribute('data-untouched');
+            update(input.value);
+        });
+        input.addEventListener('change', () => update(input.value));
+        input.form.addEventListener('submit', (e) => {
+            if (input.hasAttribute('data-untouched')) {
+                input.disabled = true;
+                setTimeout(() => { input.disabled = false; }, 100);
+            }
+        });
+    })();
+</script>
+
+{% endblock %}

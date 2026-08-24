@@ -1,0 +1,32 @@
+{% load i18n %}
+{# Live-Ergebnisblock der Beamer-Ansicht — via HTMX alle 3s ersetzt. #}
+<div class="results__body">
+{% if poll.type == 'open' %}
+    {% if text_answers %}
+    <div class="texts">
+        {% for t in text_answers %}
+        <div class="texts__item">{{ t|truncatechars:220 }}</div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty">{% trans "Waiting for the first answer …" %}</div>
+    {% endif %}
+{% else %}
+    {% if total %}
+    <div>
+        {% for o in options %}
+        <div class="opt {% if o.is_leader %}opt--leader{% endif %}">
+            <div class="opt__row">
+                <span class="opt__label">{{ o.text }}</span>
+                <span class="opt__pct">{{ o.pct }}%<span class="opt__count">{{ o.count }}</span></span>
+            </div>
+            <div class="bar"><div class="bar__fill" style="width: {{ o.pct }}%;"></div></div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty">{% trans "No votes yet — waiting for the audience …" %}</div>
+    {% endif %}
+{% endif %}
+</div>
+<div class="footer">{{ total }} {% blocktrans count counter=total %}vote{% plural %}votes{% endblocktrans %}</div>

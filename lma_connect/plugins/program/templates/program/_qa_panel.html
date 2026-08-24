@@ -1,0 +1,58 @@
+{% load i18n %}
+{# Q&A panel — re-rendered after submit/upvote via HTMX. #}
+<div id="qa-panel">
+
+{% if user.is_authenticated %}
+<div class="card mb-2"><div class="card-body py-3">
+    <form hx-post="{% url 'program:question_create' session.slug %}"
+          hx-target="#qa-panel" hx-swap="outerHTML"
+          data-hx-reset-on-success>
+        <textarea class="form-control mb-2" name="text" rows="3"
+                  placeholder="{% trans "Your question for the panel discussion …" %}" required maxlength="2000"></textarea>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="small text-secondary">{% if session.qa_moderated %}{% trans "Moderated — needs approval before showing" %}{% else %}{% trans "Visible immediately" %}{% endif %}</div>
+            <button type="submit" class="btn btn-primary btn-sm"><i class="ti ti-send"></i> {% trans "Send" %}</button>
+        </div>
+    </form>
+</div></div>
+{% else %}
+<div class="alert alert-secondary py-2"><i class="ti ti-info-circle"></i> <a href="{% url 'login' %}?next={{ request.path }}">{% trans "Sign in" %}</a> {% trans "required to ask a question." %}</div>
+{% endif %}
+
+{% if questions %}
+<div class="d-flex flex-column gap-2">
+    {% for q in questions %}
+    <div class="card {% if q.is_starred %}border-warning{% endif %}" {% if q.is_starred %}style="box-shadow: 0 0 0 1px var(--tblr-warning);"{% endif %}>
+    <div class="card-body py-2">
+        <div class="d-flex justify-content-between align-items-start gap-2">
+            <div class="flex-grow-1">
+                <div class="small text-secondary mb-1">
+                    {% if q.is_starred %}<span class="badge bg-warning text-dark"><i class="ti ti-star-filled"></i> {% trans "will be asked" %}</span> {% endif %}
+                    {% if q.added_by_chair %}<span class="badge bg-blue-lt"><i class="ti ti-microphone-2"></i> {% trans "Chair" %}</span>{% elif q.asker %}<strong class="text-body">{{ q.asker.first_name|default:q.asker.username }}</strong>{% if q.asker.affiliation_line %} · {{ q.asker.affiliation_line }}{% endif %}{% else %}{{ q.asker_display_name|default:"anonymous" }}{% endif %}
+                    · {{ q.created_at|date:"H:i" }}
+                    {% if q.is_answered %}<span class="badge bg-green-lt ms-1"><i class="ti ti-check"></i> {% trans "answered" %}</span>{% endif %}
+                </div>
+                <div>{{ q.text }}</div>
+            </div>
+            <div class="text-center" style="min-width: 56px;">
+                {% if user.is_authenticated %}
+                <button type="button" class="btn btn-sm {% if q.id in user_upvoted_ids %}btn-primary{% else %}btn-ghost-primary{% endif %}"
+                        hx-post="{% url 'program:question_upvote' q.id %}"
+                        hx-target="#qa-panel" hx-swap="outerHTML"
+                        aria-label="{% trans "Upvote" %}">
+                    <i class="ti ti-arrow-up"></i>
+                </button>
+                {% else %}
+                <button type="button" class="btn btn-sm btn-ghost-secondary" disabled aria-label="{% trans "Upvote (sign in)" %}"><i class="ti ti-arrow-up"></i></button>
+                {% endif %}
+                <div class="small fw-bold mt-1">{{ q.votes }}</div>
+            </div>
+        </div>
+    </div></div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="text-center text-secondary small py-3">{% trans "No questions yet — be the first to ask." %}</div>
+{% endif %}
+
+</div>

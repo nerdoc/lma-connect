@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% blocktrans with name=event.name %}Feedback — {{ name }}{% endblocktrans %}{% endblock %}
+{% block topbar_title %}{% trans "Feedback" %}{% endblock %}
+{% block topbar_sub %}{% blocktrans with name=event.name %}Help us make {{ name }} better{% endblocktrans %}{% endblock %}
+
+{% block content %}
+
+{% if not surveys %}
+<div class="empty">
+    <div class="empty-icon"><i class="ti ti-message-2 h1"></i></div>
+    <p class="empty-title">{% trans "No feedback survey active" %}</p>
+    <p class="empty-subtitle text-secondary">{% trans "The post-event survey will be opened at the end of the conference." %}</p>
+</div>
+{% else %}
+<div class="d-flex flex-column gap-2">
+{% for survey in surveys %}
+<a href="{% url 'feedback:detail' survey.slug %}" class="card text-decoration-none">
+    <div class="card-body py-3">
+        <div class="d-flex justify-content-between gap-2 align-items-start">
+            <div>
+                <div class="fw-bold">{{ survey.localized_title }}</div>
+                {% if survey.localized_intro_text %}<div class="small text-secondary mt-1">{{ survey.localized_intro_text|truncatechars:120 }}</div>{% endif %}
+                <div class="small mt-2">
+                    <span class="badge bg-blue-lt"><i class="ti ti-list-numbers"></i> {% blocktrans with count=survey.questions.count %}{{ count }} questions{% endblocktrans %}</span>
+                    {% if survey.allow_anonymous %}<span class="badge bg-green-lt"><i class="ti ti-eye-off"></i> {% trans "anonymous allowed" %}</span>{% endif %}
+                </div>
+            </div>
+            <i class="ti ti-chevron-right text-secondary"></i>
+        </div>
+    </div>
+</a>
+{% endfor %}
+</div>
+{% endif %}
+{% endblock %}

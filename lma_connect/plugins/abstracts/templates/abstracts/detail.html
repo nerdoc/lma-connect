@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load i18n markdownify %}
+
+{% block title %}[{{ abstract.poster_id }}] {{ abstract.title }}{% endblock %}
+{% block topbar_title %}{{ abstract.poster_id|default:_("Abstract") }}{% endblock %}
+{% block topbar_sub %}{{ abstract.category.name|default:"" }}{% endblock %}
+
+{% block content %}
+<a href="{% url 'abstracts:list' %}" class="btn btn-sm btn-ghost-secondary mb-2"><i class="ti ti-arrow-left"></i> {% trans "Abstracts" %}</a>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="d-flex flex-wrap gap-1 mb-2">
+            <span class="badge bg-{% if abstract.type == 'poster' %}orange{% elif abstract.type == 'oral' %}blue{% else %}yellow{% endif %}-lt fs-5 fw-bold">{{ abstract.poster_id|default:abstract.get_type_display }}</span>
+            {% if abstract.category %}<span class="badge" style="background: {{ abstract.category.color }}; color: #fff;">{{ abstract.category.name }}</span>{% endif %}
+            <span class="badge bg-secondary-lt">{{ abstract.get_type_display }}</span>
+        </div>
+        <h1 class="h3 mb-2">{{ abstract.title }}</h1>
+        {% if abstract.award %}
+        <div class="alert mb-2 py-2"
+             style="background: var(--lma-highlight-soft); border: 1px solid var(--lma-highlight);">
+            <div class="d-flex align-items-center gap-2">
+                <i class="ti ti-trophy h2 m-0" style="color: var(--lma-ink);"></i>
+                <div>
+                    <div class="fw-bold" style="color: var(--lma-ink);">{{ abstract.award.name }}</div>
+                    {% if abstract.award_note %}<div class="small">{{ abstract.award_note }}</div>{% endif %}
+                    {% if abstract.award_at %}<div class="small text-muted">{{ abstract.award_at|date:"j F Y" }}</div>{% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if abstract.location %}
+        <div class="alert alert-info py-2 mb-0"><i class="ti ti-map-pin"></i> <strong>{% trans "Where to find:" %}</strong> {{ abstract.location }}</div>
+        {% endif %}
+    </div>
+</div>
+
+{# ─── Audience vote: the note only; voting happens at the poster ─── #}
+{% if abstract.has_poster %}
+<div class="card mb-3">
+    <div class="card-body py-3">
+        <div class="d-flex gap-3 align-items-start">
+            <i class="ti ti-star-filled h2 m-0 text-warning"></i>
+            <div>
+                <div class="fw-bold mb-1">{% trans "Audience Choice Award" %}</div>
+                {% if user_star_given %}
+                <div class="small">
+                    <i class="ti ti-check text-success me-1"></i>{% trans "You have given this poster your star." %}
+                </div>
+                {% else %}
+                <div class="small text-secondary">
+                    {% blocktrans %}To rate this poster, scan the QR code on the poster itself — voting only works on site. Every attendee has {{ stars_total }} stars and can give at most one per poster. A star is final and cannot be taken back.{% endblocktrans %}
+                </div>
+                {% if user.is_authenticated %}
+                <div class="small mt-1">
+                    {% blocktrans count n=stars_left %}You have {{ n }} star left.{% plural %}You have {{ n }} stars left.{% endblocktrans %}
+                </div>
+                {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% with authors=abstract.authors.all %}
+{% if authors %}
+<div class="card mb-3">
+    <div class="card-header py-2"><h2 class="card-title mb-0 h5"><i class="ti ti-users me-1"></i>{% trans "Authors" %}</h2></div>
+    <div class="card-body p-0">
+        <ul class="list-unstyled mb-0">
+            {% for a in authors %}
+            <li class="d-flex justify-content-between gap-2 px-3 py-2 {% if not forloop.last %}border-bottom{% endif %}">
+                <div>
+                    <div class="fw-bold">{{ a.full_name }}{% if a.is_presenting %} <span class="badge bg-blue-lt">{% trans "presenting" %}</span>{% endif %}{% if a.is_corresponding %} <span class="badge bg-orange-lt">{% trans "corr." %}</span>{% endif %}</div>
+                    {% if a.affiliation %}<div class="small text-secondary">{{ a.affiliation }}</div>{% endif %}
+                    {% if a.orcid %}<div class="small text-secondary">ORCID: {{ a.orcid }}</div>{% endif %}
+                </div>
+                <span class="text-secondary small" style="font-variant-numeric: tabular-nums;">#{{ a.order }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}
+{% endwith %}
+
+<div class="card mb-3">
+    <div class="card-header py-2"><h2 class="card-title mb-0 h5">{% trans "Abstract" %}</h2></div>
+    <div class="card-body">
+        <div>{{ abstract.abstract_text|markdownify }}</div>
+        {% if abstract.keywords %}
+        <hr>
+        <div class="small">
+            <strong>{% trans "Keywords:" %}</strong>
+            <span class="text-secondary">{{ abstract.keywords }}</span>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% with refs=abstract.references.all %}
+{% if refs %}
+<div class="card mb-3">
+    <div class="card-header py-2"><h2 class="card-title mb-0 h5">{% trans "References" %}</h2></div>
+    <div class="card-body p-0">
+        <ol class="mb-0 ps-4 py-2">
+            {% for ref in refs %}
+            <li class="px-2 py-2 {% if not forloop.last %}border-bottom{% endif %}">
+                <div>{{ ref.citation_text }}</div>
+                <div class="small mt-1">
+                    {% if ref.doi %}<a href="https://doi.org/{{ ref.doi }}" target="_blank" rel="noopener" class="me-2"><i class="ti ti-link"></i> DOI: {{ ref.doi }}</a>{% endif %}
+                    {% if ref.url %}<a href="{{ ref.url }}" target="_blank" rel="noopener"><i class="ti ti-external-link"></i> {% trans "Link" %}</a>{% endif %}
+                </div>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+</div>
+{% endif %}
+{% endwith %}
+
+{% endblock %}

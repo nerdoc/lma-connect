@@ -1,0 +1,31 @@
+{% load i18n %}
+{% comment %}Aktuell projizierter Inhalt — via HTMX alle 3s ersetzt.
+   Quelle steuert der Chair (Session.screen_source).{% endcomment %}
+{% if screen_source == 'poll' and poll %}
+    <div class="question">{{ poll.question_text }}</div>
+    <div class="results">
+        {% include "program/_poll_project_results.html" %}
+    </div>
+
+{% elif screen_source == 'qa' %}
+    <div class="qa">
+        <div class="qa__title"><i class="ti ti-microphone-2"></i> {% trans "Questions" %}</div>
+        {% if screen_questions %}
+            {% for q in screen_questions %}
+            <div class="qa-item {% if q.is_starred %}qa-item--starred{% endif %}">
+                {% if q.is_starred %}<span class="qa-item__star">★</span> {% endif %}{{ q.text }}
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty">{% trans "No questions yet — ask away!" %}</div>
+        {% endif %}
+    </div>
+
+{% else %}
+    <div class="standby">
+        {% if event.logo %}<img class="standby__logo" src="{{ event.logo.url }}" alt="">{% endif %}
+        <div class="standby__title">{{ session.title }}</div>
+        {% if event.name %}<div class="standby__sub">{{ event.name }}</div>{% endif %}
+        <div class="standby__hint">{% trans "The session will continue shortly." %}</div>
+    </div>
+{% endif %}

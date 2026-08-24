@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% comment %}
+    Django renders this template automatically through its default handler
+    django.views.defaults.page_not_found when DEBUG=False and a URL does not
+    match (Http404). Context: a RequestContext, so the context processors run
+    — active_event in particular supplies {{ event }} for base.html.
+{% endcomment %}
+
+{% block title %}{% trans "Page not found" %} — {{ event.name|default:"Conference App" }}{% endblock %}
+{% block topbar_title %}{% trans "Page not found" %}{% endblock %}
+{% block topbar_sub %}{% trans "Error 404" %}{% endblock %}
+
+{% block content %}
+<div class="empty">
+    <div class="empty-icon">
+        <i class="ti ti-map-search h1" style="color: var(--lma-primary);"></i>
+    </div>
+    <p class="empty-title">{% trans "This page doesn’t exist" %}</p>
+    <p class="empty-subtitle text-secondary">
+        {% trans "The link may be outdated, or the page has moved. Let’s get you back on track." %}
+    </p>
+    <div class="empty-action d-flex gap-2 flex-wrap justify-content-center">
+        <a href="{% url 'core:home' %}" class="btn btn-primary">
+            <i class="ti ti-home"></i> {% trans "Back to home" %}
+        </a>
+        <a href="{% url 'core:help' %}" class="btn btn-outline-primary">
+            <i class="ti ti-help-circle"></i> {% trans "Help" %}
+        </a>
+    </div>
+</div>
+{% endblock %}

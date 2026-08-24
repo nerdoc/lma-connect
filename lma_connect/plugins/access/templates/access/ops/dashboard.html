@@ -1,0 +1,99 @@
+{% extends "access/ops/_base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Operations Dashboard" %}{% endblock %}
+
+{% block ops_content %}
+<div class="row g-3 mb-3">
+    <div class="col-6 col-md-3">
+        <div class="card">
+            <div class="card-body py-3 text-center">
+                <div class="h2 mb-0" style="color: var(--lma-primary);">{{ stats.tokens_total }}</div>
+                <div class="small text-secondary">{% trans "Tokens total" %}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card">
+            <div class="card-body py-3 text-center">
+                <div class="h2 mb-0" style="color: var(--lma-highlight); text-shadow: 0 1px 0 var(--lma-shadow);">{{ stats.tokens_open }}</div>
+                <div class="small text-secondary">{% trans "Open / unused" %}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card">
+            <div class="card-body py-3 text-center">
+                <div class="h2 mb-0" style="color: var(--lma-primary);">{{ stats.tokens_redeemed }}</div>
+                <div class="small text-secondary">{% trans "Redeemed" %}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card">
+            <div class="card-body py-3 text-center">
+                <div class="h2 mb-0" style="color: var(--lma-accent);">{{ stats.users_total }}</div>
+                <div class="small text-secondary">{% trans "Users total" %}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2 class="h4 mb-2"><i class="ti ti-bolt"></i> {% trans "Quick actions" %}</h2>
+<div class="row g-2 mb-3">
+    <div class="col-12 col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h3 class="h5"><i class="ti ti-plus"></i> {% trans "Generate access tokens" %}</h3>
+                <p class="small text-secondary mb-2">
+                    {% trans "Bulk-create QR-code tokens for attendees who need a badge." %}
+                </p>
+                <form method="post" action="{% url 'access:ops_tokens_create' %}" class="row g-2 align-items-end">
+                    {% csrf_token %}
+                    <div class="col-4 col-sm-3">
+                        <label class="form-label small mb-1">{% trans "Count" %}</label>
+                        <input type="number" name="count" value="10" min="1" max="1000" class="form-control form-control-sm" required>
+                    </div>
+                    <div class="col-8 col-sm-4">
+                        <label class="form-label small mb-1">{% trans "Group" %}</label>
+                        <select name="category" class="form-select form-select-sm">
+                            {% for value, label in categories %}
+                            <option value="{{ value }}" {% if value == 'delegate' %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-12 col-sm-5">
+                        <label class="form-label small mb-1">{% trans "Label (optional)" %}</label>
+                        <input type="text" name="label" placeholder="{% trans 'e.g. Booth A, Reserve' %}" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-sm w-100">
+                            <i class="ti ti-plus"></i> {% trans "Create QR tokens" %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h3 class="h5"><i class="ti ti-printer"></i> {% trans "Print QR sheets" %}</h3>
+                <p class="small text-secondary mb-2">
+                    {% trans "Print A4-format QR cards for badge stations, booths and posters." %}
+                </p>
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="{% url 'qr:print' %}?kind=tokens&event={{ event.slug }}" target="_blank" class="btn btn-outline-secondary btn-sm">
+                        <i class="ti ti-ticket"></i> {% trans "Tokens" %}
+                    </a>
+                    <a href="{% url 'qr:print' %}?kind=booths&event={{ event.slug }}" target="_blank" class="btn btn-outline-secondary btn-sm">
+                        <i class="ti ti-building-store"></i> {% trans "Booths" %}
+                    </a>
+                    <a href="{% url 'qr:print' %}?kind=posters&event={{ event.slug }}" target="_blank" class="btn btn-outline-secondary btn-sm">
+                        <i class="ti ti-file-text"></i> {% trans "Posters" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

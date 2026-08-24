@@ -1,0 +1,132 @@
+{% extends "access/ops/_base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Audience vote" %} — Ops{% endblock %}
+
+{% block extra_head %}
+<style>
+    .star-cell { font-variant-numeric: tabular-nums; }
+    .is-leader { background: rgba(var(--lma-highlight-rgb), 0.16); }
+    .is-leader td:first-child { border-left: 3px solid var(--lma-highlight); }
+    .star-bar { height: 6px; border-radius: 3px; background: var(--lma-highlight); min-width: 2px; }
+</style>
+{% endblock %}
+
+{% block ops_content %}
+
+<div class="row g-3 mb-3">
+    <div class="col-6 col-md-4">
+        <div class="card"><div class="card-body py-2 text-center">
+            <div class="h3 mb-0" style="color: var(--lma-highlight);">{{ total_votes }}</div>
+            <div class="small text-secondary">{% trans "Stars given" %}</div>
+        </div></div>
+    </div>
+    <div class="col-6 col-md-4">
+        <div class="card"><div class="card-body py-2 text-center">
+            <div class="h3 mb-0" style="color: var(--lma-primary);">{{ n_voters }}</div>
+            <div class="small text-secondary">{% trans "Attendees who voted" %}</div>
+        </div></div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="card"><div class="card-body py-2 text-center">
+            <div class="h3 mb-0">{{ stars_per_user }}</div>
+            <div class="small text-secondary">{% trans "Stars per attendee" %}</div>
+        </div></div>
+    </div>
+</div>
+
+<div class="alert alert-info py-2 small mb-3">
+    <i class="ti ti-info-circle"></i>
+    {% blocktrans %}Attendees give their stars by scanning the QR code on a poster — one star per poster, {{ stars_per_user }} per person, final once given.{% endblocktrans %}
+    {% if audience_award %}{% blocktrans with award=audience_award.name %}Use the trophy button to hand out the {{ award }}; only one abstract per event can hold it.{% endblocktrans %}{% endif %}
+</div>
+
+{% if not audience_award %}
+<div class="alert alert-warning py-2 small mb-3">
+    <i class="ti ti-alert-triangle"></i>
+    {% blocktrans %}This event has no audience award yet. Create one under Abstract awards in the admin and tick “Audience choice” — until then the trophy button does nothing.{% endblocktrans %}
+</div>
+{% endif %}
+
+{% if is_tie %}
+<div class="alert alert-warning py-2 small mb-3">
+    <i class="ti ti-alert-triangle"></i>
+    {% blocktrans count n=leaders|length %}{{ n }} abstract is in the lead.{% plural %}{{ n }} abstracts are tied for the lead — decide who gets the award.{% endblocktrans %}
+</div>
+{% endif %}
+
+<div class="card">
+    <div class="table-responsive">
+        <table class="table table-vcenter mb-0">
+            <thead>
+                <tr>
+                    <th style="width: 3rem;">#</th>
+                    <th>{% trans "Poster" %}</th>
+                    <th>{% trans "Title" %}</th>
+                    <th>{% trans "Category" %}</th>
+                    <th class="text-end">{% trans "Stars" %}</th>
+                    <th style="width: 25%;"></th>
+                    <th class="text-center">{% trans "Award" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in rows %}
+                <tr class="{% if a.n_stars and a.n_stars == leaders.0.n_stars %}is-leader{% endif %}">
+                    <td class="text-secondary star-cell">{{ forloop.counter }}</td>
+                    <td><code>{{ a.poster_id|default:"—" }}</code></td>
+                    <td>
+                        <a href="{% url 'access:ops_abstract_detail' a.pk %}" class="text-reset">
+                            {{ a.title|truncatechars:60 }}
+                        </a>
+                        {% if not a.has_poster %}
+                        <span class="badge bg-secondary-lt ms-1" title="{% trans "No poster on site — cannot be voted for" %}">{% trans "no poster" %}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if a.category %}
+                        <span class="badge small" style="background: {{ a.category.color }}; color: #fff;">{{ a.category.name|truncatechars:18 }}</span>
+                        {% else %}<span class="text-secondary small">—</span>{% endif %}
+                    </td>
+                    <td class="text-end star-cell">
+                        {% if a.n_stars %}
+                        <strong>{{ a.n_stars }}</strong> <i class="ti ti-star-filled text-warning"></i>
+                        {% else %}<span class="text-secondary">—</span>{% endif %}
+                    </td>
+                    <td>
+                        {% if a.n_stars and leaders.0.n_stars %}
+                        <div class="star-bar" style="width: {% widthratio a.n_stars leaders.0.n_stars 100 %}%;"></div>
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        <form method="post" action="{% url 'access:ops_abstract_audience_award' a.pk %}" class="d-inline">
+                            {% csrf_token %}
+                            {% if audience_award and a.award_id == audience_award.pk %}
+                            <button type="submit" class="btn btn-sm btn-warning"
+                                    title="{% blocktrans with award=audience_award.name %}Remove the {{ award }}{% endblocktrans %}">
+                                <i class="ti ti-trophy-filled"></i>
+                            </button>
+                            {% elif a.award %}
+                            <span class="badge bg-secondary-lt" title="{{ a.award.name }}">{{ a.award.name|truncatechars:14 }}</span>
+                            <button type="submit" class="btn btn-sm btn-outline-secondary ms-1"
+                                    title="{% blocktrans with award=audience_award.name %}Hand out the {{ award }} instead{% endblocktrans %}">
+                                <i class="ti ti-trophy"></i>
+                            </button>
+                            {% else %}
+                            <button type="submit" class="btn btn-sm btn-outline-secondary"
+                                    title="{% blocktrans with award=audience_award.name %}Hand out the {{ award }}{% endblocktrans %}">
+                                <i class="ti ti-trophy"></i>
+                            </button>
+                            {% endif %}
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="7" class="text-center text-secondary py-4">
+                    {% trans "No published abstracts yet." %}
+                </td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

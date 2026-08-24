@@ -1,0 +1,29 @@
+{% load i18n %}
+<div class="border rounded p-2" id="chair-speaker-{{ sp.speaker_id }}">
+    <div class="d-flex justify-content-between align-items-start gap-2">
+        <div>
+            <div class="fw-bold">{{ sp.speaker.profile.user.get_full_name|default:sp.speaker.profile.user.username }}</div>
+            {% with aff=sp.speaker.affiliation|default:sp.speaker.profile.affiliation|default:sp.speaker.profile.user.affiliation_line %}
+            {% if aff %}<div class="small text-secondary">{{ aff }}</div>{% endif %}
+            {% endwith %}
+        </div>
+        <span class="badge bg-secondary-lt">{{ sp.get_role_display }}</span>
+    </div>
+    {% if sp.speaker.intro %}<div class="small mt-2">{{ sp.speaker.intro|linebreaksbr }}</div>{% endif %}
+    <form class="mt-2"
+          hx-post="{% url 'program:chair_speaker_notes' session.slug sp.speaker_id %}"
+          hx-target="#chair-speaker-{{ sp.speaker_id }}" hx-swap="outerHTML">
+        {% csrf_token %}
+        <label class="form-label small fw-bold mb-1" for="chair-notes-{{ sp.speaker_id }}">
+            <i class="ti ti-notes me-1"></i>{% trans "Your notes" %}
+        </label>
+        <textarea class="form-control form-control-sm mb-2" id="chair-notes-{{ sp.speaker_id }}"
+                  name="chair_notes" rows="3" maxlength="5000"
+                  placeholder="{% trans "How you want to introduce this speaker …" %}">{{ sp.speaker.chair_notes }}</textarea>
+        <div class="d-flex align-items-center gap-2">
+            <button type="submit" class="btn btn-sm btn-primary"><i class="ti ti-device-floppy"></i> {% trans "Save notes" %}</button>
+            {% if saved %}<span class="small text-success"><i class="ti ti-check"></i> {% trans "Saved" %}</span>{% endif %}
+        </div>
+        <div class="form-hint small mt-1">{% trans "Keep it factual — no judgemental or sensitive personal details." %}</div>
+    </form>
+</div>

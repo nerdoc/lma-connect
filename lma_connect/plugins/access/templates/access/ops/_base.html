@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block topbar_title %}{% trans "Operations" %}{% endblock %}
+{% block topbar_sub %}{{ event.name }}{% endblock %}
+
+{% block content %}
+{% if messages %}
+<div class="mb-3">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible py-2 mb-2">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="d-flex gap-1 mb-3 flex-wrap">
+    <a href="{% url 'access:ops_dashboard' %}" class="btn btn-sm {% if active_ops == 'dashboard' or not active_ops %}btn-primary{% else %}btn-outline-secondary{% endif %}">
+        <i class="ti ti-dashboard"></i> {% trans "Dashboard" %}
+    </a>
+    <a href="{% url 'access:ops_tokens' %}" class="btn btn-sm {% if active_ops == 'tokens' %}btn-primary{% else %}btn-outline-secondary{% endif %}">
+        <i class="ti ti-qrcode"></i> {% trans "Tokens" %}
+    </a>
+    <a href="{% url 'access:ops_users' %}" class="btn btn-sm {% if active_ops == 'users' %}btn-primary{% else %}btn-outline-secondary{% endif %}">
+        <i class="ti ti-users"></i> {% trans "Users" %}
+    </a>
+    <a href="{% url 'access:ops_abstracts' %}" class="btn btn-sm {% if active_ops == 'abstracts' %}btn-primary{% else %}btn-outline-secondary{% endif %}">
+        <i class="ti ti-file-text"></i> {% trans "Abstracts" %}
+    </a>
+    <a href="{% url 'access:ops_abstract_stars' %}" class="btn btn-sm {% if active_ops == 'stars' %}btn-primary{% else %}btn-outline-secondary{% endif %}">
+        <i class="ti ti-star"></i> {% trans "Audience vote" %}
+    </a>
+</div>
+
+{% block ops_content %}{% endblock %}
+{% endblock %}

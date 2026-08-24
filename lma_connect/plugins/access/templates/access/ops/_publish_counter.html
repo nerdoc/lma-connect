@@ -1,0 +1,10 @@
+{% load i18n %}
+{% comment %}
+The "published / total" counter. Replaced after every toggle via an
+out-of-band swap. hx-swap-oob only takes effect in HTMX responses; on the
+initial render it does nothing.
+{% endcomment %}
+<div id="publish-counter" hx-swap-oob="true">
+    <div class="h3 mb-0" style="color: var(--lma-primary);">{{ n_published }} / {{ n_total }}</div>
+    <div class="small text-secondary">{% trans "Visible to attendees" %}</div>
+</div>

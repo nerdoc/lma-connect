@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load markdownify i18n %}
+
+{% block title %}{{ profile.user.get_full_name|default:profile.user.username }}{% endblock %}
+{% block topbar_title %}{{ profile.user.get_full_name|default:profile.user.username }}{% endblock %}
+{% block topbar_sub %}{{ profile.affiliation|default:"" }}{% endblock %}
+
+{% block content %}
+<a href="{% url 'people:list' %}" data-back class="btn btn-sm btn-ghost-secondary mb-2"><i class="ti ti-arrow-left"></i> {% trans "Back" %}</a>
+
+<div class="card mb-3"><div class="card-body">
+    <div class="d-flex gap-3 align-items-start mb-3">
+        {% if profile.photo %}
+            <img src="{{ profile.photo.url }}" alt="{{ profile.user.get_full_name }}"
+                 style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%;">
+        {% else %}
+            <span class="avatar avatar-lg bg-blue-lt"
+                  style="width: 80px; height: 80px; font-size: 1.5rem;">
+                {{ profile.user.first_name|first }}{{ profile.user.last_name|first }}
+            </span>
+        {% endif %}
+        <div class="flex-grow-1">
+            <h1 class="h3 mb-1">{{ profile.user.get_full_name|default:profile.user.username }}</h1>
+            {% if profile.position %}<div class="text-secondary">{{ profile.position }}</div>{% endif %}
+            {% if profile.speaker.is_keynote %}<span class="badge bg-yellow-lt mt-1"><i class="ti ti-star"></i> {% trans "Keynote speaker" %}</span>{% endif %}
+        </div>
+    </div>
+
+    <div class="d-flex flex-column gap-2">
+        {% with aff=profile.affiliation|default:profile.user.affiliation_line %}
+        {% if aff %}
+        <div class="d-flex gap-2 align-items-start small">
+            <i class="ti ti-building text-secondary mt-1"></i>
+            <span>{{ aff }}</span>
+        </div>
+        {% endif %}
+        {% endwith %}
+        {% with c=profile.country|default:profile.user.country %}
+        {% if c %}
+        <div class="d-flex gap-2 align-items-center small">
+            <i class="ti ti-map-2 text-secondary"></i>
+            <span>🌍 {{ c }}</span>
+        </div>
+        {% endif %}
+        {% endwith %}
+        {% if profile.pronouns %}
+        <div class="d-flex gap-2 align-items-center small text-secondary">
+            <i class="ti ti-user"></i><span>{{ profile.pronouns }}</span>
+        </div>
+        {% endif %}
+    </div>
+</div></div>
+
+<div class="row g-2 mb-3">
+    {% if profile.linkedin_url %}
+    <div class="col-6"><a href="{{ profile.linkedin_url }}" target="_blank" rel="noopener" class="card text-decoration-none h-100"><div class="card-body py-3 text-center">
+        <i class="ti ti-brand-linkedin h2 m-0" style="color: #0a66c2;"></i>
+        <div class="small fw-bold mt-1">LinkedIn</div>
+    </div></a></div>
+    {% endif %}
+    {% if profile.cv %}
+    <div class="col-6"><a href="{{ profile.cv.url }}" target="_blank" class="card text-decoration-none h-100"><div class="card-body py-3 text-center">
+        <i class="ti ti-file-cv h2 m-0" style="color: var(--lma-primary);"></i>
+        <div class="small fw-bold mt-1">{% trans "CV (PDF)" %}</div>
+    </div></a></div>
+    {% endif %}
+    {% if profile.orcid %}
+    <div class="col-6"><a href="https://orcid.org/{{ profile.orcid }}" target="_blank" rel="noopener" class="card text-decoration-none h-100"><div class="card-body py-3 text-center">
+        <i class="ti ti-id-badge h2 m-0" style="color: #a6ce39;"></i>
+        <div class="small fw-bold mt-1">ORCID</div>
+    </div></a></div>
+    {% endif %}
+    {% if profile.website %}
+    <div class="col-6"><a href="{{ profile.website }}" target="_blank" rel="noopener" class="card text-decoration-none h-100"><div class="card-body py-3 text-center">
+        <i class="ti ti-world h2 m-0" style="color: var(--lma-accent);"></i>
+        <div class="small fw-bold mt-1">{% trans "Website" %}</div>
+    </div></a></div>
+    {% endif %}
+</div>
+
+{% if profile.speaker.intro %}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5 mb-2"><i class="ti ti-user-circle me-1"></i>{% trans "About" %}</h2>
+    <div>{{ profile.speaker.intro|linebreaks }}</div>
+</div></div>
+{% endif %}
+
+{% if profile.bio %}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5 mb-2"><i class="ti ti-quote me-1"></i>{% trans "Biography" %}</h2>
+    <div>{{ profile.bio|markdownify }}</div>
+</div></div>
+{% endif %}
+
+{% if sessions %}
+<h2 class="h5 mb-2"><i class="ti ti-presentation me-1"></i>{% trans "Talks at this event" %}</h2>
+<div class="d-flex flex-column gap-2 mb-3">
+    {% for sa in sessions %}
+    <a href="{% url 'program:detail' sa.session.slug %}" class="card session-card text-decoration-none" style="--track-color: {{ sa.session.track.color|default:'#9ca3af' }}">
+        <div class="card-body py-3">
+            <div class="d-flex justify-content-between gap-2 align-items-start">
+                <div class="flex-grow-1">
+                    <div class="d-flex flex-wrap gap-1 mb-1 small text-secondary">
+                        <span><i class="ti ti-calendar"></i> {{ sa.session.starts_at|date:"D, j M" }}</span>
+                        <span>· <i class="ti ti-clock"></i> {{ sa.session.starts_at|date:"H:i" }}–{{ sa.session.ends_at|date:"H:i" }}</span>
+                        {% if sa.session.room %}<span>· {{ sa.session.room.name }}</span>{% endif %}
+                        <span class="badge bg-secondary-lt ms-1">{{ sa.get_role_display }}</span>
+                    </div>
+                    <div class="fw-bold">{{ sa.session.title }}</div>
+                </div>
+                <i class="ti ti-chevron-right text-secondary"></i>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}

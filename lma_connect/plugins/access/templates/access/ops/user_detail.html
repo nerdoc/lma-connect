@@ -1,0 +1,173 @@
+{% extends "access/ops/_base.html" %}
+{% load i18n %}
+{% block title %}{{ target.username }} — Ops{% endblock %}
+
+{% block ops_content %}
+<a href="{% url 'access:ops_users' %}" class="btn btn-sm btn-outline-secondary mb-3">
+    <i class="ti ti-arrow-left"></i> {% trans "Back to users" %}
+</a>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h2 class="h3 mb-0">{{ target.first_name }} {{ target.last_name }}</h2>
+        <div class="text-secondary"><code>{{ target.username }}</code>{% if target.email %} · {{ target.email }}{% endif %}</div>
+
+        <div class="d-flex flex-wrap gap-1 mt-2 align-items-center">
+            {% if profile %}<span class="badge bg-primary-lt">{{ profile.get_category_display }}</span>{% endif %}
+            {% if profile.social_event_registered %}<span class="badge" style="background: var(--lma-highlight); color: var(--lma-ink);"><i class="ti ti-glass-cocktail"></i> {% trans "Social event" %}</span>{% endif %}
+            {% if target.is_superuser %}<span class="badge bg-danger-lt">superuser</span>{% endif %}
+            {% if target.is_staff %}<span class="badge bg-primary-lt">staff</span>{% endif %}
+            {% for g in target.groups.all %}<span class="badge bg-cyan-lt">{{ g.name }}</span>{% endfor %}
+        </div>
+
+        <dl class="row mt-3 mb-0 small">
+            <dt class="col-4 text-secondary">{% trans "Last login" %}</dt>
+            <dd class="col-8">{% if target.last_login %}{{ target.last_login|date:"j M Y, H:i" }}{% else %}—{% endif %}</dd>
+            <dt class="col-4 text-secondary">{% trans "Joined" %}</dt>
+            <dd class="col-8">{{ target.date_joined|date:"j M Y" }}</dd>
+            <dt class="col-4 text-secondary">{% trans "Active" %}</dt>
+            <dd class="col-8">{% if target.is_active %}{% trans "yes" %}{% else %}<span class="text-danger">{% trans "no" %}</span>{% endif %}</dd>
+        </dl>
+    </div>
+</div>
+
+{% if profile %}
+<div class="card mb-3">
+    <div class="card-body">
+        <h3 class="h5 mb-2"><i class="ti ti-id-badge-2"></i> {% trans "Event profile" %}</h3>
+        <form method="post" action="{% url 'access:ops_user_update_profile' target.pk %}" class="d-flex gap-2 align-items-end flex-wrap">
+            {% csrf_token %}
+            <div class="flex-grow-1" style="min-width: 200px;">
+                <label class="form-label small mb-1">{% trans "Category" %}</label>
+                <select name="category" class="form-select form-select-sm">
+                    {% for value, label in categories %}
+                    <option value="{{ value }}" {% if profile.category == value %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="flex-grow-0">
+                <div class="form-check mb-2">
+                    <input type="checkbox" name="social_event_registered" id="social_{{ target.pk }}"
+                           class="form-check-input" {% if profile.social_event_registered %}checked{% endif %}>
+                    <label class="form-check-label small" for="social_{{ target.pk }}">{% trans "Registered for social event" %}</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-sm btn-primary">{% trans "Save profile" %}</button>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+<h3 class="h5 mb-2"><i class="ti ti-tools"></i> {% trans "Support actions" %}</h3>
+{% if target_protected %}
+<div class="alert alert-warning" role="alert">
+    <i class="ti ti-shield-lock"></i>
+    {% trans "This account has elevated privileges (staff/admin). Password reset and token issuing are disabled here — manage it in the Django admin instead." %}
+</div>
+{% endif %}
+<div class="row g-2 mb-3">
+    {% if not target_protected %}
+    <div class="col-12 col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h4 class="h6"><i class="ti ti-lock-open"></i> {% trans "Reset password" %}</h4>
+                <p class="small text-secondary mb-2">
+                    {% trans "Set a fresh temporary password. The user should change it after login." %}
+                </p>
+                <form method="post" action="{% url 'access:ops_user_reset_pw' target.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-warning"
+                            data-confirm="{% trans "Generate a new temporary password for this user?" %}">
+                        <i class="ti ti-refresh"></i> {% trans "Reset password" %}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h4 class="h6"><i class="ti ti-shield-off"></i> {% trans "Unlock login" %}</h4>
+                <p class="small text-secondary mb-2">
+                    {% trans "Clear all django-axes lockout entries — useful if the user got locked out after wrong-password attempts." %}
+                </p>
+                <form method="post" action="{% url 'access:ops_user_unlock' target.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-secondary">
+                        <i class="ti ti-shield-check"></i> {% trans "Clear lockouts" %}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if not target_protected %}
+    <div class="col-12 col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h4 class="h6"><i class="ti ti-qrcode"></i> {% trans "Issue new token" %}</h4>
+                <p class="small text-secondary mb-2">
+                    {% trans "Generate a new QR-code token bound to this user (e.g. lost badge)." %}
+                </p>
+                <form method="post" action="{% url 'access:ops_user_new_token' target.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-primary">
+                        <i class="ti ti-plus"></i> {% trans "New token" %}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<h3 class="h5 mb-2"><i class="ti ti-qrcode"></i> {% trans "Access tokens" %} ({{ target.access_tokens.count }})</h3>
+{% if target.access_tokens.all %}
+<div class="card mb-3">
+    <div class="table-responsive">
+        <table class="table table-vcenter table-sm mb-0">
+            <thead>
+                <tr>
+                    <th>{% trans "Token" %}</th>
+                    <th>{% trans "Label" %}</th>
+                    <th>{% trans "Active" %}</th>
+                    <th>{% trans "Last seen" %}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in target.access_tokens.all %}
+                <tr>
+                    <td><code>{{ t.token|slice:":12" }}…</code></td>
+                    <td><span class="small">{{ t.label|default:"—" }}</span></td>
+                    <td>{% if t.is_active %}✓{% else %}✗{% endif %}</td>
+                    <td><span class="small text-secondary">{% if t.last_seen_at %}{{ t.last_seen_at|date:"j M, H:i" }}{% else %}—{% endif %}</span></td>
+                    <td class="text-end"><a href="{% url 'access:ops_token_detail' t.pk %}" class="btn btn-sm btn-outline-secondary"><i class="ti ti-eye"></i></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% else %}
+<p class="small text-secondary">{% trans "No tokens linked to this user." %}</p>
+{% endif %}
+
+{% if target.abstract_reviews.all %}
+<h3 class="h5 mb-2"><i class="ti ti-clipboard-check"></i> {% trans "Abstract reviews" %} ({{ target.abstract_reviews.count }})</h3>
+<div class="card">
+    <div class="card-body">
+        {% for r in target.abstract_reviews.all|slice:":10" %}
+        <div class="d-flex justify-content-between align-items-center py-1 {% if not forloop.last %}border-bottom{% endif %}">
+            <div class="small">
+                <code>{{ r.abstract.poster_id }}</code> · {{ r.abstract.title|truncatechars:50 }}
+            </div>
+            <div>
+                {% if r.score %}<span class="badge bg-primary-lt">{{ r.score }}</span>{% else %}<span class="badge bg-warning-lt text-dark">{% trans "open" %}</span>{% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}

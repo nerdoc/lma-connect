@@ -1,0 +1,28 @@
+# Cron entries for LMA Connect.
+#
+# Paste these lines into `crontab -e` below your existing entries — do NOT
+# install the whole file, the account usually runs other jobs as well.
+#
+# Time zone: cron runs in the server's time zone, which is not necessarily the
+# event's. Check with `date` before the first conference day.
+#
+# Paths assume a checkout in ~/lma-connect; adjust if yours differs.
+
+# Hourly DB backup between 08:00 and 18:00 (conference core hours).
+# The command writes a consistent, compressed snapshot to ~/backups/lma-connect
+# and rotates old ones itself (48 hourly + 30 daily). A non-zero exit code on
+# any error makes cron send mail.
+0 8-18 * * * cd $HOME/lma-connect && .venv/bin/python manage.py backup_db >> $HOME/logs/lma-connect-backup.log 2>&1
+
+# One backup per night, so a daily snapshot exists outside conference hours
+# too (program editing often happens in the evening).
+30 2 * * * cd $HOME/lma-connect && .venv/bin/python manage.py backup_db >> $HOME/logs/lma-connect-backup.log 2>&1
+
+# Weekly: actually open the newest backup and verify it. A backup that was
+# never verified is a guess, not a backup.
+15 3 * * 1 cd $HOME/lma-connect && .venv/bin/python manage.py backup_db --verify "$(ls -1t $HOME/backups/lma-connect/db-*.sqlite3.gz | head -1)" >> $HOME/logs/lma-connect-backup.log 2>&1
+
+# Media directory (speaker photos, sponsor logos, floorplans) weekly, Sunday
+# night. Those files change week by week, not hour by hour — backing them up
+# more often only costs disk space. Keeps 8 weekly snapshots.
+45 3 * * 7 cd $HOME/lma-connect && .venv/bin/python manage.py backup_media >> $HOME/logs/lma-connect-backup.log 2>&1

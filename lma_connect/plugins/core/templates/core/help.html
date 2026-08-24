@@ -1,0 +1,442 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Help" %} · {{ event.name|default:"Conference" }}{% endblock %}
+{% block topbar_title %}{% trans "Help" %}{% endblock %}
+{% block topbar_sub %}{% trans "How to use the app" %}{% endblock %}
+
+{% block content %}
+
+<style>
+    /* Handy-Screenshots wie ein Telefon darstellen, Desktop-Screenshots breit. */
+    .help-figure { margin: 0 0 .25rem; }
+    .help-figure figcaption {
+        font-size: .8125rem; color: var(--tblr-secondary); text-align: center; margin-top: .4rem;
+    }
+    .help-phone {
+        display: block; width: 100%; max-width: 230px; margin: 0 auto;
+        border-radius: 20px; border: 1px solid var(--tblr-border-color);
+        box-shadow: 0 6px 22px rgba(0,0,0,.12);
+    }
+    .help-wide {
+        display: block; width: 100%; border-radius: 10px;
+        border: 1px solid var(--tblr-border-color); box-shadow: 0 4px 16px rgba(0,0,0,.10);
+    }
+    .help-shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+    .help-toc a { text-decoration: none; }
+    .role-badge { font-weight: 600; }
+</style>
+
+<div class="alert alert-info py-2 mb-3">
+    <i class="ti ti-info-circle me-1"></i>
+    {% trans "This app is your companion for the whole event — programme, live Q&A, polls, ratings, sponsors and more." %}
+</div>
+
+{# ─── Sprungnavigation ─── #}
+<div class="help-toc btn-list mb-4">
+    <a href="#everyone" class="btn btn-primary"><i class="ti ti-users me-1"></i>{% trans "For everyone" %}</a>
+    <a href="#chairs" class="btn btn-outline-primary"><i class="ti ti-microphone me-1"></i>{% trans "Session chairs" %}</a>
+    <a href="#industry" class="btn btn-outline-primary"><i class="ti ti-building-store me-1"></i>{% trans "Industry" %}</a>
+    <a href="#organisers" class="btn btn-outline-primary"><i class="ti ti-settings me-1"></i>{% trans "Organisers" %}</a>
+</div>
+
+{# ─────────────── PART 1 — FOR EVERYONE ─────────────── #}
+<h1 id="everyone" class="h3 mt-2 mb-1"><i class="ti ti-users me-1"></i>{% trans "For everyone" %}</h1>
+<p class="text-secondary mb-3">{% trans "These features work the same for every attendee — delegates, speakers, industry and guests." %}</p>
+
+{# ─── Sign in ─── #}
+<div class="card mb-3"><div class="card-body py-3">
+    <div class="row g-3 align-items-center">
+        <div class="col-12 col-md-8">
+            <h2 class="h5"><i class="ti ti-login me-1"></i>{% trans "Sign in — two ways" %}</h2>
+            <div class="mb-2">
+                <strong>{% trans "QR code on your badge (easiest)." %}</strong>
+                {% trans "Open the camera on your phone, point it at the QR code on your badge and tap the link. The first time you'll be asked for a nickname — pick one and you're in. Next time you scan the same QR, you'll be logged in immediately." %}
+            </div>
+            <div>
+                <strong>{% trans "Username & password." %}</strong>
+                {% url 'login' as login_url %}
+                {% blocktrans %}Organisers and staff go to <a href="{{ login_url }}">Sign in</a> and enter the credentials they were given. After 10 wrong attempts the form locks for about an hour — please don't guess.{% endblocktrans %}
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <figure class="help-figure">
+                <img class="help-phone" src="{% static shots|add:"login.png" %}" alt="{% trans 'The sign-in screen' %}" loading="lazy">
+                <figcaption>{% trans "The sign-in screen" %}</figcaption>
+            </figure>
+        </div>
+    </div>
+</div></div>
+
+{# ─── Home & Programme ─── #}
+<div class="card mb-3"><div class="card-body py-3">
+    <div class="row g-3">
+        <div class="col-12 col-md-8">
+            <h2 class="h5"><i class="ti ti-calendar-event me-1"></i>{% trans "Home & programme" %}</h2>
+            <p class="mb-2">
+                {% blocktrans %}The <strong>Home</strong> screen gives you the event at a glance — what's coming up next, quick tiles to the programme, abstracts, expo and feedback, plus the committees.{% endblocktrans %}
+            </p>
+            <p class="mb-2">
+                {% blocktrans %}Tap <strong>Programme</strong> in the bottom bar to see all sessions grouped by day. Each session shows its type, track and time.{% endblocktrans %}
+            </p>
+            <p class="mb-0">
+                {% trans "Tap a session to see the speakers, abstract and live tools (Q&A, poll, rating). Speaker names link to their profile with bio and contact links." %}
+            </p>
+        </div>
+        <div class="col-6 col-md-2">
+            <figure class="help-figure">
+                <img class="help-phone" src="{% static shots|add:"home.png" %}" alt="{% trans 'Home screen' %}" loading="lazy">
+                <figcaption>{% trans "Home" %}</figcaption>
+            </figure>
+        </div>
+        <div class="col-6 col-md-2">
+            <figure class="help-figure">
+                <img class="help-phone" src="{% static shots|add:"programme.png" %}" alt="{% trans 'Programme list' %}" loading="lazy">
+                <figcaption>{% trans "Programme" %}</figcaption>
+            </figure>
+        </div>
+    </div>
+</div></div>
+
+{# ─── Session page: Q&A, Polls, Rating ─── #}
+<div class="card mb-3"><div class="card-body py-3">
+    <div class="row g-3">
+        <div class="col-12 col-md-8">
+            <h2 class="h5"><i class="ti ti-presentation me-1"></i>{% trans "On a session page" %}</h2>
+            <p class="mb-2 text-secondary">{% trans "Everything that happens live during a talk is on its session page." %}</p>
+
+            <h3 class="h6 mb-1"><i class="ti ti-message-question me-1"></i>{% trans "Ask & up-vote questions" %}</h3>
+            <ul class="mb-2 ps-3">
+                <li>{% blocktrans %}Type your question and hit <strong>Send</strong>.{% endblocktrans %}</li>
+                <li>{% trans "Tap the up-arrow on someone else's question to up-vote it. Most-voted questions float to the top so the chair sees what the room wants to know." %}</li>
+                <li>{% trans "Questions starred by the session chair appear at the very top with a gold border — those are the ones the chair plans to ask." %}</li>
+                <li>
+                    {% url 'core:legal' 'terms' as terms_url %}
+                    {% blocktrans %}Be civil: posts that breach the <a href="{{ terms_url }}">terms of use</a> can be hidden by the chair or organiser.{% endblocktrans %}
+                </li>
+            </ul>
+
+            <h3 class="h6 mb-1"><i class="ti ti-chart-bar me-1"></i>{% trans "Live polls" %}</h3>
+            <p class="mb-2">
+                {% trans "When the chair opens a poll, the question shows up on the session page. Tap your choice — for multi-choice polls you can pick several options. Results appear on the room screen." %}
+            </p>
+
+            <h3 class="h6 mb-1"><i class="ti ti-star me-1"></i>{% trans "Rate a session" %}</h3>
+            <p class="mb-1">{% trans "Each session can be rated on four independent dimensions:" %}</p>
+            <ul class="mb-2 ps-3">
+                <li><strong>{% trans "Slides" %}</strong> — {% trans "visual quality of the presentation" %}</li>
+                <li><strong>{% trans "Clarity (English)" %}</strong> — {% trans "how easy it was to follow the English" %}</li>
+                <li><strong>{% trans "Practical relevance" %}</strong> — {% trans "usefulness for your daily work" %}</li>
+                <li><strong>{% trans "Overall" %}</strong> — {% trans "your gut feeling" %}</li>
+            </ul>
+            <p class="mb-0">
+                {% blocktrans %}Tap a star for each dimension — your rating saves immediately. You can also leave a free-text comment; remember to hit <strong>Save comment</strong> when you're done typing.{% endblocktrans %}
+            </p>
+        </div>
+        <div class="col-12 col-md-4">
+            <figure class="help-figure">
+                <img class="help-phone" src="{% static shots|add:"session.png" %}" alt="{% trans 'A session page with poll and Q&A' %}" loading="lazy">
+                <figcaption>{% trans "A session page — poll & Q&A" %}</figcaption>
+            </figure>
+        </div>
+    </div>
+</div></div>
+
+{# ─── Sponsors ─── #}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5"><i class="ti ti-building-store me-1"></i>{% trans "Sponsors & exhibitors" %}</h2>
+    <p class="mb-0">
+        {% blocktrans %}The <strong>Expo</strong> tab lists all exhibitors in alphabetical order. Each sponsor page shows their description, contact people, materials to download (PDFs, white-papers) and a pin on the floor plan so you can find their booth.{% endblocktrans %}
+    </p>
+</div></div>
+
+{# ─── Abstracts ─── #}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5"><i class="ti ti-file-text me-1"></i>{% trans "Abstracts & posters" %}</h2>
+    <p class="mb-2">
+        {% blocktrans %}Browse all submitted abstracts in the <strong>Abstracts</strong> tab. Use the search box to filter by title or author, and the pills to narrow down by category. Each abstract page tells you where to find the poster (poster ID + location) and lists all authors with their affiliations and ORCID.{% endblocktrans %}
+    </p>
+    <p class="mb-0">
+        <i class="ti ti-star-filled text-warning me-1"></i>
+        {% blocktrans %}<strong>Audience Choice Award:</strong> every attendee has three stars for their favourite posters. You give a star by scanning the QR code on the poster itself — voting works on site only, one star per poster. You are asked to confirm, because a star cannot be changed or taken back afterwards. Giving a star also earns you points. Your remaining stars are shown on your profile page.{% endblocktrans %}
+    </p>
+</div></div>
+
+{# ─── Feedback / Surveys ─── #}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5"><i class="ti ti-message-2 me-1"></i>{% trans "Surveys" %}</h2>
+    <p class="mb-0">
+        {% blocktrans %}Organisers may publish surveys during or after the event. Open the <strong>Feedback</strong> tab, pick a survey, and answer the questions — yes/no, scale 1–5, single or multiple choice, or free text. You can come back and edit your answers as long as the survey is open.{% endblocktrans %}
+    </p>
+</div></div>
+
+{# ─── Profile & Gamification ─── #}
+<div class="card mb-3"><div class="card-body py-3">
+    <div class="row g-3">
+        <div class="col-12 col-md-9">
+            <h2 class="h5"><i class="ti ti-trophy me-1"></i>{% trans "Your profile, points & badges" %}</h2>
+            <p class="mb-2">
+                {% trans "Every action you take in the app earns you points: asking a question, up-voting, voting in a poll, rating a session, completing a survey." %}
+            </p>
+            <p class="mb-0">
+                {% url 'access:me' as profile_url %}
+                {% url 'gamification:leaderboard' as leaderboard_url %}
+                {% blocktrans %}Open <a href="{{ profile_url }}">My profile</a> (the person icon, top right) to change your nickname and see your score and unlocked badges, or check the <a href="{{ leaderboard_url }}">leaderboard</a> to see who's most active.{% endblocktrans %}
+            </p>
+        </div>
+        <div class="col-12 col-md-3">
+            <figure class="help-figure">
+                <img class="help-phone" src="{% static shots|add:"profile.png" %}" alt="{% trans 'My profile' %}" loading="lazy">
+                <figcaption>{% trans "My profile" %}</figcaption>
+            </figure>
+        </div>
+    </div>
+</div></div>
+
+{# ─── Install ─── #}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5"><i class="ti ti-device-mobile me-1"></i>{% trans "Add to home screen" %}</h2>
+    <p class="mb-2">
+        {% trans "Use the app like a native app — without a browser address bar:" %}
+    </p>
+    <ul class="mb-0 ps-3">
+        <li>{% blocktrans %}<strong>iPhone / iPad:</strong> in Safari, tap the share button → <em>Add to Home Screen</em>.{% endblocktrans %}</li>
+        <li>{% blocktrans %}<strong>Android:</strong> in Chrome, tap the menu → <em>Add to Home Screen</em> (or accept the install prompt when it appears).{% endblocktrans %}</li>
+    </ul>
+</div></div>
+
+{# ─── Privacy ─── #}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5"><i class="ti ti-shield-lock me-1"></i>{% trans "Your data & privacy" %}</h2>
+    <p class="mb-0">
+        {% url 'core:legal' 'privacy' as privacy_url %}
+        {% url 'core:legal' 'imprint' as imprint_url %}
+        {% blocktrans %}We store only what we need to run the event: your nickname, optional affiliation, and the actions you take in the app (questions, votes, ratings). No tracking, no ads, no third-party analytics. For the details see the <a href="{{ privacy_url }}">privacy policy</a> and the <a href="{{ imprint_url }}">imprint</a>.{% endblocktrans %}
+    </p>
+</div></div>
+
+{# ─────────────── TEIL 2 — SESSION-CHAIRS ─────────────── #}
+<hr class="my-4">
+<h1 id="chairs" class="h3 mb-1"><i class="ti ti-microphone me-1"></i>{% trans "For session chairs" %}
+    <span class="badge bg-purple-lt role-badge ms-1">{% trans "Chair / Co-Chair" %}</span></h1>
+<p class="text-secondary mb-3">{% trans "If you chair or co-chair a session, that session gets an extra Chair view for moderating Q&A, running polls and driving the room screen. You reach it from the session page via the “Chair view” button." %}</p>
+
+{# ─── Chair panel ─── #}
+<div class="card mb-3"><div class="card-body py-3">
+    <div class="row g-3">
+        <div class="col-12 col-md-8">
+            <h2 class="h5"><i class="ti ti-message-star me-1"></i>{% trans "Moderate the Q&A" %}</h2>
+            <ul class="mb-2 ps-3">
+                <li>{% blocktrans %}<strong>Star</strong> a question to promote it — starred questions get a badge and jump to the top of the public list, so the audience sees what you'll actually ask.{% endblocktrans %}</li>
+                <li>{% blocktrans %}<strong>Hide</strong> a question that is off-topic or breaches the rules; <strong>Mark as answered</strong> once the panel has dealt with it.{% endblocktrans %}</li>
+                <li>{% blocktrans %}Prepare your own questions in advance with <strong>Add question</strong> — they're added pre-starred so you can walk in ready.{% endblocktrans %}</li>
+                <li>{% trans "The counters show how many questions are starred, visible and total." %}</li>
+            </ul>
+        </div>
+        <div class="col-12 col-md-4">
+            <figure class="help-figure">
+                <img class="help-phone" src="{% static shots|add:"chair-panel.png" %}" alt="{% trans 'The chair view' %}" loading="lazy">
+                <figcaption>{% trans "The chair view" %}</figcaption>
+            </figure>
+        </div>
+    </div>
+</div></div>
+
+{# ─── Room screen & polls ─── #}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5"><i class="ti ti-device-tv me-1"></i>{% trans "The room screen (beamer) & live polls" %}</h2>
+    <p class="mb-2">
+        {% blocktrans %}Open the <strong>room screen</strong> once on the projector. From the chair view you switch what it shows — a <em>Standby</em> title card, the live <em>Q&A</em>, or a poll's results — and it refreshes within a few seconds. You never need to touch the projector laptop again.{% endblocktrans %}
+    </p>
+    <p class="mb-3">
+        {% blocktrans %}<strong>Live polls:</strong> attendees only see the results once you project them. Start/stop opens or closes the vote. Below you can see the two screen states — a live poll result and the standby card.{% endblocktrans %}
+    </p>
+    <div class="help-shots">
+        <figure class="help-figure">
+            <img class="help-wide" src="{% static shots|add:"poll-project.png" %}" alt="{% trans 'Live poll projected on the room screen' %}" loading="lazy">
+            <figcaption>{% trans "Live poll results on the room screen" %}</figcaption>
+        </figure>
+        <figure class="help-figure">
+            <img class="help-wide" src="{% static shots|add:"beamer-screen.png" %}" alt="{% trans 'Room screen in standby' %}" loading="lazy">
+            <figcaption>{% trans "Standby card between talks" %}</figcaption>
+        </figure>
+    </div>
+</div></div>
+
+{# ─────────────── TEIL 3 — INDUSTRIE / AUSSTELLER ─────────────── #}
+<hr class="my-4">
+<h1 id="industry" class="h3 mb-1"><i class="ti ti-building-store me-1"></i>{% trans "For industry & exhibitors" %}
+    <span class="badge bg-teal-lt role-badge ms-1">{% trans "Company / Industry" %}</span></h1>
+<p class="text-secondary mb-3">{% trans "If you represent a company at the expo: you use the app like every other attendee — sign in by scanning the QR code on your badge. On top of that, your company has a profile and a booth in the app." %}</p>
+
+{# ─── Firmenprofil ─── #}
+<div class="card mb-3"><div class="card-body py-3">
+    <div class="row g-3">
+        <div class="col-12 col-md-8">
+            <h2 class="h5"><i class="ti ti-id-badge-2 me-1"></i>{% trans "Your company profile" %}</h2>
+            <p class="mb-2">
+                {% blocktrans %}Attendees find you in the <strong>Expo</strong> tab — all exhibitors are listed as equals, in alphabetical order. Your profile page shows:{% endblocktrans %}
+            </p>
+            <ul class="mb-2 ps-3">
+                <li>{% trans "your logo, a short one-line description and the full company description," %}</li>
+                <li>{% trans "your contact people at the booth — with photo, role and field of expertise, so visitors know whom to approach," %}</li>
+                <li>{% trans "downloads (white-papers, datasheets, brochures) and links attendees can open right away," %}</li>
+                <li>{% trans "your booth location, plus a pin on the floor plan." %}</li>
+            </ul>
+            <p class="mb-0 text-secondary small">
+                {% trans "The profile is maintained by the organisers — you don't have to edit anything yourself." %}
+            </p>
+        </div>
+        <div class="col-12 col-md-4">
+            <figure class="help-figure">
+                <img class="help-phone" src="{% static shots|add:"sponsor-detail.png" %}" alt="{% trans 'A company profile in the expo' %}" loading="lazy">
+                <figcaption>{% trans "Your company profile" %}</figcaption>
+            </figure>
+        </div>
+    </div>
+</div></div>
+
+{# ─── Stand-QR & Booth-Quiz ─── #}
+<div class="card mb-3"><div class="card-body py-3">
+    <div class="row g-3">
+        <div class="col-12 col-md-8">
+            <h2 class="h5"><i class="ti ti-qrcode me-1"></i>{% trans "Your booth QR code & the booth quiz" %}</h2>
+            <p class="mb-2">
+                {% blocktrans %}You get a printed <strong>QR code for your booth</strong> from the organisers. Visitors scan it and check in — that earns them points in the app's leaderboard, which is exactly what draws them to your stand.{% endblocktrans %}
+            </p>
+            <p class="mb-2">
+                {% blocktrans %}On top of the check-in you can have a <strong>booth quiz</strong>: one question with several answers. The answer should be findable at your booth — on a roll-up, on a device, or simply by asking your staff. That is the point: it starts a conversation. A correct answer earns extra points.{% endblocktrans %}
+            </p>
+            <p class="mb-0 text-secondary small">
+                {% trans "Send your quiz question and answers to the organisers — we set it up for you." %}
+            </p>
+        </div>
+        <div class="col-12 col-md-4">
+            <figure class="help-figure">
+                <img class="help-phone" src="{% static shots|add:"booth-stop.png" %}" alt="{% trans 'Booth check-in with quiz' %}" loading="lazy">
+                <figcaption>{% trans "Booth check-in & quiz" %}</figcaption>
+            </figure>
+        </div>
+    </div>
+</div></div>
+
+{# ─── Changes / contact ─── #}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5"><i class="ti ti-edit me-1"></i>{% trans "Want to change something on your profile?" %}</h2>
+    <p class="mb-2">
+        {% blocktrans %}Send your text, logo, contact people, downloads or quiz question to the organisers — we keep your profile up to date for you, before and during the event.{% endblocktrans %}
+    </p>
+    {% if industry_contact %}
+    <div class="d-flex align-items-center gap-2">
+        <i class="ti ti-mail text-secondary"></i>
+        <div>
+            <div class="fw-semibold">{{ industry_contact.name }}</div>
+            {% if industry_contact.email %}
+            <a href="mailto:{{ industry_contact.email }}">{{ industry_contact.email }}</a>
+            {% endif %}
+        </div>
+    </div>
+    {% else %}
+    <p class="mb-0">{% trans "Please talk to the registration desk — they will put you in touch with the right person." %}</p>
+    {% endif %}
+</div></div>
+
+{# ─────────────── TEIL 4 — ORGA / OPERATIONS ─────────────── #}
+<hr class="my-4">
+<h1 id="organisers" class="h3 mb-1"><i class="ti ti-settings me-1"></i>{% trans "For organisers" %}
+    <span class="badge bg-azure-lt role-badge ms-1">{% trans "Operations team" %}</span></h1>
+<p class="text-secondary mb-3">{% trans "Organisers and staff have an Operations area for access tokens, badges and attendees. Reach it from the wrench icon in the top bar after signing in with your organiser account." %}</p>
+
+{# ─── Dashboard ─── #}
+<div class="card mb-3"><div class="card-body py-3">
+    <div class="row g-3">
+        <div class="col-12 col-md-7">
+            <h2 class="h5"><i class="ti ti-dashboard me-1"></i>{% trans "Operations dashboard" %}</h2>
+            <p class="mb-2">
+                {% trans "The dashboard shows live counts — tokens total, open/unused, redeemed and registered users — and quick actions for the two most common jobs:" %}
+            </p>
+            <ul class="mb-0 ps-3">
+                <li>{% blocktrans %}<strong>Generate access tokens</strong> in bulk — pick a count and a group (Delegate, Speaker, Industry …).{% endblocktrans %}</li>
+                <li>{% blocktrans %}<strong>Print QR sheets</strong> — A4 sheets of QR cards for badge stations, booths and posters.{% endblocktrans %}</li>
+            </ul>
+        </div>
+        <div class="col-12 col-md-5">
+            <figure class="help-figure">
+                <img class="help-wide" src="{% static shots|add:"ops-dashboard.png" %}" alt="{% trans 'Operations dashboard' %}" loading="lazy">
+                <figcaption>{% trans "Operations dashboard" %}</figcaption>
+            </figure>
+        </div>
+    </div>
+</div></div>
+
+{# ─── Tokens & badges ─── #}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5"><i class="ti ti-qrcode me-1"></i>{% trans "Access tokens & badges" %}</h2>
+    <p class="mb-2">
+        {% blocktrans %}The <strong>Tokens</strong> list shows every access token with its group, label and status (open, redeemed, inactive). Search by token, label or username, and filter by status or group.{% endblocktrans %}
+    </p>
+    <p class="mb-3">
+        {% blocktrans %}Open a token to see its QR code and details. <strong>Print badge</strong> produces the printable badge; <strong>Deactivate</strong> revokes a token if a badge is lost. A token stays “open” until someone scans it and picks a nickname — then it counts as redeemed.{% endblocktrans %}
+    </p>
+    <div class="help-shots">
+        <figure class="help-figure">
+            <img class="help-wide" src="{% static shots|add:"ops-tokens.png" %}" alt="{% trans 'Token list with filters' %}" loading="lazy">
+            <figcaption>{% trans "Token list — filter by group & status" %}</figcaption>
+        </figure>
+        <figure class="help-figure">
+            <img class="help-wide" src="{% static shots|add:"ops-token-detail.png" %}" alt="{% trans 'Single token with QR code' %}" loading="lazy">
+            <figcaption>{% trans "Single token — QR & badge" %}</figcaption>
+        </figure>
+    </div>
+</div></div>
+
+{# ─── Users ─── #}
+<div class="card mb-3"><div class="card-body py-3">
+    <div class="row g-3">
+        <div class="col-12 col-md-7">
+            <h2 class="h5"><i class="ti ti-users-group me-1"></i>{% trans "Manage attendees" %}</h2>
+            <p class="mb-0">
+                {% blocktrans %}Under <strong>Users</strong> you find every registered attendee. Open a profile to edit their display name or affiliation, reset a password, unlock an account that got locked after too many sign-in attempts, or issue a fresh token.{% endblocktrans %}
+            </p>
+        </div>
+        <div class="col-12 col-md-5">
+            <figure class="help-figure">
+                <img class="help-wide" src="{% static shots|add:"ops-users.png" %}" alt="{% trans 'User management' %}" loading="lazy">
+                <figcaption>{% trans "User management" %}</figcaption>
+            </figure>
+        </div>
+    </div>
+</div></div>
+
+{# ─── Abstract results ─── #}
+<div class="card mb-3"><div class="card-body py-3">
+    <div class="row g-3">
+        <div class="col-12 col-md-7">
+            <h2 class="h5"><i class="ti ti-clipboard-data me-1"></i>{% trans "Abstract review results" %}</h2>
+            <p class="mb-2">
+                {% blocktrans %}The <strong>Abstracts</strong> area in Operations aggregates the reviewers' scores per abstract, so the scientific committee can rank submissions and decide on oral vs. poster slots.{% endblocktrans %}
+            </p>
+            <p class="mb-0">
+                {% blocktrans %}<strong>Audience vote</strong> is the separate public ranking: how many stars each poster collected from attendees. From there you award the Audience Choice Award with one click — a tie at the top is flagged, and only one abstract per event can hold the award. An abstract is only votable once it is marked as <em>poster on display</em>, which also decides whether it gets a QR sheet.{% endblocktrans %}
+            </p>
+        </div>
+        <div class="col-12 col-md-5">
+            <figure class="help-figure">
+                <img class="help-wide" src="{% static shots|add:"ops-abstracts.png" %}" alt="{% trans 'Abstract review results' %}" loading="lazy">
+                <figcaption>{% trans "Aggregated review scores" %}</figcaption>
+            </figure>
+        </div>
+    </div>
+</div></div>
+
+{# ─── Contact ─── #}
+<hr class="my-4">
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5"><i class="ti ti-mail me-1"></i>{% trans "Need help during the event?" %}</h2>
+    <p class="mb-0">
+        {% trans "Walk up to the registration desk or any committee member with an orange lanyard. They'll help you with login problems, missing sessions on your schedule, or anything else." %}
+    </p>
+</div></div>
+
+{% endblock %}

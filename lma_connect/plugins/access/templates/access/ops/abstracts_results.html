@@ -1,0 +1,117 @@
+{% extends "access/ops/_base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Abstract results" %} — Ops{% endblock %}
+
+{% block extra_head %}
+<style>
+    .score-cell { font-variant-numeric: tabular-nums; }
+    .score-tag { display: inline-block; min-width: 22px; padding: 1px 6px;
+                 margin: 1px; border-radius: 3px; font-size: 0.75rem;
+                 font-weight: 600; text-align: center; color: #fff; }
+    .below-min { background: rgba(var(--lma-accent-rgb), 0.08); }
+    .below-min td:first-child { border-left: 3px solid var(--lma-accent); }
+</style>
+{% endblock %}
+
+{% block ops_content %}
+
+<div class="row g-3 mb-3">
+    <div class="col-6 col-md-4">
+        <div class="card"><div class="card-body py-2 text-center">
+            <div class="h3 mb-0" style="color: var(--lma-primary);">{{ total_done }} / {{ total_assigned }}</div>
+            <div class="small text-secondary">{% trans "Reviews submitted" %}</div>
+        </div></div>
+    </div>
+    <div class="col-6 col-md-4">
+        <div class="card"><div class="card-body py-2 text-center">
+            <div class="h3 mb-0" style="color: var(--lma-accent);">{{ below_min_count }}</div>
+            <div class="small text-secondary">{% blocktrans %}Abstracts with &lt; {{ min_required }} reviews{% endblocktrans %}</div>
+        </div></div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="card"><div class="card-body py-2 text-center">
+            {% include "access/ops/_publish_counter.html" %}
+        </div></div>
+    </div>
+</div>
+
+<div class="card mb-3"><div class="card-body py-2">
+    <div class="small text-secondary mb-1">{% trans "Sort by" %}</div>
+    <div class="btn-group btn-group-sm" role="group">
+        <a href="?sort=avg" class="btn {% if sort == 'avg' %}btn-primary{% else %}btn-outline-secondary{% endif %}">⌀ {% trans "Score (best first)" %}</a>
+        <a href="?sort=n" class="btn {% if sort == 'n' %}btn-primary{% else %}btn-outline-secondary{% endif %}">{% trans "Reviews done" %}</a>
+        <a href="?sort=poster" class="btn {% if sort == 'poster' %}btn-primary{% else %}btn-outline-secondary{% endif %}">{% trans "Poster-ID" %}</a>
+    </div>
+</div></div>
+
+<div class="alert alert-info py-2 small mb-3">
+    <i class="ti ti-info-circle"></i>
+    {% blocktrans %}Scale: 1 = excellent · 6 = not suitable. Lower average = better.
+    Rows marked in red have fewer than {{ min_required }} submitted reviews — please follow up with reviewers.{% endblocktrans %}
+    {% trans "Use the eye button to publish an abstract — only published abstracts appear in the attendee app." %}
+</div>
+
+<div class="card">
+    <div class="table-responsive">
+        <table class="table table-vcenter mb-0">
+            <thead>
+                <tr>
+                    <th>{% trans "Poster" %}</th>
+                    <th>{% trans "Title" %}</th>
+                    <th>{% trans "Category" %}</th>
+                    <th class="text-center">n</th>
+                    <th class="text-end">⌀</th>
+                    <th class="text-center">{% trans "Spread" %}</th>
+                    <th>{% trans "Individual scores" %}</th>
+                    <th class="text-center">{% trans "Public" %}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr class="{% if row.below_min and row.n_assigned %}below-min{% endif %}">
+                    <td><code>{{ row.abstract.poster_id|default:"—" }}</code></td>
+                    <td>
+                        <a href="{% url 'access:ops_abstract_detail' row.abstract.pk %}" class="text-reset">
+                            {{ row.abstract.title|truncatechars:60 }}
+                        </a>
+                    </td>
+                    <td>
+                        {% if row.abstract.category %}
+                        <span class="badge small" style="background: {{ row.abstract.category.color }}; color: #fff;">{{ row.abstract.category.name|truncatechars:18 }}</span>
+                        {% else %}<span class="text-secondary small">—</span>{% endif %}
+                    </td>
+                    <td class="text-center score-cell">
+                        {% if row.below_min and row.n_assigned %}
+                            <span class="badge bg-danger-lt">{{ row.n_done }}/{{ row.n_assigned }}</span>
+                        {% else %}
+                            <span class="text-secondary small">{{ row.n_done }}/{{ row.n_assigned }}</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-end score-cell">
+                        {% if row.avg is not None %}
+                            <strong>{{ row.avg|floatformat:2 }}</strong>
+                        {% else %}<span class="text-secondary">—</span>{% endif %}
+                    </td>
+                    <td class="text-center score-cell">
+                        {% if row.n_done > 1 %}{{ row.spread }}{% else %}<span class="text-secondary">—</span>{% endif %}
+                    </td>
+                    <td>
+                        {% for score in row.scores %}
+                        <span class="score-tag" style="background-color: {% if score <= 2 %}var(--lma-primary){% elif score == 3 %}var(--lma-primary-light){% elif score == 4 %}var(--lma-highlight); color: var(--lma-ink){% else %}var(--lma-accent){% endif %};">{{ score }}</span>
+                        {% endfor %}
+                    </td>
+                    <td class="text-center">
+                        {% include "access/ops/_publish_toggle.html" with abstract=row.abstract with_counter=True %}
+                    </td>
+                    <td class="text-end">
+                        <a href="{% url 'access:ops_abstract_detail' row.abstract.pk %}" class="btn btn-sm btn-outline-secondary" title="{% trans "Details" %}"><i class="ti ti-list-details"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

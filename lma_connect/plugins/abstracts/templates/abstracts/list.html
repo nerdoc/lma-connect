@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load i18n world_map_tags %}
+
+{% block title %}{% trans "Abstracts" %} — {{ event.name }}{% endblock %}
+{% block topbar_title %}{% trans "Abstracts" %}{% endblock %}
+{% block topbar_sub %}{% blocktrans with n=published_count count c=categories|length %}{{ n }} accepted · {{ c }} category{% plural %}{{ n }} accepted · {{ c }} categories{% endblocktrans %}{% endblock %}
+
+{% block content %}
+
+{% world_map "abstracts" title=_("Where our abstracts come from") %}
+
+<form method="get" class="mb-3">
+    <div class="input-group mb-2">
+        <span class="input-group-text"><i class="ti ti-search"></i></span>
+        <input type="search" name="q" value="{{ q }}" placeholder="{% trans 'Title, content, keywords …' %}" class="form-control"
+               hx-get="{% url 'abstracts:list' %}" hx-trigger="keyup changed delay:400ms, search"
+               hx-target="#abstract-grid" hx-select="#abstract-grid" hx-swap="outerHTML">
+    </div>
+    <div class="d-flex gap-2 flex-wrap" role="tablist">
+        <a href="?" class="btn btn-sm {% if not selected_cat and not selected_type and not awards_only %}btn-primary{% else %}btn-outline-secondary{% endif %}">{% trans "All" %}</a>
+        <a href="?awards=1" class="btn btn-sm {% if awards_only %}btn-warning text-dark{% else %}btn-outline-warning{% endif %}"><i class="ti ti-trophy"></i> {% trans "Award winners" %}</a>
+        <a href="?type=poster" class="btn btn-sm {% if selected_type == 'poster' %}btn-primary{% else %}btn-outline-secondary{% endif %}"><i class="ti ti-clipboard"></i> {% trans "Posters" %}</a>
+        <a href="?type=oral" class="btn btn-sm {% if selected_type == 'oral' %}btn-primary{% else %}btn-outline-secondary{% endif %}"><i class="ti ti-microphone"></i> {% trans "Oral communications" %}</a>
+        {% for cat in categories %}
+        <a href="?cat={{ cat.slug }}" class="btn btn-sm {% if selected_cat == cat.slug %}btn-primary{% else %}btn-outline-secondary{% endif %}" style="{% if selected_cat == cat.slug %}background: {{ cat.color }}; border-color: {{ cat.color }};{% endif %}">{{ cat.name }}</a>
+        {% endfor %}
+    </div>
+</form>
+
+<div id="abstract-grid">
+{% if not abstracts %}
+<div class="empty">
+    <div class="empty-icon"><i class="ti ti-file-search h1"></i></div>
+    <p class="empty-title">{% trans "No abstracts found" %}</p>
+    <p class="empty-subtitle text-secondary">{% trans "Reset filters or change your search term." %}</p>
+</div>
+{% else %}
+<div class="d-flex flex-column gap-2">
+    {% for abstract in abstracts %}
+    <a href="{{ abstract.get_absolute_url }}" class="card text-decoration-none {% if abstract.award %}border-warning{% endif %}" {% if abstract.award %}style="box-shadow: 0 0 0 1px var(--tblr-warning), 0 4px 16px rgba(245,158,11,0.18);"{% endif %}>
+        <div class="card-body py-3">
+            <div class="d-flex justify-content-between align-items-start gap-2 mb-1">
+                <div class="d-flex flex-wrap gap-1 align-items-center">
+                    <span class="badge bg-{% if abstract.type == 'poster' %}orange{% elif abstract.type == 'oral' %}blue{% else %}yellow{% endif %}-lt fw-bold">{{ abstract.poster_id|default:abstract.get_type_display }}</span>
+                    {% if abstract.category %}<span class="badge" style="background: {{ abstract.category.color }}; color: #fff;">{{ abstract.category.name }}</span>{% endif %}
+                    {% if abstract.award %}<span class="badge bg-warning text-dark"><i class="ti ti-trophy"></i> {{ abstract.award.name }}</span>{% endif %}
+                </div>
+                <i class="ti ti-chevron-right text-secondary"></i>
+            </div>
+            <div class="fw-bold mb-1">{{ abstract.title }}</div>
+            {% with authors=abstract.authors.all %}
+            {% if authors %}
+            <div class="small text-secondary">
+                {% for a in authors|slice:":3" %}{{ a.full_name }}{% if a.is_presenting %} <span class="text-primary">*</span>{% endif %}{% if not forloop.last %}, {% endif %}{% endfor %}{% if authors|length > 3 %} <em>et al.</em>{% endif %}
+            </div>
+            {% endif %}
+            {% endwith %}
+            {% if abstract.location %}
+            <div class="small text-secondary mt-1"><i class="ti ti-map-pin"></i> {{ abstract.location }}</div>
+            {% endif %}
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endif %}
+</div>
+
+{% endblock %}

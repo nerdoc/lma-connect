@@ -1,0 +1,34 @@
+{% load i18n %}
+{% comment %}
+An event's floorplans — one block per level.
+
+Expects `plans` as Floorplan objects, always passed explicitly:
+
+    {% include "core/_floorplans.html" with plans=event.floorplans.all %}
+    {% include "core/_floorplans.html" with plans=event.exhibition_floorplans %}
+
+That way the calling page decides which levels it shows (info and home show
+all of them, expo only the exhibition floor) without duplicating the render
+logic. How many levels there are and what they are called lives in the data —
+see core.models.Floorplan.
+
+PDFs get an open button; images are shown inline and open at full resolution
+in a new tab, because on a phone the embedded plan is too small to read.
+{% endcomment %}
+{% for plan in plans %}
+<div class="{% if not forloop.last %}mb-3{% endif %}">
+    <div class="d-flex align-items-center justify-content-between mb-1">
+        <div class="fw-bold small text-secondary text-uppercase">{{ plan.localized_title }}</div>
+        <a href="{{ plan.file.url }}" target="_blank" rel="noopener"
+           class="small text-decoration-none"><i class="ti ti-maximize"></i> {% trans "Full size" %}</a>
+    </div>
+    {% if plan.is_pdf %}
+        <a href="{{ plan.file.url }}" target="_blank" rel="noopener"
+           class="btn btn-outline-primary w-100"><i class="ti ti-file-type-pdf"></i> {% trans "Open PDF" %}</a>
+    {% else %}
+        <a href="{{ plan.file.url }}" target="_blank" rel="noopener" class="d-block">
+            <img src="{{ plan.file.url }}" alt="{{ plan.localized_title }}" class="img-fluid rounded border">
+        </a>
+    {% endif %}
+</div>
+{% endfor %}

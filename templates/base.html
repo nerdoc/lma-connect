@@ -1,0 +1,464 @@
+{% load static i18n %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:'en' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="{{ event.theme_color|default:'#206bc4' }}">
+    {# PWA / Homescreen-Icon — gemeinsames Partial (auch in core/welcome.html). #}
+    {% include "_pwa_head.html" %}
+    <title>{% block title %}{{ event.name|default:"Conference App" }}{% endblock %}</title>
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    {% comment %}
+        Tabler, the icon fonts and htmx live under static/vendor/ in the repo,
+        not on a CDN. Two reasons: a CDN request hands every attendee's IP to a
+        third party (which the privacy policy would then have to disclose), and
+        on the conference day the interface would depend on the conference WiFi
+        AND on someone else's infrastructure. No SRI needed any more —
+        same-origin, and WhiteNoise hashes the filenames anyway.
+        To update: pull the files again (versions in docs/vendor-assets.md),
+        check the hashes against the SRI values noted there, run collectstatic.
+    {% endcomment %}
+    <link rel="stylesheet" href="{% static 'vendor/tabler/tabler.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/tabler-icons/tabler-icons.min.css' %}">
+    <script src="{% static 'vendor/htmx/htmx.min.js' %}"></script>
+    <script nonce="{{ request.csp_nonce }}">
+        // Auto-attach CSRF token to all HTMX requests (fixes 403 on hx-post).
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = document.querySelector('meta[name="csrf-token"]')?.content;
+            document.body.addEventListener('htmx:configRequest', (e) => {
+                if (token) e.detail.headers['X-CSRFToken'] = token;
+            });
+            // Replacement for hx-on::after-request="this.reset();" — forms
+            // carrying data-hx-reset-on-success are reset after a successful
+            // HTMX response. Inline hx-on breaks under a strict CSP
+            // (script-src without unsafe-inline).
+            document.body.addEventListener('htmx:afterRequest', (e) => {
+                if (!e.detail.successful) return;
+                const el = e.detail.elt;
+                if (el?.matches?.('[data-hx-reset-on-success]')) {
+                    el.reset?.();
+                }
+            });
+            // Back buttons: a replacement for inline navigation in the href,
+            // which a strict CSP (script-src without unsafe-inline) blocks.
+            // Elements with data-back go back in history; the real href stays
+            // as the no-JS fallback.
+            document.body.addEventListener('click', (e) => {
+                // Close the topbar settings menu on a click outside it.
+                const settingsMenu = document.getElementById('settings-menu');
+                if (settingsMenu?.open && !settingsMenu.contains(e.target)) {
+                    settingsMenu.open = false;
+                }
+                const back = e.target.closest?.('[data-back]');
+                if (back) {
+                    if (history.length > 1) {
+                        e.preventDefault();
+                        history.back();
+                    }
+                    return;
+                }
+                // data-confirm: a replacement for the inline confirm handler,
+                // which a strict CSP blocks. Cancels the action (a form
+                // submit, say) when the user declines.
+                const confirmEl = e.target.closest?.('[data-confirm]');
+                if (confirmEl && !window.confirm(confirmEl.getAttribute('data-confirm'))) {
+                    e.preventDefault();
+                }
+            });
+            // Add to home screen (settings menu). Chrome/Edge hand us the
+            // install prompt via beforeinstallprompt; we keep it and open it on
+            // click. Without one (Safari/iOS, Firefox) the <dialog> with the
+            // manual steps opens instead. Hidden when already installed.
+            const a2hs = document.getElementById('add-to-homescreen');
+            const a2hsDialog = document.getElementById('a2hs-dialog');
+            if (a2hs && a2hsDialog) {
+                const standalone = window.matchMedia('(display-mode: standalone)').matches
+                    || window.navigator.standalone === true;
+                if (!standalone) a2hs.hidden = false;
+                let installPrompt = null;
+                window.addEventListener('beforeinstallprompt', (e) => {
+                    e.preventDefault();
+                    installPrompt = e;
+                });
+                window.addEventListener('appinstalled', () => { installPrompt = null; a2hs.hidden = true; });
+                a2hs.addEventListener('click', async () => {
+                    document.getElementById('settings-menu').open = false;
+                    if (installPrompt) {
+                        installPrompt.prompt();
+                        try { await installPrompt.userChoice; } catch (_) { /* dismissed */ }
+                        installPrompt = null;
+                        return;
+                    }
+                    const ua = navigator.userAgent;
+                    const platform = /iPhone|iPad|iPod/.test(ua) || (ua.includes('Mac') && navigator.maxTouchPoints > 1)
+                        ? 'ios' : /Android/.test(ua) ? 'android' : 'desktop';
+                    a2hsDialog.querySelectorAll('[data-platform]').forEach((el) => {
+                        el.hidden = el.getAttribute('data-platform') !== platform;
+                    });
+                    a2hsDialog.showModal();
+                });
+                a2hsDialog.addEventListener('click', (e) => {
+                    // Click on the backdrop (outside the card) or a close button.
+                    if (e.target === a2hsDialog || e.target.closest?.('[data-a2hs-close]')) a2hsDialog.close();
+                });
+            }
+        });
+    </script>
+    <style>
+        /* Brand palette — five colours per event, everything else derived. */
+        {% include "_brand_palette.html" %}
+        body {
+            padding-bottom: calc(64px + env(safe-area-inset-bottom));
+            background-color: var(--lma-surface);
+            color: var(--lma-ink);
+        }
+        /* Buttons: primary, btn-warning = highlight on ink, btn-danger = accent */
+        .btn-primary {
+            background-color: var(--lma-primary);
+            border-color: var(--lma-primary);
+        }
+        .btn-primary:hover, .btn-primary:focus {
+            background-color: var(--lma-primary-dark);
+            border-color: var(--lma-primary-dark);
+        }
+        .btn-warning {
+            background-color: var(--lma-highlight);
+            border-color: var(--lma-highlight);
+            color: var(--lma-ink);
+        }
+        .btn-danger {
+            background-color: var(--lma-accent);
+            border-color: var(--lma-accent);
+        }
+        .badge.bg-primary  { background-color: var(--lma-primary) !important; }
+        .badge.bg-warning  { background-color: var(--lma-highlight) !important; color: var(--lma-ink) !important; }
+        .badge.bg-danger   { background-color: var(--lma-accent) !important; }
+        .badge.bg-success  { background-color: var(--lma-primary) !important; }
+        .badge.bg-info     { background-color: var(--lma-primary) !important; }
+        .text-success      { color: var(--lma-primary) !important; }
+        .text-warning      { color: var(--lma-highlight-ink) !important; }  /* readable on white */
+        .text-danger       { color: var(--lma-accent) !important; }
+        .text-info         { color: var(--lma-primary) !important; }
+        .border-info       { border-color: var(--lma-primary) !important; }
+        .border-warning    { border-color: var(--lma-highlight) !important; }
+        .alert-success {
+            background-color: var(--lma-primary-soft);
+            color: var(--lma-primary);
+            border-color: var(--lma-primary-border);
+        }
+        .alert-warning {
+            background-color: var(--lma-highlight-soft);
+            color: var(--lma-ink);
+            border-color: var(--lma-highlight);
+        }
+        .alert-info {
+            background-color: var(--lma-primary-soft);
+            color: var(--lma-primary);
+            border-color: var(--lma-primary-border);
+        }
+        .alert-danger {
+            background-color: var(--lma-accent-soft);
+            color: var(--lma-accent);
+            border-color: var(--lma-accent-border);
+        }
+        .topbar {
+            position: sticky; top: 0; z-index: 1030;
+            background: var(--tblr-bg-surface);
+            border-bottom: 1px solid var(--tblr-border-color);
+            padding: 0.5rem 1rem;
+            padding-top: calc(0.5rem + env(safe-area-inset-top));
+        }
+        .topbar-title { font-weight: 600; font-size: 1rem; line-height: 1.2; color: var(--tblr-body-color); }
+        .topbar-sub { font-size: 0.75rem; color: var(--tblr-secondary); }
+        /* Bottom nav: the primary colour as a full bar — far more present
+           than the white bar it replaced. Active tab: highlight marker plus
+           full opacity. */
+        .bottom-nav {
+            position: fixed; left: 0; right: 0; bottom: 0; z-index: 1030;
+            display: flex; background: var(--lma-primary);
+            padding-bottom: env(safe-area-inset-bottom);
+            box-shadow: 0 -4px 16px var(--lma-shadow);
+        }
+        .bottom-nav a {
+            flex: 1; display: flex; flex-direction: column; align-items: center;
+            justify-content: center; padding: 8px 2px; min-height: 60px;
+            text-decoration: none; color: rgba(255, 255, 255, 0.72);
+            font-size: 0.7rem; font-weight: 500; line-height: 1.1;
+            position: relative;
+        }
+        .bottom-nav a.active { color: #ffffff; }
+        .bottom-nav a.active::before {
+            content: ""; position: absolute; top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 56%; max-width: 64px; height: 3px;
+            background: var(--lma-highlight); border-radius: 0 0 3px 3px;
+        }
+        .bottom-nav a.active i { color: var(--lma-highlight); }
+        .bottom-nav a i { font-size: 1.4rem; margin-bottom: 2px; }
+        .bottom-nav a:active { background: rgba(255, 255, 255, 0.1); }
+        /* Settings menu in the topbar: CSP-safe <details> dropdown, no JS framework. */
+        .settings-menu { position: relative; }
+        .settings-menu > summary { display: inline-flex; }
+        /* Same size as the bottom-nav icons (1.4rem) */
+        .settings-menu > summary .ti-settings { font-size: 1.4rem; transition: transform 0.2s; }
+        .settings-menu[open] > summary .ti-settings { transform: rotate(60deg); }
+        .settings-dot {
+            position: absolute; top: 2px; right: 2px;
+            width: 9px; height: 9px; border-radius: 50%;
+            background: var(--lma-highlight); border: 1.5px solid var(--tblr-bg-surface);
+        }
+        .settings-panel {
+            position: absolute; right: 0; top: calc(100% + 6px);
+            min-width: 230px; padding: 0.25rem; z-index: 1040;
+            background: var(--tblr-bg-surface);
+            border: 1px solid var(--tblr-border-color); border-radius: 10px;
+            box-shadow: 0 8px 24px var(--lma-shadow);
+        }
+        .settings-panel .settings-item {
+            display: flex; align-items: center; gap: 0.6rem;
+            width: 100%; min-height: 44px; padding: 0.45rem 0.75rem;
+            border: 0; border-radius: 7px; background: transparent;
+            text-align: left; text-decoration: none;
+            color: var(--tblr-body-color); font-size: 0.875rem;
+        }
+        .settings-panel .settings-item:hover,
+        .settings-panel .settings-item:active { background: var(--lma-surface); }
+        .settings-panel .settings-item i { font-size: 1.15rem; color: var(--tblr-secondary); }
+        .settings-panel hr { margin: 0.25rem 0; }
+        /* Installed as an app already: the menu item has nothing left to offer.
+           Only standalone — a browser window in (macOS/F11) fullscreen reports
+           display-mode: fullscreen and would otherwise lose the item. */
+        @media (display-mode: standalone) {
+            #add-to-homescreen { display: none !important; }
+        }
+        .a2hs-dialog { border: 0; border-radius: var(--tblr-border-radius-lg, 0.75rem); padding: 0;
+            max-width: min(26rem, calc(100vw - 2rem)); box-shadow: var(--tblr-box-shadow, 0 0.5rem 1rem rgba(0,0,0,0.15)); }
+        .a2hs-dialog::backdrop { background: rgba(0,0,0,0.45); }
+        .a2hs-dialog ol { padding-left: 1.25rem; }
+        .content-pad { padding: 1rem; max-width: 720px; margin: 0 auto; }
+        /* Clearance for the fixed bottom nav. It has to hang off the last
+           element in the flow, not off body{padding-bottom}: the body box ends
+           with the viewport, so its padding sits *over* the content instead of
+           below it and never had any effect. Measured at 390×844 the copyright
+           line sat 40 px behind the bar, and the legal links come after it in
+           the markup — imprint and privacy policy were unreachable on a phone.
+           84 px because the bar is at least 60 px tall and grows as soon as a
+           tab label wraps on a narrow device. */
+        :root { --lma-nav-clearance: calc(84px + env(safe-area-inset-bottom)); }
+        main.content-pad { padding-bottom: var(--lma-nav-clearance); }
+        main.content-pad:has(+ footer) { padding-bottom: 1rem; }
+        footer.content-pad { padding-bottom: var(--lma-nav-clearance); }
+        /* App attribution: present on every page, but visually the quietest
+           line in the footer — the organizer's brand stays the loud one. */
+        .app-credit { font-size: 0.75rem; opacity: 0.75; border-top: 1px solid var(--tblr-border-color); }
+        .app-credit a { color: inherit; }
+        .session-card { border-left: 4px solid var(--track-color, var(--lma-primary)); }
+        /* Breaks & catering: highlight tint plus a dashed border, so they
+           stand out clearly from the talk blocks in the program. */
+        .session-card.is-break {
+            background: var(--lma-highlight-soft);
+            border: 1px dashed var(--lma-highlight-ink);
+            border-left: 4px solid var(--lma-highlight);
+        }
+        /* Touch targets ≥44px */
+        .btn, .form-check-input, .form-control { min-height: 44px; }
+        .btn-sm { min-height: 36px; }
+
+        /* Collapsible <details> ohne Marker, Chevron rotiert beim Auf-/Zuklappen */
+        details > summary { list-style: none; cursor: pointer; user-select: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details > summary .ti-chevron-down { transition: transform 0.15s; }
+        details[open] > summary .ti-chevron-down { transform: rotate(180deg); }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+
+<header class="topbar">
+    <div class="d-flex align-items-center justify-content-between gap-2">
+        {% if event.logo %}
+        <a href="{% url 'core:home' %}" class="topbar-logo flex-shrink-0" aria-label="Dashboard">
+            <img src="{{ event.logo.url }}" alt="{{ event.name }}" style="max-height: 36px; width: auto;">
+        </a>
+        {% endif %}
+        <a href="{% url 'core:home' %}" class="flex-grow-1 min-w-0 text-decoration-none text-reset" aria-label="Dashboard">
+            {% comment %} Title only next to the logo. The subtitle was removed, so
+               topbar_sub overrides on subpages have nothing to fill.{% endcomment %}
+            {% comment %} firstof, not chained |default: — see _pwa_head.html: a filter
+               argument resolves eagerly, so `event.name` raised on installations
+               without an event yet.{% endcomment %}
+            <div class="topbar-title">{% block topbar_title %}{% firstof event.short_name event.name "Conference" %}{% endblock %}</div>
+        </a>
+        {% comment %} Every topbar action lives in the settings menu — a CSP-safe
+           <details> dropdown, no JavaScript dropdown library.{% endcomment %}
+        <details class="settings-menu flex-shrink-0" id="settings-menu">
+            <summary class="btn btn-sm btn-ghost-secondary position-relative" role="button"
+                     aria-label="{% trans 'Menu' %}" title="{% trans 'Menu' %}">
+                <i class="ti ti-settings"></i>
+                {% if user.is_authenticated and my_reviews_open %}<span class="settings-dot" aria-hidden="true"></span>{% endif %}
+            </summary>
+            <div class="settings-panel">
+                <form action="{% url 'set_language' %}" method="post" class="m-0">{% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button type="submit" name="language" value="{% if LANGUAGE_CODE == 'de' %}en{% else %}de{% endif %}" class="settings-item">
+                        <i class="ti ti-language"></i>{% if LANGUAGE_CODE == 'de' %}English{% else %}Deutsch{% endif %}
+                    </button>
+                </form>
+                <a href="{% url 'core:help' %}" class="settings-item"><i class="ti ti-help-circle"></i>{% trans "Help" %}</a>
+                {% comment %} Add to home screen: Chrome/Edge fire beforeinstallprompt, then the
+                   native install dialog opens; everywhere else (Safari/iOS, Firefox) a
+                   <dialog> with the manual steps. Hidden once the app runs standalone
+                   (CSS display-mode query + navigator.standalone for iOS). Needs JS, so
+                   it is hidden by default and revealed by the script below.{% endcomment %}
+                <button type="button" class="settings-item" id="add-to-homescreen" hidden>
+                    <i class="ti ti-device-mobile"></i>{% trans "Add to home screen" %}
+                </button>
+                <a href="{% url 'core:about' %}" class="settings-item"><i class="ti ti-info-circle"></i>{% blocktrans with name=app.name %}About {{ name }}{% endblocktrans %}</a>
+                {% if user.is_authenticated %}
+                    {% if is_ops %}
+                    <a href="{% url 'access:ops_dashboard' %}" class="settings-item"><i class="ti ti-tool"></i>{% trans "Operations" %}</a>
+                    {% endif %}
+                    {% if my_reviews_total %}
+                    <a href="{% url 'abstracts:review_list' %}" class="settings-item">
+                        <i class="ti ti-clipboard-check"></i>{% trans "Abstract reviews" %}
+                        {% if my_reviews_open %}<span class="badge bg-warning text-dark ms-auto">{{ my_reviews_open }}</span>{% endif %}
+                    </a>
+                    {% endif %}
+                    <a href="{% url 'access:me' %}" class="settings-item">
+                        <i class="ti ti-user"></i><span class="text-truncate">{{ user.first_name|default:user.username }}</span>
+                    </a>
+                    <hr>
+                    <form action="{% url 'logout' %}" method="post" class="m-0">{% csrf_token %}
+                        <button type="submit" class="settings-item"><i class="ti ti-logout"></i>{% trans "Sign out" %}</button>
+                    </form>
+                {% else %}
+                    <hr>
+                    <a href="{% url 'login' %}" class="settings-item"><i class="ti ti-login"></i>{% trans "Sign in" %}</a>
+                    <a href="{% url 'admin:index' %}" class="settings-item"><i class="ti ti-lock-cog"></i>Admin</a>
+                {% endif %}
+            </div>
+        </details>
+    </div>
+</header>
+
+{% comment %} Instructions for browsers without a programmatic install prompt — the
+   platform block is picked by the script above; the help page carries the same
+   steps for the no-JS case.{% endcomment %}
+<dialog class="a2hs-dialog" id="a2hs-dialog" aria-labelledby="a2hs-title">
+    <div class="card m-0 border-0">
+        <div class="card-body">
+            <h3 class="card-title mb-2" id="a2hs-title"><i class="ti ti-device-mobile me-1"></i>{% trans "Add to home screen" %}</h3>
+            <p class="text-secondary mb-2">{% trans "Use the app like a native app — without a browser address bar:" %}</p>
+            <ol class="mb-0" data-platform="ios" hidden>
+                <li>{% trans "Open this page in Safari (other browsers cannot install apps on iOS)." %}</li>
+                <li>{% blocktrans %}Tap the <strong>share button</strong> <i class="ti ti-share-2"></i> at the bottom of the screen.{% endblocktrans %}</li>
+                <li>{% blocktrans %}Choose <strong>Add to Home Screen</strong>, then <strong>Add</strong>.{% endblocktrans %}</li>
+            </ol>
+            <ol class="mb-0" data-platform="android" hidden>
+                <li>{% blocktrans %}Open the browser menu <i class="ti ti-dots-vertical"></i> (top right).{% endblocktrans %}</li>
+                <li>{% blocktrans %}Choose <strong>Add to Home screen</strong> or <strong>Install app</strong>, then confirm.{% endblocktrans %}</li>
+            </ol>
+            <ol class="mb-0" data-platform="desktop" hidden>
+                <li>{% blocktrans %}In Chrome or Edge, click the <strong>install icon</strong> in the address bar, or open the browser menu and choose <strong>Install app</strong>.{% endblocktrans %}</li>
+                <li>{% trans "Safari on Mac: File → Add to Dock. Firefox has no install option — use a bookmark." %}</li>
+            </ol>
+        </div>
+        <div class="card-footer d-flex justify-content-end gap-2 py-2">
+            <a href="{% url 'core:help' %}" class="btn btn-sm btn-ghost-secondary">{% trans "Help" %}</a>
+            <button type="button" class="btn btn-sm btn-primary" data-a2hs-close autofocus>{% trans "Close" %}</button>
+        </div>
+    </div>
+</dialog>
+
+<main class="content-pad">
+    {% block content %}{% endblock %}
+</main>
+
+{% comment %} The footer renders on every page, event or not: besides the organizer's
+   own lines it carries the app's attribution, and that one may not depend on
+   whether an event happens to be configured.{% endcomment %}
+<footer class="content-pad text-center text-secondary small" style="padding-top: 2rem;">
+    {% if event %}
+    {% if event.organizer_name or event.organizer_logo %}
+    <div class="d-flex align-items-center justify-content-center gap-2 flex-wrap mb-2">
+        <span>{{ event.footer_label|default:_("Hosted by") }}</span>
+        {% if event.organizer_url %}<a href="{{ event.organizer_url }}" target="_blank" rel="noopener" class="text-decoration-none">{% endif %}
+        {% if event.organizer_logo %}
+            <img src="{{ event.organizer_logo.url }}" alt="{{ event.organizer_name }}" style="max-height: 28px; width: auto; vertical-align: middle;">
+        {% else %}
+            <strong>{{ event.organizer_name }}</strong>
+        {% endif %}
+        {% if event.organizer_url %}</a>{% endif %}
+    </div>
+    {% endif %}
+
+    {# Copyright line #}
+    {% with cyear=event.copyright_year_start|default:event.start_date.year holder=event.copyright_holder|default:event.organizer_name %}
+    {% if holder %}
+    <div class="mb-1">
+        © {% if cyear and cyear < current_year %}{{ cyear }}–{{ current_year }}{% else %}{{ cyear|default:current_year }}{% endif %}
+        {% if event.organizer_url %}<a href="{{ event.organizer_url }}" target="_blank" rel="noopener">{{ holder }}</a>{% else %}{{ holder }}{% endif %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    {# Legal links — pages maintained in the admin, in their configured order #}
+    {% with legal_pages=event.published_legal_pages %}
+    {% if legal_pages %}
+    <ul class="list-inline list-inline-dots mb-1 small">
+        {% for page in legal_pages %}
+        <li class="list-inline-item"><a href="{% url 'core:legal' page.slug %}">{{ page.localized_title }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    {% if event.localized_footer_extra_md %}
+    <div class="small">{{ event.localized_footer_extra_md|linebreaks }}</div>
+    {% endif %}
+    {% endif %}{# /event #}
+
+    {% comment %} App attribution — hard-coded, never event data. Names the software,
+       its authors and its share-alike licence, and links to /about/, which is
+       also this deployment's source offer under AGPL §13.{% endcomment %}
+    <div class="app-credit mt-2 pt-2">
+        <a href="{% url 'core:about' %}" class="text-decoration-none"><strong>{{ app.name }}</strong></a>
+        · {% blocktrans with holder=app.copyright_holder %}built by {{ holder }}{% endblocktrans %}
+        · <a href="{% url 'core:about' %}">{% blocktrans with license=app.license_spdx %}open source, {{ license }}{% endblocktrans %}</a>
+    </div>
+</footer>
+
+<nav class="bottom-nav" role="navigation" aria-label="{% trans 'Main navigation' %}">
+    <a href="{% url 'core:home' %}" class="{% if active_tab == 'home' %}active{% endif %}" aria-label="{% trans 'Home' %}">
+        <i class="ti ti-home"></i><span>{% trans "Home" %}</span>
+    </a>
+    {% if event.tab_program_enabled|default_if_none:True %}
+    <a href="{% url 'program:list' %}" class="{% if active_tab == 'program' %}active{% endif %}" aria-label="{% trans 'Program' %}">
+        <i class="ti ti-calendar-event"></i><span>{% trans "Program" %}</span>
+    </a>
+    {% endif %}
+    {% if event.tab_sponsors_enabled|default_if_none:True %}
+    <a href="{% url 'sponsors:list' %}" class="{% if active_tab == 'sponsors' %}active{% endif %}" aria-label="{% trans 'Expo' %}">
+        <i class="ti ti-building-store"></i><span>{% trans "Expo" %}</span>
+    </a>
+    {% endif %}
+    {% if event.tab_abstracts_enabled|default_if_none:True %}
+    <a href="{% url 'abstracts:list' %}" class="{% if active_tab == 'abstracts' %}active{% endif %}" aria-label="{% trans 'Abstracts' %}">
+        <i class="ti ti-file-text"></i><span>{% trans "Abstracts" %}</span>
+    </a>
+    {% endif %}
+    {% if event.tab_info_enabled|default_if_none:True %}
+    <a href="{% url 'core:info' %}" class="{% if active_tab == 'info' %}active{% endif %}" aria-label="{% trans 'Info' %}">
+        <i class="ti ti-info-circle"></i><span>{% trans "Info" %}</span>
+    </a>
+    {% endif %}
+    {% if event.tab_feedback_enabled|default_if_none:True %}
+    <a href="{% url 'feedback:list' %}" class="{% if active_tab == 'feedback' %}active{% endif %}" aria-label="{% trans 'Feedback' %}">
+        <i class="ti ti-message-2"></i><span>{% trans "Feedback" %}</span>
+    </a>
+    {% endif %}
+</nav>
+
+</body>
+</html>

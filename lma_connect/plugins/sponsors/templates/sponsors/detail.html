@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+{% load markdownify i18n static brand_tags %}
+
+{% block title %}{{ sponsor.name }}{% endblock %}
+{% block topbar_title %}{{ sponsor.name }}{% endblock %}
+{% comment %} The tier (gold/silver/…) stays internal on purpose — exhibitors are not
+   ranked by it in front of attendees.{% endcomment %}
+{% block topbar_sub %}{% if sponsor.is_exhibitor %}{% trans "Exhibitor" %}{% else %}{% trans "Sponsor" %}{% endif %}{% endblock %}
+
+{% block extra_head %}
+<script src="{% static 'vendor/tabler/tabler.min.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+<a href="{% url 'sponsors:list' %}" class="btn btn-sm btn-ghost-secondary mb-2"><i class="ti ti-arrow-left"></i> {% trans "Sponsors" %}</a>
+
+<div class="card mb-3">
+    {% with images=sponsor.images.all %}
+    {% if sponsor.banner %}
+    <img src="{{ sponsor.banner.url }}" alt="" class="card-img-top" style="max-height: 200px; object-fit: cover;">
+    {% endif %}
+    {% endwith %}
+    <div class="card-body">
+        <div class="d-flex gap-3 align-items-start mb-2">
+            {% if sponsor.logo %}
+                <img src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}"
+                     style="width: 80px; height: 80px; object-fit: contain; background: #fff; padding: 8px; border-radius: 8px; border: 1px solid var(--tblr-border-color);">
+            {% endif %}
+            <div class="flex-grow-1">
+                <h1 class="h3 mb-1">{{ sponsor.name }}</h1>
+                {% if sponsor.is_exhibitor %}
+                <span class="text-secondary small"><i class="ti ti-map-pin"></i> {{ sponsor.localized_booth_location }}</span>
+                {% endif %}
+            </div>
+        </div>
+        {% if sponsor.localized_bio_short %}<p class="text-secondary mb-0">{{ sponsor.localized_bio_short }}</p>{% endif %}
+    </div>
+</div>
+
+{# Carousel #}
+{% with images=sponsor.images.all %}
+{% if images %}
+<div id="sponsor-carousel-{{ sponsor.id }}" class="carousel slide mb-3" data-bs-ride="carousel" data-bs-interval="5000">
+    <div class="carousel-inner rounded">
+        {% for img in images %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <img src="{{ img.image.url }}" class="d-block w-100" alt="{{ img.localized_caption }}"
+                 style="aspect-ratio: 16/9; object-fit: cover;">
+            {% if img.localized_caption %}
+            <div class="carousel-caption d-block py-1" style="background: rgba(0,0,0,0.5); border-radius: 4px;">
+                <p class="m-0 small">{{ img.localized_caption }}</p>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% if images|length > 1 %}
+    <button class="carousel-control-prev" type="button" data-bs-target="#sponsor-carousel-{{ sponsor.id }}" data-bs-slide="prev" aria-label="{% trans 'Previous' %}">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#sponsor-carousel-{{ sponsor.id }}" data-bs-slide="next" aria-label="{% trans 'Next' %}">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
+    <div class="carousel-indicators">
+        {% for img in images %}
+        <button type="button" data-bs-target="#sponsor-carousel-{{ sponsor.id }}" data-bs-slide-to="{{ forloop.counter0 }}"
+                class="{% if forloop.first %}active{% endif %}" aria-label="{% blocktrans with n=forloop.counter %}Slide {{ n }}{% endblocktrans %}"></button>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+{% endwith %}
+
+{% comment %} Booth and floorplan marker — only for exhibitors with a booth. Logo-only
+   sponsors get no plan here, otherwise the map would point nowhere.{% endcomment %}
+{% if sponsor.is_exhibitor %}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5 mb-2"><i class="ti ti-map-pin me-1" style="color: var(--lma-primary);"></i>{% trans "Where to find us" %}</h2>
+    {% if sponsor.localized_booth_location %}<div class="fw-bold mb-2">{{ sponsor.localized_booth_location }}</div>{% endif %}
+    {% with plan=event.booth_floorplan %}
+    {% if plan %}
+    {% if plan.is_pdf %}
+        <a href="{{ plan.file.url }}" target="_blank" class="btn btn-outline-primary w-100"><i class="ti ti-file-type-pdf"></i> {% blocktrans with loc=sponsor.localized_booth_location %}Floorplan PDF (Booth: {{ loc }}){% endblocktrans %}</a>
+    {% elif sponsor.has_booth_marker %}
+    {% comment %} The image plan only with coordinates — without a marker it would be
+       a plan that says nothing.{% endcomment %}
+    <div class="position-relative" style="border: 1px solid var(--tblr-border-color); border-radius: 6px; overflow: hidden;">
+        <img src="{{ plan.file.url }}" alt="{{ plan.localized_title }}" class="w-100">
+        {% comment %}Pin — anchor at (20, 54) of a 40x56 SVG.{% endcomment %}
+        <div style="position: absolute;
+                    left: calc({{ sponsor.booth_x|stringformat:'f' }} * 100% - 20px);
+                    top: calc({{ sponsor.booth_y|stringformat:'f' }} * 100% - 54px);
+                    pointer-events: none;
+                    filter: drop-shadow(0 3px 4px rgba(0,0,0,0.35));">
+            <svg width="40" height="56" viewBox="0 0 40 56" xmlns="http://www.w3.org/2000/svg" aria-label="{% trans 'Booth marker' %}">
+                <defs>
+                    {% comment %} Pin head in the event's accent colour, lightened at the top
+                       and darkened at the bottom so it reads as a sphere.{% endcomment %}
+                    <radialGradient id="lma-pin-head-{{ sponsor.id }}" cx="35%" cy="32%" r="65%">
+                        {% brand_color event "accent" as accent %}
+                        <stop offset="0%" stop-color="{{ accent|shade:'42' }}"/>
+                        <stop offset="65%" stop-color="{{ accent }}"/>
+                        <stop offset="100%" stop-color="{{ accent|shade:'-32' }}"/>
+                    </radialGradient>
+                </defs>
+                <line x1="22" y1="20" x2="20" y2="54" stroke="#b0b6bd" stroke-width="2.4" stroke-linecap="round"/>
+                <line x1="22" y1="20" x2="20" y2="54" stroke="#e6e8eb" stroke-width="0.8" stroke-linecap="round"/>
+                <circle cx="20" cy="14" r="13" fill="url(#lma-pin-head-{{ sponsor.id }})"/>
+                <ellipse cx="14.5" cy="9.5" rx="4.5" ry="2.8" fill="rgba(255,255,255,0.6)"/>
+            </svg>
+        </div>
+    </div>
+    {% endif %}
+    {% endif %}
+    {% endwith %}
+</div></div>
+{% endif %}
+
+{# Highlights #}
+{% if sponsor.localized_highlights_md %}
+<div class="card mb-3" style="border-left: 4px solid var(--lma-accent);"><div class="card-body py-3">
+    <h2 class="h5 mb-2"><i class="ti ti-sparkles me-1" style="color: var(--lma-accent);"></i>{% trans "Highlights" %}</h2>
+    <div>{{ sponsor.localized_highlights_md|markdownify }}</div>
+</div></div>
+{% endif %}
+
+{# About #}
+{% if sponsor.localized_bio_long %}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5 mb-2">{% trans "About us" %}</h2>
+    <div>{{ sponsor.localized_bio_long|markdownify }}</div>
+</div></div>
+{% endif %}
+
+{# Contacts #}
+{% with contacts=sponsor.contacts.all %}
+{% if contacts %}
+<h2 class="h5 mb-2"><i class="ti ti-users me-1"></i>{% trans "Contacts" %}</h2>
+<div class="d-flex flex-column gap-2 mb-3">
+    {% for c in contacts %}
+    <div class="card"><div class="card-body py-3">
+        <div class="d-flex gap-3 align-items-start">
+            {% if c.photo %}
+                <img src="{{ c.photo.url }}" alt="{{ c.name }}" class="avatar avatar-md" style="object-fit: cover;">
+            {% else %}
+                <span class="avatar avatar-md bg-{% cycle 'blue' 'orange' 'green' 'purple' %}-lt">{{ c.name|first }}</span>
+            {% endif %}
+            <div class="flex-grow-1">
+                <div class="fw-bold">{{ c.name }}</div>
+                {% if c.localized_role %}<div class="small text-secondary">{{ c.localized_role }}</div>{% endif %}
+                {% if c.localized_expertise %}<div class="small mt-1"><i class="ti ti-bulb text-warning"></i> {{ c.localized_expertise }}</div>{% endif %}
+                <div class="d-flex gap-2 flex-wrap mt-2">
+                    {% if c.email %}<a href="mailto:{{ c.email }}" class="btn btn-sm btn-outline-primary"><i class="ti ti-mail"></i> {% trans "Email" %}</a>{% endif %}
+                    {% if c.phone %}<a href="tel:{{ c.phone }}" class="btn btn-sm btn-outline-secondary"><i class="ti ti-phone"></i> {{ c.phone }}</a>{% endif %}
+                    {% if c.linkedin_url %}<a href="{{ c.linkedin_url }}" target="_blank" rel="noopener" class="btn btn-sm btn-outline-info"><i class="ti ti-brand-linkedin"></i></a>{% endif %}
+                </div>
+            </div>
+        </div>
+    </div></div>
+    {% endfor %}
+</div>
+{% elif sponsor.contact_email or sponsor.contact_person %}
+<div class="card mb-3"><div class="card-body py-3">
+    <h2 class="h5 mb-2"><i class="ti ti-mail me-1"></i>{% trans "Contact" %}</h2>
+    {% if sponsor.contact_person %}<div class="fw-bold">{{ sponsor.contact_person }}</div>{% endif %}
+    {% if sponsor.contact_email %}<a href="mailto:{{ sponsor.contact_email }}">{{ sponsor.contact_email }}</a>{% endif %}
+</div></div>
+{% endif %}
+{% endwith %}
+
+{# Other links — only when present #}
+{% with links=sponsor.links.all %}
+{% if links %}
+<h2 class="h5 mb-2"><i class="ti ti-link me-1"></i>{% trans "More links" %}</h2>
+<div class="d-flex flex-column gap-2 mb-3">
+    {% for l in links %}
+    <a href="{{ l.url }}" target="_blank" rel="noopener" class="card text-decoration-none">
+        <div class="card-body py-2 d-flex gap-3 align-items-center">
+            <i class="ti
+                {% if l.type == 'product' %}ti-package{% elif l.type == 'news' %}ti-news{% elif l.type == 'whitepaper' %}ti-file-text{% elif l.type == 'video' %}ti-video{% else %}ti-external-link{% endif %}
+                h3 m-0" style="color: var(--lma-primary);"></i>
+            <div class="flex-grow-1 min-w-0">
+                <div class="fw-bold">{{ l.localized_label }}</div>
+                {% if l.localized_description %}<div class="small text-secondary">{{ l.localized_description }}</div>{% endif %}
+                <div class="small text-secondary"><span class="badge bg-secondary-lt">{{ l.get_type_display }}</span></div>
+            </div>
+            <i class="ti ti-external-link text-secondary"></i>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+{# Downloads — files admin uploaded on behalf of the sponsor #}
+{% with downloads=sponsor.downloads.all %}
+{% if downloads %}
+<h2 class="h5 mb-2"><i class="ti ti-download me-1"></i>{% trans "Downloads" %}</h2>
+<div class="d-flex flex-column gap-2 mb-3">
+    {% for d in downloads %}
+    <a href="{{ d.file.url }}" target="_blank" rel="noopener" class="card text-decoration-none" download>
+        <div class="card-body py-3 d-flex gap-3 align-items-center">
+            <i class="ti
+                {% if d.file_extension == 'pdf' %}ti-file-type-pdf
+                {% elif d.file_extension == 'pptx' or d.file_extension == 'ppt' %}ti-file-type-ppt
+                {% elif d.file_extension == 'docx' or d.file_extension == 'doc' %}ti-file-type-doc
+                {% elif d.file_extension == 'xlsx' or d.file_extension == 'xls' %}ti-file-type-xls
+                {% elif d.file_extension == 'zip' %}ti-file-type-zip
+                {% else %}ti-file-download{% endif %}
+                h2 m-0 flex-shrink-0" style="color: var(--lma-primary);"></i>
+            <div class="flex-grow-1 min-w-0">
+                <div class="fw-bold">{{ d.localized_title }}</div>
+                {% if d.localized_description %}<div class="small text-secondary">{{ d.localized_description }}</div>{% endif %}
+                <div class="small text-secondary mt-1">
+                    <span class="badge bg-secondary-lt">{{ d.get_type_display }}</span>
+                    {% if d.file_extension %}<span class="badge bg-light text-secondary text-uppercase">{{ d.file_extension }}</span>{% endif %}
+                    {% if d.file.size %}<span class="text-muted">· {{ d.file.size|filesizeformat }}</span>{% endif %}
+                </div>
+            </div>
+            <i class="ti ti-download text-secondary flex-shrink-0"></i>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+{% if sponsor.website %}
+<a href="{{ sponsor.website }}" target="_blank" rel="noopener" class="btn btn-primary w-100 mb-3">
+    <i class="ti ti-world"></i> {% blocktrans with name=sponsor.name %}Visit {{ name }}{% endblocktrans %}
+</a>
+{% endif %}
+{% endblock %}

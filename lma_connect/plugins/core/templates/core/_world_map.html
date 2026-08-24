@@ -1,0 +1,66 @@
+{% load i18n %}
+{# Reusable world map card — used on program/list.html + abstracts/list.html. #}
+{# Renders a choropleth highlighting either speaker- or abstract-countries.   #}
+{# No countries → no card. An empty `isos` loop would otherwise produce the   #}
+{# selector `.map-x .world-choropleth {fill: …}` and paint the whole world.   #}
+{% if isos %}
+<style>
+    .{{ klass }} .world-choropleth {
+        display: block; width: 100%; height: auto;
+        background: var(--lma-surface, #f2f4ff);
+        border-radius: 0.375rem;
+        max-height: 280px;
+    }
+    .{{ klass }} .world-choropleth path {
+        fill: #d8dde7; stroke: #fff; stroke-width: 0.4;
+        transition: fill 0.15s ease;
+    }
+    .{{ klass }} .world-choropleth path:hover { fill: #adb5bd; cursor: help; }
+    {% spaceless %}{% for iso in isos %}.{{ klass }} .world-choropleth #{{ iso }}{% if not forloop.last %},{% endif %}{% endfor %}{% endspaceless %} {
+        fill: {{ color }};
+    }
+    {% spaceless %}{% for iso in isos %}.{{ klass }} .world-choropleth #{{ iso }}:hover{% if not forloop.last %},{% endif %}{% endfor %}{% endspaceless %} {
+        fill: {{ color_hover }};
+    }
+    .{{ klass }} .country-pill {
+        display: inline-flex; align-items: center; gap: 0.25rem;
+        padding: 0.15rem 0.55rem; margin: 0.1rem 0.15rem;
+        border-radius: 1rem;
+        background: rgba(var(--lma-primary-rgb), 0.10);
+        font-size: 0.82rem; white-space: nowrap;
+    }
+    .{{ klass }} .country-pill .badge {
+        background: {{ color }}; font-size: 0.7rem; padding: 0.15em 0.45em;
+    }
+    .{{ klass }} details summary { cursor: pointer; list-style: none; }
+    .{{ klass }} details summary::-webkit-details-marker { display: none; }
+</style>
+
+<div class="card mb-3 {{ klass }}">
+    <div class="card-body py-3">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h2 class="h5 mb-0">
+                <i class="ti ti-world me-1" style="color: {{ color }};"></i>
+                {{ title }}
+            </h2>
+            <span class="text-secondary small">
+                {% blocktrans count n=country_count %}{{ n }} country{% plural %}{{ n }} countries{% endblocktrans %} ·
+                {% if kind == "speakers" %}{% blocktrans count n=total_count %}{{ n }} speaker{% plural %}{{ n }} speakers{% endblocktrans %}{% else %}{% blocktrans count n=total_count %}{{ n }} abstract{% plural %}{{ n }} abstracts{% endblocktrans %}{% endif %}
+            </span>
+        </div>
+        {{ world_svg|safe }}
+        <details class="mt-2">
+            <summary class="text-secondary small">
+                <i class="ti ti-chevron-down"></i> {% trans "Show country list" %}
+            </summary>
+            <div class="mt-2">
+                {% for c in entries %}
+                    <span class="country-pill" title="{{ c.entries|join:'; ' }}">
+                        {{ c.flag }} {{ c.name }} <span class="badge">{{ c.count }}</span>
+                    </span>
+                {% endfor %}
+            </div>
+        </details>
+    </div>
+</div>
+{% endif %}

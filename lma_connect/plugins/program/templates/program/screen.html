@@ -1,0 +1,30 @@
+{% load static i18n %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:'en' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="{{ event.theme_color|default:'#206bc4' }}">
+    <title>{% trans "Room screen" %} · {{ session.title|truncatechars:40 }}</title>
+    {% comment %} htmx polls the content; GET only, so no CSRF token and no inline
+       script are needed.{% endcomment %}
+    <script src="{% static 'vendor/htmx/htmx.min.js' %}"></script>
+    {% include "program/_projection_styles.html" %}
+</head>
+<body>
+    <div class="stage">
+        <div class="stage__head">
+            <span class="brand">{{ event.name|default:"" }} · {{ session.title|truncatechars:60 }}</span>
+            <span class="live"><span class="live__dot"></span>{% trans "LIVE" %}</span>
+        </div>
+
+        <div class="screen-body"
+             id="screen-content"
+             hx-get="{% url 'program:screen_content' session.slug %}"
+             hx-trigger="every 3s"
+             hx-swap="innerHTML">
+            {% include "program/_screen_content.html" %}
+        </div>
+    </div>
+</body>
+</html>

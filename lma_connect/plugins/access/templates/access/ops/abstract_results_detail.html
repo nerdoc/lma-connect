@@ -1,0 +1,95 @@
+{% extends "access/ops/_base.html" %}
+{% load i18n markdownify %}
+{% block title %}{{ abstract.poster_id }} — Ops{% endblock %}
+
+{% block extra_head %}
+<style>
+    .score-badge { display: inline-block; min-width: 36px; padding: 4px 10px;
+                   border-radius: 5px; font-weight: 700; font-size: 1rem;
+                   color: #fff; text-align: center; }
+    .review-row td { vertical-align: top; }
+</style>
+{% endblock %}
+
+{% block ops_content %}
+<a href="{% url 'access:ops_abstracts' %}" class="btn btn-sm btn-outline-secondary mb-3">
+    <i class="ti ti-arrow-left"></i> {% trans "Back to results" %}
+</a>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="d-flex flex-wrap gap-1 mb-2">
+            {% if abstract.poster_id %}<span class="badge bg-secondary-lt fw-bold">{{ abstract.poster_id }}</span>{% endif %}
+            {% if abstract.category %}<span class="badge" style="background: {{ abstract.category.color }}; color: #fff;">{{ abstract.category.name }}</span>{% endif %}
+            {% for tag in abstract.tags.all %}<span class="badge" style="background: {{ tag.color }}; color: #fff;">{{ tag.name }}</span>{% endfor %}
+        </div>
+        <h1 class="h4 mb-2">{{ abstract.title }}</h1>
+        <div class="small text-secondary mb-0">
+            {% for a in abstract.authors.all %}{{ a.full_name }}{% if not forloop.last %}, {% endif %}{% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-6 col-md-4"><div class="card"><div class="card-body py-2 text-center">
+        <div class="h3 mb-0" style="color: var(--lma-primary);">{{ n_done }}/{{ n_assigned }}</div>
+        <div class="small text-secondary">{% trans "Reviews submitted" %}</div>
+    </div></div></div>
+    <div class="col-6 col-md-4"><div class="card"><div class="card-body py-2 text-center">
+        <div class="h3 mb-0">{% if avg is not None %}{{ avg|floatformat:2 }}{% else %}—{% endif %}</div>
+        <div class="small text-secondary">⌀ {% trans "Average" %}</div>
+    </div></div></div>
+    <div class="col-12 col-md-4"><div class="card"><div class="card-body py-2 text-center">
+        <div class="mb-1">{% include "access/ops/_publish_toggle.html" %}</div>
+        <div class="small text-secondary">{% trans "Visible to attendees" %}</div>
+    </div></div></div>
+</div>
+
+<h2 class="h5 mb-2"><i class="ti ti-clipboard-check"></i> {% trans "Individual reviews" %}</h2>
+<div class="card mb-3">
+    <div class="table-responsive">
+        <table class="table table-vcenter mb-0">
+            <thead>
+                <tr>
+                    <th>{% trans "Reviewer" %}</th>
+                    <th class="text-center">{% trans "Score" %}</th>
+                    <th>{% trans "Comment" %}</th>
+                    <th>{% trans "Submitted" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in reviews %}
+                <tr class="review-row">
+                    <td>
+                        <a href="{% url 'access:ops_user_detail' r.reviewer.pk %}">
+                            {{ r.reviewer.first_name|default:r.reviewer.username }} {{ r.reviewer.last_name }}
+                        </a>
+                        <div class="small text-secondary"><code>{{ r.reviewer.username }}</code></div>
+                    </td>
+                    <td class="text-center">
+                        {% if r.score %}
+                        <span class="score-badge" style="background-color: {% if r.score <= 2 %}var(--lma-primary){% elif r.score == 3 %}var(--lma-primary-light){% elif r.score == 4 %}var(--lma-highlight); color: var(--lma-ink){% else %}var(--lma-accent){% endif %};">{{ r.score }}</span>
+                        {% else %}
+                        <span class="badge bg-warning-lt text-dark">{% trans "open" %}</span>
+                        {% endif %}
+                    </td>
+                    <td class="small">{% if r.comment %}{{ r.comment|markdownify }}{% else %}<span class="text-secondary">—</span>{% endif %}</td>
+                    <td class="small text-secondary">{% if r.submitted_at %}{{ r.submitted_at|date:"j M, H:i" }}{% else %}—{% endif %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<details class="card mb-3"><summary class="card-body fw-bold cursor-pointer"><i class="ti ti-robot text-info"></i> {% trans "PEER pre-review" %} <i class="ti ti-chevron-down float-end"></i></summary>
+<div class="card-body pt-0">
+    {% if abstract.peer_review %}{{ abstract.peer_review|markdownify }}{% else %}<span class="text-secondary small">{% trans "Not generated yet" %}</span>{% endif %}
+</div>
+</details>
+
+<details class="card"><summary class="card-body fw-bold cursor-pointer"><i class="ti ti-file-text"></i> {% trans "Original abstract" %} <i class="ti ti-chevron-down float-end"></i></summary>
+<div class="card-body pt-0"><div style="white-space: pre-wrap;">{{ abstract.abstract_text }}</div></div>
+</details>
+
+{% endblock %}

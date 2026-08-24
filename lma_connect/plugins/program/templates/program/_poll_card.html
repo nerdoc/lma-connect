@@ -1,0 +1,74 @@
+{% load program_extras i18n %}
+{# Live-poll card — re-rendered via HTMX after vote. #}
+<div class="card mb-2" id="poll-{{ poll.id }}">
+<div class="card-body py-3">
+    <div class="fw-bold mb-2">{{ poll.question_text }}</div>
+
+    {% if user.is_authenticated %}
+    <form hx-post="{% url 'program:poll_vote' poll.id %}"
+          hx-target="#poll-{{ poll.id }}" hx-swap="outerHTML">
+
+        {% if poll.type == 'open' %}
+            <textarea class="form-control mb-2" name="text_answer" rows="2" placeholder="{% trans "Your answer …" %}" required>{{ user_text }}</textarea>
+            <button type="submit" class="btn btn-primary btn-sm w-100">{% if user_text %}{% trans "Update" %}{% else %}{% trans "Submit" %}{% endif %}</button>
+
+        {% elif poll.type == 'single' %}
+            <div class="mb-2">
+                {% for opt in poll.options.all %}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="option"
+                           id="poll{{ poll.id }}opt{{ opt.id }}" value="{{ opt.id }}"
+                           {% if opt.id in user_choice_ids %}checked{% endif %} required>
+                    <label class="form-check-label {% if opt.id in user_choice_ids %}fw-bold{% endif %}"
+                           for="poll{{ poll.id }}opt{{ opt.id }}">{{ opt.text }}</label>
+                </div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm w-100">{% if user_choice_ids %}{% trans "Change vote" %}{% else %}{% trans "Vote" %}{% endif %}</button>
+
+        {% elif poll.type == 'multi' %}
+            <div class="mb-2">
+                {% for opt in poll.options.all %}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="options"
+                           id="poll{{ poll.id }}opt{{ opt.id }}" value="{{ opt.id }}"
+                           {% if opt.id in user_choice_ids %}checked{% endif %}>
+                    <label class="form-check-label {% if opt.id in user_choice_ids %}fw-bold{% endif %}"
+                           for="poll{{ poll.id }}opt{{ opt.id }}">{{ opt.text }}</label>
+                </div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm w-100">{% if user_choice_ids %}{% trans "Update selection" %}{% else %}{% trans "Vote" %}{% endif %}</button>
+        {% endif %}
+    </form>
+    {% else %}
+    <div class="alert alert-secondary py-2 mb-0"><i class="ti ti-info-circle"></i> <a href="{% url 'login' %}?next={{ request.path }}">{% trans "Sign in" %}</a> {% trans "to take part." %}</div>
+    {% endif %}
+
+    {# Aggregated results #}
+    {% if poll.is_results_public and results.total %}
+    <div class="mt-3">
+        <div class="small text-secondary mb-1">{% blocktrans count total=results.total %}{{ total }} vote{% plural %}{{ total }} votes{% endblocktrans %}</div>
+        {% for opt in poll.options.all %}
+        <div class="d-flex justify-content-between align-items-center small mb-1">
+            <span>{{ opt.text }}</span>
+            {% with cnt=results.by_option|dict_get:opt.id %}
+            <span class="text-secondary">{% if cnt %}{{ cnt }}{% else %}0{% endif %}</span>
+            {% endwith %}
+        </div>
+        {% with cnt=results.by_option|dict_get:opt.id %}
+        <div class="progress mb-2" style="height: 6px;" role="progressbar">
+            <div class="progress-bar" style="width: {% if cnt %}{% widthratio cnt results.total 100 %}{% else %}0{% endif %}%; background: var(--lma-primary);"></div>
+        </div>
+        {% endwith %}
+        {% endfor %}
+        {% if results.text_answers %}
+        <details class="mt-2"><summary class="small text-secondary">{% blocktrans with n=results.text_answers|length %}Text answers ({{ n }}){% endblocktrans %}</summary>
+        <ul class="mt-2 mb-0 small">{% for t in results.text_answers %}<li>{{ t|truncatechars:200 }}</li>{% endfor %}</ul>
+        </details>
+        {% endif %}
+    </div>
+    {% elif user.is_authenticated %}
+    <div class="small text-secondary mt-3"><i class="ti ti-device-tv-old"></i> {% trans "Results are shown on the room screen by the chair." %}</div>
+    {% endif %}
+</div></div>
