@@ -27,6 +27,7 @@ local_settings.py
 # must never reach a public mirror. Do not rely on a global ignore file for
 # this: that one only exists on the machine it was configured on.
 .claude/
+CLAUDE.local.md
 .vscode/
 .idea/
 .DS_Store
