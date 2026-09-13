@@ -1,0 +1,58 @@
+# systemd user unit for the LMA Connect SSE process (Django ASGI + uvicorn),
+# e.g. on Uberspace. Serves only the long-lived /events/... streams; the main
+# app stays on lma-connect.service (WSGI, port 8130).
+#
+# Install / update on the server:
+#   scp deploy/lma-connect-sse.service \
+#       <user>@<host>:~/.config/systemd/user/lma-connect-sse.service
+#   ssh <user>@<host> \
+#       'systemctl --user daemon-reload && systemctl --user enable --now lma-connect-sse.service'
+#   uberspace web backend add /events port 8131
+#
+# Adjust WorkingDirectory / EnvironmentFile / ExecStart if your checkout does
+# not live in ~/lma-connect, and the port if 8131 is taken.
+#
+# Notes on the gunicorn flags and why they are what they are:
+#
+#   --worker-class uvicorn_worker.UvicornWorker + --workers 1
+#       One async worker carries hundreds of idle SSE connections with ease.
+#       A second worker would double the DB watcher (one query per second
+#       per process) for no gain.
+#
+#   no --max-requests
+#       Recycling a worker would cut every open stream at once.
+#
+#   --timeout 0
+#       gunicorn's worker heartbeat is meant for sync workers; with an async
+#       worker it only produces spurious kills.
+#
+#   --graceful-timeout 5
+#       Streams never end on their own, so a restart must not wait 30 s for
+#       them. Clients reconnect automatically (EventSource backoff).
+#
+#   Restart=always + StartLimitIntervalSec=0
+#       Same reasoning as the main unit: come back up under all circumstances.
+
+[Unit]
+Description=LMA Connect SSE (Django ASGI + uvicorn)
+After=default.target
+# No start rate limit: the service must come back up under all circumstances.
+StartLimitIntervalSec=0
+
+[Service]
+WorkingDirectory=%h/lma-connect
+Environment=DJANGO_SETTINGS_MODULE=lma_connect.settings
+EnvironmentFile=%h/lma-connect/.env
+ExecStart=%h/lma-connect/.venv/bin/gunicorn lma_connect.asgi:application \
+    --bind 0.0.0.0:8131 \
+    --worker-class uvicorn_worker.UvicornWorker \
+    --workers 1 \
+    --graceful-timeout 5 \
+    --timeout 0 \
+    --access-logfile - \
+    --error-logfile -
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target

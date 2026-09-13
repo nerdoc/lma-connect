@@ -2,6 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.http import HttpResponsePermanentRedirect
 from django.urls import get_script_prefix, include, path
 
@@ -18,6 +19,9 @@ urlpatterns = [
     path("feedback/", include("lma_connect.plugins.feedback.urls", namespace="feedback")),
     path("qr/", include("lma_connect.plugins.qr.urls", namespace="qr")),
     path("expo/", include("lma_connect.plugins.expo.urls", namespace="expo")),
+    # Long-lived SSE streams — served by the separate ASGI process
+    # (deploy/lma-connect-sse.service), see docs/live-updates-sse.md.
+    path("events/", include("lma_connect.plugins.program.live_urls", namespace="live")),
     path("", include("lma_connect.plugins.gamification.urls", namespace="gamification")),
     path("", include("lma_connect.plugins.access.urls", namespace="access")),
     path("", include("lma_connect.plugins.core.urls", namespace="core")),
@@ -50,3 +54,6 @@ urlpatterns += [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # uvicorn has no WhiteNoise wrapper (that lives in wsgi.py) — serve statics
+    # in dev so the ASGI process can run the whole app on one port.
+    urlpatterns += staticfiles_urlpatterns()

@@ -1,7 +1,7 @@
 from datetime import timedelta
 
 from django.contrib.auth import get_user_model
-from django.test import TestCase
+from django.test import AsyncClient, TestCase
 from django.urls import reverse
 from django.utils import timezone
 
@@ -307,3 +307,27 @@ class SpeakerIntroVisibilityTests(PollFixtureMixin, TestCase):
         self.client.force_login(self.chair)
         url = reverse("program:chair_speaker_notes", args=[self.session.slug, self.speaker.id])
         self.assertEqual(self.client.get(url).status_code, 405)
+
+
+class LiveStreamTests(TestCase):
+    """SSE endpoints in live.py — served only under ASGI."""
+
+    async def test_ping_stream_is_event_stream(self):
+        response = await AsyncClient().get(reverse("live:ping") + "?interval=1")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response["Content-Type"], "text/event-stream")
+        self.assertEqual(response["Cache-Control"], "no-cache")
+        first = await anext(response.streaming_content)
+        self.assertEqual(first, b": ping 1\n\n")
+        await response.streaming_content.aclose()
+
+    async def test_ping_interval_is_clamped(self):
+        response = await AsyncClient().get(reverse("live:ping") + "?interval=abc")
+        self.assertEqual(response.status_code, 200)
+        await response.streaming_content.aclose()
+
+    def test_stream_under_wsgi_is_503(self):
+        # WSGI would collect the endless async iterator into a list — the
+        # guard has to answer 503 before that happens.
+        response = self.client.get(reverse("live:ping"))
+        self.assertEqual(response.status_code, 503)
